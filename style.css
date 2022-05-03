@@ -16,6 +16,7 @@ body {
 }
 
 a {
+  color: silver;
   text-decoration: none;
 }
 
@@ -60,6 +61,7 @@ a {
 .main-body > * {
   width: 100%;
   min-height: 60%;
+  margin-bottom: 1rem;
 }
 
 .left-side {
@@ -72,7 +74,7 @@ a {
 }
 
 p {
-  font-size: medium;
+  font-size: 14px;
   width: 80%;
 }
 
@@ -109,5 +111,5 @@ p {
   justify-content: center;
   margin: 0.5rem;
   margin-inline: 0.2rem;
-  background-color: springgreen;
+ 
 }
