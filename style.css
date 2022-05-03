@@ -99,17 +99,38 @@ p {
   overflow-x: scroll;
   gap: 0.1rem;
   min-width: 0;
+  cursor: grab;
+  padding: 1rem;
 }
 
 .cards {
   height: 200px;
   width: 150px;
-  border: 2px solid black;
+  border: 2px solid rgba(0, 0, 0, 0.301);
   border-radius: 5%;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0.5rem;
   margin-inline: 0.2rem;
- 
+  font-size: small;
+  text-align: center;
+  cursor: pointer;
+}
+
+.cards:hover {
+  transform: scale(1.1);
+  box-shadow: 2px 25px 21px 1px #0ff;
+   background-color: linear-gradient(white, white);
+  transition: all 1s ease;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
 }

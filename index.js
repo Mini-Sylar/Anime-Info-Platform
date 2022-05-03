@@ -104,5 +104,21 @@ fetch("https://graphql.anilist.co/?id=15125", {
         background-repeat: no-repeat;
         background-size: cover;
       `;
+      currentElement.addEventListener("mouseover", function () {
+        currentElement.style = `
+        background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0,0.1)), url(${find_card[index].coverImage.extraLarge});
+        background-repeat: no-repeat;
+        background-size: cover;
+        transition: all 1s ease;
+        `;
+      });
+       currentElement.addEventListener("mouseleave", function () {
+         currentElement.style = `
+        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0,0.6)), url(${find_card[index].coverImage.extraLarge});
+        background-repeat: no-repeat;
+        background-size: cover;
+        transition: all 1s ease;
+        `;
+       });
     });
   });
