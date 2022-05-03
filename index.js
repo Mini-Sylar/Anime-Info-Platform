@@ -6,6 +6,21 @@ const genre = document.querySelector(".genre");
 const episode_count = document.querySelector(".episode-count");
 const rating = document.querySelector(".rating");
 const anime_cards = document.querySelectorAll(".cards");
+const body = document.querySelector("body");
+
+function Replace(data) {
+  // console.log(data);
+  main_data = data.data.Media;
+  title.innerHTML = data.data.Media.title.english;
+  description.innerHTML = data.data.Media.description;
+  // description.querySelectorAll("br").forEach((element) => {
+  //   element.remove()
+  // });
+  release_year.innerHTML = main_data.seasonYear;
+  genre.innerHTML = main_data.genres.join(" / ");
+  episode_count.innerHTML = `${main_data.episodes} episodes`;
+  rating.innerHTML = `${main_data.averageScore / 10}/10`;
+}
 
 let headersList = {
   Accept: "*/*",
@@ -13,8 +28,9 @@ let headersList = {
   "Content-Type": "application/json",
 };
 
-let gqlBody = {
-  query: `query ($id: Int) {
+function callBody(setID = 140960) {
+  let gqlBody = {
+    query: `query ($id: Int) {
   Media (id: $id, type: ANIME) { 
     id
     title {
@@ -31,32 +47,23 @@ let gqlBody = {
   averageScore
   }
 }`,
-  variables: { id: 140960 },
-};
+    variables: { id: setID },
+  };
 
-let bodyContent = JSON.stringify(gqlBody);
+  let bodyContent = JSON.stringify(gqlBody);
 
-fetch("https://graphql.anilist.co/?id=15125", {
-  method: "POST",
-  body: bodyContent,
-  headers: headersList,
-})
-  .then(function (response) {
-    return response.json();
+  fetch("https://graphql.anilist.co/?id=15125", {
+    method: "POST",
+    body: bodyContent,
+    headers: headersList,
   })
-  .then(function (data) {
-    // console.log(data);
-    main_data = data.data.Media;
-    title.innerHTML = data.data.Media.title.english;
-    description.innerHTML = data.data.Media.description;
-    // description.querySelectorAll("br").forEach((element) => {
-    //   element.remove()
-    // });
-    release_year.innerHTML = main_data.seasonYear;
-    genre.innerHTML = main_data.genres.join(" / ");
-    episode_count.innerHTML = `${main_data.episodes} episodes`;
-    rating.innerHTML = `${main_data.averageScore / 10}/10`;
-  });
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      Replace(data);
+    });
+}
 
 //   For Cards
 let card_main;
@@ -85,7 +92,7 @@ let gqlBody_Cards = {
 
 let cardContent = JSON.stringify(gqlBody_Cards);
 
-fetch("https://graphql.anilist.co/?id=15125", {
+fetch("https://graphql.anilist.co/", {
   method: "POST",
   body: cardContent,
   headers: headersList,
@@ -104,7 +111,7 @@ fetch("https://graphql.anilist.co/?id=15125", {
         background-repeat: no-repeat;
         background-size: cover;
       `;
-      currentElement.addEventListener("mouseover", function () {
+      currentElement.addEventListener("mouseenter", function () {
         currentElement.style = `
         background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0,0.1)), url(${find_card[index].coverImage.extraLarge});
         background-repeat: no-repeat;
@@ -112,13 +119,25 @@ fetch("https://graphql.anilist.co/?id=15125", {
         transition: all 1s ease;
         `;
       });
-       currentElement.addEventListener("mouseleave", function () {
-         currentElement.style = `
+      currentElement.addEventListener("mouseleave", function () {
+        currentElement.style = `
         background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0,0.6)), url(${find_card[index].coverImage.extraLarge});
         background-repeat: no-repeat;
         background-size: cover;
         transition: all 1s ease;
         `;
-       });
+      });
+
+      //    Onclick Replace Everything
+      currentElement.addEventListener("click", function () {
+        let getThatID = find_card[index].id;
+        console.log(getThatID);
+        // MYQUERY HERE
+        callBody(getThatID);
+      });
     });
   });
+
+
+document.onload = callBody()
+  

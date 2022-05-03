@@ -71,10 +71,12 @@ a {
 
 .anime-title {
   font-size: 64px;
+  font-family: DexaPro-Bold;
+  margin: 0;
 }
 
 p {
-  font-size: 14px;
+  font-size: 12px;
   width: 80%;
 }
 

@@ -13,6 +13,43 @@
       type="text/javascript"
       src="https://cdn.rawgit.com/asvd/dragscroll/master/dragscroll.js"
     ></script>
+    <!-- preload font -->
+    <link
+      rel="preload"
+      href="./fonts/DexaPro-Regular.ttf"
+      as="font"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="preload"
+      href="./fonts/DexaPro-Medium.ttf"
+      as="font"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="preload"
+      href="./fonts/DexaPro-Bold.ttf"
+      as="font"
+      crossorigin="anonymous"
+    />
+    <!-- Set Font Family -->
+    <style>
+      @font-face {
+        font-family: DexaPro-Regular;
+        src: url(./fonts/DexaPro-Regular.ttf);
+      }
+      @font-face {
+        font-family: DexaPro-Medium;
+        src: url(./fonts/DexaPro-Medium.ttf);
+      }
+      @font-face {
+        font-family: DexaPro-Bold;
+        src: url(./fonts/DexaPro-Bold.ttf);
+      }
+      * {
+        font-family: DexaPro-Regular;
+      }
+    </style>
     <title>Anime Streaming Concept</title>
   </head>
   <body>
