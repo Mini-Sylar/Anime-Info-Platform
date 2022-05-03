@@ -8,6 +8,12 @@ const rating = document.querySelector(".rating");
 const anime_cards = document.querySelectorAll(".cards");
 const body = document.querySelector("body");
 
+let get_genre;
+function randomIntFromInterval(min, max) {
+  // min and max included
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
 function Replace(data) {
   // console.log(data);
   main_data = data.data.Media;
@@ -18,6 +24,7 @@ function Replace(data) {
   // });
   release_year.innerHTML = main_data.seasonYear;
   genre.innerHTML = main_data.genres.join(" / ");
+  get_genre = genre.textContent;
   episode_count.innerHTML = `${main_data.episodes} episodes`;
   rating.innerHTML = `${main_data.averageScore / 10}/10`;
 }
@@ -62,6 +69,7 @@ function callBody(setID = 140960) {
     })
     .then(function (data) {
       Replace(data);
+      get_genre ? get_genre.split("/").join(",") : "Action";
     });
 }
 
@@ -87,7 +95,11 @@ let gqlBody_Cards = {
   }
 }
 `,
-  variables: { search: "Action", page: 1, perPage: 5 },
+  variables: {
+    search: get_genre ? get_genre.split("/").join(",") : "Action",
+    page: randomIntFromInterval(1, 200),
+    perPage: 5,
+  },
 };
 
 let cardContent = JSON.stringify(gqlBody_Cards);
@@ -138,6 +150,4 @@ fetch("https://graphql.anilist.co/", {
     });
   });
 
-
-document.onload = callBody()
-  
+document.onload = callBody();
