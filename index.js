@@ -85,6 +85,7 @@ let gqlBody_Cards = {
       id
       title {
         english
+        romaji
       }
       
        coverImage {
@@ -114,10 +115,16 @@ fetch("https://graphql.anilist.co/", {
   })
   .then(function (card_data) {
     console.log(card_data);
-    console.log(card_data.data.Page.media[2].title.english);
+    console.log(
+      card_data.data.Page.media[2].title.english
+        ? card_data.data.Page.media[2].title.english
+        : card_data.data.Page.media[2].title.romaji
+    );
     const find_card = card_data.data.Page.media;
     anime_cards.forEach((currentElement, index) => {
-      currentElement.innerHTML = find_card[index].title.english;
+      currentElement.innerHTML = find_card[index].title.english
+        ? find_card[index].title.english
+        : find_card[index].title.romaji;
       currentElement.style = `
         background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0,0.6)), url(${find_card[index].coverImage.extraLarge});
         background-repeat: no-repeat;
