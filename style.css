@@ -70,14 +70,22 @@ a {
 }
 
 .anime-title {
+  height: 100%;
   font-size: 64px;
   font-family: DexaPro-Bold;
   margin: 0;
+  overflow-y: auto;
+}
+
+.anime-title-container {
+  display: flex;
+  margin: 0;
+  height: 7rem;
 }
 
 p {
   font-size: 12px;
-  width: 80%;
+  width: 90%;
   text-align: justify;
 }
 
@@ -89,6 +97,7 @@ p {
   overflow-y: auto;
   display: flex;
   align-items: center;
+  padding-block: .5rem;
 }
 .anime-meta-details {
   display: flex;
