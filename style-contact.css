@@ -128,12 +128,14 @@ a {
   text-decoration: none;
   color: silver;
 }
-
+.about-body {
+  font-weight: normal;
+}
 .contact-heading-container {
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  width: 100%;
+  width: 85%;
   justify-content: center;
 }
 
@@ -162,6 +164,7 @@ li {
   margin-block: 0.8rem;
   margin-top: 0;
 }
+
 @keyframes sub-fadein {
   0% {
     opacity: 0;
