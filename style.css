@@ -80,7 +80,7 @@ a {
   margin: 0;
   /* overflow-y: auto; */
   line-height: 1em;
-  animation: sub-fadein 2s ease-in;
+  animation: sub-fadein 1.2s ease-in;
 }
 
 .anime-title-container {
@@ -104,7 +104,9 @@ p {
   overflow-y: auto;
   display: flex;
   align-items: flex-start;
+  animation: sub-fadein 1.5s ease-in;
 }
+
 .anime-meta-details {
   display: flex;
   align-items: flex-end;
@@ -279,4 +281,21 @@ p {
   background-color: transparent;
   border-bottom: 1px solid rgba(255, 255, 255, 0.5);
   transition: all 500ms cubic-bezier(0, 0.11, 0.35, 2);
+}
+
+/* Transition Anime Data */
+.year {
+  animation: sub-fadein 1.56s ease-in;
+}
+
+.genre {
+  animation: sub-fadein 1.66s ease-in;
+}
+
+.episode-count {
+  animation: sub-fadein 1.76s ease-in;
+}
+
+.rating {
+  animation: sub-fadein 1.86s ease-in;
 }
