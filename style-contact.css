@@ -138,15 +138,30 @@ a {
 }
 
 .about,
-h2,.third {
+h2,
+.third {
   display: flex;
   justify-content: center;
+  margin-bottom: 0;
 }
 
 .about-body {
   text-align: left;
+  width: 40%;
+  margin: 0 auto;
 }
 
+ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+  width: 40%;
+}
+li {
+  margin-block: 0.8rem;
+  margin-top: 0;
+}
 @keyframes sub-fadein {
   0% {
     opacity: 0;
