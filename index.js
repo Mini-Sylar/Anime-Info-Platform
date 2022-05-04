@@ -8,6 +8,8 @@ const rating = document.querySelector(".rating");
 const anime_cards = document.querySelectorAll(".cards");
 const body = document.querySelector("body");
 
+
+// 
 let get_genre;
 function randomIntFromInterval(min, max) {
   // min and max included
