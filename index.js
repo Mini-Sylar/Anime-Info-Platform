@@ -78,7 +78,33 @@ function Replace(data) {
   get_Color = shadeColor(main_data.coverImage.color, -30);
   col_elements[0].style.backgroundColor = get_Color;
   col_elements[1].style.backgroundColor = get_Color;
-  //   col_elements[2].style.backgroundColor = get_Color;
+  col_elements[7].style.backgroundColor = get_Color;
+  col_elements[1].addEventListener("mouseenter", function () {
+    col_elements[1].style.setProperty(
+      "-webkit-filter",
+      `drop-shadow(0 0 0.55rem ${get_Color})`
+    );
+  });
+  col_elements[1].addEventListener("mouseleave", function () {
+    col_elements[1].style.setProperty(
+      "-webkit-filter",
+      `drop-shadow(0 0 0 ${get_Color})`
+    );
+  });
+  //   Change Surprise me Color
+  col_elements[7].addEventListener("mouseenter", function () {
+    col_elements[7].style.setProperty(
+      "-webkit-filter",
+      `drop-shadow(0 0 0.55rem ${get_Color})`
+    );
+  });
+  col_elements[7].addEventListener("mouseleave", function () {
+    col_elements[7].style.setProperty(
+      "-webkit-filter",
+      `drop-shadow(0 0 0 ${get_Color})`
+    );
+  });
+  //   col_elements[2].style.backgroundColor = get_Color; "drop-shadow(0 0 0.55rem ${get_Color})
 }
 
 let headersList = {
@@ -185,6 +211,9 @@ function callCard(genre = "Action") {
         background-repeat: no-repeat;
         background-size: cover;
         box-shadow: none;
+         border: 2px solid rgba(0, 0, 0, 0.301);
+        border-radius: 5%;
+        overflow:hidden
       `;
         currentElement.addEventListener("mouseenter", function () {
           currentElement.style = `
