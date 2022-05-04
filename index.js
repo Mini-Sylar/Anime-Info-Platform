@@ -176,6 +176,10 @@ function callCard(genre = "Action") {
         currentElement.innerHTML = find_card[index].title.english
           ? find_card[index].title.english
           : find_card[index].title.romaji;
+        // currentElement.innerHTML = find_card[index].title.english
+        //   ? ` <div class="cards   dynamic-color">${find_card[index].title.english}</div>`
+        //   : `  <div class="cards  dynamic-color">${find_card[index].title.romaji}</div>`;
+        //   Set Styles Here
         currentElement.style = `
         background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0,0.6)), url(${find_card[index].coverImage.large});
         background-repeat: no-repeat;
@@ -193,6 +197,7 @@ function callCard(genre = "Action") {
         });
         currentElement.addEventListener("mouseleave", function () {
           currentElement.style = `
+           transform: scale(1);
         background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0,0.6)), url(${find_card[index].coverImage.large});
         background-repeat: no-repeat;
         background-size: cover;

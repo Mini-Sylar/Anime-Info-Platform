@@ -162,12 +162,13 @@ p {
   font-size: small;
   text-align: center;
   cursor: pointer;
+  animation: sub-fadein 1.5s ease-in;
 }
 
 .cards:hover {
   transform: scale(1.1);
   box-shadow: 2px 25px 21px 1px #0195ff;
-  background-color: linear-gradient(white, white);
+  background-color: linear-gradient(rgba(255, 255, 255, 0.76), rgba(255, 255, 255, 0.678));
   transition: all 1s ease;
 }
 
