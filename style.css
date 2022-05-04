@@ -136,6 +136,7 @@ p {
   min-width: 0;
   min-height: 35%;
   align-items: flex-end;
+  width: 100%;
 }
 
 .anime-cards {
@@ -284,7 +285,7 @@ p {
 }
 
 .remove {
-  background:none;
+  background: none;
 }
 
 /* Transition Anime Data */
@@ -302,4 +303,32 @@ p {
 
 .rating {
   animation: sub-fadein 1.86s ease-in;
+}
+
+.surpise-holder{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.surprise {
+  color: white;
+  background-color: #0195ff;
+  border: none;
+  padding: .7em;
+  padding-inline: 2rem;
+  border-radius: 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: .5rem;
+}
+
+.surprise:hover {
+  cursor: pointer;
+  transition: all 0.3s ease-in;
+  filter: drop-shadow(0 0 0.55rem #0195ff);
+  transform: scale(1.05) rotate(-1deg);
+  backdrop-filter: blur(10px);
+  transition: all 0.2s ease;
 }

@@ -32,7 +32,7 @@ const search_button = document.querySelector(".btn-search");
 const search_value = document.querySelector(".input-search");
 const form = document.querySelector("#search-form");
 const col_elements = document.querySelectorAll(".dynamic-color");
-const weird = document.querySelectorAll(".btn-search:focus ~ .input-search");
+const surprise = document.querySelector(".surprise");
 
 // Get Useful Values Here
 let get_genre;
@@ -69,6 +69,7 @@ function Replace(data) {
   more_info.addEventListener("click", function () {
     window.open(`https://anilist.co/anime/${get_ID}`, "_blank");
   });
+
   //   Dynamic Colors
   console.log(col_elements[2]);
   //   0 is search
@@ -268,6 +269,12 @@ form.addEventListener("submit", function (e) {
   //   Random Genres Here... can be improved to submit entre genre as array
   callCard(randomGenre[Math.floor(Math.random() * randomGenre.length)]);
   form.reset();
+});
+
+surprise.addEventListener("click", function () {
+  let randomGenre = get_genre.split(" / ");
+  callCard(randomGenre[Math.floor(Math.random() * randomGenre.length)]);
+  console.log("clicked");
 });
 
 // Start With SPY X FAMILY
