@@ -1,13 +1,13 @@
 body {
   background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-    url("./images/banner.jpg");
+    url("./images/banner.jpg") ;
   background-repeat: no-repeat;
   background-size: contain;
   display: flex;
   flex-direction: column;
   font-family: sans-serif;
   color: white;
-   animation: sub-fadein .3s ease-in;
+  animation: sub-fadein 0.3s ease-in;
 }
 
 html,
@@ -169,7 +169,10 @@ p {
 .cards:hover {
   transform: scale(1.1);
   box-shadow: 2px 25px 21px 1px #0195ff;
-  background-color: linear-gradient(rgba(255, 255, 255, 0.76), rgba(255, 255, 255, 0.76));
+  background-color: linear-gradient(
+    rgba(255, 255, 255, 0.76),
+    rgba(255, 255, 255, 0.76)
+  );
   transition: all 1s ease;
 }
 
@@ -307,23 +310,23 @@ p {
   animation: sub-fadein 1.86s ease-in;
 }
 
-.surpise-holder{
-    display: flex;
-    width: 100%;
-    justify-content: center;
+.surpise-holder {
+  display: flex;
+  width: 100%;
+  justify-content: center;
 }
 
 .surprise {
   color: white;
   background-color: #0195ff;
   border: none;
-  padding: .7em;
+  padding: 0.7em;
   padding-inline: 2rem;
   border-radius: 5%;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: .5rem;
+  margin-top: 0.5rem;
 }
 
 .surprise:hover {

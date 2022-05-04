@@ -71,12 +71,19 @@ function Replace(data) {
   });
 
   //   Dynamic Colors
-  console.log(col_elements[2]);
   //   0 is search
   //   1 is more info
   //   2 is cards
   get_Color = shadeColor(main_data.coverImage.color, -30);
-  body.style.backgroundColor = get_Color;
+  body.style.backgroundColor = shadeColor(main_data.coverImage.color, -60);
+  body.style.backgroundImage =
+    main_data.bannerImage == null
+      ? `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url(./images/404-no-wallpaper.jpg)`
+      : `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url(${main_data.bannerImage})`;
+  body.style.backgroundSize = "cover";
+  body.style.backgroundPosition = "center";
+
+  // body.style.backgroundImage = `url(${main_data.bannerImage})`;
   col_elements[0].style.backgroundColor = get_Color;
   col_elements[1].style.backgroundColor = get_Color;
   col_elements[7].style.backgroundColor = get_Color;
@@ -152,7 +159,6 @@ function callBody(setID = 140960) {
       Replace(data);
       get_genre ? get_genre.split("/").join(",") : "Action";
       get_Color = data.data.Media.coverImage.color;
-      console.log(get_Color);
     });
 }
 
@@ -286,7 +292,6 @@ function SearchAnime(searchQuery) {
       return response.json();
     })
     .then(function (data) {
-      console.log(data);
       let thisID = data.data.Page.media[0].id;
       callBody(thisID);
     });
@@ -305,7 +310,6 @@ form.addEventListener("submit", function (e) {
 surprise.addEventListener("click", function () {
   let randomGenre = get_genre.split(" / ");
   callCard(randomGenre[Math.floor(Math.random() * randomGenre.length)]);
-  console.log("clicked");
 });
 
 // Start With SPY X FAMILY
