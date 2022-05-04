@@ -12,7 +12,7 @@ const search_button = document.querySelector(".btn-search");
 const search_value = document.querySelector(".input-search");
 const form = document.querySelector("#search-form");
 const col_elements = document.querySelectorAll(".dynamic-color");
-const weird = document.querySelector(".btn-search:focus ~ .input-search");
+const weird = document.querySelectorAll(".btn-search:focus ~ .input-search");
 
 // Get Useful Values Here
 let get_genre;
@@ -58,11 +58,6 @@ function Replace(data) {
   col_elements[0].style.backgroundColor = get_Color;
   col_elements[1].style.backgroundColor = get_Color;
   col_elements[2].style.backgroundColor = get_Color;
-  console.log(col_elements[0].getBoundingClientRect());
-  col_elements[0].addEventListener("focus", function () {
-    weird.style.backgroundColor ="transparent";
-    console.log("clicked");
-  });
 }
 
 let headersList = {

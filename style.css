@@ -265,20 +265,20 @@ p {
   right: 2px;
   top: 15%;
   color: #ffffff;
-  background-color: transparent;
+  background-color: transparent !important;
   pointer-events: painted;
 }
 .btn-search:focus ~ .input-search {
   width: 200px;
   border-radius: 0px;
-  background-color: transparent;
+  background-color: transparent !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.5);
   transition: all 500ms cubic-bezier(0, 0.11, 0.35, 2);
 }
 .input-search:focus {
   width: 200px;
   border-radius: 0px;
-  background-color: transparent;
+  background-color: transparent !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.5);
   transition: all 500ms cubic-bezier(0, 0.11, 0.35, 2);
 }
