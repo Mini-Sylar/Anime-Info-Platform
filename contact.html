@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact</title>
+    <link rel="stylesheet" href="style-contact.css" />
+    <style>
+      @font-face {
+        font-family: DexaPro-Regular;
+        src: url(./fonts/DexaPro-Regular.ttf);
+      }
+      * {
+        font-family: DexaPro-Regular;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Nav Here -->
+    <nav class="navigation-desktop">
+      <div class="logo">LOGO</div>
+      <div class="links-desktop">
+        <a href="./index.html" class="links">Home</a>
+        <a href="#" class="links">About</a>
+        <a href="./contact.html" class="links">Contact</a>
+        <!-- <a href="#" class="links">Subscription</a> -->
+      </div>
+    </nav>
+    <!-- Main Body -->
+    <div class="mainpage">
+      <div class="contact-heading-container">
+        <h1
+          class="contact-heading"
+          style="font-weight: 800; text-align: center"
+        >
+          Contact
+        </h1>
+        <p>
+          Have any suggestions or complaints? or you just want to say hi? Feel
+          free to send me an email
+        </p>
+      </div>
+      <div class="main-body-container">
+        <form action="mailto: minisylar3@gmail.com" class="contact-me">
+          <label for="lname">Full Name</label>
+          <input
+            type="text"
+            id="lname"
+            name="lastname"
+            placeholder="Your name.."
+            required
+          />
+
+          <label for="subject">Subject</label>
+          <textarea
+            id="subject"
+            name="subject"
+            placeholder="Your message goes in here..."
+            style="height: 40vh"
+            required
+          ></textarea>
+
+          <input type="submit" value="Message Me" class="submit" />
+        </form>
+      </div>
+      <div class="to-be-blurred"></div>
+    </div>
+  </body>
+</html>

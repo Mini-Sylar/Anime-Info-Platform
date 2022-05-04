@@ -7,6 +7,7 @@ body {
   flex-direction: column;
   font-family: sans-serif;
   color: white;
+   animation: sub-fadein .3s ease-in;
 }
 
 html,
@@ -242,7 +243,7 @@ p {
   width: 0px;
   border-style: none;
   padding: 10px;
-  font-size: 11px;
+  font-size: 16px;
   outline: none;
   border-radius: 25px;
   transition: all 0.5s ease-in-out;
@@ -252,7 +253,7 @@ p {
 }
 .input-search::placeholder {
   color: rgba(255, 255, 255, 0.5);
-  font-size: 11px;
+  font-size: 16px;
   font-weight: 100;
 }
 .btn-search {
