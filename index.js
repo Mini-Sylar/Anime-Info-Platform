@@ -11,17 +11,20 @@ const more_info = document.querySelector(".more-info");
 const search_button = document.querySelector(".btn-search");
 const search_value = document.querySelector(".input-search");
 const form = document.querySelector("#search-form");
+const col_elements = document.querySelectorAll(".dynamic-color");
+const weird = document.querySelector(".btn-search:focus ~ .input-search");
 
 // Get Useful Values Here
 let get_genre;
 let get_ID;
+let get_Color;
 function randomIntFromInterval(min, max) {
   // min and max included
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
 function Replace(data) {
-  main_data = data.data.Media;
+  let main_data = data.data.Media;
   //   Render title Here
   title.innerHTML = data.data.Media.title.english
     ? ` <h1 class="anime-title style-1">${main_data.title.english}</h1>`
@@ -46,6 +49,20 @@ function Replace(data) {
   more_info.addEventListener("click", function () {
     window.open(`https://anilist.co/anime/${get_ID}`, "_blank");
   });
+  //   Dynamic Colors
+  console.log(col_elements[2]);
+  //   0 is search
+  //   1 is more info
+  //   2 is cards
+  get_Color = main_data.coverImage.color;
+  col_elements[0].style.backgroundColor = get_Color;
+  col_elements[1].style.backgroundColor = get_Color;
+  col_elements[2].style.backgroundColor = get_Color;
+  console.log(col_elements[0].getBoundingClientRect());
+  col_elements[0].addEventListener("focus", function () {
+    weird.style.backgroundColor ="transparent";
+    console.log("clicked");
+  });
 }
 
 let headersList = {
@@ -65,6 +82,7 @@ function callBody(setID = 140960) {
     }
     coverImage {
         extraLarge
+        color
   }
   bannerImage
   description
@@ -90,6 +108,8 @@ function callBody(setID = 140960) {
     .then(function (data) {
       Replace(data);
       get_genre ? get_genre.split("/").join(",") : "Action";
+      get_Color = data.data.Media.coverImage.color;
+      console.log(get_Color);
     });
 }
 
@@ -150,7 +170,8 @@ function callCard(genre = "Action") {
         background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0,0.1)), url(${find_card[index].coverImage.extraLarge});
         background-repeat: no-repeat;
         background-size: cover;
-        transition: all 1s ease;
+        box-shadow: 2px 25px 21px 1px ${get_Color};
+         transition: all 1s ease;
         `;
         });
         currentElement.addEventListener("mouseleave", function () {
@@ -161,7 +182,6 @@ function callCard(genre = "Action") {
         transition: all 1s ease;
         `;
         });
-
         //    Onclick Replace Everything
         currentElement.addEventListener("click", function () {
           let getThatID = find_card[index].id;
@@ -217,7 +237,7 @@ function SearchAnime(searchQuery) {
       return response.json();
     })
     .then(function (search_data) {
-      console.log(search_data);
+      //   console.log(search_data);
       let thisID = search_data.data.Page.media[0].id;
       callBody(thisID);
     });
