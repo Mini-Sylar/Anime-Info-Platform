@@ -199,7 +199,11 @@ function SearchAnime(searchQuery) {
     }
   }
 }`,
-    variables: { search: searchQuery, page: 1, perPage: 1 },
+    variables: {
+      search: searchQuery,
+      page: randomIntFromInterval(1, 200),
+      perPage: 1,
+    },
   };
 
   let bodyContent = JSON.stringify(gqlBody);
