@@ -7,10 +7,16 @@ const episode_count = document.querySelector(".episode-count");
 const rating = document.querySelector(".rating");
 const anime_cards = document.querySelectorAll(".cards");
 const body = document.querySelector("body");
+const more_info = document.querySelector(".more-info");
+const search_button = document.querySelector(".btn-search");
+const search_value = document.querySelector(".input-search");
+const form = document.querySelector("#search-form");
 
+// Store Value Temporarily
 
-// 
+//
 let get_genre;
+let get_ID;
 function randomIntFromInterval(min, max) {
   // min and max included
   return Math.floor(Math.random() * (max - min + 1) + min);
@@ -22,7 +28,7 @@ function Replace(data) {
   title.innerHTML = data.data.Media.title.english
     ? main_data.title.english
     : main_data.title.romaji;
-title.classList.add("addtransition");
+  title.classList.add("addtransition");
   description.innerHTML = data.data.Media.description;
   // description.querySelectorAll("br").forEach((element) => {
   //   element.remove()
@@ -32,6 +38,10 @@ title.classList.add("addtransition");
   get_genre = genre.textContent;
   episode_count.innerHTML = `${main_data.episodes} episodes`;
   rating.innerHTML = `${main_data.averageScore / 10}/10`;
+  get_ID = main_data.id;
+  more_info.addEventListener("click", function () {
+    window.open(`https://anilist.co/anime/${get_ID}`, "_blank");
+  });
 }
 
 let headersList = {
@@ -163,4 +173,59 @@ fetch("https://graphql.anilist.co/", {
     });
   });
 
+// ============== Search Section =====================
+function SearchAnime(searchQuery) {
+  let headersList = {
+    Accept: "*/*",
+    "User-Agent": "Thunder Client (https://www.thunderclient.com)",
+    "Content-Type": "application/json",
+  };
+
+  let gqlBody = {
+    query: `query ($id: Int, $page: Int, $perPage: Int, $search: String) {
+  Page (page: $page, perPage: $perPage) {
+    pageInfo {
+      total
+      currentPage
+      lastPage
+      hasNextPage
+      perPage
+    }
+    media (id: $id, search: $search type: ANIME) {
+      id
+      title {
+        english
+        romaji
+      }
+    }
+  }
+}`,
+    variables: { search: searchQuery, page: 1, perPage: 1 },
+  };
+
+  let bodyContent = JSON.stringify(gqlBody);
+
+  fetch("https://graphql.anilist.co/", {
+    method: "POST",
+    body: bodyContent,
+    headers: headersList,
+  })
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (search_data) {
+      console.log(search_data);
+      let thisID = search_data.data.Page.media[0].id;
+      callBody(thisID);
+    });
+}
+
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
+  SearchAnime(search_value.value);
+  form.reset();
+});
+
+// console.log(localStorage["mySearchQuery"]);
+// Start With SPY X FAMILY
 document.onload = callBody();

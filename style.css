@@ -112,13 +112,22 @@ p {
   margin: 0;
 }
 
-.watch-now {
+.more-info {
   color: white;
   background-color: #0195ff;
   border: none;
   padding: 1rem;
   padding-inline: 2rem;
   border-radius: 5%;
+}
+
+.more-info:hover {
+  cursor: pointer;
+  transition: all 0.3s ease-in;
+  filter: drop-shadow(0 0 0.55rem #0195ff);
+  transform: scale(1.05) rotate(-1deg);
+  backdrop-filter: blur(10px);
+  transition: all 0.2s ease;
 }
 
 .right-side {
