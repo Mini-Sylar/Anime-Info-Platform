@@ -78,6 +78,23 @@ a {
 p {
   font-size: 12px;
   width: 80%;
+  text-align: justify;
+}
+
+.anime-synopsis {
+  height: 100%;
+  margin: 0;
+  padding-right: 1rem;
+  font-size: 14px;
+  overflow-y: auto;
+  display: flex;
+  align-items: center;
+}
+.anime-meta-details {
+  display: flex;
+  align-items: flex-end;
+  height: 15rem;
+  margin: 0;
 }
 
 .watch-now {
@@ -123,7 +140,7 @@ p {
 .cards:hover {
   transform: scale(1.1);
   box-shadow: 2px 25px 21px 1px #0ff;
-   background-color: linear-gradient(white, white);
+  background-color: linear-gradient(white, white);
   transition: all 1s ease;
 }
 

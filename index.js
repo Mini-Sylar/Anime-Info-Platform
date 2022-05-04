@@ -17,7 +17,9 @@ function randomIntFromInterval(min, max) {
 function Replace(data) {
   // console.log(data);
   main_data = data.data.Media;
-  title.innerHTML = data.data.Media.title.english;
+  title.innerHTML = data.data.Media.title.english
+    ? main_data.title.english
+    : main_data.title.romaji;
   description.innerHTML = data.data.Media.description;
   // description.querySelectorAll("br").forEach((element) => {
   //   element.remove()
@@ -42,6 +44,7 @@ function callBody(setID = 140960) {
     id
     title {
       english
+      romaji
     }
     coverImage {
         extraLarge
