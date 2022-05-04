@@ -76,7 +76,7 @@ function callBody(setID = 140960) {
       romaji
     }
     coverImage {
-        extraLarge
+        large
         color
   }
   bannerImage
@@ -125,7 +125,7 @@ function callCard(genre = "Action") {
       }
       
        coverImage {
-        extraLarge
+        large
   }
     }
     
@@ -156,13 +156,13 @@ function callCard(genre = "Action") {
           ? find_card[index].title.english
           : find_card[index].title.romaji;
         currentElement.style = `
-        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0,0.6)), url(${find_card[index].coverImage.extraLarge});
+        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0,0.6)), url(${find_card[index].coverImage.large});
         background-repeat: no-repeat;
         background-size: cover;
       `;
         currentElement.addEventListener("mouseenter", function () {
           currentElement.style = `
-        background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0,0.1)), url(${find_card[index].coverImage.extraLarge});
+        background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0,0.1)), url(${find_card[index].coverImage.large});
         background-repeat: no-repeat;
         background-size: cover;
         box-shadow: 2px 25px 21px 1px ${get_Color};
@@ -171,7 +171,7 @@ function callCard(genre = "Action") {
         });
         currentElement.addEventListener("mouseleave", function () {
           currentElement.style = `
-        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0,0.6)), url(${find_card[index].coverImage.extraLarge});
+        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0,0.6)), url(${find_card[index].coverImage.large});
         background-repeat: no-repeat;
         background-size: cover;
         transition: all 1s ease;
