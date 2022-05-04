@@ -1,8 +1,8 @@
 body {
   background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-    url("./images/spy-x-family-main.png");
+    url("./images/banner.jpg");
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
   display: flex;
   flex-direction: column;
   font-family: sans-serif;

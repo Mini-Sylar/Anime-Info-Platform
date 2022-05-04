@@ -76,6 +76,7 @@ function Replace(data) {
   //   1 is more info
   //   2 is cards
   get_Color = shadeColor(main_data.coverImage.color, -30);
+  body.style.backgroundColor = get_Color;
   col_elements[0].style.backgroundColor = get_Color;
   col_elements[1].style.backgroundColor = get_Color;
   col_elements[7].style.backgroundColor = get_Color;
@@ -271,16 +272,12 @@ function SearchAnime(searchQuery) {
     }
   }
 }`,
-    variables: {
-      search: searchQuery,
-      page: randomIntFromInterval(1, 200),
-      perPage: 1,
-    },
+    variables: { search: searchQuery, page: 1, perPage: 1 },
   };
 
   let bodyContent = JSON.stringify(gqlBody);
 
-  fetch("https://graphql.anilist.co/", {
+  fetch("https://graphql.anilist.co/?id=15125", {
     method: "POST",
     body: bodyContent,
     headers: headersList,
@@ -288,17 +285,17 @@ function SearchAnime(searchQuery) {
     .then(function (response) {
       return response.json();
     })
-    .then(function (search_data) {
-      //   console.log(search_data);
-      let thisID = search_data.data.Page.media[0].id;
+    .then(function (data) {
+      console.log(data);
+      let thisID = data.data.Page.media[0].id;
       callBody(thisID);
     });
 }
 
 form.addEventListener("submit", function (e) {
   e.preventDefault();
+  // Broken For now
   SearchAnime(search_value.value);
-  console.log(get_genre);
   let randomGenre = get_genre.split(" / ");
   //   Random Genres Here... can be improved to submit entre genre as array
   callCard(randomGenre[Math.floor(Math.random() * randomGenre.length)]);
