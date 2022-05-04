@@ -57,7 +57,7 @@ function Replace(data) {
   get_Color = main_data.coverImage.color;
   col_elements[0].style.backgroundColor = get_Color;
   col_elements[1].style.backgroundColor = get_Color;
-  col_elements[2].style.backgroundColor = get_Color;
+//   col_elements[2].style.backgroundColor = get_Color;
 }
 
 let headersList = {
@@ -159,6 +159,7 @@ function callCard(genre = "Action") {
         background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0,0.6)), url(${find_card[index].coverImage.large});
         background-repeat: no-repeat;
         background-size: cover;
+        box-shadow: none;
       `;
         currentElement.addEventListener("mouseenter", function () {
           currentElement.style = `
@@ -175,6 +176,7 @@ function callCard(genre = "Action") {
         background-repeat: no-repeat;
         background-size: cover;
         transition: all 1s ease;
+          box-shadow: none;
         `;
         });
         //    Onclick Replace Everything
