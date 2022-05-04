@@ -135,12 +135,6 @@ fetch("https://graphql.anilist.co/", {
         return (card_main = response.json());
     })
     .then(function (card_data) {
-        console.log(card_data);
-        console.log(
-            card_data.data.Page.media[2].title.english
-                ? card_data.data.Page.media[2].title.english
-                : card_data.data.Page.media[2].title.romaji
-        );
         const find_card = card_data.data.Page.media;
         anime_cards.forEach((currentElement, index) => {
             currentElement.innerHTML = find_card[index].title.english
@@ -171,7 +165,6 @@ fetch("https://graphql.anilist.co/", {
             //    Onclick Replace Everything
             currentElement.addEventListener("click", function () {
                 let getThatID = find_card[index].id;
-                console.log(getThatID);
                 // MYQUERY HERE
                 callBody(getThatID);
             });
@@ -219,7 +212,6 @@ function SearchAnime(searchQuery) {
             return response.json();
         })
         .then(function (search_data) {
-            console.log(search_data);
             let thisID = search_data.data.Page.media[0].id;
             callBody(thisID);
         });
@@ -231,6 +223,5 @@ form.addEventListener("submit", function (e) {
     form.reset();
 });
 
-// console.log(localStorage["mySearchQuery"]);
 // Start With SPY X FAMILY
 document.onload = callBody();
