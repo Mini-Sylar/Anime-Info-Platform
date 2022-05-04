@@ -22,6 +22,7 @@ function Replace(data) {
   title.innerHTML = data.data.Media.title.english
     ? main_data.title.english
     : main_data.title.romaji;
+title.classList.add("addtransition");
   description.innerHTML = data.data.Media.description;
   // description.querySelectorAll("br").forEach((element) => {
   //   element.remove()
