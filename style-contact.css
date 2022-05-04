@@ -61,23 +61,6 @@ h1 {
   backdrop-filter: blur(30px);
 }
 
-/* .main-body-container::before {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  background: rgba(2, 0, 36, 0.562);
-  background: linear-gradient(
-    135deg,
-    rgba(145, 145, 150, 0.623) 0%,
-    rgb(36, 35, 35) 35%
-  );
-  left: 0;
-  bottom: 0;
-  filter: blur(20px);
-} */
-
 .contact-me {
   display: flex;
   flex-direction: column;
