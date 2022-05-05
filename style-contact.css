@@ -183,3 +183,12 @@ li {
     visibility: visible;
   }
 }
+
+@media screen and (max-width: 425px) {
+p{
+  width: 100%;
+}
+.main-body-container{
+  width: 85%;
+}
+}
