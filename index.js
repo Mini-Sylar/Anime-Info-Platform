@@ -33,6 +33,8 @@ const search_value = document.querySelector(".input-search");
 const form = document.querySelector("#search-form");
 const col_elements = document.querySelectorAll(".dynamic-color");
 const surprise = document.querySelector(".surprise");
+const mobile_nav = document.querySelector(".links-mobile");
+const ham = document.querySelector(".hamburger");
 
 // Get Useful Values Here
 let get_genre;
@@ -82,7 +84,10 @@ function Replace(data) {
       : `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url(${main_data.bannerImage})`;
   body.style.backgroundSize = "cover";
   body.style.backgroundPosition = "center";
-
+  mobile_nav.style.backgroundColor = shadeColor(
+    main_data.coverImage.color,
+    -60
+  );
   // body.style.backgroundImage = `url(${main_data.bannerImage})`;
   col_elements[0].style.backgroundColor = get_Color;
   col_elements[1].style.backgroundColor = get_Color;
@@ -317,6 +322,19 @@ form.addEventListener("submit", function (e) {
 surprise.addEventListener("click", function () {
   let randomGenre = get_genre.split(" / ");
   callCard(randomGenre[Math.floor(Math.random() * randomGenre.length)]);
+});
+
+ham.addEventListener("click", () => {
+  mobile_nav.classList.toggle("show-links");
+  if (mobile_nav.classList.contains("show-links")) {
+    body.style = `
+        overflow:hidden;
+    `;
+  } else {
+    body.style = `
+        overflow:scroll;
+    `;
+  }
 });
 
 // Start With SPY X FAMILY
