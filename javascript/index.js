@@ -1,3 +1,36 @@
+/*
+-------- Anime Information Platform v.1.0 ----------
+--- Some Background Info ---
+  Get data from AniList API and do stuff with the data, AniList uses 'GraphQl* syntax
+---Sections---
+Explanation on functions
+1. ShadeColor() : 
+  - This returns a darker varient of the accent color on certain elements
+
+2. Replace(data) : 
+  - This function contains all the elements that will modified
+  - Takes data parameter; this is the JSON object returned by the API, from this data the elements are modified
+
+3. callBody(id) :
+  - This function contains the request that provides data for main body
+   call Replace(data) to modify the elements
+  - id: this represents the id of the anime we are looking for by default it is '140960' for Spy X Family
+
+4. callCard(genre) :
+  - This function contains the request that provides data for the suggestion cards
+  - genre: default genre to be passed, initially it is "Action"
+  - after modifying the cards, which ever card is clicked call callBody(id) to replace page body contents
+
+5. SearchAnime(query) :
+  - This function returns data that contains ID and title of anime you searched for so it can pass the ID to callBody(id)
+    to change body contains
+
+----- Other Variables --------
+get_genre : store "Genre" to be used in callCard(genre) globally
+get_ID: store "ID" to be used by callBody(id) globally
+get_Color: store "Color" to be used to change accents of elements
+*/
+
 // Color Darkner
 function shadeColor(color, percent) {
   var R = parseInt(color.substring(1, 3), 16);
@@ -45,6 +78,7 @@ function randomIntFromInterval(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
+// ============== Modify all elements ==============
 function Replace(data) {
   let main_data = data.data.Media;
   //   Render title Here
@@ -88,7 +122,7 @@ function Replace(data) {
     main_data.coverImage.color,
     -60
   );
-  // body.style.backgroundImage = `url(${main_data.bannerImage})`;
+
   col_elements[0].style.backgroundColor = get_Color;
   col_elements[1].style.backgroundColor = get_Color;
   col_elements[7].style.backgroundColor = get_Color;
@@ -126,6 +160,7 @@ let headersList = {
   "Content-Type": "application/json",
 };
 
+// =============== Replace page Body contents ================
 function callBody(setID = 140960) {
   let gqlBody = {
     query: `query ($id: Int) {
@@ -167,7 +202,7 @@ function callBody(setID = 140960) {
     });
 }
 
-//   For Cards
+// ======================  Card Section ======================
 let card_main;
 function callCard(genre = "Action") {
   let gqlBody_Cards = {
@@ -199,7 +234,8 @@ function callCard(genre = "Action") {
   };
 
   let cardContent = JSON.stringify(gqlBody_Cards);
-
+  // Fetch data from here
+  // First  then get
   fetch("https://graphql.anilist.co/", {
     method: "POST",
     body: cardContent,
@@ -209,15 +245,15 @@ function callCard(genre = "Action") {
       return (card_main = response.json());
     })
     .then(function (card_data) {
+      // When you get data, perform some actions here (CARD DATA!)
       const find_card = card_data.data.Page.media;
       anime_cards.forEach((currentElement, index) => {
+        // For each card
+        // Set title
         currentElement.innerHTML = find_card[index].title.english
           ? find_card[index].title.english
           : find_card[index].title.romaji;
-        // currentElement.innerHTML = find_card[index].title.english
-        //   ? ` <div class="cards   dynamic-color">${find_card[index].title.english}</div>`
-        //   : `  <div class="cards  dynamic-color">${find_card[index].title.romaji}</div>`;
-        //   Set Styles Here
+        // Set Background image here along with some styles
         currentElement.style = `
         background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0,0.6)), url(${find_card[index].coverImage.large});
         background-repeat: no-repeat;
@@ -227,6 +263,7 @@ function callCard(genre = "Action") {
         border-radius: 5%;
         overflow:hidden
       `;
+        // Mouse Enter to Mouseleave creates the hover effect when mouses passes on a card
         currentElement.addEventListener("mouseenter", function () {
           currentElement.style = `
         background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0,0.1)), url(${find_card[index].coverImage.large});
@@ -246,11 +283,12 @@ function callCard(genre = "Action") {
           box-shadow: none;
         `;
         });
-        //    Onclick Replace Everything
+        //    Onclick Replace every card based on a random genre
         currentElement.addEventListener("click", function () {
           let getThatID = find_card[index].id;
           // MYQUERY HERE
           callBody(getThatID);
+          // temporarily store search query using local storage to reload what you searched previously
           localStorage["searchKey"] = find_card[index].title.english
             ? find_card[index].title.english
             : find_card[index].title.romaji;
@@ -265,7 +303,7 @@ function SearchAnime(searchQuery) {
     "User-Agent": "Thunder Client (https://www.thunderclient.com)",
     "Content-Type": "application/json",
   };
-
+  // Get the following details in a json from AniList API
   let gqlBody = {
     query: `query ($id: Int, $page: Int, $perPage: Int, $search: String) {
   Page (page: $page, perPage: $perPage) {
@@ -300,17 +338,16 @@ function SearchAnime(searchQuery) {
       return response.json();
     })
     .then(function (data) {
-      console.log(data);
-      console.log(data.data.Page.media.length);
+      // Check if there was an initial value... if not pass Spy X Family id and call...this function simulates a fresh load of the page
       let thisID =
         data.data.Page.media.length === 0 ? 140960 : data.data.Page.media[0].id;
       callBody(thisID);
     });
 }
 
-form.addEventListener("submit", function (e) {
-  // e.preventDefault();
-  // Broken For now
+// Add event listners here
+form.addEventListener("submit", function () {
+  // When a search is passed, call searchAnime and pass the query value to search
   SearchAnime(search_value.value);
   localStorage["searchKey"] = search_value.value;
   let randomGenre = get_genre.split(" / ");
@@ -319,11 +356,13 @@ form.addEventListener("submit", function (e) {
   form.reset();
 });
 
+// Refresh the recommendations list when you click on surprise me
 surprise.addEventListener("click", function () {
   let randomGenre = get_genre.split(" / ");
   callCard(randomGenre[Math.floor(Math.random() * randomGenre.length)]);
 });
 
+//  Hamburger menu for mobile devices
 ham.addEventListener("click", () => {
   mobile_nav.classList.toggle("show-links");
   if (mobile_nav.classList.contains("show-links")) {
@@ -333,19 +372,15 @@ ham.addEventListener("click", () => {
   }
 });
 
-// Start With SPY X FAMILY
-// document.onload = callBody();
+// Call cards on load
 callCard();
 
-let myVar = localStorage["searchKey"] || "140960";
-// console.log(myVar);
-// SearchAnime(myVar);
-// localStorage.removeItem("searchKey");
-// console.log("removed", myVar);
+let myValue = localStorage["searchKey"] || "140960";
 
+// Check if code has been run before on page
 window.onload = function () {
   if (!("hasCodeRunBefore" in localStorage)) {
-    SearchAnime(myVar);
+    SearchAnime(myValue);
   } else {
     console.log("Code never run");
     callBody();
