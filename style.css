@@ -367,13 +367,12 @@ p {
   }
 
   .anime-title {
-    font-size: 18px;
+    font-size: 6vw;
     text-align: center;
     font-family: DexaPro-Bold;
     margin: 0 auto;
-    line-height: 1em;;
+    line-height: 1em;
     animation: sub-fadein 1.2s ease-in;
-    width: 80%;
   }
 
   .anime-title-container {
@@ -466,6 +465,5 @@ p {
     position: absolute;
     font-size: 11px;
     top: 3%;
-    z-index: 3;
   }
 }
