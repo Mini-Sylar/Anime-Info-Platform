@@ -129,7 +129,9 @@ a {
   text-decoration: none;
   color: silver;
 }
-
+p>a{
+  color: darkorange;
+}
 .contact-heading-container {
   display: flex;
   flex-direction: column;
