@@ -25,6 +25,9 @@ Explanation on functions
   - This function returns data that contains ID and title of anime you searched for so it can pass the ID to callBody(id)
     to change body contains
 
+6. randomIntFromInterval() :
+  - choose random index from a given lenght
+
 ----- Other Variables --------
 get_genre : store "Genre" to be used in callCard(genre) globally
 get_ID: store "ID" to be used by callBody(id) globally
