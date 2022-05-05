@@ -462,7 +462,7 @@ p {
     height: auto;
   }
   .logo{
-    position: absolute;
+    position: fixed;
     font-size: 11px;
     top: 3%;
   }
