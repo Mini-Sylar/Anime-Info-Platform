@@ -385,7 +385,6 @@ window.onload = function () {
   if (!("hasCodeRunBefore" in localStorage)) {
     SearchAnime(myValue);
   } else {
-    console.log("Code never run");
     callBody();
   }
 };
