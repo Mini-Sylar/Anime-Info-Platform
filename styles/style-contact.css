@@ -5,7 +5,7 @@ body {
 }
 body {
   background: linear-gradient(-45deg, #000000d2, #191b1ade),
-    url("./images/doodleBG.jpg");
+    url("../images/doodleBG.jpg");
   background-size: cover;
   height: 100vh;
   color: white;
