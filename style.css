@@ -438,7 +438,7 @@ p {
     z-index: 2;
   }
 
-    .show-links {
+  .show-links {
     height: 100vh;
     visibility: visible;
     height: 100vh;
@@ -456,6 +456,9 @@ p {
     border: none;
     font-size: 1.5rem;
   }
-
-
+  html,
+  body {
+    margin: 0;
+    height: auto;
+  }
 }
