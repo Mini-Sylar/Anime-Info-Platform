@@ -194,19 +194,26 @@ li {
 }
 
 @media screen and (max-width: 1024px) {
-  body{
+  body {
     font-size: 13px;
   }
+
+  html,
+  body {
+    margin: 0;
+    height: 100%;
+  }
+
   p {
     width: 100%;
   }
   .main-body-container {
     margin: 0 auto;
-    padding: .5rem;
+    padding: 0.5rem;
     width: 85%;
-
   }
   .contact-heading-container {
+    margin-top: 1.3rem;
     width: 100%;
   }
   .about-body {
@@ -221,8 +228,8 @@ li {
     width: 80%;
   }
   li {
-  margin: 0;
-  width: 100%;
+    margin: 0;
+    width: 100%;
   }
   .links-desktop {
     display: none;
@@ -235,16 +242,17 @@ li {
     width: 100vw;
     justify-content: center;
     align-items: center;
-    row-gap: 1em;
-    background-color: purple;
+    row-gap: 2em;
+    background-color: #0e0f0f;
     position: absolute;
     visibility: hidden;
     overflow: hidden;
     transition: all 0.5s ease, opacity 0.1s ease-in;
     z-index: 2;
+    font-size: 18px;
   }
 
-    .show-links {
+  .show-links {
     height: 100vh;
     visibility: visible;
     height: 100vh;
@@ -261,5 +269,16 @@ li {
     color: silver;
     border: none;
     font-size: 1.5rem;
+  }
+
+  .supported{
+    margin-bottom: 0;
+  }
+
+  .about{
+    margin-top: 0;
+  }
+  .third{
+    flex-direction: column;
   }
 }

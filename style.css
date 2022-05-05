@@ -429,7 +429,7 @@ p {
     width: 100vw;
     justify-content: center;
     align-items: center;
-    row-gap: 1em;
+    row-gap: 2em;
     background-color: purple;
     position: absolute;
     visibility: hidden;
