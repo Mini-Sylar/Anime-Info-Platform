@@ -128,9 +128,7 @@ a {
   text-decoration: none;
   color: silver;
 }
-.about-body {
-  font-weight: normal;
-}
+
 .contact-heading-container {
   display: flex;
   flex-direction: column;
@@ -148,6 +146,7 @@ h2,
 }
 
 .about-body {
+  font-weight: normal;
   text-align: left;
   width: 40%;
   margin: 0 auto;
@@ -184,11 +183,35 @@ li {
   }
 }
 
-@media screen and (max-width: 425px) {
-p{
+@media screen and (max-width: 1024px) {
+  body{
+    font-size: 13px;
+  }
+  p {
+    width: 100%;
+  }
+  .main-body-container {
+    margin: 0 auto;
+    padding: .5rem;
+    width: 85%;
+
+  }
+  .contact-heading-container {
+    width: 100%;
+  }
+  .about-body {
+    width: 100%;
+    text-align: center;
+  }
+  ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+    width: 80%;
+  }
+  li {
+  margin: 0;
   width: 100%;
-}
-.main-body-container{
-  width: 85%;
-}
+  }
 }
