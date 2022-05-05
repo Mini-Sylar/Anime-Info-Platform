@@ -76,18 +76,19 @@ a {
   display: flex;
   align-items: flex-end;
   height: 100%;
-  font-size: 64px;
+  font-size: 60px;
   font-family: DexaPro-Bold;
   margin: 0;
-  /* overflow-y: auto; */
   line-height: 1em;
+  overflow-y: clip;
   animation: sub-fadein 1.2s ease-in;
 }
 
 .anime-title-container {
   /* display: flex; */
   margin: 0;
-  height: 12em;
+  height: 100%;
+ 
   /* align-items: center; */
 }
 
@@ -105,6 +106,7 @@ p {
   overflow-y: auto;
   display: flex;
   align-items: flex-start;
+  /* margin-top: 1rem; */
   animation: sub-fadein 1.5s ease-in;
 }
 
@@ -113,6 +115,7 @@ p {
   align-items: flex-end;
   height: 12rem;
   margin: 0;
+  padding-top: .8rem;
 }
 
 .more-info {
@@ -336,4 +339,62 @@ p {
   transform: scale(1.05) rotate(-1deg);
   backdrop-filter: blur(10px);
   transition: all 0.2s ease;
+}
+
+/* Phones */
+@media screen and (max-width: 425px) {
+  .main-body{
+    flex-direction: column;
+    gap: 0;
+  }
+  .main-body > * {
+  width: 100%;
+  min-height: none;
+  margin-bottom: 0;
+}
+.left-side {
+  padding-inline-start: 0rem;
+  box-sizing: border-box;
+}
+
+.anime-title {
+  font-size: 32px;
+  text-align: center;
+  font-family: DexaPro-Bold;
+  margin: 0 auto;
+  line-height: 1em;
+  animation: sub-fadein 1.2s ease-in;
+}
+
+.anime-title-container {
+  display: flex;
+  margin: 0;
+  height: 12em;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.anime-synopsis {
+  padding-right: 0rem;
+  font-size: 12px;
+  text-align: justify;
+  justify-content: center;
+  padding-inline: 15px;
+  animation: sub-fadein 1.5s ease-in;
+}
+
+p{
+  width: 100%;
+  margin: 1rem auto;
+  text-align: center;
+}
+.more-info{
+  display: flex;
+  width: 40%;
+  margin: 0 auto;
+  justify-content: center;
+}
+.surprise{
+  margin-block: 1rem;
+}
 }
