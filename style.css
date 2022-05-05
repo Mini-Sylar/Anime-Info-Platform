@@ -48,6 +48,7 @@ a {
   display: flex;
   width: 10%;
   padding-inline-start: 3rem;
+  display: none;
 }
 
 .links-desktop {
@@ -461,9 +462,10 @@ p {
     margin: 0;
     height: auto;
   }
-  .logo{
-    position: fixed;
+  .logo {
+    position: absolute;
     font-size: 11px;
     top: 3%;
+    display: none;
   }
 }
