@@ -292,15 +292,21 @@ function SearchAnime(searchQuery) {
       return response.json();
     })
     .then(function (data) {
-      let thisID = data.data.Page.media[0].id;
+      console.log(data);
+      console.log(data.data.Page.media.length);
+      let thisID =
+        data.data.Page.media.length === 0
+          ? 140960
+          : data.data.Page.media[0].id;
       callBody(thisID);
     });
 }
 
 form.addEventListener("submit", function (e) {
-  e.preventDefault();
+  // e.preventDefault();
   // Broken For now
   SearchAnime(search_value.value);
+  localStorage["searchKey"] = search_value.value;
   let randomGenre = get_genre.split(" / ");
   //   Random Genres Here... can be improved to submit entre genre as array
   callCard(randomGenre[Math.floor(Math.random() * randomGenre.length)]);
@@ -313,5 +319,20 @@ surprise.addEventListener("click", function () {
 });
 
 // Start With SPY X FAMILY
-document.onload = callBody();
+// document.onload = callBody();
 callCard();
+
+let myVar = localStorage["searchKey"] || "140960";
+// console.log(myVar);
+// SearchAnime(myVar);
+// localStorage.removeItem("searchKey");
+// console.log("removed", myVar);
+
+window.onload = function () {
+  if (!("hasCodeRunBefore" in localStorage)) {
+    SearchAnime(myVar);
+  } else {
+    console.log("Code never run");
+    callBody();
+  }
+};
