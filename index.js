@@ -246,6 +246,9 @@ function callCard(genre = "Action") {
           let getThatID = find_card[index].id;
           // MYQUERY HERE
           callBody(getThatID);
+          localStorage["searchKey"] = find_card[index].title.english
+            ? find_card[index].title.english
+            : find_card[index].title.romaji;
         });
       });
     });
@@ -295,9 +298,7 @@ function SearchAnime(searchQuery) {
       console.log(data);
       console.log(data.data.Page.media.length);
       let thisID =
-        data.data.Page.media.length === 0
-          ? 140960
-          : data.data.Page.media[0].id;
+        data.data.Page.media.length === 0 ? 140960 : data.data.Page.media[0].id;
       callBody(thisID);
     });
 }
