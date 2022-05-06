@@ -5,6 +5,7 @@ body {
   color: white;
   animation: sub-fadein 0.3s ease-in;
   flex: 1;
+  position: relative;
 }
 
 .showBackroundImages {
