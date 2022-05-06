@@ -36,7 +36,7 @@ a {
   flex-direction: column;
   height: 100%;
   min-height: 100%;
-  /* position: relative; */
+  position: relative;
 }
 .navigation-desktop {
   display: flex;
@@ -81,6 +81,7 @@ a {
   width: 100%;
   gap: 3rem;
   min-height: 90%;
+  position: relative;
 }
 
 .main-body > * {
