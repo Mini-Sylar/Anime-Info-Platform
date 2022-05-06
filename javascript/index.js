@@ -124,7 +124,7 @@ function Replace(data) {
       : main_data.coverImage.color),
     (get_Color = shadeColor(get_Color, -30));
   body.style.backgroundColor = shadeColor(get_Color, -60);
-  document.body.backgroundColor = shadeColor(get_Color, -60);
+  document.body.style.backgroundColor = shadeColor(get_Color, -60);
   body.style.backgroundImage =
     main_data.bannerImage === null
       ? `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url(./images/404-no-wallpaper.jpg)`
