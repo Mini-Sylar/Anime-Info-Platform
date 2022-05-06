@@ -62,7 +62,7 @@ const genre = document.querySelector(".genre");
 const episode_count = document.querySelector(".episode-count");
 const rating = document.querySelector(".rating");
 const anime_cards = document.querySelectorAll(".cards");
-const body = document.querySelector("body");
+const body = document.querySelector(".showBackroundImages");
 const more_info = document.querySelector(".more-info");
 const search_button = document.querySelector(".btn-search");
 const search_value = document.querySelector(".input-search");
@@ -127,8 +127,9 @@ function Replace(data) {
       ? `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url(./images/Spy-mobile.jpeg)`
       : `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url(./images/spy-x-family-main.jpg)`;
 
-  body.style.backgroundSize = "cover";
+  body.style.backgroundSize = "100% 100%";
   body.style.backgroundPosition = "center";
+  body.classList.add("addtransition")
   mobile_nav.style.backgroundColor = shadeColor(
     main_data.coverImage.color,
     -60

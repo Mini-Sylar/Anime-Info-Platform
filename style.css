@@ -1,13 +1,24 @@
 body {
-  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+  /* background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
     url("./images/pre-loading-image.jpg");
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: cover; */
   display: flex;
   flex-direction: column;
   font-family: sans-serif;
   color: white;
   animation: sub-fadein 0.3s ease-in;
+}
+
+.showBackroundImages {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("./images/pre-loading-image.jpg");
+  position: fixed;
+  min-width: 100vw;
+  min-height: 100%;
+  height: auto;
+  z-index: -1;
+  animation: shrink 2s ease;
 }
 
 html,
@@ -219,31 +230,6 @@ p {
   background-color: #555;
 }
 
-@keyframes sub-fadein {
-  0% {
-    opacity: 0;
-    visibility: hidden;
-    display: none;
-  }
-
-  50% {
-    opacity: 0;
-    visibility: visible;
-    display: none;
-  }
-
-  100% {
-    opacity: 1;
-    visibility: visible;
-    display: flex;
-  }
-}
-
-.addtransition {
-  animation: sub-fadein 2s ease-in;
-  transition: all 2s ease;
-}
-
 /* Search Bar From Hall Management */
 .search-box {
   width: fit-content;
@@ -353,9 +339,9 @@ p {
 
 /* Phones */
 @media screen and (max-width: 425px) {
-  body{
-     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-    url("./images/pre-loading-image-mobile.jpg");
+  body {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+      url("./images/pre-loading-image-mobile.jpg");
     background-size: cover;
   }
   .main-body {
@@ -464,13 +450,50 @@ p {
   }
   html,
   body {
-    margin: 0;
     height: auto;
+    object-fit: cover;
+    background-repeat: no-repeat;
   }
   .logo {
     position: absolute;
     font-size: 11px;
     top: 3%;
     display: none;
+  }
+}
+
+/* .addtransition {
+  background-size: 110% 110%;
+  background-position: center center;
+  animation: shrink 2s ease;
+
+} */
+
+@keyframes sub-fadein {
+  0% {
+    opacity: 0;
+    visibility: hidden;
+    display: none;
+  }
+
+  50% {
+    opacity: 0;
+    visibility: visible;
+    display: none;
+  }
+
+  100% {
+    opacity: 1;
+    visibility: visible;
+    display: flex;
+  }
+}
+
+@keyframes shrink {
+  0% {
+    background-size: 110% 110%;
+  }
+  100% {
+    background-size: 100% 100%;
   }
 }
