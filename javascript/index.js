@@ -116,25 +116,28 @@ function Replace(data) {
   //   0 is search
   //   1 is more info
   //   2 is cards
-  get_Color = shadeColor(main_data.coverImage.color, -30);
-  body.style.backgroundColor = shadeColor(main_data.coverImage.color, -60);
-  document.body.backgroundColor = shadeColor(main_data.coverImage.color, -60);
+
+  // Get color if null replace with darkened default color
+  (get_Color =
+    main_data.coverImage.color === null
+      ? "#0195ff"
+      : main_data.coverImage.color),
+    (get_Color = shadeColor(get_Color, -30));
+  body.style.backgroundColor = shadeColor(get_Color, -60);
+  document.body.backgroundColor = shadeColor(get_Color, -60);
   body.style.backgroundImage =
-    main_data.bannerImage == null
+    main_data.bannerImage === null
       ? `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url(./images/404-no-wallpaper.jpg)`
-      : main_data.id !== 140960
-      ? `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url(${main_data.bannerImage})`
-      : window.screen.width <= 425
-      ? `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url(./images/Spy-mobile.jpeg)`
-      : `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url(./images/spy-x-family-main.jpg)`;
+      : main_data.id === 140960
+      ? window.screen.width <= 425
+        ? `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url(./images/Spy-mobile.jpeg)`
+        : `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url(./images/spy-x-family-main.jpg)`
+      : `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url(${main_data.bannerImage})`;
 
   body.style.backgroundSize = "cover";
   body.style.backgroundPosition = "center center";
-  body.classList.add("addtransition")
-  mobile_nav.style.backgroundColor = shadeColor(
-    main_data.coverImage.color,
-    -60
-  );
+  body.classList.add("addtransition");
+  mobile_nav.style.backgroundColor = shadeColor(get_Color, -60);
 
   col_elements[0].style.backgroundColor = get_Color;
   col_elements[1].style.backgroundColor = get_Color;
