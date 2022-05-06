@@ -235,6 +235,7 @@ p {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 3;
   /* margin-top: 2rem; */
 }
 .input-search {
