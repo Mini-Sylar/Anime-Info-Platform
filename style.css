@@ -11,7 +11,7 @@ body {
     url("./images/pre-loading-image.jpg");
   position: absolute;
   min-width: 100vw;
-  height: 100vh;
+  height: 100px;
   z-index: -1;
   background-color: black;
   margin: 0;
@@ -24,7 +24,7 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
-  position: relative;
+  /* position: relative; */
 }
 
 a {
@@ -37,7 +37,7 @@ a {
   flex-direction: column;
   height: 100%;
   min-height: 100%;
-  position: relative;
+  /* position: relative; */
 }
 .navigation-desktop {
   display: flex;
@@ -78,12 +78,10 @@ a {
 /* Section */
 .main-body {
   display: flex;
-  flex-grow: 0;
-  flex-shrink: 0;
   align-items: flex-end;
   width: 100%;
   gap: 3rem;
-  position: relative;
+  min-height: 90%;
 }
 
 .main-body > * {
