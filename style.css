@@ -36,7 +36,7 @@ a {
   flex-direction: column;
   height: 100%;
   min-height: 100%;
-  position: relative;
+  /* position: relative; */
 }
 .navigation-desktop {
   display: flex;
@@ -81,7 +81,6 @@ a {
   width: 100%;
   gap: 3rem;
   min-height: 90%;
-  position: relative;
 }
 
 .main-body > * {
@@ -343,16 +342,18 @@ p {
       url("./images/pre-loading-image-mobile.jpg");
     background-size: 100% 100%;
     position: absolute;
-    min-height: 100%;
+    min-height: 100vh;
   }
   .main-body {
     flex-direction: column;
     gap: 0;
+    position: relative;
   }
   .main-body > * {
     width: 100%;
     min-height: none;
     margin-bottom: 0;
+    position: relative;
   }
   .left-side {
     padding-inline-start: 0rem;
