@@ -4,6 +4,7 @@ body {
   font-family: sans-serif;
   color: white;
   animation: sub-fadein 0.3s ease-in;
+  flex: 1;
 }
 
 .showBackroundImages {
@@ -338,7 +339,7 @@ p {
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
       url("./images/pre-loading-image-mobile.jpg");
     background-size: 100% 100%;
-    position: fixed;
+    position: absolute;
     top: 0;
     bottom: 0;
   }
@@ -491,4 +492,3 @@ p {
     opacity: 1;
   }
 }
-
