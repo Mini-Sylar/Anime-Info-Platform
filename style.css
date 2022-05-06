@@ -353,6 +353,11 @@ p {
 
 /* Phones */
 @media screen and (max-width: 425px) {
+  body{
+     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("./images/pre-loading-image-mobile.jpg");
+    background-size: cover;
+  }
   .main-body {
     flex-direction: column;
     gap: 0;
