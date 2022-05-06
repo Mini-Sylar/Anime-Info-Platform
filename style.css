@@ -15,7 +15,7 @@ body {
     url("./images/pre-loading-image.jpg");
   position: fixed;
   min-width: 100vw;
-  min-height: 100%;
+  min-height: 100vh;
   height: auto;
   z-index: -1;
   animation: shrink 2s ease;
@@ -339,10 +339,10 @@ p {
 
 /* Phones */
 @media screen and (max-width: 425px) {
-  body {
+  .showBackroundImages {
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
       url("./images/pre-loading-image-mobile.jpg");
-    background-size: cover;
+    background-size: 100% 100%;
   }
   .main-body {
     flex-direction: column;
@@ -452,7 +452,6 @@ p {
   body {
     height: auto;
     object-fit: cover;
-    background-repeat: no-repeat;
   }
   .logo {
     position: absolute;
@@ -490,10 +489,10 @@ p {
 }
 
 @keyframes shrink {
-  0% {
-    background-size: 110% 110%;
+  from {
+  opacity: 0;
   }
-  100% {
-    background-size: 100% 100%;
+  to {
+    opacity: 1;
   }
 }

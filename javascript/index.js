@@ -118,6 +118,7 @@ function Replace(data) {
   //   2 is cards
   get_Color = shadeColor(main_data.coverImage.color, -30);
   body.style.backgroundColor = shadeColor(main_data.coverImage.color, -60);
+  document.body.backgroundColor = shadeColor(main_data.coverImage.color, -60);
   body.style.backgroundImage =
     main_data.bannerImage == null
       ? `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url(./images/404-no-wallpaper.jpg)`
@@ -127,8 +128,8 @@ function Replace(data) {
       ? `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url(./images/Spy-mobile.jpeg)`
       : `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url(./images/spy-x-family-main.jpg)`;
 
-  body.style.backgroundSize = "100% 100%";
-  body.style.backgroundPosition = "center";
+  body.style.backgroundSize = "cover";
+  body.style.backgroundPosition = "center center";
   body.classList.add("addtransition")
   mobile_nav.style.backgroundColor = shadeColor(
     main_data.coverImage.color,
