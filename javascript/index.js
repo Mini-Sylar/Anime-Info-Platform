@@ -382,9 +382,9 @@ surprise.addEventListener("click", function () {
 ham.addEventListener("click", () => {
   mobile_nav.classList.toggle("show-links");
   if (mobile_nav.classList.contains("show-links")) {
-    body.style.overflow = "hidden";
+    document.body.style.overflow = "hidden";
   } else {
-    body.style.overflow = "scroll";
+    document.body.style.overflow = "scroll";
   }
 });
 

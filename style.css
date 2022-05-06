@@ -338,6 +338,9 @@ p {
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
       url("./images/pre-loading-image-mobile.jpg");
     background-size: 100% 100%;
+    position: fixed;
+    top: 0;
+    bottom: 0;
   }
   .main-body {
     flex-direction: column;
