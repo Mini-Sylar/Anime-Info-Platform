@@ -125,14 +125,9 @@ function Replace(data) {
       ? `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url(${main_data.bannerImage})`
       : window.screen.width <= 425
       ? `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url(./images/Spy-mobile.jpeg)`
-      : `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url(./images/spy-x-family-main.png)`;
+      : `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url(./images/spy-x-family-main.jpg)`;
 
-  body.style.backgroundSize =
-    main_data.id !== 140960?
-      "cover"
-      : window.screen.width <= 425
-      ? "100% 100%"
-      : "cover";
+  body.style.backgroundSize = "cover";
   body.style.backgroundPosition = "center";
   mobile_nav.style.backgroundColor = shadeColor(
     main_data.coverImage.color,
