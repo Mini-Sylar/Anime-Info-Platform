@@ -18,6 +18,7 @@ body {
 .mainpage {
   display: flex;
   flex-direction: column;
+   overflow: hidden;
 }
 
 label {

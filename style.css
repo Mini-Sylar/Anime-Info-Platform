@@ -11,8 +11,11 @@ body {
     url("./images/pre-loading-image.jpg");
   position: absolute;
   min-width: 100vw;
-  min-height: 100vh;
-  z-index: -1;
+  height: 100vh;
+  z-index: -1;  
+  background-color: black;
+  /* animation: sub-fadein 2s ease-in; */
+
 }
 
 html,
@@ -80,7 +83,6 @@ a {
 
 .main-body > * {
   width: 100%;
-  min-height: 60%;
   margin-bottom: 1rem;
 }
 
@@ -102,11 +104,8 @@ a {
 }
 
 .anime-title-container {
-  /* display: flex; */
   margin: 0;
   height: 100%;
-
-  /* align-items: center; */
 }
 
 p {
@@ -453,6 +452,11 @@ p {
   }
 }
 
+.addtransition{
+  animation: fade-in 1s ease;
+}
+
+
 @keyframes sub-fadein {
   0% {
     opacity: 0;
@@ -474,10 +478,14 @@ p {
 }
 
 @keyframes fade-in {
-  from {
+  0% {
     opacity: 0;
   }
-  to {
+  50% {
+    opacity: 1;
+  }
+  100%{
     opacity: 1;
   }
 }
+
