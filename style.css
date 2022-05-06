@@ -13,10 +13,11 @@ body {
   position: absolute;
   min-width: 100vw;
   height: 100vh;
-  z-index: -1;  
+  z-index: -1;
   background-color: black;
+  margin: 0;
+  padding: 0;
   /* animation: sub-fadein 2s ease-in; */
-
 }
 
 html,
@@ -338,7 +339,7 @@ p {
   .showBackroundImages {
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
       url("./images/pre-loading-image-mobile.jpg");
-    /* background-size: 100% 100%; */
+    background-size: 100% 100%;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -456,10 +457,9 @@ p {
   }
 }
 
-.addtransition{
+.addtransition {
   animation: fade-in 1s ease;
 }
-
 
 @keyframes sub-fadein {
   0% {
@@ -488,7 +488,7 @@ p {
   50% {
     opacity: 1;
   }
-  100%{
+  100% {
     opacity: 1;
   }
 }
