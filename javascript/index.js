@@ -393,6 +393,11 @@ callCard();
 
 let myValue = localStorage["searchKey"] || "140960";
 
+
+  distanceFromTop = body.getBoundingClientRect().top;
+body.style.top = distanceFromTop + "px";
+body.style.bottom = "auto";
+
 // Check if code has been run before on page
 window.onload = function () {
   if (!("hasCodeRunBefore" in localStorage)) {
