@@ -342,7 +342,7 @@ p {
       url("./images/pre-loading-image-mobile.jpg");
     background-size: 100% 100%;
     position: fixed;
-    min-height: 700px;
+    min-height: 100vmax;
   }
   .main-body {
     flex-direction: column;

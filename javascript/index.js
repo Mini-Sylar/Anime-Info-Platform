@@ -133,7 +133,7 @@ function Replace(data) {
         ? `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url(./images/Spy-mobile.jpeg)`
         : `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url(./images/spy-x-family-main.jpg)`
       : `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url(${main_data.bannerImage})`;
-  
+
   body.style.backgroundSize = "cover";
   body.style.backgroundPosition = "center center";
   body.classList.add("addtransition");
