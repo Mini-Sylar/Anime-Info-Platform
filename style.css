@@ -4,8 +4,6 @@ body {
   font-family: sans-serif;
   color: white;
   animation: sub-fadein 0.3s ease-in;
-  flex: 1;
-  position: relative;
 }
 
 .showBackroundImages {
@@ -26,6 +24,7 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
+  position: relative;
 }
 
 a {
@@ -38,6 +37,7 @@ a {
   flex-direction: column;
   height: 100%;
   min-height: 100%;
+  position: relative;
 }
 .navigation-desktop {
   display: flex;
@@ -78,10 +78,12 @@ a {
 /* Section */
 .main-body {
   display: flex;
-  flex-grow: 1;
+  flex-grow: 0;
+  flex-shrink: 0;
   align-items: flex-end;
   width: 100%;
   gap: 3rem;
+  position: relative;
 }
 
 .main-body > * {
@@ -338,6 +340,7 @@ p {
 /* Phones */
 @media screen and (max-width: 425px) {
   .showBackroundImages {
+    display: flex;
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
       url("./images/pre-loading-image-mobile.jpg");
     background-size: 100% 100%;
