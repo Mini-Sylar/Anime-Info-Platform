@@ -135,7 +135,7 @@ function Replace(data) {
       : `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url(${main_data.bannerImage})`;
 
   body.style.backgroundSize = "cover";
-  body.style.backgroundPosition = "fixed";
+  // body.style.backgroundPosition = "center center";
   body.classList.add("addtransition");
   mobile_nav.style.backgroundColor = shadeColor(get_Color, -60);
 
