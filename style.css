@@ -1,8 +1,4 @@
 body {
-  /* background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-    url("./images/pre-loading-image.jpg");
-  background-repeat: no-repeat;
-  background-size: cover; */
   display: flex;
   flex-direction: column;
   font-family: sans-serif;
@@ -13,18 +9,18 @@ body {
 .showBackroundImages {
   background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
     url("./images/pre-loading-image.jpg");
-  position: fixed;
+  position: absolute;
   min-width: 100vw;
   min-height: 100vh;
-  height: auto;
   z-index: -1;
-  animation: shrink 2s ease;
 }
 
 html,
 body {
   height: 100%;
   margin: 0;
+  padding: 0;
+  height: -webkit-fill-available;
 }
 
 a {
@@ -343,6 +339,8 @@ p {
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
       url("./images/pre-loading-image-mobile.jpg");
     background-size: 100% 100%;
+    min-height: -webkit-fill-available;
+    height: -webkit-fill-available;
   }
   .main-body {
     flex-direction: column;
@@ -448,11 +446,7 @@ p {
     border: none;
     font-size: 1.5rem;
   }
-  html,
-  body {
-    height: auto;
-    object-fit: cover;
-  }
+
   .logo {
     position: absolute;
     font-size: 11px;
@@ -460,13 +454,6 @@ p {
     display: none;
   }
 }
-
-/* .addtransition {
-  background-size: 110% 110%;
-  background-position: center center;
-  animation: shrink 2s ease;
-
-} */
 
 @keyframes sub-fadein {
   0% {
@@ -488,9 +475,9 @@ p {
   }
 }
 
-@keyframes shrink {
+@keyframes fade-in {
   from {
-  opacity: 0;
+    opacity: 0;
   }
   to {
     opacity: 1;
