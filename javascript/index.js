@@ -91,7 +91,10 @@ function Replace(data) {
   //   Render Description Here
   description.innerHTML = `<p class="anime-synopsis style-1">${data.data.Media.description}</p>`;
   //   Render Release Year
-  release_year.innerHTML = ` <span class="year">${main_data.seasonYear}</span>`;
+  release_year.innerHTML =
+    main_data.seasonYear === null
+      ? `<span class="year">TBA</span>`
+      : `<span class="year">${main_data.seasonYear}</span>`;
   //   Render Genre
   genre.innerHTML = `<span class="genre">${main_data.genres.join(
     " / "
@@ -118,7 +121,10 @@ function Replace(data) {
   body.style.backgroundImage =
     main_data.bannerImage == null
       ? `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url(./images/404-no-wallpaper.jpg)`
+      : main_data.id === 140960
+      ? `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url(./images/spy-x-family-main.png)`
       : `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url(${main_data.bannerImage})`;
+
   body.style.backgroundSize = "cover";
   body.style.backgroundPosition = "center";
   mobile_nav.style.backgroundColor = shadeColor(
@@ -332,7 +338,7 @@ function SearchAnime(searchQuery) {
 
   let bodyContent = JSON.stringify(gqlBody);
 
-  fetch("https://graphql.anilist.co/?id=15125", {
+  fetch("https://graphql.anilist.co/", {
     method: "POST",
     body: bodyContent,
     headers: headersList,
