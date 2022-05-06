@@ -235,7 +235,6 @@ p {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 3;
   /* margin-top: 2rem; */
 }
 .input-search {
@@ -342,19 +341,18 @@ p {
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
       url("./images/pre-loading-image-mobile.jpg");
     background-size: 100% 100%;
-    position: absolute;
+    position: fixed;
+    width: 100vw;
     min-height: 100vh;
   }
   .main-body {
     flex-direction: column;
     gap: 0;
-    position: relative;
   }
   .main-body > * {
     width: 100%;
     min-height: none;
     margin-bottom: 0;
-    position: relative;
   }
   .left-side {
     padding-inline-start: 0rem;
