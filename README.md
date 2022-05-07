@@ -1,5 +1,4 @@
-[![Vercel](https://vercelbadge.vercel.app/api/[Mini-Sylar]/[repo])](https://img.shields.io/github/deployments/Mini-Sylar/Anime-Info-Platform/production?label=Vercel&logo=Vercel)
-
+![GitHub deployments](https://img.shields.io/github/deployments/Mini-Sylar/Anime-Info-Platform/production?label=Vercel)
 
 # Anime-Info-Platform
 
