@@ -460,7 +460,8 @@ p {
     display: none;
   }
 
-  .arrow-left,.arrow-right{
+  .arrow-left,
+  .arrow-right {
     display: none;
   }
 }
@@ -476,15 +477,19 @@ p {
 
 .arrow-left,
 .arrow-right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
   border: 2px solid #0195ff;
-  border-radius: 50%;
+  border-radius: 100%;
   padding: 20px;
+  box-sizing: border-box;
   z-index: 5;
   background-color: #0195ffb2;
   cursor: pointer;
   overflow: hidden;
-    animation: sub-fadein 0.5s ease-in;
+  animation: sub-fadein 0.5s ease-in;
 }
 
 .arrow-left:hover,
