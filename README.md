@@ -1,4 +1,4 @@
-![GitHub deployments](https://img.shields.io/github/deployments/Mini-Sylar/Anime-Info-Platform/production?label=Vercel)
+![GitHub deployments](https://img.shields.io/github/deployments/Mini-Sylar/Anime-Info-Platform/production?label=Vercel-Deployment)
 
 # Anime-Info-Platform
 
