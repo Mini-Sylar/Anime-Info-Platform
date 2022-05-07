@@ -312,9 +312,9 @@ function callCard(genre = "Action") {
         background-repeat: no-repeat;
         background-size: cover;
         box-shadow: none;
-         border: 2px solid rgba(0, 0, 0, 0.301);
+        border: 2px solid rgba(0, 0, 0, 0.301);
         border-radius: 5%;
-        overflow:hidden
+        overflow: hidden;
       `;
         // Mouse Enter to Mouseleave creates the hover effect when mouses passes on a card
         currentElement.addEventListener("mouseenter", function () {

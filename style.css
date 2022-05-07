@@ -189,11 +189,12 @@ p {
   text-align: center;
   cursor: pointer;
   animation: sub-fadein 1.5s ease-in;
+  overflow: hidden;
 }
 
 .cards:hover {
   transform: scale(1.1);
-  box-shadow: 2px 25px 21px 1px #0195ff;
+ box-shadow: 1px 1px 2px 2px #0195ff;
   background-color: linear-gradient(
     rgba(255, 255, 255, 0.76),
     rgba(255, 255, 255, 0.76)
