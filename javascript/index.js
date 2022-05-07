@@ -192,10 +192,7 @@ function Replace(data) {
     );
   });
   left_arrow.addEventListener("mouseleave", function () {
-    left_arrow.style.setProperty(
-      "-webkit-filter",
-      ``
-    );
+    left_arrow.style.setProperty("-webkit-filter", ``);
   });
   // Right Arrow
   //   Change Drop Shadow Color
@@ -206,10 +203,7 @@ function Replace(data) {
     );
   });
   right_arrow.addEventListener("mouseleave", function () {
-    right_arrow.style.setProperty(
-      "-webkit-filter",
-      ``
-    );
+    right_arrow.style.setProperty("-webkit-filter", ``);
   });
 }
 
