@@ -1,5 +1,6 @@
 ![GitHub deployments](https://img.shields.io/github/deployments/Mini-Sylar/Anime-Info-Platform/production?label=Vercel-Deployment)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/Mini-Sylar/Anime-Info-Platform)
+[![GitHub license](https://img.shields.io/github/license/Mini-Sylar/Anime-Info-Platform)](https://github.com/Mini-Sylar/Anime-Info-Platform)
 
 # Anime-Info-Platform
 
