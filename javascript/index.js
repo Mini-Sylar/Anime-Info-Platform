@@ -54,6 +54,11 @@ function shadeColor(color, percent) {
 
   return "#" + RR + GG + BB;
 }
+
+const setOpacity = (hex, alpha) =>
+  `${hex}${Math.floor(alpha * 255)
+    .toString(16)
+    .padStart(2, 0)}`;
 // Get Elements here
 const title = document.querySelector(".anime-title");
 const description = document.querySelector(".anime-synopsis");
@@ -137,7 +142,10 @@ function Replace(data) {
   body.style.backgroundSize = "cover";
   body.style.backgroundPosition = "center center";
   body.classList.add("addtransition");
-  mobile_nav.style.backgroundColor = shadeColor(get_Color, -60);
+  mobile_nav.style.backgroundColor = setOpacity(
+    shadeColor(get_Color, -60),
+    0.7
+  );
 
   col_elements[0].style.backgroundColor = get_Color;
   col_elements[1].style.backgroundColor = get_Color;
