@@ -370,13 +370,9 @@ function SearchAnime(searchQuery) {
 }
 
 // Add event listners here
-form.addEventListener("submit", function () {
-  // When a search is passed, call searchAnime and pass the query value to search
-  SearchAnime(search_value.value);
-  localStorage["searchKey"] = search_value.value;
-  let randomGenre = get_genre.split(" / ");
-  //   Random Genres Here... can be improved to submit entre genre as array
-  callCard(randomGenre[Math.floor(Math.random() * randomGenre.length)]);
+form.addEventListener("submit", function (e) {
+  e.preventDefault()
+  ValidateForm()
   form.reset();
 });
 
@@ -395,6 +391,20 @@ ham.addEventListener("click", () => {
     document.body.style.overflow = "scroll";
   }
 });
+
+// Form Validation
+function ValidateForm() {
+  if (search_value.value === "") {
+    return false;
+  } else {
+    // When a search is passed, call searchAnime and pass the query value to search
+    SearchAnime(search_value.value);
+    localStorage["searchKey"] = search_value.value;
+    let randomGenre = get_genre.split(" / ");
+    //   Random Genres Here... can be improved to submit entre genre as array
+    callCard(randomGenre[Math.floor(Math.random() * randomGenre.length)]);
+  }
+}
 
 // Call cards on load
 callCard();
