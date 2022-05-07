@@ -45,7 +45,6 @@ a {
   justify-content: space-between;
   align-items: center;
   height: 5%;
-  /* height: 100%; */
 }
 .links-mobile {
   display: none;
@@ -59,20 +58,22 @@ a {
 
 .logo {
   display: flex;
-  width: 10%;
+  width: 0%;
   padding-inline-start: 3rem;
   display: none;
 }
 
 .links-desktop {
   display: flex;
-  width: 100%;
-  justify-content: space-evenly;
+  width: 50%;
+  justify-content: space-between;
+  margin-left: 3.6rem;
 }
 
 .extra-desktop {
-  width: 30%;
+  width: 40%;
   display: flex;
+  justify-content: center;
 }
 
 /* Section */
