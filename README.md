@@ -1,3 +1,6 @@
+[![Vercel](https://vercelbadge.vercel.app/api/[Mini-Sylar]/[repo])](https://img.shields.io/github/deployments/Mini-Sylar/Anime-Info-Platform/production?label=Vercel&logo=Vercel)
+
+
 # Anime-Info-Platform
 
 Official repository of the Anime Information Platform
