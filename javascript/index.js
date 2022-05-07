@@ -76,6 +76,9 @@ const col_elements = document.querySelectorAll(".dynamic-color");
 const surprise = document.querySelector(".surprise");
 const mobile_nav = document.querySelector(".links-mobile");
 const ham = document.querySelector(".hamburger");
+const left_arrow = document.querySelector(".arrow-left");
+const right_arrow = document.querySelector(".arrow-right");
+const anime_container = document.querySelector(".anime-cards");
 
 // Get Useful Values Here
 let get_genre;
@@ -172,10 +175,42 @@ function Replace(data) {
   col_elements[7].addEventListener("mouseleave", function () {
     col_elements[7].style.setProperty(
       "-webkit-filter",
-      `drop-shadow(0 0 0 ${get_Color})`
+      `drop-shadow(0 0 0 ${setOpacity(get_Color, 0.7)})`
     );
   });
-  //   col_elements[2].style.backgroundColor = get_Color; "drop-shadow(0 0 0.55rem ${get_Color})
+
+  // Dynamic Color For Scroll buttons
+  left_arrow.style.backgroundColor = setOpacity(get_Color, 0.9);
+  right_arrow.style.backgroundColor = setOpacity(get_Color, 0.9);
+  left_arrow.style.borderColor = get_Color;
+  right_arrow.style.borderColor = get_Color;
+  //   Change Drop Shadow Color
+  left_arrow.addEventListener("mouseenter", function () {
+    left_arrow.style.setProperty(
+      "-webkit-filter",
+      `drop-shadow(0 0 0.3rem ${get_Color})`
+    );
+  });
+  left_arrow.addEventListener("mouseleave", function () {
+    left_arrow.style.setProperty(
+      "-webkit-filter",
+      ``
+    );
+  });
+  // Right Arrow
+  //   Change Drop Shadow Color
+  right_arrow.addEventListener("mouseenter", function () {
+    right_arrow.style.setProperty(
+      "-webkit-filter",
+      `drop-shadow(0 0 0.3rem ${get_Color})`
+    );
+  });
+  right_arrow.addEventListener("mouseleave", function () {
+    right_arrow.style.setProperty(
+      "-webkit-filter",
+      ``
+    );
+  });
 }
 
 let headersList = {
@@ -293,7 +328,7 @@ function callCard(genre = "Action") {
         background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0,0.1)), url(${find_card[index].coverImage.large});
         background-repeat: no-repeat;
         background-size: cover;
-        box-shadow: 2px 25px 21px 1px ${get_Color};
+        box-shadow: 1px 1px 2px 2px ${get_Color};
          transition: all 1s ease;
         `;
         });
@@ -371,8 +406,8 @@ function SearchAnime(searchQuery) {
 
 // Add event listners here
 form.addEventListener("submit", function (e) {
-  e.preventDefault()
-  ValidateForm()
+  e.preventDefault();
+  ValidateForm();
   form.reset();
 });
 
@@ -390,6 +425,14 @@ ham.addEventListener("click", () => {
   } else {
     document.body.style.overflow = "scroll";
   }
+});
+
+left_arrow.addEventListener("click", function () {
+  anime_container.scrollBy(-400, 0);
+});
+
+right_arrow.addEventListener("click", function () {
+  anime_container.scrollBy(400, 0);
 });
 
 // Form Validation
