@@ -46,7 +46,7 @@ The Anime Information Platform is built completely with
 - CSS
 - Vanilla Javascript
 
-The javascript here is repsonsible for fetching data from the AniList API written in GraphQl as well as updating the page with the data fetched. View [index.js](javascript\index.js) for more information
+The javascript here is repsonsible for fetching data from the AniList API written in GraphQl as well as updating the page with the data fetched. View [index.js](https://github.com/Mini-Sylar/Anime-Info-Platform/blob/master/javascript/index.js) for more information
 
 <hr>
 
@@ -85,7 +85,7 @@ The first page you see when you load the site ->
 
 <hr>
 
-### [index.js](javascript\index.js)
+### [index.js](https://github.com/Mini-Sylar/Anime-Info-Platform/blob/master/javascript/index.js)
 
 contains all the code used. [index.js](javascript\index.js) contains a thorough explanation on what every function/ variable does
 
