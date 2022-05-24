@@ -57,12 +57,17 @@
         </p>
       </div>
       <div class="main-body-container">
-        <form action="mailto: minisylar3@gmail.com" class="contact-me">
+        <form
+          action="mailto:minisylar3@gmail.com"
+          method="get"
+          enctype="text/plain"
+          class="contact-me"
+        >
           <label for="lname">Full Name</label>
           <input
             type="text"
             id="lname"
-            name="lastname"
+            name="name"
             placeholder="Your name.."
             required
           />
@@ -84,7 +89,7 @@
             required
           ></textarea>
 
-          <input type="submit" value="Message Me" class="submit" />
+          <input type="submit" value="Send" class="submit" />
         </form>
       </div>
       <div class="to-be-blurred"></div>
