@@ -1,45 +1,50 @@
-<?php
-
-$errors = [];
-$errorMessage = '';
-
-if (!empty($_POST)) {
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $message = $_POST['message'];
-
-    if (empty($name)) {
-        $errors[] = 'Name is empty';
-    }
-
-    if (empty($email)) {
-        $errors[] = 'Email is empty';
-    } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $errors[] = 'Email is invalid';
-    }
-
-    if (empty($message)) {
-        $errors[] = 'Message is empty';
-    }
-
-
-    if (empty($errors)) {
-        $toEmail = 'minisylar3@gmail.com';
-        $emailSubject = 'New email from your contant form';
-        $headers = ['From' => $email, 'Reply-To' => $email, 'Content-type' => 'text/html; charset=iso-8859-1'];
-
-        $bodyParagraphs = ["Name: {$name}", "Email: {$email}", "Message:", $message];
-        $body = join(PHP_EOL, $bodyParagraphs);
-
-        if (mail($toEmail, $emailSubject, $body, $headers)) {
-            header('Location: contact.html');
-        } else {
-            $errorMessage = 'Oops, something went wrong. Please try again later';
-        }
-    } else {
-        $allErrors = join('<br/>', $errors);
-        $errorMessage = "<p style='color: red;'>{$allErrors}</p>";
-    }
+<?php 
+$errors = '';
+$myemail = 'minisylar3@gmail.com';//<-----Put Your email address here.
+if(empty($_POST['name'])  || 
+   empty($_POST['email']) || 
+   empty($_POST['message']))
+{
+    $errors .= "\n Error: all fields are required";
 }
 
+$name = $_POST['name']; 
+$email_address = $_POST['email']; 
+$message = $_POST['message']; 
+
+if (!preg_match(
+"/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/i", 
+$email_address))
+{
+    $errors .= "\n Error: Invalid email address";
+}
+
+if( empty($errors))
+{
+	$to = $myemail; 
+	$email_subject = "Contact form submission: $name";
+	$email_body = "You have received a new message. ".
+	" Here are the details:\n Name: $name \n Email: $email_address \n Message \n $message"; 
+	
+	$headers = "From: $myemail\n"; 
+	$headers .= "Reply-To: $email_address";
+	
+	mail($to,$email_subject,$email_body,$headers);
+	//redirect to the 'thank you' page
+	header('Location: contact-form-thank-you.html');
+} 
 ?>
+<html>
+<head>
+	<title>Contact form handler</title>
+</head>
+
+<body>
+<!-- This page is displayed only if there is some error -->
+<?php
+echo nl2br($errors);
+?>
+
+
+</body>
+</html>
