@@ -59,7 +59,7 @@
       <div class="main-body-container">
         <form
           action="mailto:minisylar3@gmail.com"
-          method="get"
+          method="GET"
           enctype="text/plain"
           class="contact-me"
         >
@@ -67,7 +67,6 @@
           <input
             type="text"
             id="lname"
-            name="name"
             placeholder="Your name.."
             required
           />
@@ -76,19 +75,17 @@
             type="text"
             id="subject"
             name="subject"
-            placeholder="Your name.."
+            placeholder="What are we talking about? :)"
             required
           />
 
           <label for="message">Message</label>
           <textarea
-            id="body"
             name="body"
             placeholder="Your message goes in here..."
             style="height: 30vh"
             required
           ></textarea>
-
           <input type="submit" value="Send" class="submit" />
         </form>
       </div>
