@@ -1,50 +1,33 @@
+
 <?php 
-$errors = '';
-$myemail = 'minisylar3@gmail.com';//<-----Put Your email address here.
-if(empty($_POST['name'])  || 
-   empty($_POST['email']) || 
-   empty($_POST['message']))
-{
-    $errors .= "\n Error: all fields are required";
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+if (isset($_POST['name'],$_POST['email'],$_POST['message'])){
+
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $message = $_POST['message'];
+    $from = 'From: ' . $_POST['email']; 
+    $to  = 'minisylar3@mail.com' . ', '; 
+    $to .= $_POST['email'];
+    $subject = 'Uw vraag op www.aledvertising.be';
+    $human = $_POST['human'];
+
+    $body = "From: $name\n E-Mail: $email\nMessage:\n $message";
+    if ($name != '' && $email != '' && $message != '') {
+        if ($human == '4') {                 
+            if (mail ($to, $subject, $body, $from)) { 
+            echo '<p class="green">Uw bericht is succesvol verzonden.</p>';
+        } else { 
+            echo '<p>Er iets misgelopen, probeer opnieuw aub.</p>'; 
+        } 
+    } else if ($_POST['submit'] && $human != '4') {
+        echo '<p>2+2 is niet gelijk aan het getal dat u hebt ingevoerd.</p>';
+    }
+    } else {
+        echo '<p>Alle velden met een * zijn verplicht in te vullen.</p>';
+    }
 }
-
-$name = $_POST['name']; 
-$email_address = $_POST['email']; 
-$message = $_POST['message']; 
-
-if (!preg_match(
-"/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/i", 
-$email_address))
-{
-    $errors .= "\n Error: Invalid email address";
-}
-
-if( empty($errors))
-{
-	$to = $myemail; 
-	$email_subject = "Contact form submission: $name";
-	$email_body = "You have received a new message. ".
-	" Here are the details:\n Name: $name \n Email: $email_address \n Message \n $message"; 
-	
-	$headers = "From: $myemail\n"; 
-	$headers .= "Reply-To: $email_address";
-	
-	mail($to,$email_subject,$email_body,$headers);
-	//redirect to the 'thank you' page
-	header('Location: contact-form-thank-you.html');
-} 
 ?>
-<html>
-<head>
-	<title>Contact form handler</title>
-</head>
-
-<body>
-<!-- This page is displayed only if there is some error -->
-<?php
-echo nl2br($errors);
-?>
-
-
-</body>
-</html>
