@@ -19,7 +19,7 @@
     ></script>
     <script type="text/javascript">
       (function () {
-        emailjs.init(`process.env.PUBLIC_KEY`);
+        emailjs.init(process.env.PUBLIC_KEY);
       })();
     </script>
     <style>
@@ -132,8 +132,8 @@
         e.preventDefault();
         emailjs
           .sendForm(
-            `process.env.SERVICE_ID`,
-            `process.env.EMAIL_TEMPLATE`,
+            process.env.SERVICE_ID,
+            process.env.EMAIL_TEMPLATE,
             form
           )
           .then(
