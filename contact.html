@@ -19,7 +19,7 @@
     ></script>
     <script type="text/javascript">
       (function () {
-        emailjs.init("laUn5X52pMBQ3VyHw");
+        emailjs.init(`process.env.PUBLIC_KEY`);
       })();
     </script>
     <style>
@@ -126,18 +126,25 @@
       });
     </script>
     <script>
+      `process.env.API_URL`;
       const form = document.getElementById("contact_form");
       form.addEventListener("submit", (e) => {
         e.preventDefault();
-        emailjs.sendForm("service_email_sylar", "temp_email_sylar", form).then(
-          function () {
-            alert("Your message has been sent, expect a reply soon ☺");
-            form.reset();
-          },
-          function (error) {
-            alert("There was a problem sending your email, try again ☹");
-          }
-        );
+        emailjs
+          .sendForm(
+            `process.env.SERVICE_ID`,
+            `process.env.EMAIL_TEMPLATE`,
+            form
+          )
+          .then(
+            function () {
+              alert("Your message has been sent, expect a reply soon ☺");
+              form.reset();
+            },
+            function (error) {
+              alert("There was a problem sending your email, try again ☹");
+            }
+          );
       });
     </script>
   </body>
