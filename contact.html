@@ -1,3 +1,5 @@
+<?php include 'contact-me.php';?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -11,6 +13,15 @@
       src="https://kit.fontawesome.com/df3ec59988.js"
       crossorigin="anonymous"
     ></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"
+    ></script>
+    <script type="text/javascript">
+      (function () {
+        emailjs.init("laUn5X52pMBQ3VyHw");
+      })();
+    </script>
     <style>
       @font-face {
         font-family: DexaPro-Regular;
@@ -57,34 +68,43 @@
         </p>
       </div>
       <div class="main-body-container">
-        <form action="mailto: minisylar3@gmail.com" class="contact-me">
-          <label for="lname">Full Name</label>
+        <form class="contact-me" id="contact_form">
+          <!-- Name -->
+          <label for="name">Full Name</label>
           <input
             type="text"
             id="lname"
-            name="lastname"
+            name="from_name"
             placeholder="Your name.."
             required
           />
-          <label for="subject">What do you want to talk about?</label>
+          <!-- Email Address -->
+          <label for="email_address">Email Address</label>
+          <input
+            type="email"
+            id="email"
+            name="reply_to"
+            placeholder="Enter your email"
+            required
+          />
+          <!-- Subject -->
+          <label for="subject">What do you want to talk about</label>
           <input
             type="text"
             id="subject"
             name="subject"
-            placeholder="Your name.."
+            placeholder="What are we talking about?"
             required
           />
-
+          <!-- Message -->
           <label for="message">Message</label>
           <textarea
-            id="body"
-            name="body"
+            name="message"
             placeholder="Your message goes in here..."
-            style="height: 30vh"
+            style="height: 20vh"
             required
           ></textarea>
-
-          <input type="submit" value="Message Me" class="submit" />
+          <input type="submit" name="Send" value="Message Me" class="submit" />
         </form>
       </div>
       <div class="to-be-blurred"></div>
@@ -92,7 +112,6 @@
     <script>
       const mobile_nav = document.querySelector(".links-mobile");
       const ham = document.querySelector(".hamburger");
-      // const body = document.querySelector("body");
       ham.addEventListener("click", () => {
         mobile_nav.classList.toggle("show-links");
         if (mobile_nav.classList.contains("show-links")) {
@@ -104,6 +123,21 @@
         overflow:scroll;
     `;
         }
+      });
+    </script>
+    <script>
+      const form = document.getElementById("contact_form");
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        emailjs.sendForm("service_email_sylar", "temp_email_sylar", form).then(
+          function () {
+            alert("Your message has been sent, expect a reply soon ☺");
+            form.reset();
+          },
+          function (error) {
+            alert("There was a problem sending your email, try again ☹");
+          }
+        );
       });
     </script>
   </body>
