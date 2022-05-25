@@ -133,6 +133,7 @@
           function () {
             alert("Your message has been sent, expect a reply soon ☺");
             form.reset();
+            window.location.reload();
           },
           function (error) {
             alert("There was a problem sending your email, try again ☹");
