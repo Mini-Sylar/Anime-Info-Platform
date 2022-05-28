@@ -84,6 +84,7 @@ const anime_container = document.querySelector(".anime-cards");
 let get_genre;
 let get_ID;
 let get_Color;
+let find_card;
 function randomIntFromInterval(min, max) {
   // min and max included
   return Math.floor(Math.random() * (max - min + 1) + min);
@@ -299,7 +300,7 @@ function callCard(genre = "Action") {
     })
     .then(function (card_data) {
       // When you get data, perform some actions here (CARD DATA!)
-      const find_card = card_data.data.Page.media;
+      find_card = card_data.data.Page.media;
       anime_cards.forEach((currentElement, index) => {
         // For each card
         // Set title
@@ -335,16 +336,6 @@ function callCard(genre = "Action") {
         transition: all 1s ease;
           box-shadow: none;
         `;
-        });
-        //    Onclick Replace every card based on a random genre
-        currentElement.addEventListener("click", function () {
-          let getThatID = find_card[index].id;
-          // MYQUERY HERE
-          callBody(getThatID);
-          // temporarily store search query using local storage to reload what you searched previously
-          localStorage["searchKey"] = find_card[index].title.english
-            ? find_card[index].title.english
-            : find_card[index].title.romaji;
         });
       });
     });
@@ -427,6 +418,20 @@ left_arrow.addEventListener("click", function () {
 
 right_arrow.addEventListener("click", function () {
   anime_container.scrollBy(400, 0);
+});
+
+//    Onclick Replace every card based on a random genre
+anime_cards.forEach((currentElement, index) => {
+  currentElement.addEventListener("click", function () {
+    let getThatID = find_card[index].id;
+    // console.log(getThatID);
+    // MYQUERY HERE
+    callBody(getThatID);
+    // temporarily store search query using local storage to reload what you searched previously
+    localStorage["searchKey"] = find_card[index].title.english
+      ? find_card[index].title.english
+      : find_card[index].title.romaji;
+  });
 });
 
 // Form Validation
