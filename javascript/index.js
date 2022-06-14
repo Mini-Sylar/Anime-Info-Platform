@@ -441,15 +441,18 @@ function ValidateForm() {
     return false;
   } else {
     // When a search is passed, call searchAnime and pass the query value to search
+    // ----Share Link Feature Starts here---
+    //  Get the search value and append it to the link when sending to someone
     here = new URL(window.location.href);
     console.log(here);
-    console.log(here.href);
+    // console.log(here.href);
     here.searchParams.set("show", search_value.value);
     let mySearchValue = here.searchParams.get("show");
     SearchAnime(mySearchValue);
     localStorage["searchKey"] = mySearchValue;
     console.log(localStorage["searchKey"]);
-    // window.history.pushState(null, "", `show=${search_value.value}`);
+    // Add query text to URL in address bar if you want to copy and paste
+    window.history.pushState(null, "", `?show=${search_value.value}`);
     // location.href  =  here.href
     let randomGenre = get_genre.split(" / ");
     //   Random Genres Here... can be improved to submit entre genre as array
