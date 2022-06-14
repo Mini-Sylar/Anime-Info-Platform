@@ -79,12 +79,14 @@ const ham = document.querySelector(".hamburger");
 const left_arrow = document.querySelector(".arrow-left");
 const right_arrow = document.querySelector(".arrow-right");
 const anime_container = document.querySelector(".anime-cards");
+const share_info = document.querySelector(".share-info");
 
 // Get Useful Values Here
 let get_genre;
 let get_ID;
 let get_Color;
 let find_card;
+let here;
 function randomIntFromInterval(min, max) {
   // min and max included
   return Math.floor(Math.random() * (max - min + 1) + min);
@@ -205,6 +207,19 @@ function Replace(data) {
   });
   right_arrow.addEventListener("mouseleave", function () {
     right_arrow.style.setProperty("-webkit-filter", ``);
+  });
+
+  // Dynamic Color For Share Button!
+  share_info.style.color = get_Color;
+  //   Change Drop Shadow Color
+  share_info.addEventListener("mouseenter", function () {
+    share_info.style.setProperty(
+      "-webkit-filter",
+      `drop-shadow(0 0 0.3rem ${get_Color})`
+    );
+  });
+  share_info.addEventListener("mouseleave", function () {
+    share_info.style.setProperty("-webkit-filter", ``);
   });
 }
 
@@ -440,8 +455,19 @@ function ValidateForm() {
     return false;
   } else {
     // When a search is passed, call searchAnime and pass the query value to search
-    SearchAnime(search_value.value);
-    localStorage["searchKey"] = search_value.value;
+    // ----Share Link Feature Starts here---
+    //  Get the search value and append it to the link when sending to someone
+    here = new URL(window.location.href);
+    // console.log(here);
+    // console.log(here.href);
+    here.searchParams.set("show", search_value.value);
+    let mySearchValue = here.searchParams.get("show");
+    SearchAnime(mySearchValue);
+    localStorage["searchKey"] = mySearchValue;
+    // console.log(localStorage["searchKey"]);
+    // Add query text to URL in address bar if you want to copy and paste
+    window.history.pushState(null, "", `?show=${search_value.value}`);
+    // location.href  =  here.href
     let randomGenre = get_genre.split(" / ");
     //   Random Genres Here... can be improved to submit entre genre as array
     callCard(randomGenre[Math.floor(Math.random() * randomGenre.length)]);
@@ -451,8 +477,19 @@ function ValidateForm() {
 // Call cards on load
 callCard();
 
-let myValue = localStorage["searchKey"] || "140960";
+const params = new Proxy(new URLSearchParams(window.location.search), {
+  get: (searchParams, prop) => searchParams.get(prop),
+});
 
+let valueFromLink = params.show;
+// console.log(valueFromLink);
+
+let myValue =
+  valueFromLink !== null
+    ? valueFromLink
+    : localStorage["searchKey"] !== undefined
+    ? localStorage["searchKey"]
+    : "140960";
 // Check if code has been run before on page
 window.onload = function () {
   if (!("hasCodeRunBefore" in localStorage)) {
@@ -461,3 +498,37 @@ window.onload = function () {
     callBody();
   }
 };
+
+// console.log("This is local storage:", localStorage["searchKey"]);
+
+// Call Share API
+share_info.addEventListener("click", (event) => {
+  // Fallback, Tries to use API only
+  // if navigator.share function is
+  // available
+  if (navigator.share) {
+    navigator
+      .share({
+        // Title that occurs over
+        // web share dialog
+        title: `${title.textContent} | Anime Info Platform`,
+
+        // URL to share
+        url: `${location.origin}/?show=${title.textContent}`,
+      })
+      .then(() => {
+        console.log("Thanks for sharing!");
+      })
+      .catch((err) => {
+        // Handle errors, if occured
+        console.log("Error while using Web share API:");
+        console.log(err);
+      });
+  } else {
+    // Alerts user if API not available
+    navigator.clipboard.writeText(
+      `${location.origin}/?show=${title.textContent}`
+    );
+    alert("Link Copied To Clipboard!");
+  }
+});
