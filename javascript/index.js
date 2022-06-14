@@ -511,7 +511,7 @@ share_info.addEventListener("click", (event) => {
       .share({
         // Title that occurs over
         // web share dialog
-        title: `${title.textContent} | Anime Info Platform`,
+        title: `${title.textContent}`,
 
         // URL to share
         url: `${location.origin}/?show=${title.textContent}`,
