@@ -79,6 +79,7 @@ const ham = document.querySelector(".hamburger");
 const left_arrow = document.querySelector(".arrow-left");
 const right_arrow = document.querySelector(".arrow-right");
 const anime_container = document.querySelector(".anime-cards");
+const share_info = document.querySelector(".share-info");
 
 // Get Useful Values Here
 let get_genre;
@@ -206,6 +207,19 @@ function Replace(data) {
   });
   right_arrow.addEventListener("mouseleave", function () {
     right_arrow.style.setProperty("-webkit-filter", ``);
+  });
+
+  // Dynamic Color For Share Button!
+  share_info.style.color = get_Color;
+  //   Change Drop Shadow Color
+  share_info.addEventListener("mouseenter", function () {
+    share_info.style.setProperty(
+      "-webkit-filter",
+      `drop-shadow(0 0 0.3rem ${get_Color})`
+    );
+  });
+  share_info.addEventListener("mouseleave", function () {
+    share_info.style.setProperty("-webkit-filter", ``);
   });
 }
 
@@ -488,7 +502,7 @@ window.onload = function () {
 console.log("This is local storage:", localStorage["searchKey"]);
 
 // Call Share API
-document.querySelector(".share-info").addEventListener("click", (event) => {
+share_info.addEventListener("click", (event) => {
   // Fallback, Tries to use API only
   // if navigator.share function is
   // available
