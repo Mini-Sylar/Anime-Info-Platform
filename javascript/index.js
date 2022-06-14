@@ -460,35 +460,6 @@ function ValidateForm() {
   }
 }
 
-// Call Share API
-document.querySelector(".share-info").addEventListener("click", (event) => {
-  // Fallback, Tries to use API only
-  // if navigator.share function is
-  // available
-  if (navigator.share) {
-    navigator
-      .share({
-        // Title that occurs over
-        // web share dialog
-        title: `${title.textContent} | Anime Info Platform`,
-
-        // URL to share
-        url: location.href,
-      })
-      .then(() => {
-        console.log("Thanks for sharing!");
-      })
-      .catch((err) => {
-        // Handle errors, if occured
-        console.log("Error while using Web share API:");
-        console.log(err);
-      });
-  } else {
-    // Alerts user if API not available
-    alert("Browser doesn't support this API !");
-  }
-});
-
 // Call cards on load
 callCard();
 
@@ -515,3 +486,35 @@ window.onload = function () {
 };
 
 console.log("This is local storage:", localStorage["searchKey"]);
+
+// Call Share API
+document.querySelector(".share-info").addEventListener("click", (event) => {
+  // Fallback, Tries to use API only
+  // if navigator.share function is
+  // available
+  if (navigator.share) {
+    navigator
+      .share({
+        // Title that occurs over
+        // web share dialog
+        title: `${title.textContent} | Anime Info Platform`,
+
+        // URL to share
+        url: `${location.origin}/?show=${title.textContent}`,
+      })
+      .then(() => {
+        console.log("Thanks for sharing!");
+      })
+      .catch((err) => {
+        // Handle errors, if occured
+        console.log("Error while using Web share API:");
+        console.log(err);
+      });
+  } else {
+    // Alerts user if API not available
+    navigator.clipboard.writeText(
+      `${location.origin}/?show=${title.textContent}`
+    );
+    alert("Link Copied To Clipboard!");
+  }
+});
