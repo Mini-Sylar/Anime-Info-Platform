@@ -458,13 +458,13 @@ function ValidateForm() {
     // ----Share Link Feature Starts here---
     //  Get the search value and append it to the link when sending to someone
     here = new URL(window.location.href);
-    console.log(here);
+    // console.log(here);
     // console.log(here.href);
     here.searchParams.set("show", search_value.value);
     let mySearchValue = here.searchParams.get("show");
     SearchAnime(mySearchValue);
     localStorage["searchKey"] = mySearchValue;
-    console.log(localStorage["searchKey"]);
+    // console.log(localStorage["searchKey"]);
     // Add query text to URL in address bar if you want to copy and paste
     window.history.pushState(null, "", `?show=${search_value.value}`);
     // location.href  =  here.href
@@ -499,7 +499,7 @@ window.onload = function () {
   }
 };
 
-console.log("This is local storage:", localStorage["searchKey"]);
+// console.log("This is local storage:", localStorage["searchKey"]);
 
 // Call Share API
 share_info.addEventListener("click", (event) => {
