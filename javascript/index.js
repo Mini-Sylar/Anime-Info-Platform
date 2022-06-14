@@ -465,9 +465,14 @@ const params = new Proxy(new URLSearchParams(window.location.search), {
 });
 
 let valueFromLink = params.show;
-console.log(valueFromLink);
+// console.log(valueFromLink);
 
-let myValue = localStorage["searchKey"] ||valueFromLink || "140960";
+let myValue =
+  valueFromLink !== null
+    ? valueFromLink
+    : localStorage["searchKey"] !== undefined
+    ? localStorage["searchKey"]
+    : "140960";
 // Check if code has been run before on page
 window.onload = function () {
   if (!("hasCodeRunBefore" in localStorage)) {
