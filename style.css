@@ -156,6 +156,23 @@ p {
   transition: all 0.2s ease;
 }
 
+.share-info {
+  font-size: 24px;
+  border: none;
+  background-color: transparent;
+  color: #0195ff;
+  cursor: pointer;
+  margin-left: 4rem;
+}
+
+.share-info:hover {
+  cursor: pointer;
+  transition: all 0.3s ease-in;
+  filter: drop-shadow(0 0 0.55rem #0195ff);
+  backdrop-filter: blur(10px);
+  transition: all 0.2s ease;
+}
+
 .right-side {
   min-width: 0;
   min-height: 35%;
@@ -194,7 +211,7 @@ p {
 
 .cards:hover {
   transform: scale(1.1);
- box-shadow: 1px 1px 2px 2px #0195ff;
+  box-shadow: 1px 1px 2px 2px #0195ff;
   background-color: linear-gradient(
     rgba(255, 255, 255, 0.76),
     rgba(255, 255, 255, 0.76)
@@ -543,8 +560,6 @@ p {
 .anime-cards::-webkit-scrollbar {
   display: none;
 }
-
-
 
 @keyframes sub-fadein {
   0% {
