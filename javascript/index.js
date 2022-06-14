@@ -85,6 +85,7 @@ let get_genre;
 let get_ID;
 let get_Color;
 let find_card;
+let here;
 function randomIntFromInterval(min, max) {
   // min and max included
   return Math.floor(Math.random() * (max - min + 1) + min);
@@ -440,8 +441,16 @@ function ValidateForm() {
     return false;
   } else {
     // When a search is passed, call searchAnime and pass the query value to search
-    SearchAnime(search_value.value);
-    localStorage["searchKey"] = search_value.value;
+    here = new URL(window.location.href);
+    console.log(here);
+    console.log(here.href);
+    here.searchParams.set("show", search_value.value);
+    let mySearchValue = here.searchParams.get("show");
+    SearchAnime(mySearchValue);
+    localStorage["searchKey"] = mySearchValue;
+    console.log(localStorage["searchKey"]);
+    // window.history.pushState(null, "", `show=${search_value.value}`);
+    // location.href  =  here.href
     let randomGenre = get_genre.split(" / ");
     //   Random Genres Here... can be improved to submit entre genre as array
     callCard(randomGenre[Math.floor(Math.random() * randomGenre.length)]);
@@ -451,8 +460,14 @@ function ValidateForm() {
 // Call cards on load
 callCard();
 
-let myValue = localStorage["searchKey"] || "140960";
+const params = new Proxy(new URLSearchParams(window.location.search), {
+  get: (searchParams, prop) => searchParams.get(prop),
+});
 
+let valueFromLink = params.show;
+console.log(valueFromLink);
+
+let myValue = localStorage["searchKey"] ||valueFromLink || "140960";
 // Check if code has been run before on page
 window.onload = function () {
   if (!("hasCodeRunBefore" in localStorage)) {
@@ -461,3 +476,5 @@ window.onload = function () {
     callBody();
   }
 };
+
+console.log("This is local storage:", localStorage["searchKey"]);
