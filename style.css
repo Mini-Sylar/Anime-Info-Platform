@@ -550,9 +550,7 @@ p {
   .arrow-right {
     display: none;
   }
-  .share-container{
-    /* position: relative; */
-  }
+
   .share-info{
     position: relative;
     top:.18rem
