@@ -116,6 +116,7 @@ let get_ID;
 let get_Color;
 // let find_card;
 let here;
+let filtered;
 let fallback;
 let final_fall;
 function randomIntFromInterval(min, max) {
@@ -262,15 +263,11 @@ function replaceCards(data) {
     data.data.Media == undefined
       ? data.data.Page.media
       : data.data.Media.recommendations.nodes;
-  console.log(chunk);
   let firstPiece = chunk.map((e) => e.mediaRecommendation);
-  console.log(firstPiece);
-  let filtered = firstPiece.concat(fallback).filter((e) => {
-    return e !== undefined;
-  });
+  console.log("first piece", firstPiece);
+  filtered = firstPiece.concat(fallback).filter(Boolean);
   console.log("filtered", filtered);
   final_fall = chunk.length == 0 ? fallback : filtered;
-  console.log(final_fall);
 
   anime_cards.forEach((currentElement, index) => {
     let newIndex =
@@ -284,6 +281,7 @@ function replaceCards(data) {
     currentElement.innerHTML = newIndex.title.english
       ? newIndex.title.english
       : newIndex.title.romaji;
+    // console.log(newIndex.id);
     // Set Background image here along with some styles
     currentElement.style = `
         background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0,0.6)), url(${newIndex.coverImage.large});
@@ -456,7 +454,10 @@ function callCard(genre = "Action") {
       return response.json();
     })
     .then(function (data) {
+      // Set fallback so you can update values
+      fallback = data.data.Page.media;
       replaceCards(data);
+      console.log("orignaldata", data);
       //
       // When you get data, perform some actions here (CARD DATA!)
       // find_card = data.data.Page.media;
@@ -600,6 +601,7 @@ anime_cards.forEach((currentElement, index) => {
       final_fall[index].id === undefined
         ? final_fall[index].mediaRecommendation.id
         : final_fall[index].id;
+    console.log(getThatID);
     // MYQUERY HERE
     let temp_query =
       final_fall[index].id === undefined
