@@ -85,7 +85,7 @@ const share_info = document.querySelector(".share-info");
 let get_genre;
 let get_ID;
 let get_Color;
-let find_card;
+// let find_card;
 let here;
 let fallback;
 let final_fall;
@@ -231,8 +231,8 @@ function replaceCards(data = data.data.Media.recommendations.nodes) {
   let chunk = data.data.Media.recommendations.nodes;
   let firstPiece = chunk.map((e) => e.mediaRecommendation);
   let supplement = fallback.slice(0, chunk.length);
-  final_fall = firstPiece.concat(supplement);
-  console.log(final_fall);
+  final_fall = chunk.length == 0 ? fallback : firstPiece.concat(supplement);
+  console.log(fallback, chunk, firstPiece, supplement);
 
   // let newArray = Object.values(chunk.forEach((e) => Object.values(e) ))
   // console.log(newArray);
@@ -374,7 +374,7 @@ function GetRecommendations(recommendations_id) {
     .then(function (data) {
       // Cards copied from here
       replaceCards(data);
-      find_card = data.data.Media.recommendations.nodes;
+      // find_card = data.data.Media.recommendations.nodes;
     });
 }
 // ===================== Get recommendations end ====================
@@ -423,7 +423,7 @@ function callCard(genre = "Action") {
     .then(function (data) {
       replaceCards(data);
       // When you get data, perform some actions here (CARD DATA!)
-      find_card = data.data.Page.media;
+      // find_card = data.data.Page.media;
     });
 }
 
