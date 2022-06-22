@@ -98,13 +98,18 @@ const anime_genres = [
   "Ecchi",
   "Fantasy",
   "Horror",
-  "Mahou Shoujo",
+  // "Mahou Shoujo",
   "Mecha",
   "Music",
   "Mystery",
   "Psychological",
   "Romance",
 ];
+function random_Gen() {
+  let item = anime_genres[Math.floor(Math.random() * anime_genres.length)];
+  return item;
+}
+
 // Get Useful Values Here
 let get_genre;
 let get_ID;
@@ -251,12 +256,22 @@ function Replace(data) {
 }
 
 //================== Cards copied from here
-function replaceCards(data = data.data.Media.recommendations.nodes) {
-  let chunk = data.data.Media.recommendations.nodes;
+function replaceCards(data) {
+  // let chunk = data.data.Media.recommendations.nodes;
+  let chunk =
+    data.data.Media == undefined
+      ? data.data.Page.media
+      : data.data.Media.recommendations.nodes;
+  console.log(chunk);
   let firstPiece = chunk.map((e) => e.mediaRecommendation);
+  console.log(firstPiece);
+  let filtered = firstPiece.concat(fallback).filter((e) => {
+    return e !== undefined;
+  });
+  console.log("filtered", filtered);
+  final_fall = chunk.length == 0 ? fallback : filtered;
+  console.log(final_fall);
 
-  final_fall = chunk.length == 0 ? fallback : firstPiece.concat(fallback);
-  // console.log(fallback, chunk, firstPiece,);
   anime_cards.forEach((currentElement, index) => {
     let newIndex =
       data.data.Media == undefined
@@ -264,7 +279,6 @@ function replaceCards(data = data.data.Media.recommendations.nodes) {
         : data.data.Media.recommendations.nodes.length == 10
         ? data.data.Media.recommendations.nodes[index].mediaRecommendation
         : final_fall[index];
-    console.log(newIndex);
     // For each card
     // Set title
     currentElement.innerHTML = newIndex.title.english
@@ -400,8 +414,6 @@ function GetRecommendations(recommendations_id) {
 }
 // ===================== Get recommendations end ====================
 
-
-
 // ======================  Card Section ======================
 function callCard(genre = "Action") {
   let gqlBody_Cards = {
@@ -426,7 +438,7 @@ function callCard(genre = "Action") {
 }
 `,
     variables: {
-      search: get_genre ? genre : "Action",
+      search: genre,
       page: randomIntFromInterval(1, 200),
       perPage: 10,
     },
@@ -444,14 +456,13 @@ function callCard(genre = "Action") {
       return response.json();
     })
     .then(function (data) {
-      // console.log(data);
       replaceCards(data);
+      //
       // When you get data, perform some actions here (CARD DATA!)
       // find_card = data.data.Page.media;
     });
 }
 
-// ======================== CAll card ends here ===============
 // ======================= Call Supplement ====================
 function getSupplement(genre = "Action") {
   let gqlBody_Cards = {
@@ -476,7 +487,7 @@ function getSupplement(genre = "Action") {
 }
 `,
     variables: {
-      search: get_genre ? genre : "Action",
+      search: genre,
       page: randomIntFromInterval(1, 200),
       perPage: 10,
     },
@@ -491,7 +502,7 @@ function getSupplement(genre = "Action") {
     headers: headersList,
   })
     .then(function (response) {
-      return (card_main = response.json());
+      return response.json();
     })
     .then(function (data) {
       // When you get data, perform some actions here (CARD DATA!)
@@ -560,7 +571,8 @@ form.addEventListener("submit", function (e) {
 //    Onclick Replace every card based on a random genre
 surprise.addEventListener("click", function () {
   // let randomGenre = get_genre.split(" / ");
-  callCard(anime_genres[Math.floor(Math.random() * anime_genres.length)]);
+  // !!!!!!Found bug source (calling random genre keeps bugging)
+  callCard("Action");
 });
 
 //  Hamburger menu for mobile devices
