@@ -120,7 +120,7 @@ function Replace(data) {
     main_data.averageScore / 10
   }/10</span>`;
   get_ID = main_data.id;
-  console.log("main data id", get_ID);
+  // console.log("main data id", get_ID);
   //   Navigate to Anilist
   more_info.addEventListener("click", function () {
     window.open(`https://anilist.co/anime/${get_ID}`, "_blank");
@@ -232,7 +232,7 @@ function replaceCards(data = data.data.Media.recommendations.nodes) {
   let firstPiece = chunk.map((e) => e.mediaRecommendation);
 
   final_fall = chunk.length == 0 ? fallback : firstPiece.concat(fallback);
-  console.log(fallback, chunk, firstPiece,);
+  // console.log(fallback, chunk, firstPiece,);
 
   // let newArray = Object.values(chunk.forEach((e) => Object.values(e) ))
   // console.log(newArray);
@@ -563,7 +563,6 @@ anime_cards.forEach((currentElement, index) => {
       final_fall[index].id === undefined
         ? final_fall[index].mediaRecommendation.id
         : final_fall[index].id;
-    // console.log(getThatID);
     // MYQUERY HERE
     let temp_query =
       final_fall[index].id === undefined
@@ -594,16 +593,11 @@ function ValidateForm() {
     // Add query text to URL in address bar if you want to copy and paste
     window.history.pushState(null, "", `?show=${search_value.value}`);
     let randomGenre = get_genre.split(" / ");
-    //   Random Genres Here... can be improved to submit entre genre as array
-    // callCard(randomGenre[Math.floor(Math.random() * randomGenre.length)]);
-    // console.log("getID for recommendations", get_ID);
-    // GetRecommendations(get_ID);
   }
 }
 
-// Call cards on load
+// Call cards on load [reversed]
 // callCard();
-// GetRecommendations();
 
 const params = new Proxy(new URLSearchParams(window.location.search), {
   get: (searchParams, prop) => searchParams.get(prop),
