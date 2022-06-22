@@ -227,10 +227,10 @@ function Replace(data) {
 function replaceCards(data = data.data.Media.recommendations.nodes) {
   // console.log(data);
   anime_cards.forEach((currentElement, index) => {
-
-    let newIndex = data.data.Media == undefined
-      ? data.data.Page.media[index]
-      : data.data.Media.recommendations.nodes[index].mediaRecommendation;
+    let newIndex =
+      data.data.Media == undefined
+        ? data.data.Page.media[index]
+        : data.data.Media.recommendations.nodes[index].mediaRecommendation;
     // console.log(newIndex)
     // console.log(newIndex.title)
     // For each card
@@ -362,9 +362,10 @@ function GetRecommendations() {
     .then(function (data) {
       // Cards copied from here
       replaceCards(data);
+      find_card = data.data.Media.recommendations.nodes;
     });
 }
-
+// ===================== Get recommendations end ====================
 // ======================  Card Section ======================
 let card_main;
 function callCard(genre = "Action") {
@@ -470,6 +471,7 @@ form.addEventListener("submit", function (e) {
 });
 
 // Refresh the recommendations list when you click on surprise me
+//    Onclick Replace every card based on a random genre
 surprise.addEventListener("click", function () {
   let randomGenre = get_genre.split(" / ");
   callCard(randomGenre[Math.floor(Math.random() * randomGenre.length)]);
@@ -493,17 +495,26 @@ right_arrow.addEventListener("click", function () {
   anime_container.scrollBy(400, 0);
 });
 
-//    Onclick Replace every card based on a random genre
+//    Onclick Replace main body of selected card
 anime_cards.forEach((currentElement, index) => {
   currentElement.addEventListener("click", function () {
-    let getThatID = find_card[index].id;
-    // console.log(getThatID);
+    let getThatID =
+      find_card[index].id === undefined
+        ? find_card[index].mediaRecommendation.id
+        : find_card[index].id;
+    console.log(getThatID);
     // MYQUERY HERE
+    let temp_query =
+      find_card[index].id === undefined
+        ? find_card[index].mediaRecommendation.title.english
+          ? find_card[index].mediaRecommendation.title.english
+          : find_card[index].mediaRecommendation.title.romaji
+        : find_card[index].title.english
+        ? find_card[index].title.english
+        : find_card[index].title.romaji;
     callBody(getThatID);
     // temporarily store search query using local storage to reload what you searched previously
-    localStorage["searchKey"] = find_card[index].title.english
-      ? find_card[index].title.english
-      : find_card[index].title.romaji;
+    localStorage["searchKey"] = temp_query;
   });
 });
 
