@@ -28,10 +28,19 @@ Explanation on functions
 6. randomIntFromInterval() :
   - choose random index from a given lenght
 
+7. GetRecommendations(query) :
+  - This function returns the proper recommendations based on rating by users on anilist, makes searching easier
+
+8. getSupplement:
+  - This function gets a supplement of shows that are added to existing cards if the recommendation of that show was not up to 10
+  - this is particularly useful for old shows in the 1980s and older that have close to 0 recommendations
+
 ----- Other Variables --------
 get_genre : store "Genre" to be used in callCard(genre) globally
 get_ID: store "ID" to be used by callBody(id) globally
 get_Color: store "Color" to be used to change accents of elements
+fallback: data returned by the getSupplement function
+final_fall: data returned after combining recommendations and supplements
 */
 
 // Color Darkner
