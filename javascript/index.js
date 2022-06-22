@@ -264,9 +264,9 @@ function replaceCards(data) {
       ? data.data.Page.media
       : data.data.Media.recommendations.nodes;
   let firstPiece = chunk.map((e) => e.mediaRecommendation);
-  console.log("first piece", firstPiece);
+  // console.log("first piece", firstPiece);
   filtered = firstPiece.concat(fallback).filter(Boolean);
-  console.log("filtered", filtered);
+  // console.log("filtered", filtered);
   final_fall = chunk.length == 0 ? fallback : filtered;
 
   anime_cards.forEach((currentElement, index) => {
@@ -457,8 +457,7 @@ function callCard(genre = "Action") {
       // Set fallback so you can update values
       fallback = data.data.Page.media;
       replaceCards(data);
-      console.log("orignaldata", data);
-      //
+      // console.log("orignaldata", data);
       // When you get data, perform some actions here (CARD DATA!)
       // find_card = data.data.Page.media;
     });
@@ -601,7 +600,7 @@ anime_cards.forEach((currentElement, index) => {
       final_fall[index].id === undefined
         ? final_fall[index].mediaRecommendation.id
         : final_fall[index].id;
-    console.log(getThatID);
+    // console.log(getThatID);
     // MYQUERY HERE
     let temp_query =
       final_fall[index].id === undefined
