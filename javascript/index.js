@@ -230,9 +230,9 @@ function Replace(data) {
 function replaceCards(data = data.data.Media.recommendations.nodes) {
   let chunk = data.data.Media.recommendations.nodes;
   let firstPiece = chunk.map((e) => e.mediaRecommendation);
-  let supplement = fallback.slice(0, chunk.length);
-  final_fall = chunk.length == 0 ? fallback : firstPiece.concat(supplement);
-  console.log(fallback, chunk, firstPiece, supplement);
+
+  final_fall = chunk.length == 0 ? fallback : firstPiece.concat(fallback);
+  console.log(fallback, chunk, firstPiece,);
 
   // let newArray = Object.values(chunk.forEach((e) => Object.values(e) ))
   // console.log(newArray);
