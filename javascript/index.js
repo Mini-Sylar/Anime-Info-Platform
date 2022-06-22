@@ -88,6 +88,7 @@ let get_Color;
 let find_card;
 let here;
 let fallback;
+let final_fall;
 function randomIntFromInterval(min, max) {
   // min and max included
   return Math.floor(Math.random() * (max - min + 1) + min);
@@ -230,7 +231,7 @@ function replaceCards(data = data.data.Media.recommendations.nodes) {
   let chunk = data.data.Media.recommendations.nodes;
   let firstPiece = chunk.map((e) => e.mediaRecommendation);
   let supplement = fallback.slice(0, chunk.length);
-  let final_fall = firstPiece.concat(supplement);
+  final_fall = firstPiece.concat(supplement);
   console.log(final_fall);
 
   // let newArray = Object.values(chunk.forEach((e) => Object.values(e) ))
@@ -559,19 +560,19 @@ right_arrow.addEventListener("click", function () {
 anime_cards.forEach((currentElement, index) => {
   currentElement.addEventListener("click", function () {
     let getThatID =
-      find_card[index].id === undefined
-        ? find_card[index].mediaRecommendation.id
-        : find_card[index].id;
+      final_fall[index].id === undefined
+        ? final_fall[index].mediaRecommendation.id
+        : final_fall[index].id;
     // console.log(getThatID);
     // MYQUERY HERE
     let temp_query =
-      find_card[index].id === undefined
-        ? find_card[index].mediaRecommendation.title.english
-          ? find_card[index].mediaRecommendation.title.english
-          : find_card[index].mediaRecommendation.title.romaji
-        : find_card[index].title.english
-        ? find_card[index].title.english
-        : find_card[index].title.romaji;
+      final_fall[index].id === undefined
+        ? final_fall[index].mediaRecommendation.title.english
+          ? final_fall[index].mediaRecommendation.title.english
+          : final_fall[index].mediaRecommendation.title.romaji
+        : final_fall[index].title.english
+        ? final_fall[index].title.english
+        : final_fall[index].title.romaji;
     callBody(getThatID);
     // temporarily store search query using local storage to reload what you searched previously
     localStorage["searchKey"] = temp_query;
