@@ -224,9 +224,52 @@ function Replace(data) {
   });
 }
 
-// ================== Cards copied from here
-function replaceCards(data) {
- 
+//================== Cards copied from here
+function replaceCards(data = data.data.Media.recommendations.nodes) {
+  // console.log(data);
+  anime_cards.forEach((currentElement, index) => {
+    let newIndex =
+      data.data.Media == undefined
+        ? data.data.Page.media[index]
+        : data.data.Media.recommendations.nodes[index].mediaRecommendation;
+    // console.log(newIndex)
+    // console.log(newIndex.title)
+    // For each card
+    // Set title
+    currentElement.innerHTML = newIndex.title.english
+      ? newIndex.title.english
+      : newIndex.title.romaji;
+    // Set Background image here along with some styles
+    currentElement.style = `
+        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0,0.6)), url(${newIndex.coverImage.large});
+        background-repeat: no-repeat;
+        background-size: cover;
+        box-shadow: none;
+        border: 2px solid rgba(0, 0, 0, 0.301);
+        border-radius: 5%;
+        overflow: hidden;
+      `;
+    // Mouse Enter to Mouseleave creates the hover effect when mouses passes on a card
+    currentElement.addEventListener("mouseenter", function () {
+      currentElement.style = `
+        background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0,0.1)), url(${newIndex.coverImage.large});
+        background-repeat: no-repeat;
+        background-size: cover;
+        box-shadow: 1px 1px 2px 2px ${get_Color};
+         transition: all 1s ease;
+        `;
+    });
+    currentElement.addEventListener("mouseleave", function () {
+      currentElement.style = `
+           transform: scale(1);
+        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0,0.6)), url(${newIndex.coverImage.large});
+        background-repeat: no-repeat;
+        background-size: cover;
+        transition: all 1s ease;
+          box-shadow: none;
+        `;
+    });
+  });
 }
 
 let headersList = {
@@ -274,6 +317,7 @@ function callBody(setID = 140960) {
       Replace(data);
       get_genre ? get_genre.split("/").join(",") : "Action";
       get_Color = data.data.Media.coverImage.color;
+      // GetRecommendations(get_ID);
     });
 }
 
@@ -319,44 +363,8 @@ function GetRecommendations(recommendations_id) {
     })
     .then(function (data) {
       // Cards copied from here
+      replaceCards(data);
       find_card = data.data.Media.recommendations.nodes;
-
-      anime_cards.forEach((currentElement, index) => {
-        currentElement.innerHTML = find_card[index].mediaRecommendation.title
-          .english
-          ? find_card[index].mediaRecommendation.title.english
-          : find_card[index].mediaRecommendation.title.romaji;
-        // Set Background image here along with some styles
-        currentElement.style = `
-              background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0,0.6)), url(${find_card[index].mediaRecommendation.coverImage.large});
-              background-repeat: no-repeat;
-              background-size: cover;
-              box-shadow: none;
-              border: 2px solid rgba(0, 0, 0, 0.301);
-              border-radius: 5%;
-              overflow: hidden;
-            `;
-        // Mouse Enter to Mouseleave creates the hover effect when mouses passes on a card
-        currentElement.addEventListener("mouseenter", function () {
-          currentElement.style = `
-              background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0,0.1)), url(${find_card[index].mediaRecommendation.coverImage.large});
-              background-repeat: no-repeat;
-              background-size: cover;
-              box-shadow: 1px 1px 2px 2px ${get_Color};
-               transition: all 1s ease;
-              `;
-        });
-        currentElement.addEventListener("mouseleave", function () {
-          currentElement.style = `
-                 transform: scale(1);
-              background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0,0.6)), url(${find_card[index].mediaRecommendation.coverImage.large});
-              background-repeat: no-repeat;
-              background-size: cover;
-              transition: all 1s ease;
-                box-shadow: none;
-              `;
-        });
-      });
     });
 }
 // ===================== Get recommendations end ====================
@@ -403,43 +411,9 @@ function callCard(genre = "Action") {
       return (card_main = response.json());
     })
     .then(function (data) {
+      replaceCards(data);
       // When you get data, perform some actions here (CARD DATA!)
       find_card = data.data.Page.media;
-       anime_cards.forEach((currentElement, index) => {
-         currentElement.innerHTML = find_card[index].title.english
-           ? find_card[index].title.english
-           : find_card[index].title.romaji;
-         // Set Background image here along with some styles
-         currentElement.style = `
-        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0,0.6)), url(${find_card[index].coverImage.large});
-        background-repeat: no-repeat;
-        background-size: cover;
-        box-shadow: none;
-        border: 2px solid rgba(0, 0, 0, 0.301);
-        border-radius: 5%;
-        overflow: hidden;
-      `;
-         // Mouse Enter to Mouseleave creates the hover effect when mouses passes on a card
-         currentElement.addEventListener("mouseenter", function () {
-           currentElement.style = `
-        background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0,0.1)), url(${find_card[index].coverImage.large});
-        background-repeat: no-repeat;
-        background-size: cover;
-        box-shadow: 1px 1px 2px 2px ${get_Color};
-         transition: all 1s ease;
-        `;
-         });
-         currentElement.addEventListener("mouseleave", function () {
-           currentElement.style = `
-           transform: scale(1);
-        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0,0.6)), url(${find_card[index].coverImage.large});
-        background-repeat: no-repeat;
-        background-size: cover;
-        transition: all 1s ease;
-          box-shadow: none;
-        `;
-         });
-       });
     });
 }
 // ============== Search Section =====================
@@ -489,7 +463,6 @@ function SearchAnime(searchQuery) {
         data.data.Page.media.length === 0 ? 140960 : data.data.Page.media[0].id;
       callBody(thisID);
       GetRecommendations(thisID);
-      replaceCards(data);
     });
 }
 
