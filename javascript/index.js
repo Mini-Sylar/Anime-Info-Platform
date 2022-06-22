@@ -89,7 +89,22 @@ const left_arrow = document.querySelector(".arrow-left");
 const right_arrow = document.querySelector(".arrow-right");
 const anime_container = document.querySelector(".anime-cards");
 const share_info = document.querySelector(".share-info");
-
+// Anime Genre
+const anime_genres = [
+  "Action",
+  "Adventure",
+  "Comedy",
+  "Drama",
+  "Ecchi",
+  "Fantasy",
+  "Horror",
+  "Mahou Shoujo",
+  "Mecha",
+  "Music",
+  "Mystery",
+  "Psychological",
+  "Romance",
+];
 // Get Useful Values Here
 let get_genre;
 let get_ID;
@@ -543,8 +558,8 @@ form.addEventListener("submit", function (e) {
 // Refresh the recommendations list when you click on surprise me
 //    Onclick Replace every card based on a random genre
 surprise.addEventListener("click", function () {
-  let randomGenre = get_genre.split(" / ");
-  callCard(randomGenre[Math.floor(Math.random() * randomGenre.length)]);
+  // let randomGenre = get_genre.split(" / ");
+  callCard(anime_genres[Math.floor(Math.random() * anime_genres.length)]);
 });
 
 //  Hamburger menu for mobile devices
