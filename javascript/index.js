@@ -125,7 +125,7 @@ function Replace(data) {
   //   Dynamic Colors
   //   0 is search
   //   1 is more info
-  //   2 is cards
+  //   2 to 11 is cards
   //   7 -> 12 is now surprise me color
 
   // Get color if null replace with darkened default color
@@ -349,7 +349,6 @@ function GetRecommendations() {
 }`,
     variables: { id: 1, page: 1, perPage: 10 },
   };
-
   let properRecommendations = JSON.stringify(gqlBody);
 
   fetch("https://graphql.anilist.co/?id=15125", {
@@ -412,43 +411,6 @@ function callCard(genre = "Action") {
       replaceCards(data);
       // When you get data, perform some actions here (CARD DATA!)
       find_card = data.data.Page.media;
-      // anime_cards.forEach((currentElement, index) => {
-      //   // For each card
-      //   // Set title
-      //   currentElement.innerHTML = find_card[index].title.english
-      //     ? find_card[index].title.english
-      //     : find_card[index].title.romaji;
-      //   // Set Background image here along with some styles
-      //   currentElement.style = `
-      //   background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0,0.6)), url(${find_card[index].coverImage.large});
-      //   background-repeat: no-repeat;
-      //   background-size: cover;
-      //   box-shadow: none;
-      //   border: 2px solid rgba(0, 0, 0, 0.301);
-      //   border-radius: 5%;
-      //   overflow: hidden;
-      // `;
-      //   // Mouse Enter to Mouseleave creates the hover effect when mouses passes on a card
-      //   currentElement.addEventListener("mouseenter", function () {
-      //     currentElement.style = `
-      //   background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0,0.1)), url(${find_card[index].coverImage.large});
-      //   background-repeat: no-repeat;
-      //   background-size: cover;
-      //   box-shadow: 1px 1px 2px 2px ${get_Color};
-      //    transition: all 1s ease;
-      //   `;
-      //   });
-      //   currentElement.addEventListener("mouseleave", function () {
-      //     currentElement.style = `
-      //      transform: scale(1);
-      //   background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0,0.6)), url(${find_card[index].coverImage.large});
-      //   background-repeat: no-repeat;
-      //   background-size: cover;
-      //   transition: all 1s ease;
-      //     box-shadow: none;
-      //   `;
-      //   });
-      // });
     });
 }
 // ============== Search Section =====================
