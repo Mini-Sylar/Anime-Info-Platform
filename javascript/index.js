@@ -126,6 +126,7 @@ function Replace(data) {
   //   0 is search
   //   1 is more info
   //   2 is cards
+  //   7 -> 12 is now surprise me color
 
   // Get color if null replace with darkened default color
   (get_Color =
@@ -154,7 +155,7 @@ function Replace(data) {
 
   col_elements[0].style.backgroundColor = get_Color;
   col_elements[1].style.backgroundColor = get_Color;
-  col_elements[7].style.backgroundColor = get_Color;
+  col_elements[12].style.backgroundColor = get_Color;
   col_elements[1].addEventListener("mouseenter", function () {
     col_elements[1].style.setProperty(
       "-webkit-filter",
@@ -168,14 +169,14 @@ function Replace(data) {
     );
   });
   //   Change Surprise me Color
-  col_elements[7].addEventListener("mouseenter", function () {
-    col_elements[7].style.setProperty(
+  col_elements[12].addEventListener("mouseenter", function () {
+    col_elements[12].style.setProperty(
       "-webkit-filter",
       `drop-shadow(0 0 0.55rem ${get_Color})`
     );
   });
-  col_elements[7].addEventListener("mouseleave", function () {
-    col_elements[7].style.setProperty(
+  col_elements[12].addEventListener("mouseleave", function () {
+    col_elements[12].style.setProperty(
       "-webkit-filter",
       `drop-shadow(0 0 0 ${setOpacity(get_Color, 0.7)})`
     );
@@ -230,7 +231,6 @@ function replaceCards(data = data.data.Media.recommendations.nodes) {
     let newIndex = data.data.Media == undefined
       ? data.data.Page.media[index]
       : data.data.Media.recommendations.nodes[index].mediaRecommendation;
-
     // console.log(newIndex)
     // console.log(newIndex.title)
     // For each card
@@ -361,10 +361,6 @@ function GetRecommendations() {
       return response.json();
     })
     .then(function (data) {
-      // console.log(data);
-      // find_recommendation = data.data.Media.recommendations.nodes;
-      // console.log(find_recommendation);
-      // console.log(find_recommendation[0].mediaRecommendation.title.english);
       // Cards copied from here
       replaceCards(data);
     });
