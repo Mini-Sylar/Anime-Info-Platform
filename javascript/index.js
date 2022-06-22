@@ -323,7 +323,7 @@ function callBody(setID = 140960) {
 
 // ====================== Proper Recommendations ==============
 // recommendations_id = 1 means get me the recommendations based on ID 140960 in this case spy x family
-function GetRecommendations(recommendations_id = 140960) {
+function GetRecommendations(recommendations_id) {
   let headersList = {
     Accept: "*/*",
     "User-Agent": "Thunder Client (https://www.thunderclient.com)",
@@ -462,6 +462,7 @@ function SearchAnime(searchQuery) {
       let thisID =
         data.data.Page.media.length === 0 ? 140960 : data.data.Page.media[0].id;
       callBody(thisID);
+      GetRecommendations(thisID);
     });
 }
 
@@ -526,29 +527,25 @@ function ValidateForm() {
     return false;
   } else {
     // When a search is passed, call searchAnime and pass the query value to search
-    // ----Share Link Feature Starts here---
-    //  Get the search value and append it to the link when sending to someone
+    // ----Share Link Feature Starts here---    //  Get the search value and append it to the link when sending to someone
     here = new URL(window.location.href);
-    // console.log(here);
-    // console.log(here.href);
     here.searchParams.set("show", search_value.value);
     let mySearchValue = here.searchParams.get("show");
     SearchAnime(mySearchValue);
     localStorage["searchKey"] = mySearchValue;
-    // console.log(localStorage["searchKey"]);
     // Add query text to URL in address bar if you want to copy and paste
     window.history.pushState(null, "", `?show=${search_value.value}`);
-    // location.href  =  here.href
     let randomGenre = get_genre.split(" / ");
     //   Random Genres Here... can be improved to submit entre genre as array
     // callCard(randomGenre[Math.floor(Math.random() * randomGenre.length)]);
-    GetRecommendations(get_ID);
+    // console.log("getID for recommendations", get_ID);
+    // GetRecommendations(get_ID);
   }
 }
 
 // Call cards on load
 // callCard();
-GetRecommendations();
+// GetRecommendations();
 
 const params = new Proxy(new URLSearchParams(window.location.search), {
   get: (searchParams, prop) => searchParams.get(prop),
