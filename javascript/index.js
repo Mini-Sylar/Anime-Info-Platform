@@ -87,6 +87,7 @@ let get_ID;
 let get_Color;
 let find_card;
 let here;
+let fallback;
 function randomIntFromInterval(min, max) {
   // min and max included
   return Math.floor(Math.random() * (max - min + 1) + min);
@@ -226,14 +227,22 @@ function Replace(data) {
 
 //================== Cards copied from here
 function replaceCards(data = data.data.Media.recommendations.nodes) {
-  // console.log(data);
+  let chunk = data.data.Media.recommendations.nodes;
+  let firstPiece = chunk.map((e) => e.mediaRecommendation);
+  let supplement = fallback.slice(0, chunk.length);
+  let final_fall = firstPiece.concat(supplement);
+  console.log(final_fall);
+
+  // let newArray = Object.values(chunk.forEach((e) => Object.values(e) ))
+  // console.log(newArray);
   anime_cards.forEach((currentElement, index) => {
     let newIndex =
       data.data.Media == undefined
         ? data.data.Page.media[index]
-        : data.data.Media.recommendations.nodes[index].mediaRecommendation;
-    // console.log(newIndex)
-    // console.log(newIndex.title)
+        : data.data.Media.recommendations.nodes.length == 10
+        ? data.data.Media.recommendations.nodes[index].mediaRecommendation
+        : final_fall[index];
+
     // For each card
     // Set title
     currentElement.innerHTML = newIndex.title.english
@@ -416,6 +425,53 @@ function callCard(genre = "Action") {
       find_card = data.data.Page.media;
     });
 }
+
+// ======================= Call Supplement ====================
+function getSupplement(genre = "Action") {
+  let gqlBody_Cards = {
+    query: `query ($id: Int, $page: Int, $perPage: Int, $search: String) {
+  Page (page: $page, perPage: $perPage) {
+    pageInfo {
+      perPage
+    }
+    media (id: $id, genre: $search  type: ANIME) {
+      id
+      title {
+        english
+        romaji
+      }
+      
+       coverImage {
+        large
+  }
+    }
+    
+  }
+}
+`,
+    variables: {
+      search: get_genre ? genre : "Action",
+      page: randomIntFromInterval(1, 200),
+      perPage: 10,
+    },
+  };
+
+  let cardContent = JSON.stringify(gqlBody_Cards);
+  // Fetch data from here
+  // First  then get
+  fetch("https://graphql.anilist.co/", {
+    method: "POST",
+    body: cardContent,
+    headers: headersList,
+  })
+    .then(function (response) {
+      return (card_main = response.json());
+    })
+    .then(function (data) {
+      // When you get data, perform some actions here (CARD DATA!)
+      fallback = data.data.Page.media;
+    });
+}
 // ============== Search Section =====================
 function SearchAnime(searchQuery) {
   let headersList = {
@@ -462,6 +518,7 @@ function SearchAnime(searchQuery) {
       let thisID =
         data.data.Page.media.length === 0 ? 140960 : data.data.Page.media[0].id;
       callBody(thisID);
+      getSupplement();
       GetRecommendations(thisID);
     });
 }
