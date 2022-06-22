@@ -36,7 +36,7 @@ Explanation on functions
   - this is particularly useful for old shows in the 1980s and older that have close to 0 recommendations
 
 ----- Other Variables --------
-get_genre : store "Genre" to be used in callCard(genre) globally
+get_genre : store "Genre" to be used in callCard(genre) globally [REMOVED!]
 get_ID: store "ID" to be used by callBody(id) globally
 get_Color: store "Color" to be used to change accents of elements
 fallback: data returned by the getSupplement function
@@ -98,20 +98,19 @@ const anime_genres = [
   "Ecchi",
   "Fantasy",
   "Horror",
-  // "Mahou Shoujo",
+  "Mahou Shoujo",
   "Mecha",
   "Music",
   "Mystery",
   "Psychological",
   "Romance",
 ];
+
 function random_Gen() {
-  let item = anime_genres[Math.floor(Math.random() * anime_genres.length)];
-  return item;
+  return anime_genres[Math.floor(Math.random() * anime_genres.length)];
 }
 
 // Get Useful Values Here
-let get_genre;
 let get_ID;
 let get_Color;
 // let find_card;
@@ -142,7 +141,6 @@ function Replace(data) {
   genre.innerHTML = `<span class="genre">${main_data.genres.join(
     " / "
   )}</span>`;
-  get_genre = genre.textContent;
   //   Render Episode Count
   episode_count.innerHTML = ` <span class="episode-count">${main_data.episodes} episodes</span>`;
   //   Render Rating
@@ -358,7 +356,6 @@ function callBody(setID = 140960) {
     })
     .then(function (data) {
       Replace(data);
-      get_genre ? get_genre.split("/").join(",") : "Action";
       get_Color = data.data.Media.coverImage.color;
       // GetRecommendations(get_ID);
     });
@@ -570,7 +567,6 @@ form.addEventListener("submit", function (e) {
 // Refresh the recommendations list when you click on surprise me
 //    Onclick Replace every card based on a random genre
 surprise.addEventListener("click", function () {
-  // let randomGenre = get_genre.split(" / ");
   // !!!!!!Found bug source (calling random genre keeps bugging)
   callCard("Action");
 });
@@ -630,7 +626,6 @@ function ValidateForm() {
     localStorage["searchKey"] = mySearchValue;
     // Add query text to URL in address bar if you want to copy and paste
     window.history.pushState(null, "", `?show=${search_value.value}`);
-    let randomGenre = get_genre.split(" / ");
   }
 }
 
