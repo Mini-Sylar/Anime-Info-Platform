@@ -257,9 +257,6 @@ function replaceCards(data = data.data.Media.recommendations.nodes) {
 
   final_fall = chunk.length == 0 ? fallback : firstPiece.concat(fallback);
   // console.log(fallback, chunk, firstPiece,);
-
-  // let newArray = Object.values(chunk.forEach((e) => Object.values(e) ))
-  // console.log(newArray);
   anime_cards.forEach((currentElement, index) => {
     let newIndex =
       data.data.Media == undefined
@@ -267,7 +264,7 @@ function replaceCards(data = data.data.Media.recommendations.nodes) {
         : data.data.Media.recommendations.nodes.length == 10
         ? data.data.Media.recommendations.nodes[index].mediaRecommendation
         : final_fall[index];
-
+    console.log(newIndex);
     // For each card
     // Set title
     currentElement.innerHTML = newIndex.title.english
@@ -402,8 +399,10 @@ function GetRecommendations(recommendations_id) {
     });
 }
 // ===================== Get recommendations end ====================
+
+
+
 // ======================  Card Section ======================
-let card_main;
 function callCard(genre = "Action") {
   let gqlBody_Cards = {
     query: `query ($id: Int, $page: Int, $perPage: Int, $search: String) {
@@ -442,15 +441,17 @@ function callCard(genre = "Action") {
     headers: headersList,
   })
     .then(function (response) {
-      return (card_main = response.json());
+      return response.json();
     })
     .then(function (data) {
+      // console.log(data);
       replaceCards(data);
       // When you get data, perform some actions here (CARD DATA!)
       // find_card = data.data.Page.media;
     });
 }
 
+// ======================== CAll card ends here ===============
 // ======================= Call Supplement ====================
 function getSupplement(genre = "Action") {
   let gqlBody_Cards = {
