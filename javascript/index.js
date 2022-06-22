@@ -122,7 +122,6 @@ function Replace(data) {
   more_info.addEventListener("click", function () {
     window.open(`https://anilist.co/anime/${get_ID}`, "_blank");
   });
-
   //   Dynamic Colors
   //   0 is search
   //   1 is more info
@@ -223,6 +222,55 @@ function Replace(data) {
   });
 }
 
+//================== Cards copied from here
+function replaceCards(data = data.data.Media.recommendations.nodes) {
+  // console.log(data);
+  anime_cards.forEach((currentElement, index) => {
+
+    let newIndex = data.data.Media == undefined
+      ? data.data.Page.media[index]
+      : data.data.Media.recommendations.nodes[index].mediaRecommendation;
+
+    // console.log(newIndex)
+    // console.log(newIndex.title)
+    // For each card
+    // Set title
+    currentElement.innerHTML = newIndex.title.english
+      ? newIndex.title.english
+      : newIndex.title.romaji;
+    // Set Background image here along with some styles
+    currentElement.style = `
+        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0,0.6)), url(${newIndex.coverImage.large});
+        background-repeat: no-repeat;
+        background-size: cover;
+        box-shadow: none;
+        border: 2px solid rgba(0, 0, 0, 0.301);
+        border-radius: 5%;
+        overflow: hidden;
+      `;
+    // Mouse Enter to Mouseleave creates the hover effect when mouses passes on a card
+    currentElement.addEventListener("mouseenter", function () {
+      currentElement.style = `
+        background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0,0.1)), url(${newIndex.coverImage.large});
+        background-repeat: no-repeat;
+        background-size: cover;
+        box-shadow: 1px 1px 2px 2px ${get_Color};
+         transition: all 1s ease;
+        `;
+    });
+    currentElement.addEventListener("mouseleave", function () {
+      currentElement.style = `
+           transform: scale(1);
+        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0,0.6)), url(${newIndex.coverImage.large});
+        background-repeat: no-repeat;
+        background-size: cover;
+        transition: all 1s ease;
+          box-shadow: none;
+        `;
+    });
+  });
+}
+
 let headersList = {
   Accept: "*/*",
   "User-Agent": "Thunder Client (https://www.thunderclient.com)",
@@ -271,6 +319,57 @@ function callBody(setID = 140960) {
     });
 }
 
+// ====================== Proper Recommendations ==============
+function GetRecommendations() {
+  let headersList = {
+    Accept: "*/*",
+    "User-Agent": "Thunder Client (https://www.thunderclient.com)",
+    "Content-Type": "application/json",
+  };
+
+  let gqlBody = {
+    query: `query ($id: Int,) { # Define which variables will be used in the query (id)
+  Media(id:$id type:ANIME) {
+    recommendations(page: 1,perPage:10,sort:RATING_DESC) {
+      nodes { # Array of character nodes
+        mediaRecommendation {
+          id
+          title{
+            english
+            romaji
+            }
+        coverImage
+            {
+              large
+            }
+        }
+      }
+    }
+  }
+}`,
+    variables: { id: 1, page: 1, perPage: 10 },
+  };
+
+  let properRecommendations = JSON.stringify(gqlBody);
+
+  fetch("https://graphql.anilist.co/?id=15125", {
+    method: "POST",
+    body: properRecommendations,
+    headers: headersList,
+  })
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      // console.log(data);
+      // find_recommendation = data.data.Media.recommendations.nodes;
+      // console.log(find_recommendation);
+      // console.log(find_recommendation[0].mediaRecommendation.title.english);
+      // Cards copied from here
+      replaceCards(data);
+    });
+}
+
 // ======================  Card Section ======================
 let card_main;
 function callCard(genre = "Action") {
@@ -298,7 +397,7 @@ function callCard(genre = "Action") {
     variables: {
       search: get_genre ? genre : "Action",
       page: randomIntFromInterval(1, 200),
-      perPage: 5,
+      perPage: 10,
     },
   };
 
@@ -313,46 +412,47 @@ function callCard(genre = "Action") {
     .then(function (response) {
       return (card_main = response.json());
     })
-    .then(function (card_data) {
+    .then(function (data) {
+      replaceCards(data);
       // When you get data, perform some actions here (CARD DATA!)
-      find_card = card_data.data.Page.media;
-      anime_cards.forEach((currentElement, index) => {
-        // For each card
-        // Set title
-        currentElement.innerHTML = find_card[index].title.english
-          ? find_card[index].title.english
-          : find_card[index].title.romaji;
-        // Set Background image here along with some styles
-        currentElement.style = `
-        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0,0.6)), url(${find_card[index].coverImage.large});
-        background-repeat: no-repeat;
-        background-size: cover;
-        box-shadow: none;
-        border: 2px solid rgba(0, 0, 0, 0.301);
-        border-radius: 5%;
-        overflow: hidden;
-      `;
-        // Mouse Enter to Mouseleave creates the hover effect when mouses passes on a card
-        currentElement.addEventListener("mouseenter", function () {
-          currentElement.style = `
-        background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0,0.1)), url(${find_card[index].coverImage.large});
-        background-repeat: no-repeat;
-        background-size: cover;
-        box-shadow: 1px 1px 2px 2px ${get_Color};
-         transition: all 1s ease;
-        `;
-        });
-        currentElement.addEventListener("mouseleave", function () {
-          currentElement.style = `
-           transform: scale(1);
-        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0,0.6)), url(${find_card[index].coverImage.large});
-        background-repeat: no-repeat;
-        background-size: cover;
-        transition: all 1s ease;
-          box-shadow: none;
-        `;
-        });
-      });
+      find_card = data.data.Page.media;
+      // anime_cards.forEach((currentElement, index) => {
+      //   // For each card
+      //   // Set title
+      //   currentElement.innerHTML = find_card[index].title.english
+      //     ? find_card[index].title.english
+      //     : find_card[index].title.romaji;
+      //   // Set Background image here along with some styles
+      //   currentElement.style = `
+      //   background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0,0.6)), url(${find_card[index].coverImage.large});
+      //   background-repeat: no-repeat;
+      //   background-size: cover;
+      //   box-shadow: none;
+      //   border: 2px solid rgba(0, 0, 0, 0.301);
+      //   border-radius: 5%;
+      //   overflow: hidden;
+      // `;
+      //   // Mouse Enter to Mouseleave creates the hover effect when mouses passes on a card
+      //   currentElement.addEventListener("mouseenter", function () {
+      //     currentElement.style = `
+      //   background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0,0.1)), url(${find_card[index].coverImage.large});
+      //   background-repeat: no-repeat;
+      //   background-size: cover;
+      //   box-shadow: 1px 1px 2px 2px ${get_Color};
+      //    transition: all 1s ease;
+      //   `;
+      //   });
+      //   currentElement.addEventListener("mouseleave", function () {
+      //     currentElement.style = `
+      //      transform: scale(1);
+      //   background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0,0.6)), url(${find_card[index].coverImage.large});
+      //   background-repeat: no-repeat;
+      //   background-size: cover;
+      //   transition: all 1s ease;
+      //     box-shadow: none;
+      //   `;
+      //   });
+      // });
     });
 }
 // ============== Search Section =====================
@@ -475,7 +575,8 @@ function ValidateForm() {
 }
 
 // Call cards on load
-callCard();
+// callCard();
+GetRecommendations();
 
 const params = new Proxy(new URLSearchParams(window.location.search), {
   get: (searchParams, prop) => searchParams.get(prop),
