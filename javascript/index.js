@@ -118,6 +118,7 @@ function Replace(data) {
     main_data.averageScore / 10
   }/10</span>`;
   get_ID = main_data.id;
+  console.log("main data id", get_ID);
   //   Navigate to Anilist
   more_info.addEventListener("click", function () {
     window.open(`https://anilist.co/anime/${get_ID}`, "_blank");
@@ -316,17 +317,18 @@ function callBody(setID = 140960) {
       Replace(data);
       get_genre ? get_genre.split("/").join(",") : "Action";
       get_Color = data.data.Media.coverImage.color;
+      // GetRecommendations(get_ID);
     });
 }
 
 // ====================== Proper Recommendations ==============
-function GetRecommendations() {
+// recommendations_id = 1 means get me the recommendations based on ID 140960 in this case spy x family
+function GetRecommendations(recommendations_id = 140960) {
   let headersList = {
     Accept: "*/*",
     "User-Agent": "Thunder Client (https://www.thunderclient.com)",
     "Content-Type": "application/json",
   };
-
   let gqlBody = {
     query: `query ($id: Int,) { # Define which variables will be used in the query (id)
   Media(id:$id type:ANIME) {
@@ -347,7 +349,7 @@ function GetRecommendations() {
     }
   }
 }`,
-    variables: { id: 1, page: 1, perPage: 10 },
+    variables: { id: recommendations_id, page: 1, perPage: 10 },
   };
   let properRecommendations = JSON.stringify(gqlBody);
 
@@ -502,7 +504,7 @@ anime_cards.forEach((currentElement, index) => {
       find_card[index].id === undefined
         ? find_card[index].mediaRecommendation.id
         : find_card[index].id;
-    console.log(getThatID);
+    // console.log(getThatID);
     // MYQUERY HERE
     let temp_query =
       find_card[index].id === undefined
@@ -539,7 +541,8 @@ function ValidateForm() {
     // location.href  =  here.href
     let randomGenre = get_genre.split(" / ");
     //   Random Genres Here... can be improved to submit entre genre as array
-    callCard(randomGenre[Math.floor(Math.random() * randomGenre.length)]);
+    // callCard(randomGenre[Math.floor(Math.random() * randomGenre.length)]);
+    GetRecommendations(get_ID);
   }
 }
 
