@@ -28,10 +28,19 @@ Explanation on functions
 6. randomIntFromInterval() :
   - choose random index from a given lenght
 
+7. GetRecommendations(query) :
+  - This function returns the proper recommendations based on rating by users on anilist, makes searching easier
+
+8. getSupplement:
+  - This function gets a supplement of shows that are added to existing cards if the recommendation of that show was not up to 10
+  - this is particularly useful for old shows in the 1980s and older that have close to 0 recommendations
+
 ----- Other Variables --------
-get_genre : store "Genre" to be used in callCard(genre) globally
+get_genre : store "Genre" to be used in callCard(genre) globally [REMOVED!]
 get_ID: store "ID" to be used by callBody(id) globally
 get_Color: store "Color" to be used to change accents of elements
+fallback: data returned by the getSupplement function
+final_fall: data returned after combining recommendations and supplements
 */
 
 // Color Darkner
@@ -80,13 +89,35 @@ const left_arrow = document.querySelector(".arrow-left");
 const right_arrow = document.querySelector(".arrow-right");
 const anime_container = document.querySelector(".anime-cards");
 const share_info = document.querySelector(".share-info");
+// Anime Genre
+const anime_genres = [
+  "Action",
+  "Adventure",
+  "Comedy",
+  "Drama",
+  "Ecchi",
+  "Fantasy",
+  "Horror",
+  "Mahou Shoujo",
+  "Mecha",
+  "Music",
+  "Mystery",
+  "Psychological",
+  "Romance",
+];
+
+function random_Gen() {
+  return anime_genres[Math.floor(Math.random() * anime_genres.length)];
+}
 
 // Get Useful Values Here
-let get_genre;
 let get_ID;
 let get_Color;
-let find_card;
+// let find_card;
 let here;
+let filtered;
+let fallback;
+let final_fall;
 function randomIntFromInterval(min, max) {
   // min and max included
   return Math.floor(Math.random() * (max - min + 1) + min);
@@ -110,7 +141,6 @@ function Replace(data) {
   genre.innerHTML = `<span class="genre">${main_data.genres.join(
     " / "
   )}</span>`;
-  get_genre = genre.textContent;
   //   Render Episode Count
   episode_count.innerHTML = ` <span class="episode-count">${main_data.episodes} episodes</span>`;
   //   Render Rating
@@ -118,15 +148,16 @@ function Replace(data) {
     main_data.averageScore / 10
   }/10</span>`;
   get_ID = main_data.id;
+  // console.log("main data id", get_ID);
   //   Navigate to Anilist
   more_info.addEventListener("click", function () {
     window.open(`https://anilist.co/anime/${get_ID}`, "_blank");
   });
-
   //   Dynamic Colors
   //   0 is search
   //   1 is more info
-  //   2 is cards
+  //   2 to 11 is cards
+  //   7 -> 12 is now surprise me color
 
   // Get color if null replace with darkened default color
   (get_Color =
@@ -155,7 +186,7 @@ function Replace(data) {
 
   col_elements[0].style.backgroundColor = get_Color;
   col_elements[1].style.backgroundColor = get_Color;
-  col_elements[7].style.backgroundColor = get_Color;
+  col_elements[12].style.backgroundColor = get_Color;
   col_elements[1].addEventListener("mouseenter", function () {
     col_elements[1].style.setProperty(
       "-webkit-filter",
@@ -169,14 +200,14 @@ function Replace(data) {
     );
   });
   //   Change Surprise me Color
-  col_elements[7].addEventListener("mouseenter", function () {
-    col_elements[7].style.setProperty(
+  col_elements[12].addEventListener("mouseenter", function () {
+    col_elements[12].style.setProperty(
       "-webkit-filter",
       `drop-shadow(0 0 0.55rem ${get_Color})`
     );
   });
-  col_elements[7].addEventListener("mouseleave", function () {
-    col_elements[7].style.setProperty(
+  col_elements[12].addEventListener("mouseleave", function () {
+    col_elements[12].style.setProperty(
       "-webkit-filter",
       `drop-shadow(0 0 0 ${setOpacity(get_Color, 0.7)})`
     );
@@ -223,6 +254,65 @@ function Replace(data) {
   });
 }
 
+//================== Cards copied from here
+function replaceCards(data) {
+  // let chunk = data.data.Media.recommendations.nodes;
+  let chunk =
+    data.data.Media == undefined
+      ? data.data.Page.media
+      : data.data.Media.recommendations.nodes;
+  let firstPiece = chunk.map((e) => e.mediaRecommendation);
+  // console.log("first piece", firstPiece);
+  filtered = firstPiece.concat(fallback).filter(Boolean);
+  // console.log("filtered", filtered);
+  final_fall = chunk.length == 0 ? fallback : filtered;
+
+  anime_cards.forEach((currentElement, index) => {
+    let newIndex =
+      data.data.Media == undefined
+        ? data.data.Page.media[index]
+        : data.data.Media.recommendations.nodes.length == 10
+        ? data.data.Media.recommendations.nodes[index].mediaRecommendation
+        : final_fall[index];
+    // For each card
+    // Set title
+    currentElement.innerHTML = newIndex.title.english
+      ? newIndex.title.english
+      : newIndex.title.romaji;
+    // console.log(newIndex.id);
+    // Set Background image here along with some styles
+    currentElement.style = `
+        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0,0.6)), url(${newIndex.coverImage.large});
+        background-repeat: no-repeat;
+        background-size: cover;
+        box-shadow: none;
+        border: 2px solid rgba(0, 0, 0, 0.301);
+        border-radius: 5%;
+        overflow: hidden;
+      `;
+    // Mouse Enter to Mouseleave creates the hover effect when mouses passes on a card
+    currentElement.addEventListener("mouseenter", function () {
+      currentElement.style = `
+        background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0,0.1)), url(${newIndex.coverImage.large});
+        background-repeat: no-repeat;
+        background-size: cover;
+        box-shadow: 1px 1px 2px 2px ${get_Color};
+         transition: all 1s ease;
+        `;
+    });
+    currentElement.addEventListener("mouseleave", function () {
+      currentElement.style = `
+           transform: scale(1);
+        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0,0.6)), url(${newIndex.coverImage.large});
+        background-repeat: no-repeat;
+        background-size: cover;
+        transition: all 1s ease;
+          box-shadow: none;
+        `;
+    });
+  });
+}
+
 let headersList = {
   Accept: "*/*",
   "User-Agent": "Thunder Client (https://www.thunderclient.com)",
@@ -266,14 +356,61 @@ function callBody(setID = 140960) {
     })
     .then(function (data) {
       Replace(data);
-      get_genre ? get_genre.split("/").join(",") : "Action";
       get_Color = data.data.Media.coverImage.color;
+      // GetRecommendations(get_ID);
     });
 }
 
+// ====================== Proper Recommendations ==============
+// recommendations_id = 1 means get me the recommendations based on ID 140960 in this case spy x family
+function GetRecommendations(recommendations_id) {
+  let headersList = {
+    Accept: "*/*",
+    "User-Agent": "Thunder Client (https://www.thunderclient.com)",
+    "Content-Type": "application/json",
+  };
+  let gqlBody = {
+    query: `query ($id: Int,) { # Define which variables will be used in the query (id)
+  Media(id:$id type:ANIME) {
+    recommendations(page: 1,perPage:10,sort:RATING_DESC) {
+      nodes { # Array of character nodes
+        mediaRecommendation {
+          id
+          title{
+            english
+            romaji
+            }
+        coverImage
+            {
+              large
+            }
+        }
+      }
+    }
+  }
+}`,
+    variables: { id: recommendations_id, page: 1, perPage: 10 },
+  };
+  let properRecommendations = JSON.stringify(gqlBody);
+
+  fetch("https://graphql.anilist.co/?id=15125", {
+    method: "POST",
+    body: properRecommendations,
+    headers: headersList,
+  })
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      // Cards copied from here
+      replaceCards(data);
+      // find_card = data.data.Media.recommendations.nodes;
+    });
+}
+// ===================== Get recommendations end ====================
+
 // ======================  Card Section ======================
-let card_main;
-function callCard(genre = "Action") {
+function callCard(genre) {
   let gqlBody_Cards = {
     query: `query ($id: Int, $page: Int, $perPage: Int, $search: String) {
   Page (page: $page, perPage: $perPage) {
@@ -296,9 +433,9 @@ function callCard(genre = "Action") {
 }
 `,
     variables: {
-      search: get_genre ? genre : "Action",
+      search: genre,
       page: randomIntFromInterval(1, 200),
-      perPage: 5,
+      perPage: 10,
     },
   };
 
@@ -311,48 +448,64 @@ function callCard(genre = "Action") {
     headers: headersList,
   })
     .then(function (response) {
-      return (card_main = response.json());
+      return response.json();
     })
-    .then(function (card_data) {
+    .then(function (data) {
+      // Set fallback so you can update values
+      console.log(data);
+      console.log(fallback);
+      fallback = data.data.Page.media;
+      replaceCards(data);
+      // console.log("orignaldata", data);
       // When you get data, perform some actions here (CARD DATA!)
-      find_card = card_data.data.Page.media;
-      anime_cards.forEach((currentElement, index) => {
-        // For each card
-        // Set title
-        currentElement.innerHTML = find_card[index].title.english
-          ? find_card[index].title.english
-          : find_card[index].title.romaji;
-        // Set Background image here along with some styles
-        currentElement.style = `
-        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0,0.6)), url(${find_card[index].coverImage.large});
-        background-repeat: no-repeat;
-        background-size: cover;
-        box-shadow: none;
-        border: 2px solid rgba(0, 0, 0, 0.301);
-        border-radius: 5%;
-        overflow: hidden;
-      `;
-        // Mouse Enter to Mouseleave creates the hover effect when mouses passes on a card
-        currentElement.addEventListener("mouseenter", function () {
-          currentElement.style = `
-        background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0,0.1)), url(${find_card[index].coverImage.large});
-        background-repeat: no-repeat;
-        background-size: cover;
-        box-shadow: 1px 1px 2px 2px ${get_Color};
-         transition: all 1s ease;
-        `;
-        });
-        currentElement.addEventListener("mouseleave", function () {
-          currentElement.style = `
-           transform: scale(1);
-        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0,0.6)), url(${find_card[index].coverImage.large});
-        background-repeat: no-repeat;
-        background-size: cover;
-        transition: all 1s ease;
-          box-shadow: none;
-        `;
-        });
-      });
+      // find_card = data.data.Page.media;
+    });
+}
+
+// ======================= Call Supplement ====================
+function getSupplement(genre = "Action") {
+  let gqlBody_Cards = {
+    query: `query ($id: Int, $page: Int, $perPage: Int, $search: String) {
+  Page (page: $page, perPage: $perPage) {
+    pageInfo {
+      perPage
+    }
+    media (id: $id, genre: $search  type: ANIME) {
+      id
+      title {
+        english
+        romaji
+      }
+      
+       coverImage {
+        large
+  }
+    }
+    
+  }
+}
+`,
+    variables: {
+      search: genre,
+      page: randomIntFromInterval(1, 200),
+      perPage: 10,
+    },
+  };
+
+  let cardContent = JSON.stringify(gqlBody_Cards);
+  // Fetch data from here
+  // First  then get
+  fetch("https://graphql.anilist.co/", {
+    method: "POST",
+    body: cardContent,
+    headers: headersList,
+  })
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      // When you get data, perform some actions here (CARD DATA!)
+      fallback = data.data.Page.media;
     });
 }
 // ============== Search Section =====================
@@ -401,6 +554,8 @@ function SearchAnime(searchQuery) {
       let thisID =
         data.data.Page.media.length === 0 ? 140960 : data.data.Page.media[0].id;
       callBody(thisID);
+      getSupplement();
+      GetRecommendations(thisID);
     });
 }
 
@@ -412,9 +567,11 @@ form.addEventListener("submit", function (e) {
 });
 
 // Refresh the recommendations list when you click on surprise me
+//    Onclick Replace every card based on a random genre
 surprise.addEventListener("click", function () {
-  let randomGenre = get_genre.split(" / ");
-  callCard(randomGenre[Math.floor(Math.random() * randomGenre.length)]);
+  // !!!!!!Found bug source (calling random genre keeps bugging)
+  console.log(random_Gen());
+  callCard("Action");
 });
 
 //  Hamburger menu for mobile devices
@@ -435,17 +592,26 @@ right_arrow.addEventListener("click", function () {
   anime_container.scrollBy(400, 0);
 });
 
-//    Onclick Replace every card based on a random genre
+//    Onclick Replace main body of selected card
 anime_cards.forEach((currentElement, index) => {
   currentElement.addEventListener("click", function () {
-    let getThatID = find_card[index].id;
+    let getThatID =
+      final_fall[index].id === undefined
+        ? final_fall[index].mediaRecommendation.id
+        : final_fall[index].id;
     // console.log(getThatID);
     // MYQUERY HERE
+    let temp_query =
+      final_fall[index].id === undefined
+        ? final_fall[index].mediaRecommendation.title.english
+          ? final_fall[index].mediaRecommendation.title.english
+          : final_fall[index].mediaRecommendation.title.romaji
+        : final_fall[index].title.english
+        ? final_fall[index].title.english
+        : final_fall[index].title.romaji;
     callBody(getThatID);
     // temporarily store search query using local storage to reload what you searched previously
-    localStorage["searchKey"] = find_card[index].title.english
-      ? find_card[index].title.english
-      : find_card[index].title.romaji;
+    localStorage["searchKey"] = temp_query;
   });
 });
 
@@ -455,27 +621,19 @@ function ValidateForm() {
     return false;
   } else {
     // When a search is passed, call searchAnime and pass the query value to search
-    // ----Share Link Feature Starts here---
-    //  Get the search value and append it to the link when sending to someone
+    // ----Share Link Feature Starts here---    //  Get the search value and append it to the link when sending to someone
     here = new URL(window.location.href);
-    // console.log(here);
-    // console.log(here.href);
     here.searchParams.set("show", search_value.value);
     let mySearchValue = here.searchParams.get("show");
     SearchAnime(mySearchValue);
     localStorage["searchKey"] = mySearchValue;
-    // console.log(localStorage["searchKey"]);
     // Add query text to URL in address bar if you want to copy and paste
     window.history.pushState(null, "", `?show=${search_value.value}`);
-    // location.href  =  here.href
-    let randomGenre = get_genre.split(" / ");
-    //   Random Genres Here... can be improved to submit entre genre as array
-    callCard(randomGenre[Math.floor(Math.random() * randomGenre.length)]);
   }
 }
 
-// Call cards on load
-callCard();
+// Call cards on load [reversed]
+// callCard();
 
 const params = new Proxy(new URLSearchParams(window.location.search), {
   get: (searchParams, prop) => searchParams.get(prop),

@@ -183,7 +183,7 @@ p {
 
 .anime-cards {
   display: grid;
-  grid-template-columns: 2fr 2fr 2fr 2fr 2fr;
+  grid-template-columns: 2fr 2fr 2fr 2fr 2fr 2fr 2fr 2fr 2fr 2fr;
   overflow-x: scroll;
   gap: 0.1rem;
   min-width: 0;
@@ -550,12 +550,10 @@ p {
   .arrow-right {
     display: none;
   }
-  .share-container{
-    /* position: relative; */
-  }
-  .share-info{
+
+  .share-info {
     position: relative;
-    top:.18rem
+    top: 0.18rem;
   }
 }
 /* End Mobile Here */
