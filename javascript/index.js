@@ -410,7 +410,7 @@ function GetRecommendations(recommendations_id) {
 // ===================== Get recommendations end ====================
 
 // ======================  Card Section ======================
-function callCard(genre = "Action") {
+function callCard(genre) {
   let gqlBody_Cards = {
     query: `query ($id: Int, $page: Int, $perPage: Int, $search: String) {
   Page (page: $page, perPage: $perPage) {
@@ -452,6 +452,8 @@ function callCard(genre = "Action") {
     })
     .then(function (data) {
       // Set fallback so you can update values
+      console.log(data);
+      console.log(fallback);
       fallback = data.data.Page.media;
       replaceCards(data);
       // console.log("orignaldata", data);
@@ -568,6 +570,7 @@ form.addEventListener("submit", function (e) {
 //    Onclick Replace every card based on a random genre
 surprise.addEventListener("click", function () {
   // !!!!!!Found bug source (calling random genre keeps bugging)
+  console.log(random_Gen());
   callCard("Action");
 });
 
