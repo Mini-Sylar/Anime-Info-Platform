@@ -452,8 +452,8 @@ function callCard(genre) {
     })
     .then(function (data) {
       // Set fallback so you can update values
-      console.log(data);
-      console.log(fallback);
+      // console.log(data);
+      // console.log(fallback);
       fallback = data.data.Page.media;
       replaceCards(data);
       // console.log("orignaldata", data);
@@ -570,7 +570,7 @@ form.addEventListener("submit", function (e) {
 //    Onclick Replace every card based on a random genre
 surprise.addEventListener("click", function () {
   // !!!!!!Found bug source (calling random genre keeps bugging)
-  console.log(random_Gen());
+  // console.log(random_Gen());
   callCard("Action");
 });
 
