@@ -1,10 +1,6 @@
-Thanks for finding interest in the Anime info Platform
-
-To get started with contributions there a few things you need to know
-
 # Contribution
-
-You can contribute to this project in any shape or form! follow the instructions in the next section to get started
+Thanks for finding interest in the [Anime Information Platform](https://anime-info-platform.vercel.app/).
+You can contribute to this project in any shape or form! or tackle any of the [issues](https://github.com/Mini-Sylar/Anime-Info-Platform/issues) opened and submit a pull request
 
 <hr>
 
@@ -33,14 +29,13 @@ You can contribute to this project in any shape or form! follow the instructions
 
 ## [Index.html](index.html)
 
-The first page you see when you load the site ->
+The first page you see when you load the site 
 
 <hr>
 
 ## [index.js](https://github.com/Mini-Sylar/Anime-Info-Platform/blob/master/javascript/index.js)
 
 ### **functions**
-
 <details>
   <summary><b>ShadeColor()</b></summary>
          <ul>Returns a darker varient of the accent color on certain elements </ul>
@@ -61,7 +56,7 @@ The first page you see when you load the site ->
 <details>
   <summary><b>callCard(genre)</b></summary>
    <ul> This function contains the request that provides data for the suggestion cards</ul>
-   <ul> genre: default genre to be passed, initially it is "Action"</ul>
+   <ul> <b><i>genre:</i></b> default genre to be passed, initially it is "Action"</ul>
    <ul> after modifying the cards, which ever card is clicked call callBody(id) to replace page body contents</ul>
 </details>
 
@@ -72,17 +67,18 @@ The first page you see when you load the site ->
 
 <details>
   <summary><b>randomIntFromInterval()</b></summary>
-<ul> choose random index from a given lenght</ul>
+<ul> Choose random index from a given lenght</ul>
 </details>
 
 <details>
   <summary><b> GetRecommendations(recommendations_id)</b></summary>
- <ul> This function returns the proper recommendations based on rating by users on anilist, makes searching easier </ul>
+ <ul> Returns the proper recommendations based on rating by users on anilist, makes searching easier </ul>
+ <ul><b><i>recommendation_id:</i></b> similar to id, refers to the id of the show we want our recommendations to be on</ul>
 </details>
 
 <details>
   <summary><b> getSupplement()</b></summary>
- <ul> This function gets a supplement of shows that are added to existing cards if the recommendation of that show was not up to 10 </ul>
+ <ul> Gets a supplement of shows that are added to existing cards if the recommendation of that show was not up to 10 </ul>
    <ul> this is particularly useful for old shows in the 1980s and older that have close to 0 recommendations </ul>
 </details>
 
@@ -98,4 +94,3 @@ Contains all the default images used such as the preloader image
 
 Contains all the font used
 
-<hr>
