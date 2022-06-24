@@ -26,17 +26,11 @@ The Anime Information Platform is an easy to use platform for finding informatio
   - [Table of Content](#table-of-content)
   - [Built With](#built-with)
   - [Contribution](#contribution)
-  - [Getting started](#getting-started)
-      - [folder Structure](#folder-structure)
-    - [Index.html](#indexhtml)
-    - [index.js](#indexjs)
-    - [Images](#images)
-    - [Font](#font)
   - [Credits](#credits)
   - [Screenshots](#screenshots)
     - [Desktop](#desktop)
     - [Mobile](#mobile)
-<hr>
+  <hr>
 
 ## Built With
 
@@ -52,56 +46,9 @@ The javascript here is repsonsible for fetching data from the AniList API writte
 
 ## Contribution
 
-You can contribute to this project in any shape or form! follow the instructions in the next section to get started
+Moved into [contributions](CONTRIBUTION.md)
 
 <hr>
-
-## Getting started
-
-<hr><hr>
-
-#### folder Structure
-
-```
-📦Anime Streaming Concept
- ┣ 📂fonts
- ┣ 📂images
- ┣ 📂javascript
- ┃ ┗ 📜index.js
- ┣ 📂styles
- ┃ ┗ 📜style-contact.css
- ┣ 📜about.html
- ┣ 📜contact.html
- ┣ 📜index.html
- ┣ 📜README.md
- ┗ 📜style.css
-```
-
-   <hr>
-
-### [Index.html](index.html)
-
-The first page you see when you load the site ->
-
-<hr>
-
-### [index.js](https://github.com/Mini-Sylar/Anime-Info-Platform/blob/master/javascript/index.js)
-
-contains all the code used. [index.js](javascript\index.js) contains a thorough explanation on what every function/ variable does
-
-<hr>
-
-### [Images](images)
-
-Contains all the default images used such as the preloader image
-
-<hr>
-
-### [Font](fonts)
-
-Contains all the font used
-
-<hr><hr>
 
 ## Credits
 
