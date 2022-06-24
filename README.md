@@ -26,12 +26,6 @@ The Anime Information Platform is an easy to use platform for finding informatio
   - [Table of Content](#table-of-content)
   - [Built With](#built-with)
   - [Contribution](#contribution)
-  - [Getting started](#getting-started)
-      - [folder Structure](#folder-structure)
-    - [Index.html](#indexhtml)
-    - [index.js](#indexjs)
-    - [Images](#images)
-    - [Font](#font)
   - [Credits](#credits)
   - [Screenshots](#screenshots)
     - [Desktop](#desktop)
@@ -52,7 +46,7 @@ The javascript here is repsonsible for fetching data from the AniList API writte
 
 ## Contribution
 
-Moved into [contribtions](CONTRIBUTION.md)
+Moved into [contributions](CONTRIBUTION.md)
 
 <hr>
 
