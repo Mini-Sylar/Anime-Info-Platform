@@ -354,6 +354,43 @@ p {
   transition: all 0.2s ease;
 }
 
+/* Trailer Section */
+.rating-trailer-container {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  gap: 0.2rem;
+  /* background-color: #0195ff; */
+}
+.trailer-container {
+  width: 100%;
+  /* background-color: #0195ff; */
+  display: flex;
+  align-self: center;
+  justify-content: center;
+}
+.trailer-container > * {
+  border: 1px solid #acabab;
+  border-radius: 20px;
+}
+.trailer-container:hover {
+  /* position: fixed; */
+  transform: scale(1.5);
+}
+
+
+.anime-rating-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  /* background-color: #acabab; */
+}
+.anime-data {
+  /* background-color: springgreen; */
+  margin-bottom: 0;
+}
 /* Carousel */
 .arrow-left,
 .arrow-right {
