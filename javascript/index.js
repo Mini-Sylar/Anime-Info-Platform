@@ -89,6 +89,9 @@ const left_arrow = document.querySelector(".arrow-left");
 const right_arrow = document.querySelector(".arrow-right");
 const anime_container = document.querySelector(".anime-cards");
 const share_info = document.querySelector(".share-info");
+const trailer_container = document.querySelector(".trailer-container");
+const main_video_container = document.querySelector(".main-video-container");
+
 // Anime Genre
 const anime_genres = [
   "Action",
@@ -252,6 +255,25 @@ function Replace(data) {
   share_info.addEventListener("mouseleave", function () {
     share_info.style.setProperty("-webkit-filter", ``);
   });
+
+  // Render Youtube Video
+  console.log(main_data.trailer);
+  main_data.trailer == null
+    ? (trailer_container.style.visibility = "hidden")
+    : (trailer_container.style.visibility = "visible"),
+    (main_video_container.innerHTML = `
+       <iframe
+                  width="100%"
+                  height="100%"
+                  src="https://www.youtube.com/embed/${main_data.trailer.id}"
+                  title="YouTube video player"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                  class="trailer-content"
+                ></iframe>
+      
+      `);
 }
 
 //================== Cards copied from here
@@ -339,6 +361,9 @@ function callBody(setID = 140960) {
   genres
   episodes
   averageScore
+  trailer{
+      id
+    }
   }
 }`,
     variables: { id: setID },
