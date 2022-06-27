@@ -363,6 +363,8 @@ p {
   /* background-color: #0195ff; */
 }
 .trailer-container {
+  opacity: 1;
+  visibility: visible;
   position: absolute;
   height: 8rem;
   width: 20rem;
@@ -394,6 +396,11 @@ p {
   transition: all 0.2s ease;
 }
 
+.fadeout {
+  opacity: 0;
+  height: 0;
+  transition: all .5s ease;
+}
 .anime-rating-container {
   width: 100%;
   display: flex;

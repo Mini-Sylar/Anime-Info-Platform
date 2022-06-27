@@ -259,8 +259,9 @@ function Replace(data) {
   // Render Youtube Video
   console.log(main_data.trailer);
   main_data.trailer == null
-    ? (trailer_container.style.visibility = "hidden")
-    : (trailer_container.style.visibility = "visible"),
+    ? trailer_container.classList.add("fadeout")
+    : trailer_container.classList.remove("fadeout"),
+    (trailer_container.style.visibility = "visible"),
     (main_video_container.innerHTML = `
        <iframe
                   width="100%"
