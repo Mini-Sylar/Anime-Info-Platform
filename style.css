@@ -363,21 +363,36 @@ p {
   /* background-color: #0195ff; */
 }
 .trailer-container {
-  width: 100%;
-  /* background-color: #0195ff; */
+  background-color: #0195ff;
   display: flex;
   align-self: center;
   justify-content: center;
+  position: fixed;
+  min-height: 6rem;
+  transition: all 1s ease;
+  z-index: 2;
+  width: 20%;
+  left: 0;
 }
-.trailer-container > * {
+.trailer-content {
   border: 1px solid #acabab;
   border-radius: 20px;
-}
-.trailer-container:hover {
-  /* position: fixed; */
-  transform: scale(1.5);
+  position: absolute;
+  bottom: 0;
+  z-index: 1;
+  opacity: 0.5;
 }
 
+.trailer-container:hover {
+  position: absolute;
+  min-height: 320px;
+  min-width: 40%;
+  transition: all 1s ease;
+}
+
+.trailer-container:hover ~ * {
+  background-color: #0195ff;
+}
 
 .anime-rating-container {
   width: 100%;
