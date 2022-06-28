@@ -44,6 +44,9 @@ const left_arrow = document.querySelector(".arrow-left");
 const right_arrow = document.querySelector(".arrow-right");
 const anime_container = document.querySelector(".anime-cards");
 const share_info = document.querySelector(".share-info");
+const trailer_container = document.querySelector(".trailer-container");
+const main_video_container = document.querySelector(".main-video-container");
+
 // Anime Genre
 const anime_genres = [
   "Action",
@@ -207,6 +210,30 @@ function Replace(data) {
   share_info.addEventListener("mouseleave", function () {
     share_info.style.setProperty("-webkit-filter", ``);
   });
+
+  // Render Youtube Video
+  console.log(main_data.trailer);
+  main_data.trailer === null
+    ? trailer_container.classList.add("fadeout")
+    : trailer_container.classList.remove("fadeout"),
+    (trailer_container.style.visibility = "visible"),
+    (main_video_container.innerHTML = `
+       <iframe
+                  width="100%"
+                  height="100%"
+                  src="https://www.youtube.com/embed/${
+                    main_data.trailer === null
+                      ? "dQw4w9WgXcQ" //this will never be true...but if it is...💀
+                      : main_data.trailer.id
+                  }"
+                  title="YouTube video player"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                  class="trailer-content"
+                ></iframe>
+      
+      `);
 }
 
 //================== Cards copied from here
@@ -294,6 +321,9 @@ function callBody(setID = 140960) {
   genres
   episodes
   averageScore
+  trailer{
+      id
+    }
   }
 }`,
     variables: { id: setID },
@@ -511,6 +541,7 @@ function SearchAnime(searchQuery) {
       callBody(thisID);
       getSupplement();
       GetRecommendations(thisID);
+      anime_container.scrollTo(0, 0);
     });
 }
 
@@ -565,6 +596,7 @@ anime_cards.forEach((currentElement, index) => {
         ? final_fall[index].title.english
         : final_fall[index].title.romaji;
     callBody(getThatID);
+    // anime_container.scrollTo(0, 0);
     // temporarily store search query using local storage to reload what you searched previously
     localStorage["searchKey"] = temp_query;
   });
@@ -609,6 +641,7 @@ window.onload = function () {
     SearchAnime(myValue);
   } else {
     callBody();
+    anime_container.scrollTo(0, 0);
   }
 };
 

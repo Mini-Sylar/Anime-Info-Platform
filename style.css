@@ -354,6 +354,65 @@ p {
   transition: all 0.2s ease;
 }
 
+/* Trailer Section */
+.rating-trailer-container {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  gap: 0.2rem;
+  /* background-color: #0195ff; */
+}
+.trailer-container {
+  opacity: 1;
+  visibility: visible;
+  position: absolute;
+  height: 8rem;
+  width: 20rem;
+  left: 50%;
+  bottom: 0;
+  z-index: 8;
+  transition: all 0.2s ease;
+}
+.trailer-content {
+  border: 1px solid #acabab;
+  border-radius: 20px;
+  /* position: absolute; */
+}
+
+.main-video-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  top: 1rem;
+}
+
+.trailer-container:hover {
+  /* position: absolute; */
+  height: 30rem;
+  width: 100%;
+  bottom: 0;
+  box-shadow: 0 0 0 100vmin rgba(0, 0, 0, 0.877);
+  background-color: rgba(0, 0, 0, 0.877);
+  transition: all 0.2s ease;
+}
+
+.fadeout {
+  opacity: 0;
+  height: 0;
+  transition: all 0.5s ease;
+}
+.anime-rating-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  /* background-color: #acabab; */
+}
+.anime-data {
+  /* background-color: springgreen; */
+  margin-bottom: 0;
+}
 /* Carousel */
 .arrow-left,
 .arrow-right {
@@ -422,8 +481,15 @@ p {
   overflow: hidden;
 }
 
+/* Fix trailer views on small screens */
+@media screen and (max-width: 1024px) {
+  .trailer-container {
+    width: 15rem;
+  }
+}
+
 /* Phone Version Starts here */
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 768px) {
   .showBackroundImages {
     display: flex;
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
@@ -554,6 +620,27 @@ p {
   .share-info {
     position: relative;
     top: 0.18rem;
+  }
+
+  .rating-trailer-container {
+    flex-direction: column;
+    margin-bottom: 1rem;
+  }
+  .trailer-container {
+    position: static;
+    margin: 0 auto;
+    width: 77%;
+    height: 100%;
+  }
+  .main-video-container {
+    top: unset;
+  }
+  .trailer-container:hover {
+    height: initial;
+    width: 77%;
+    bottom: unset;
+    box-shadow: unset;
+    background-color: unset;
   }
 }
 /* End Mobile Here */
