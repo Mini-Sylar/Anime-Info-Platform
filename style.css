@@ -621,6 +621,27 @@ p {
     position: relative;
     top: 0.18rem;
   }
+
+  .rating-trailer-container {
+    flex-direction: column;
+    margin-bottom: 1rem;
+  }
+  .trailer-container {
+    position: static;
+    margin: 0 auto;
+    width: 50%;
+  }
+  .main-video-container {
+    top: unset;
+  }
+  .trailer-container:hover {
+    height: unset;
+    width: unset;
+    bottom: unset;
+    box-shadow: unset;
+    background-color: unset;
+    transition: unset;
+  }
 }
 /* End Mobile Here */
 
