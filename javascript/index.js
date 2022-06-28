@@ -258,7 +258,7 @@ function Replace(data) {
 
   // Render Youtube Video
   console.log(main_data.trailer);
-  main_data.trailer == null
+  main_data.trailer === null
     ? trailer_container.classList.add("fadeout")
     : trailer_container.classList.remove("fadeout"),
     (trailer_container.style.visibility = "visible"),
@@ -266,7 +266,11 @@ function Replace(data) {
        <iframe
                   width="100%"
                   height="100%"
-                  src="https://www.youtube.com/embed/${main_data.trailer.id}"
+                  src="https://www.youtube.com/embed/${
+                    main_data.trailer === null
+                      ? "dQw4w9WgXcQ" //this will never be true...but if it is...💀
+                      : main_data.trailer.id
+                  }"
                   title="YouTube video player"
                   frameborder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
