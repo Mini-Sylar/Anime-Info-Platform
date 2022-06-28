@@ -374,7 +374,7 @@ p {
   transition: all 0.2s ease;
 }
 .trailer-content {
-  border: 1px solid #acabab;
+  border: 1px solid #0195ff;
   border-radius: 20px;
   /* position: absolute; */
 }
@@ -583,7 +583,7 @@ p {
     visibility: hidden;
     overflow: hidden;
     transition: all 0.5s ease, opacity 0.1s ease-in;
-    z-index: 2;
+    z-index: 9;
     backdrop-filter: blur(50px);
   }
 
@@ -599,7 +599,7 @@ p {
     right: 1rem;
     top: 1rem;
     align-items: flex-end;
-    z-index: 3;
+    z-index: 10;
     background-color: transparent;
     color: silver;
     border: none;
