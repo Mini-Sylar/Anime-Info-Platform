@@ -629,13 +629,14 @@ p {
   .trailer-container {
     position: static;
     margin: 0 auto;
-    width: 50%;
+    width: 74%;
+    height: unset;
   }
   .main-video-container {
     top: unset;
   }
   .trailer-container:hover {
-    height: unset;
+    height: initial;
     width: unset;
     bottom: unset;
     box-shadow: unset;
