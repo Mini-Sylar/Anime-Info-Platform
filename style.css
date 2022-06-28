@@ -399,6 +399,7 @@ p {
 .fadeout {
   opacity: 0;
   height: 0;
+  visibility: hidden;
   transition: all 0.5s ease;
 }
 .anime-rating-container {
@@ -641,6 +642,12 @@ p {
     bottom: unset;
     box-shadow: unset;
     background-color: unset;
+  }
+  .fadeout {
+    opacity: 0;
+    height: 0;
+    visibility: hidden;
+    transition: all 0.5s ease;
   }
 }
 /* End Mobile Here */

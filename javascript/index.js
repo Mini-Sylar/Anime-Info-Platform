@@ -216,7 +216,6 @@ function Replace(data) {
   main_data.trailer === null
     ? trailer_container.classList.add("fadeout")
     : trailer_container.classList.remove("fadeout"),
-    (trailer_container.style.visibility = "visible"),
     (main_video_container.innerHTML = `
        <iframe
                   width="100%"
