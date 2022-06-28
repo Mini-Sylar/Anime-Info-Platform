@@ -212,7 +212,7 @@ function Replace(data) {
   });
 
   // Render Youtube Video
-  console.log(main_data.trailer);
+  // console.log(main_data.trailer);
   main_data.trailer === null
     ? trailer_container.classList.add("fadeout")
     : trailer_container.classList.remove("fadeout"),
