@@ -230,6 +230,7 @@ function Replace(data) {
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowfullscreen
                   class="trailer-content"
+                  style ="border:2px solid ${get_Color}"
                 ></iframe>
       
       `);
