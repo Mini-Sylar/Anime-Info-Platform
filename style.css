@@ -629,19 +629,18 @@ p {
   .trailer-container {
     position: static;
     margin: 0 auto;
-    width: 74%;
-    height: unset;
+    width: 77%;
+    height: 100%;
   }
   .main-video-container {
     top: unset;
   }
   .trailer-container:hover {
     height: initial;
-    width: unset;
+    width: 77%;
     bottom: unset;
     box-shadow: unset;
     background-color: unset;
-    transition: unset;
   }
 }
 /* End Mobile Here */
