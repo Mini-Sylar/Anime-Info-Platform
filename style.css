@@ -399,7 +399,7 @@ p {
 .fadeout {
   opacity: 0;
   height: 0;
-  transition: all .5s ease;
+  transition: all 0.5s ease;
 }
 .anime-rating-container {
   width: 100%;
@@ -481,8 +481,15 @@ p {
   overflow: hidden;
 }
 
+/* Fix trailer views on small screens */
+@media screen and (max-width: 1024px) {
+  .trailer-container {
+    width: 15rem;
+  }
+}
+
 /* Phone Version Starts here */
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 768px) {
   .showBackroundImages {
     display: flex;
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
