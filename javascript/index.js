@@ -596,7 +596,7 @@ anime_cards.forEach((currentElement, index) => {
         ? final_fall[index].title.english
         : final_fall[index].title.romaji;
     callBody(getThatID);
-    anime_container.scrollTo(0, 0);
+    // anime_container.scrollTo(0, 0);
     // temporarily store search query using local storage to reload what you searched previously
     localStorage["searchKey"] = temp_query;
   });
