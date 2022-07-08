@@ -86,25 +86,19 @@ function Replace(data) {
   let main_data = data.data.Media;
   //   Render title Here
   title.innerHTML = data.data.Media.title.english
-    ? ` <h1 class="anime-title style-1">${main_data.title.english}</h1>`
-    : ` <h1 class="anime-title style-1">${main_data.title.romaji}</h1>`;
+    ? ` ${main_data.title.english}`
+    : ` ${main_data.title.romaji}`;
   //   Render Description Here
-  description.innerHTML = `<p class="anime-synopsis style-1">${data.data.Media.description}</p>`;
+  description.innerHTML = `${data.data.Media.description}`;
   //   Render Release Year
   release_year.innerHTML =
-    main_data.seasonYear === null
-      ? `<span class="year">TBA</span>`
-      : `<span class="year">${main_data.seasonYear}</span>`;
+    main_data.seasonYear === null ? `TBA` : `${main_data.seasonYear}`;
   //   Render Genre
-  genre.innerHTML = `<span class="genre">${main_data.genres.join(
-    " / "
-  )}</span>`;
+  genre.innerHTML = `${main_data.genres.join(" / ")}`;
   //   Render Episode Count
-  episode_count.innerHTML = ` <span class="episode-count">${main_data.episodes} episodes</span>`;
+  episode_count.innerHTML = ` ${main_data.episodes} episodes`;
   //   Render Rating
-  rating.innerHTML = `<span class="rating">${
-    main_data.averageScore / 10
-  }/10</span>`;
+  rating.innerHTML = `${main_data.averageScore / 10}/10`;
   get_ID = main_data.id;
   // console.log("main data id", get_ID);
   //   Navigate to Anilist
