@@ -416,6 +416,8 @@ p {
   /* background-color: springgreen; */
   margin-bottom: 0;
 }
+
+
 /* Carousel */
 .arrow-left,
 .arrow-right {
@@ -541,7 +543,7 @@ p {
     margin-inline: 1rem;
     animation: sub-fadein 1.5s ease-in;
   }
-  
+
   .anime-meta-detail {
     height: 100%;
   }
