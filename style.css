@@ -124,7 +124,9 @@ p {
   padding-right: 1rem;
   font-size: 14px;
   overflow-y: auto;
+  overflow-x: hidden;
   display: flex;
+  flex-direction: column;
   align-items: flex-start;
   /* margin-top: 1rem; */
   animation: sub-fadein 1.5s ease-in;
