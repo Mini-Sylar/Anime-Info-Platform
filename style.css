@@ -537,10 +537,11 @@ p {
     padding-right: 0rem;
     font-size: 12px;
     text-align: justify;
-    justify-content: center;
-    padding-inline: 15px;
+    padding-inline: 1rem;
+    margin-inline: 1rem;
     animation: sub-fadein 1.5s ease-in;
   }
+  
   .anime-meta-detail {
     height: 100%;
   }
