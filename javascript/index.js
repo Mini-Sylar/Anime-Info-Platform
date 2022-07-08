@@ -96,7 +96,7 @@ function Replace(data) {
   //   Render Genre
   genre.innerHTML = `${main_data.genres.join(" / ")}`;
   //   Render Episode Count
-  episode_count.innerHTML = ` ${main_data.episodes} episodes`;
+  episode_count.innerHTML = `${main_data.episodes} episodes`;
   //   Render Rating
   rating.innerHTML = `${main_data.averageScore / 10}/10`;
   get_ID = main_data.id;
