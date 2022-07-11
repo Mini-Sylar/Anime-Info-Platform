@@ -487,6 +487,24 @@ function getSupplement(genre = "Action") {
       fallback = data.data.Page.media;
     });
 }
+
+function isMainPage() {
+    return window.location.search === "";
+}
+
+function getSetId(data) {
+    if(data.data.Page.media.length === 0) {
+        if(isMainPage()) {
+            return 140960;
+        } else {
+            window.location.replace("/not-found.html");
+            return;
+        }
+    } else {
+        return data.data.Page.media[0].id;
+    }
+}
+
 // ============== Search Section =====================
 function SearchAnime(searchQuery) {
   let headersList = {
@@ -529,12 +547,11 @@ function SearchAnime(searchQuery) {
       return response.json();
     })
     .then(function (data) {
-      // Check if there was an initial value... if not pass Spy X Family id and call...this function simulates a fresh load of the page
-      let thisID =
-        data.data.Page.media.length === 0 ? 140960 : data.data.Page.media[0].id;
-      callBody(thisID);
+      let setId = getSetId(data);
+      callBody(setId);
+
       getSupplement();
-      GetRecommendations(thisID);
+      GetRecommendations(setId);
       anime_container.scrollTo(0, 0);
     });
 }
