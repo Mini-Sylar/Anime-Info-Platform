@@ -53,7 +53,12 @@ Moved into [contributions](CONTRIBUTION.md)
 ## Credits
 
 - [AniList](https://anilist.co/) for all the information and easy to use API
-- Any other contributer will be added here 😊
+
+## Contributors
+<a href="https://github.com/Mini-Sylar/Anime-Info-Platform/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Mini-Sylar/Anime-Info-Platform" />
+</a>
+
 
 ## Screenshots
 
