@@ -6,31 +6,34 @@
 
 Official repository of the Anime Information Platform
 
-## Overview
-
-The Anime Information Platform is an easy to use platform for finding information about any show. It uses the [AniLIst](https://anilist.co/) API for all of its data. if a show exists, you'll find information on it😊.
-
-<hr>
-
-## Check it out here
-
-[The Anime Information Platform](https://anime-info-platform.vercel.app/)
-
 <hr>
 
 ## Table of Content
 
 - [Anime-Info-Platform](#anime-info-platform)
   - [Overview](#overview)
-  - [Check it out here](#check-it-out-here)
-  - [Table of Content](#table-of-content)
+  - [Live](#live-at)
   - [Built With](#built-with)
   - [Contribution](#contribution)
   - [Credits](#credits)
   - [Screenshots](#screenshots)
     - [Desktop](#desktop)
     - [Mobile](#mobile)
-  <hr>
+<hr>
+
+
+## Overview
+
+The Anime Information Platform is an easy to use web application for finding information on anime movies and TV shows.<br/>
+It uses [AniList](https://anilist.co/) API.
+
+<hr>
+
+## Live at
+
+[The Anime Information Platform](https://anime-info-platform.vercel.app/)
+
+<hr>
 
 ## Built With
 
@@ -52,13 +55,8 @@ Moved into [contributions](CONTRIBUTION.md)
 
 ## Credits
 
-- [AniList](https://anilist.co/) for all the information and easy to use API
-
-## Contributors
-<a href="https://github.com/Mini-Sylar/Anime-Info-Platform/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=Mini-Sylar/Anime-Info-Platform" />
-</a>
-
+- [AniList](https://anilist.co/) for all their easy to use data API
+- Any other contributer will be added here 😊
 
 ## Screenshots
 
@@ -66,8 +64,8 @@ Moved into [contributions](CONTRIBUTION.md)
 
 <div>
 <img src = "screenshots\Web capture_7-5-2022_19378_127.0.0.1.jpeg" alt="Desktop Screenshot 1 Spy x Family">
- <img src = "screenshots\Web capture_7-5-2022_19337_127.0.0.1.jpeg" alt="Desktop Screenshot 1 Spy x Family">
-  <img src = "screenshots\Web capture_7-5-2022_193843_127.0.0.1.jpeg" alt="Desktop Screenshot 1 Spy x Family">
+<img src = "screenshots\Web capture_7-5-2022_19337_127.0.0.1.jpeg" alt="Desktop Screenshot 1 Spy x Family">
+<img src = "screenshots\Web capture_7-5-2022_193843_127.0.0.1.jpeg" alt="Desktop Screenshot 1 Spy x Family">
 </div>
 
 ### Mobile
