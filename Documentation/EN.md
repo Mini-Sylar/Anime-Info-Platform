@@ -16,7 +16,7 @@ It also gets revised when major updates are made.
 <hr>
 
 ```
-📦Anime Streaming Concept
+📦Anime Info Platform
  ┣ 📂Documentation
  ┃ ┗ 📜EN.md
  ┣ 📂fonts
