@@ -11,7 +11,7 @@ You can contribute to this project in any shape or form! or tackle any of the [i
 ### folder Structure
 
 ```
-📦Anime Streaming Concept
+📦Anime info Platform
  ┣ 📂fonts
  ┣ 📂images
  ┣ 📂javascript
