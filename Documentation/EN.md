@@ -16,7 +16,7 @@ It also gets revised when major updates are made.
 <hr>
 
 ```
-📦Anime Info Platform
+📦Anime-Info-Platform
  ┣ 📂Documentation
  ┃ ┗ 📜EN.md
  ┣ 📂fonts
@@ -32,27 +32,27 @@ It also gets revised when major updates are made.
  ┗ 📜style.css
 ```
 
-> The **Documentation** folder holds an EN . md documentation file(this file you're viewing), with the posibility that documentations in other languages could later be added. 
+> The [**Documentation**](https://github.com/Mini-Sylar/Anime-Info-Platform/tree/master/Documentation) folder holds an [**EN.md**](https://github.com/Mini-Sylar/Anime-Info-Platform/blob/master/Documentation/EN.md) documentation file(this file you're viewing), with the posibility that documentations in other languages could later be added. 
 
 
-> The **fonts** folder contains Dexapro ttf font file as part of the styling.
+> The [**fonts**](https://github.com/Mini-Sylar/Anime-Info-Platform/tree/master/fonts) folder contains Dexapro ttf font file as part of the styling.
 
 
-> The **images** folder contains images(yeah). There is a 404 image used when the call to the API doesn't return the anime's banner image. A doodle image for the about and contact page. The webpage's icon. The preloading images before a show is selected (for mobile devices and desktop).
+> The [**images**](https://github.com/Mini-Sylar/Anime-Info-Platform/tree/master/images) folder contains images(yeah). There is a 404 image used when the call to the API doesn't return the anime's banner image. A doodle image for the about and contact page. The webpage's icon. The preloading images before a show is selected (for mobile devices and desktop).
 
->The **javascript** folder contains an index.js file, concerned with logic and the fetch from Anilist's API.
+>The [**javascript**](https://github.com/Mini-Sylar/Anime-Info-Platform/tree/master/javascript) folder contains an index.js file, concerned with logic and the fetch from Anilist's API.
 
->The **styles** folder contains a style-contact.css file used in the about and contact pages.
+>The [**styles**](https://github.com/Mini-Sylar/Anime-Info-Platform/tree/master/styles) folder contains a style-contact.css file used in the about and contact pages.
 
-> The **about.html** page gives a gist on the aim of the project and its features.
+> The [**about.html**](https://github.com/Mini-Sylar/Anime-Info-Platform/blob/master/about.html) page gives a gist on the aim of the project and its features.
 
-> The **contact.html** page, lets user reach back to the DEV.
+> The [**contact.html**](https://github.com/Mini-Sylar/Anime-Info-Platform/blob/master/contact.html) page, lets user reach back to the DEV.
 
-> The **index.html** page is the root/main page of the application.
+> The [**index.html**](https://github.com/Mini-Sylar/Anime-Info-Platform/blob/master/index.html) page is the root/main page of the application.
 
-> The **README . md** file gives a quick overview of the project.
+> The [**README.md**](https://github.com/Mini-Sylar/Anime-Info-Platform/blob/master/README.md) file gives a quick overview of the project.
 
-> The **style.css** is the stylesheet used in the index . html file.
+> The [**style.css**](https://github.com/Mini-Sylar/Anime-Info-Platform/blob/master/style.css) is the stylesheet used in the index . html file.
 
 
 <br />
