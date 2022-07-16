@@ -12,7 +12,7 @@ body {
   background: linear-gradient(-45deg, #000000d2, #191b1ade),
     url("../images/doodleBG.jpg");
   background-size: cover;
-  height: 100%;
+  min-height: 100vh;
   color: white;
   background-repeat: no-repeat;
   background-blend-mode: darken;
@@ -65,7 +65,7 @@ h1 {
   border: 2px solid white;
   border-radius: 2%;
   padding: 1rem;
-  height: 90%;
+  height: 100%;
   backdrop-filter: blur(30px);
 }
 
