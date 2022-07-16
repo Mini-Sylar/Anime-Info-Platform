@@ -3,7 +3,6 @@
   src: url(../fonts/DexaPro-Regular.ttf);
 }
 
-
 body {
   font-family: DexaPro-Regular;
   font-size: medium;
@@ -102,7 +101,7 @@ p {
   margin: 0 auto;
   width: 60%;
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 0.4rem;
   font-weight: bold;
 }
 
@@ -148,8 +147,7 @@ p > a {
 }
 
 .about,
-h2,
-.third {
+h2 {
   display: flex;
   justify-content: center;
   margin-bottom: 0;
@@ -282,6 +280,7 @@ li {
   }
 
   .supported {
+    margin: 0;
     margin-bottom: 0;
   }
 
@@ -289,6 +288,7 @@ li {
     margin-top: 0;
   }
   .third {
+    margin: 0;
     flex-direction: column;
   }
 
