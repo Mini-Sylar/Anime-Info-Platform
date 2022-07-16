@@ -217,7 +217,7 @@ li {
   }
   .main-body-container {
     margin: 0 auto;
-    padding: 0.5rem;
+    padding-inline: 1rem;
     width: 85%;
   }
   .contact-heading-container {
