@@ -2,20 +2,19 @@
   font-family: DexaPro-Regular;
   src: url(../fonts/DexaPro-Regular.ttf);
 }
+
+
 body {
   font-family: DexaPro-Regular;
   font-size: medium;
-  margin: 0;
-  padding: 0;
-}
-body {
   background: linear-gradient(-45deg, #000000d2, #191b1ade),
     url("../images/doodleBG.jpg");
   background-size: cover;
-  min-height: 100vh;
-  color: white;
   background-repeat: no-repeat;
-  background-blend-mode: darken;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  color: white;
   animation: sub-fadein 0.3s ease-in;
   /* overflow: hidden; */
 }
@@ -101,7 +100,7 @@ h1 {
 
 p {
   margin: 0 auto;
-  width: 40%;
+  width: 60%;
   text-align: center;
   margin-bottom: 1rem;
   font-weight: bold;
@@ -159,7 +158,7 @@ h2,
 .about-body {
   font-weight: normal;
   text-align: left;
-  width: 40%;
+  min-width: 60%;
   margin: 0 auto;
 }
 
@@ -168,10 +167,10 @@ ul {
   flex-direction: column;
   justify-content: center;
   margin: 0 auto;
-  width: 40%;
+  width: 60%;
 }
 li {
-  margin-block: 0.8rem;
+  margin-block: 0.5rem;
   margin-top: 0;
 }
 
