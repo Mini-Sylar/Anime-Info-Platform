@@ -1,5 +1,10 @@
+@font-face {
+  font-family: DexaPro-Regular;
+  src: url(../fonts/DexaPro-Regular.ttf);
+}
 body {
-  font-family: sans-serif;
+  font-family: DexaPro-Regular;
+  font-size: medium;
   margin: 0;
   padding: 0;
 }
@@ -7,7 +12,7 @@ body {
   background: linear-gradient(-45deg, #000000d2, #191b1ade),
     url("../images/doodleBG.jpg");
   background-size: cover;
-  height: 100vh;
+  height: 100%;
   color: white;
   background-repeat: no-repeat;
   background-blend-mode: darken;
@@ -18,7 +23,7 @@ body {
 .mainpage {
   display: flex;
   flex-direction: column;
-   overflow: hidden;
+  overflow: hidden;
 }
 
 label {
@@ -114,7 +119,7 @@ p {
   display: flex;
   width: 10%;
   padding-inline-start: 3rem;
-   display: none;
+  display: none;
 }
 
 .links-desktop {
@@ -130,7 +135,7 @@ a {
   text-decoration: none;
   color: silver;
 }
-p>a{
+p > a {
   color: darkorange;
 }
 .contact-heading-container {
@@ -275,18 +280,18 @@ li {
     font-size: 1.5rem;
   }
 
-  .supported{
+  .supported {
     margin-bottom: 0;
   }
 
-  .about{
+  .about {
     margin-top: 0;
   }
-  .third{
+  .third {
     flex-direction: column;
   }
 
-  .logo{
+  .logo {
     top: 3.5%;
   }
 }
