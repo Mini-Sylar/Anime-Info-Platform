@@ -191,7 +191,7 @@ p {
   min-width: 0;
   cursor: grab;
   padding: 1rem;
-  scroll-behavior: smooth;
+  /* scroll-behavior: smooth; */
 }
 
 .cards {
@@ -416,8 +416,6 @@ p {
   /* background-color: springgreen; */
   margin-bottom: 0;
 }
-
-
 /* Carousel */
 .arrow-left,
 .arrow-right {
