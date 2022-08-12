@@ -1,4 +1,4 @@
-body {
+body,html {
   margin: 0;
   padding: 0;
   overflow: hidden;
@@ -13,20 +13,25 @@ a {
   width: 100vw;
   height: 100vh;
   background: linear-gradient(-45deg, #000000d2, #191b1a7e),
-    url("../images/notFound_404.png");
+    url("../images/doodleBG.jpg");
   background-color: rgb(2, 49, 25);
   background-repeat: no-repeat;
   background-position: center;
+  background-size: cover;
 }
 
 .extra-desktop {
   width: 100%;
-  height: 100vh;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   gap: 1rem;
+  background: linear-gradient(-45deg, #000000d2, #191b1a7e),
+    url("../images/notFound_404.png");
+  background-repeat: no-repeat;
+  background-position: center;
   /* padding-top: 4rem; */
 }
 
@@ -39,10 +44,16 @@ p {
 }
 
 .error-message-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
   border: 1px solid transparent;
   border-radius: 1rem;
   backdrop-filter: blur(2px);
   padding: 10rem;
+  transition: backdrop-filter 0.6s ease;
 }
 
 ul {
@@ -71,5 +82,22 @@ ul {
 
 .error-message-container:hover {
   backdrop-filter: blur(20px);
-  transition: all 1s ease;
+  transition: all 1s ease-in-out;
+}
+
+@media screen and (max-width: 425px) {
+  *{
+    font-size: small;
+  }
+  
+    .error-message-container {
+    width: 100%;
+    padding: 0;
+    padding-block: 1rem;
+    margin: 0;
+    overflow: hidden;
+  }
+  .error-message {
+    text-align: center;
+  }
 }
