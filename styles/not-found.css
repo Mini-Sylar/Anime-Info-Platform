@@ -89,6 +89,12 @@ ul {
   *{
     font-size: small;
   }
+
+  ul{
+    width: 100%;
+    margin: 0 auto;
+  }
+
   
     .error-message-container {
     width: 100%;
