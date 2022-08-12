@@ -1,0 +1,75 @@
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: darkorange;
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(-45deg, #000000d2, #191b1a7e),
+    url("../images/notFound_404.png");
+  background-color: rgb(2, 49, 25);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.extra-desktop {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+  /* padding-top: 4rem; */
+}
+
+p {
+  color: rgb(228, 227, 227);
+}
+
+.error-message {
+  font-size: larger;
+}
+
+.error-message-container {
+  border: 1px solid transparent;
+  border-radius: 1rem;
+  backdrop-filter: blur(2px);
+  padding: 10rem;
+}
+
+ul {
+  margin: 0;
+  color: #fff;
+}
+
+/* Search Bar End */
+.go-home {
+  color: white;
+  background-color: #0195ff;
+  border: none;
+  padding: 1rem;
+  padding-inline: 2rem;
+  border-radius: 5%;
+}
+
+.go-home:hover {
+  cursor: pointer;
+  transition: all 0.3s ease-in;
+  filter: drop-shadow(0 0 0.55rem #0195ff);
+  transform: scale(1.05) rotate(-1deg);
+  backdrop-filter: blur(10px);
+  transition: all 0.2s ease;
+}
+
+.error-message-container:hover {
+  backdrop-filter: blur(20px);
+  transition: all 1s ease;
+}
