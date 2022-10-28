@@ -65,8 +65,8 @@ const anime_genres = [
   "Romance",
 ];
 
-function random_Gen() {
-  return anime_genres[Math.floor(Math.random() * anime_genres.length)];
+function random_Gen(items) {
+  return items[(items.length * Math.random()) | 0];
 }
 
 // Get Useful Values Here
@@ -570,7 +570,8 @@ form.addEventListener("submit", function (e) {
 //    Onclick Replace every card based on a random genre
 surprise.addEventListener("click", function () {
   // !!!!!!Found bug source (calling random genre keeps bugging)
-  // console.log(random_Gen());
+  // let randomElement = random_Gen(anime_genres);
+  // console.log(randomElement);
   callCard("Action");
 });
 
