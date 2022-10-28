@@ -276,7 +276,9 @@ function replaceCards(data) {
         background-repeat: no-repeat;
         background-size: cover;
         box-shadow: 1px 1px 2px 2px ${get_Color};
-         transition: all 1s ease;
+        border-radius: 25px;
+        transition: all 1s ease;
+         
         `;
     });
     currentElement.addEventListener("mouseleave", function () {
@@ -286,6 +288,7 @@ function replaceCards(data) {
         background-repeat: no-repeat;
         background-size: cover;
         transition: all 1s ease;
+        border-radius: 25px;
           box-shadow: none;
         `;
     });
