@@ -200,7 +200,7 @@ p {
   justify-content: center;
   margin: 0.5rem;
   margin-inline: 0.2rem;
-  font-size: small;
+  font-size: medium;
   text-align: center;
   cursor: pointer;
   animation: sub-fadein 1.5s ease-in;
@@ -240,7 +240,7 @@ p {
 }
 
 .style-1::-webkit-scrollbar-thumb {
-  border-radius: 2px;
+  border-radius: 5px;
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   background-color: #acabab;
