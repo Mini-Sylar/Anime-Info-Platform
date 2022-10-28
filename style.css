@@ -196,7 +196,7 @@ p {
   height: 200px;
   width: 150px;
   border: 2px solid rgba(0, 0, 0, 0.301);
-  border-radius: 5%;
+  border-radius: 25px;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -227,7 +227,7 @@ function Replace(data) {
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowfullscreen
                   class="trailer-content"
-                  style ="border:2px solid ${get_Color}"
+                  style ="border:2px solid ${get_Color};border-radius:25px;"
                 ></iframe>
       
       `);
@@ -266,7 +266,7 @@ function replaceCards(data) {
         background-size: cover;
         box-shadow: none;
         border: 2px solid rgba(0, 0, 0, 0.301);
-        border-radius: 5%;
+        border-radius: 25px;
         overflow: hidden;
       `;
     // Mouse Enter to Mouseleave creates the hover effect when mouses passes on a card
