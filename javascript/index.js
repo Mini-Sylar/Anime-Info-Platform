@@ -151,7 +151,7 @@ function Replace(data) {
   col_elements[1].addEventListener("mouseleave", function () {
     col_elements[1].style.setProperty(
       "-webkit-filter",
-      `drop-shadow(0 0 0 ${get_Color})`
+      `drop-shadow(0 0 .04rem ${get_Color})`
     );
   });
   //   Change Surprise me Color
@@ -164,7 +164,7 @@ function Replace(data) {
   col_elements[12].addEventListener("mouseleave", function () {
     col_elements[12].style.setProperty(
       "-webkit-filter",
-      `drop-shadow(0 0 0 ${setOpacity(get_Color, 0.7)})`
+      `drop-shadow(0 0 0.05rem ${setOpacity(get_Color, 0.7)})`
     );
   });
 
