@@ -489,20 +489,20 @@ function getSupplement(genre = "Action") {
 }
 
 function isMainPage() {
-    return window.location.search === "";
+  return window.location.search === "";
 }
 
 function getSetId(data) {
-    if(data.data.Page.media.length === 0) {
-        if(isMainPage()) {
-            return 140960;
-        } else {
-            window.location.replace("/not-found.html");
-            return;
-        }
+  if (data.data.Page.media.length === 0) {
+    if (isMainPage()) {
+      return 140960;
     } else {
-        return data.data.Page.media[0].id;
+      window.location.replace("/not-found.html");
+      return;
     }
+  } else {
+    return data.data.Page.media[0].id;
+  }
 }
 
 // ============== Search Section =====================
@@ -582,11 +582,20 @@ ham.addEventListener("click", () => {
 });
 
 left_arrow.addEventListener("click", function () {
-  anime_container.scrollBy(-400, 0);
+  // anime_container.scrollBy(-400, 0);
+  anime_container.scrollBy({
+    left: -400,
+    top: 0,
+    behavior: "smooth",
+  })
 });
 
 right_arrow.addEventListener("click", function () {
-  anime_container.scrollBy(400, 0);
+  anime_container.scrollBy({
+    left: 400,
+    top: 0,
+    behavior: "smooth",
+  });
 });
 
 //    Onclick Replace main body of selected card
