@@ -47,6 +47,7 @@ const anime_container = document.querySelector(".anime-cards");
 const share_info = document.querySelector(".share-info");
 const trailer_container = document.querySelector(".trailer-container");
 const main_video_container = document.querySelector(".main-video-container");
+const stars = document.querySelectorAll(".fa-star");
 
 // Anime Genre
 const anime_genres = [
@@ -231,6 +232,10 @@ function Replace(data) {
                 ></iframe>
       
       `);
+  // Stars colors
+  stars.forEach((element) => {
+    element.style.color = get_Color;
+  });
 }
 
 //================== Cards copied from here
