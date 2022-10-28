@@ -26,6 +26,7 @@ const setOpacity = (hex, alpha) =>
 // Get Elements here
 const title = document.querySelector(".anime-title");
 const description = document.querySelector(".anime-synopsis");
+const style1 = document.querySelectorAll(".style-1");
 const release_year = document.querySelector(".year");
 const genre = document.querySelector(".genre");
 const episode_count = document.querySelector(".episode-count");
@@ -135,7 +136,9 @@ function Replace(data) {
     shadeColor(get_Color, -60),
     0.7
   );
+  // Set Scroll bar color here
 
+  style1[1].style.setProperty("--BG", get_Color);
   col_elements[0].style.backgroundColor = get_Color;
   col_elements[1].style.backgroundColor = get_Color;
   col_elements[12].style.backgroundColor = get_Color;
@@ -587,7 +590,7 @@ left_arrow.addEventListener("click", function () {
     left: -400,
     top: 0,
     behavior: "smooth",
-  })
+  });
 });
 
 right_arrow.addEventListener("click", function () {
