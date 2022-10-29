@@ -56,14 +56,14 @@ Moved into [contributions](CONTRIBUTION.md)
 ### Desktop
 
 <div>
-<img src = "screenshots\Web capture_7-5-2022_19378_127.0.0.1.jpeg" alt="Desktop Screenshot 1 Spy x Family" width="60%">
-<img src = "screenshots\Web capture_7-5-2022_19337_127.0.0.1.jpeg" alt="Desktop Screenshot 1 Spy x Family" width="60%">
-<img src = "screenshots\Web capture_28-10-2022_222149_127.0.0.1.jpeg" alt="Desktop Screenshot 1 Spy x Family" width="60%">
+<img src = "screenshots\Web capture_28-10-2022_222149_127.0.0.1.jpeg" alt="Desktop Screenshot 1 Chainsaw Man" width="60%">
+<img src = "screenshots\Web capture_28-10-2022_223157_anime-info-platform.vercel.app.jpeg" alt="Desktop Screenshot 2 Bluelock" width="60%">
+<img src = "screenshots\Web capture_28-10-2022_223224_anime-info-platform.vercel.app.jpeg" alt="Desktop Screenshot 3 Mob Psycho Season 3" width="60%">
 </div>
 
 ### Mobile
 
 <div>
-<img src = "screenshots\20220507_194135.jpg" alt="Desktop Screenshot 1 Spy x Family" width="60%">
+<img src = "screenshots\20220507_194135.jpg" alt="Mobile Screenshot 1" width="60%">
 
 </div>
