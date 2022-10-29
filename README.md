@@ -12,6 +12,7 @@ Official repository of the Anime Info Platform
 ## Table of Content
 
 - [Anime-Info-Platform](#anime-info-platform)
+  - [Table of Content](#table-of-content)
   - [Overview](#overview)
   - [Link](#link)
   - [Built With](#built-with)
@@ -21,17 +22,14 @@ Official repository of the Anime Info Platform
     - [Desktop](#desktop)
     - [Mobile](#mobile)
 
-
 ## Overview
 
 The Anime Information Platform is an easy to use web application for finding information on anime shows<br/>
 using data from the [AniList](https://anilist.co/) API.
 
-
 ## Link
 
 [The Anime Information Platform](https://anime-info-platform.vercel.app/)
-
 
 ## Built With
 
@@ -43,17 +41,15 @@ The Anime Information Platform is built completely with
 
 The javascript here is responsible for fetching data from the AniList API written in GraphQl as well as updating the page with the data fetched. View [index.js](https://github.com/Mini-Sylar/Anime-Info-Platform/blob/master/javascript/index.js) for more information
 
-
-
 ## Contribution
 
 Moved into [contributions](CONTRIBUTION.md)
 
 ## Contributors
+
 <a href="https://github.com/Mini-Sylar/Anime-Info-Platform/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=Mini-Sylar/Anime-Info-Platform" />
 </a>
-
 
 ## Screenshots
 
@@ -62,7 +58,7 @@ Moved into [contributions](CONTRIBUTION.md)
 <div>
 <img src = "screenshots\Web capture_7-5-2022_19378_127.0.0.1.jpeg" alt="Desktop Screenshot 1 Spy x Family" width="60%">
 <img src = "screenshots\Web capture_7-5-2022_19337_127.0.0.1.jpeg" alt="Desktop Screenshot 1 Spy x Family" width="60%">
-<img src = "screenshots\Web capture_7-5-2022_193843_127.0.0.1.jpeg" alt="Desktop Screenshot 1 Spy x Family" width="60%">
+<img src = "screenshots\Web capture_28-10-2022_222149_127.0.0.1.jpeg" alt="Desktop Screenshot 1 Spy x Family" width="60%">
 </div>
 
 ### Mobile
