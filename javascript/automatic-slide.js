@@ -20,7 +20,7 @@ anime_container.addEventListener("mouseover", () => {
   clearInterval(scroller);
 });
 
-["ontouchstart", "ontouchmove"].forEach((event) => {
+["touchstart"].forEach((event) => {
   anime_container.addEventListener(event, () => {
     clearInterval(scroller);
   });
