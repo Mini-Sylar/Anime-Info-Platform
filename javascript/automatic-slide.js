@@ -1,26 +1,43 @@
-// Select anime-container
-const animeContainer = document.querySelector(".anime-container");
+let scroller = setInterval(() => {
+  anime_container.scrollBy({
+    left: 300,
+    top: 0,
+    behavior: "smooth",
+  });
+  if (
+    anime_container.scrollLeft + anime_container.clientWidth >=
+    anime_container.scrollWidth
+  ) {
+    anime_container.scrollTo({
+      left: 0,
+      top: 0,
+      behavior: "smooth",
+    });
+  }
+}, 5000);
 
-// After every 5 seconds scroll in anime-container if at the end scroll to beginning
+anime_container.addEventListener("mouseover", () => {
+  clearInterval(scroller);
+  console.log("removed autoscroll");
+});
 
-const checkState = false;
-
-if (checkState == false) {
-  setInterval(() => {
-    animeContainer.scrollBy({
+anime_container.addEventListener("mouseleave", () => {
+  scroller = setInterval(() => {
+    anime_container.scrollBy({
       left: 300,
       top: 0,
       behavior: "smooth",
     });
     if (
-      animeContainer.scrollLeft + animeContainer.clientWidth >=
-      animeContainer.scrollWidth
+      anime_container.scrollLeft + anime_container.clientWidth >=
+      anime_container.scrollWidth
     ) {
-      animeContainer.scrollTo({
+      anime_container.scrollTo({
         left: 0,
         top: 0,
         behavior: "smooth",
       });
     }
   }, 5000);
-}
+  console.log("Autoscroller back");
+});
