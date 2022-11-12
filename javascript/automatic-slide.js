@@ -18,7 +18,6 @@ let scroller = setInterval(() => {
 
 anime_container.addEventListener("mouseover", () => {
   clearInterval(scroller);
-  console.log("removed autoscroll");
 });
 
 anime_container.addEventListener("mouseleave", () => {
@@ -39,5 +38,4 @@ anime_container.addEventListener("mouseleave", () => {
       });
     }
   }, 5000);
-  console.log("Autoscroller back");
 });
