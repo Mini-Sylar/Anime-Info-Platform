@@ -31,12 +31,16 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 10%;
+    position: relative;
 }
 
 span {
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
+    position: relative;
+    left: -2rem;
 }
 
 p {
@@ -50,5 +54,7 @@ p {
     justify-content: flex-start;
     align-items: flex-start;
     width: fit-content;
+    position: relative;
+    left: -25px;
 }
 </style>

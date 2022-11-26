@@ -8,7 +8,7 @@ import SearchboxVue from "./componentsNavBar/Searchbox.vue";
         <nav class="navigation-bar is-a-container">
             <div class="main-links">
                 <a href="http://" target="_blank" rel="noopener noreferrer">Current Season</a>
-                <RouterLink to="/">Home</RouterLink>
+                <RouterLink to="/" v-if="$route.path !== '/'">Home</RouterLink>
                 <RouterLink to="/about">About</RouterLink>
                 <RouterLink to="/about">Contact</RouterLink>
             </div>

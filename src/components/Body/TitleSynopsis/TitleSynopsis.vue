@@ -25,6 +25,11 @@ World peace is now in the hands of this brand-new family as they embark on an ad
 .anime-synposis {
     height: 30vh;
     overflow-y: scroll;
-    margin-block: 1rem;
+    margin-block: 1.5rem;
+}
+
+.anime-title {
+    font-family: DexaPro-Bold;
+    font-size: clamp(2rem, 3vw, 3.5rem);
 }
 </style>

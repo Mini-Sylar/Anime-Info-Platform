@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="is-a-container body-container">
         <TitleSynopsis />
         <AnimeData />
         <Rating />
@@ -12,6 +12,8 @@ import AnimeData from './AnimeData/AnimeData.vue';
 import Rating from './Rating/Rating.vue'
 </script>
 
-<style>
-
+<style scoped>
+.body-container {
+    padding: 1.5rem;
+}
 </style>

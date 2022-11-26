@@ -10,7 +10,7 @@ export default {
     data() {
         return {
             year: 2021,
-            genre: "Action",
+            genre: "Action / Comedy / Slice of Life / Supernatural",
             episodes: 12,
         };
     },
@@ -18,6 +18,6 @@ export default {
 </script>
 <style scoped>
 div p {
-    font-size: clamp(.5rem, .8vw, 1rem);
+    font-size: clamp(.7rem, .9vw, 2rem);
 }
 </style>
