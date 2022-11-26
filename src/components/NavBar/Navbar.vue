@@ -31,7 +31,7 @@ import SearchboxVue from "./componentsNavBar/Searchbox.vue";
     width: 100%;
     display: flex;
     justify-content: flex-start;
-    gap: min(12rem, 16rem);
+    gap: min(5rem, 10rem);
     padding-left: .5rem;
 }
 </style>
