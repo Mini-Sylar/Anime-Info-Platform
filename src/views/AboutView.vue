@@ -5,5 +5,7 @@
 </template>
 
 <style>
+.about {
 
+}
 </style>
