@@ -32,8 +32,10 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 10%;
     position: relative;
+    padding: 0;
+    /* margin-block: -2rem; */
+    max-height: 3.5rem;
 }
 
 span {
@@ -61,5 +63,6 @@ p {
     position: relative;
     left: -25px;
     top: 1px;
+    /* background-color: red; */
 }
 </style>

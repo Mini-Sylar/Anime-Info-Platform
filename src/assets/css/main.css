@@ -2,6 +2,9 @@
 
 main {
   display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  overflow: hidden;
 }
 
 .left-side-main {
@@ -14,7 +17,7 @@ main {
 }
 .right-side-main {
   /* background-color: darkred; */
-  width: 100%;
+  width: 80%;
   flex-direction: column;
   justify-content: flex-end;
   align-items: flex-end;

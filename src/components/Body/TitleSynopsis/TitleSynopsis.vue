@@ -8,7 +8,8 @@
 export default {
     data() {
         return {
-            animeTitle: "Anime Title",
+            animeTitle: `Maou Gakuin no Futekigousha: Shijou Saikyou no Maou no Shiso, Tensei shite Shison-tachi no Gakkou e Kayou
+`,
             synopsis: `Everyone has a part of themselves they cannot show to anyone else.
 
 At a time when all nations of the world were involved in a fierce war of information happening behind closed doors, Ostania and Westalis had been in a state of cold war against one another for decades. The Westalis Intelligence Services' Eastern-Focused Division (WISE) sends their most talented spy, "Twilight," on a top-secret mission to investigate the movements of Donovan Desmond, the chairman of Ostania's National Unity Party, who is threatening peace efforts between the two nations.
@@ -23,13 +24,15 @@ World peace is now in the hands of this brand-new family as they embark on an ad
 </script>
 <style>
 .anime-synposis {
-    height: 30vh;
+    height: 20vh;
     overflow-y: scroll;
     margin-block: 1.5rem;
+    font-size: clamp(.5rem, .8rem, 1.1rem);
 }
 
 .anime-title {
     font-family: DexaPro-Bold;
-    font-size: clamp(2rem, 3vw, 3.5rem);
+    font-size: clamp(1.5rem, 3vw, 3.5rem);
+    line-height: 3rem;
 }
 </style>
