@@ -1,18 +1,20 @@
 <script setup>
-import NavbarVue from "./components/Navbar.vue";
+import NavbarVue from "./components/NavBar/Navbar.vue";
+import BodyVue from "./components/Body/Body.vue";
 import { RouterLink, RouterView } from "vue-router";
 </script>
 
 <template>
   <header>
     <NavbarVue />
-    <!-- <div class="wrapper">
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div> -->
   </header>
+  <main>
+    <div class="left-side-main">
+      <BodyVue />
+    </div>
+    <div class="right-side-main"></div>
+
+  </main>
   <RouterView />
 </template>
 
