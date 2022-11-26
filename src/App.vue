@@ -8,13 +8,6 @@ import { RouterLink, RouterView } from "vue-router";
   <header>
     <NavbarVue />
   </header>
-  <main>
-    <div class="left-side-main">
-      <BodyVue />
-    </div>
-    <div class="right-side-main"></div>
-
-  </main>
   <RouterView />
 </template>
 

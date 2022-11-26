@@ -17,7 +17,6 @@ import SearchboxVue from "./componentsNavBar/Searchbox.vue";
             </div>
         </nav>
     </header>
-    <RouterView />
 </template>
 
 <style scoped>
