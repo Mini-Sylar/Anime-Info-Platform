@@ -46,7 +46,7 @@ export default {
 }
 
 .input-search::placeholder {
-  color: rgba(255, 255, 255, 0.5);
+  color: #ffffff80;
   font-size: 16px;
   font-weight: 100;
 }
@@ -71,7 +71,7 @@ export default {
   width: 200px;
   border-radius: 0px;
   background-color: transparent !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  border-bottom: 1px solid #ffffff80;
   transition: all 500ms cubic-bezier(0, 0.11, 0.35, 2);
 }
 
@@ -79,7 +79,7 @@ export default {
   width: 200px;
   border-radius: 0px;
   background-color: transparent !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  border-bottom: 1px solid #ffffff80;
   transition: all 500ms cubic-bezier(0, 0.11, 0.35, 2);
 }
 </style>

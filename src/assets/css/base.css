@@ -1,6 +1,6 @@
 ::root {
   --default-background-color: #0195ff;
-  --default-text-color: silver;
+  --default-text-color: #c0c0c0;
 }
 /* import font file from assets fonts */
 @font-face {
@@ -19,14 +19,20 @@
   margin: 0;
   padding: 0;
   font-family: "DexaPro-Regular";
-  color: var(--default-text-color);
 }
 
 a {
   text-decoration: none;
 }
+a:visited {
+  color: --default-color;
+}
 
 .is-a-container {
   width: min(100%, 1200px);
   margin: 0 auto;
+}
+
+body {
+  background-color: #090909;
 }

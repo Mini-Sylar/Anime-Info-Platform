@@ -8,7 +8,7 @@ import SearchboxVue from "./componentsNavBar/Searchbox.vue";
         <nav class="navigation-bar is-a-container">
             <div class="main-links">
                 <a href="http://" target="_blank" rel="noopener noreferrer">Current Season</a>
-                <!-- <RouterLink to="/">Home</RouterLink> -->
+                <RouterLink to="/">Home</RouterLink>
                 <RouterLink to="/about">About</RouterLink>
                 <RouterLink to="/about">Contact</RouterLink>
             </div>
@@ -23,12 +23,13 @@ import SearchboxVue from "./componentsNavBar/Searchbox.vue";
 <style scoped>
 .navigation-bar {
     display: flex;
+    padding: 1rem;
 }
 
 .main-links {
     width: 100%;
     display: flex;
     justify-content: flex-start;
-    gap: min(14rem, 16rem);
+    gap: min(12rem, 16rem);
 }
 </style>
