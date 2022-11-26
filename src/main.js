@@ -14,6 +14,7 @@ import { fab } from "@fortawesome/free-brands-svg-icons";
 // Add to library
 library.add(fas, far, fab);
 
+// Import Star Rating
 const app = createApp(App);
 
 app.use(router);
