@@ -5,7 +5,7 @@ import SearchboxVue from "./componentsNavBar/Searchbox.vue";
 
 <template>
     <header>
-        <nav class="navigation-bar is-a-container">
+        <nav class="navigation-bar">
             <div class="main-links">
                 <a href="http://" target="_blank" rel="noopener noreferrer">Current Season</a>
                 <RouterLink to="/" v-if="$route.path !== '/'">Home</RouterLink>
@@ -24,6 +24,7 @@ import SearchboxVue from "./componentsNavBar/Searchbox.vue";
 .navigation-bar {
     display: flex;
     padding: 1rem;
+    width: min(90%, 1200px);
 }
 
 .main-links {
@@ -31,5 +32,6 @@ import SearchboxVue from "./componentsNavBar/Searchbox.vue";
     display: flex;
     justify-content: flex-start;
     gap: min(12rem, 16rem);
+    padding-left: .5rem;
 }
 </style>
