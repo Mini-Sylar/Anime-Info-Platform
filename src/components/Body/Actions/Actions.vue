@@ -1,13 +1,40 @@
 <template >
     <div>
-        
+        <div class="actions-container">
+            <div class="share">
+                <button type="button">
+                    <font-awesome-icon icon="fa-solid fa-share-nodes" />
+                </button>
+
+            </div>
+        </div>
     </div>
 </template>
 <script>
 export default {
-    
+
 }
 </script>
-<style>
-    
+<style scoped>
+button {
+    color: #0195ff;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover * {
+    color: #047bd0;
+    cursor: pointer;
+}
+
+button * {
+    /* padding: .2rem; */
+    font-size: clamp(1rem, 1.5rem, 2rem);
+    padding: 5px;
+}
+
+.actions-container {
+    display: grid;
+}
 </style>
