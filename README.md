@@ -1,69 +1,35 @@
-![GitHub deployments](https://img.shields.io/github/deployments/Mini-Sylar/Anime-Info-Platform/production?label=Vercel-Deployment)
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/Mini-Sylar/Anime-Info-Platform)
-[![GitHub license](https://img.shields.io/github/license/Mini-Sylar/Anime-Info-Platform)](https://github.com/Mini-Sylar/Anime-Info-Platform)
-![GitHub contributors](https://img.shields.io/github/contributors/Mini-Sylar/Anime-Info-Platform?color=brown&style=plastic)
+# anime-info-platform-vue
 
-# Anime-Info-Platform
+This template should help get you started developing with Vue 3 in Vite.
 
-Official repository of the Anime Info Platform
+## Recommended IDE Setup
 
-<hr>
+[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
 
-## Table of Content
+## Customize configuration
 
-- [Anime-Info-Platform](#anime-info-platform)
-  - [Table of Content](#table-of-content)
-  - [Overview](#overview)
-  - [Link](#link)
-  - [Built With](#built-with)
-  - [Contribution](#contribution)
-  - [Contributors](#contributors)
-  - [Screenshots](#screenshots)
-    - [Desktop](#desktop)
-    - [Mobile](#mobile)
+See [Vite Configuration Reference](https://vitejs.dev/config/).
 
-## Overview
+## Project Setup
 
-The Anime Information Platform is an easy to use web application for finding information on anime shows<br/>
-using data from the [AniList](https://anilist.co/) API.
+```sh
+npm install
+```
 
-## Link
+### Compile and Hot-Reload for Development
 
-[The Anime Information Platform](https://anime-info-platform.vercel.app/)
+```sh
+npm run dev
+```
 
-## Built With
+### Compile and Minify for Production
 
-The Anime Information Platform is built completely with
+```sh
+npm run build
+```
 
-- HTML
-- CSS
-- Vanilla Javascript
+### Lint with [ESLint](https://eslint.org/)
 
-The javascript here is responsible for fetching data from the AniList API written in GraphQl as well as updating the page with the data fetched. View [index.js](https://github.com/Mini-Sylar/Anime-Info-Platform/blob/master/javascript/index.js) for more information
-
-## Contribution
-
-Moved into [contributions](CONTRIBUTION.md)
-
-## Contributors
-
-<a href="https://github.com/Mini-Sylar/Anime-Info-Platform/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=Mini-Sylar/Anime-Info-Platform" />
-</a>
-
-## Screenshots
-
-### Desktop
-
-<div>
-<img src = "screenshots\Web capture_28-10-2022_222149_127.0.0.1.jpeg" alt="Desktop Screenshot 1 Chainsaw Man" width="60%">
-<img src = "screenshots\Web capture_28-10-2022_223157_anime-info-platform.vercel.app.jpeg" alt="Desktop Screenshot 2 Bluelock" width="60%">
-<img src = "screenshots\Web capture_28-10-2022_223224_anime-info-platform.vercel.app.jpeg" alt="Desktop Screenshot 3 Mob Psycho Season 3" width="60%">
-</div>
-
-### Mobile
-
-<div>
-<img src = "screenshots\20220507_194135.jpg" alt="Mobile Screenshot 1" width="60%">
-
-</div>
+```sh
+npm run lint
+```

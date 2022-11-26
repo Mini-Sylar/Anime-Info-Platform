@@ -1,0 +1,32 @@
+::root {
+  --default-background-color: #0195ff;
+  --default-text-color: silver;
+}
+/* import font file from assets fonts */
+@font-face {
+  font-family: DexaPro-Regular;
+  src: url("../fonts/DexaPro-Regular.ttf");
+}
+@font-face {
+  font-family: DexaPro-Bold;
+  src: url("../fonts/DexaPro-Bold.ttf");
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "DexaPro-Regular";
+  color: var(--default-text-color);
+}
+
+a {
+  text-decoration: none;
+}
+
+.is-a-container {
+  width: min(100%, 1200px);
+  margin: 0 auto;
+}
