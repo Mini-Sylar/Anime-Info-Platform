@@ -4,7 +4,8 @@
             :showControl="false" :starColor="'#0195ff'" :starSize="14" :disableClick="true" />
         <span>
             <p>
-                {{ rating }}/10
+            <div class="main-value"></div>{{ rating }}
+            <div class="over-ten"> /10</div>
             </p>
         </span>
     </div>
@@ -15,7 +16,7 @@ import vue3starRatings from "vue3-star-ratings";
 export default {
     data() {
         return {
-            rating: 10,
+            rating: 8.5,
             color: "#0195ff"
         }
     },
@@ -44,6 +45,9 @@ span {
 }
 
 p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-size: 14px;
     font-weight: 500;
 }
@@ -51,10 +55,11 @@ p {
 .vue3-star-ratings__wrapper {
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
-    align-items: flex-start;
+    justify-content: center;
+    align-items: center;
     width: fit-content;
     position: relative;
     left: -25px;
+    top: 1px;
 }
 </style>
