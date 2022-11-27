@@ -42,6 +42,11 @@ export const useAnimeData = defineStore("animeData", {
         : null;
       return trailer;
     },
+    getRecommendations: (state) => {
+      const recommendations = state.animeData.data.Media.recommendations.nodes;
+      console.log(state.animeData.data.Media.recommendations.nodes);
+      return recommendations;
+    },
   },
   actions: {
     async fetchAnimeData(searchQuery) {
@@ -53,7 +58,7 @@ export const useAnimeData = defineStore("animeData", {
       // Main Data Here
       let main_data = await response.json();
       this.animeData = main_data;
-    //   Set to local storage to save search query after refresh
+      //   Set to local storage to save search query after refresh
       localStorage.setItem("searchQuery", searchQuery);
     },
   },
