@@ -1,10 +1,11 @@
 <template>
     <div class="ratings-container">
-        <vue3-star-ratings v-model="rating" class="star-rating" :inactiveColor="'#c0c0c0'" :numberOfStars='5'
+        <!-- TODO Call manual refresh on vue 3 star ratings -->
+        <vue3-star-ratings v-model="rateValue" class="star-rating" :inactiveColor="'#c0c0c0'" :numberOfStars='5'
             :showControl="false" :starColor="'#0195ff'" :starSize="'14'" :disableClick="true" />
         <span>
             <p>
-            <div class="main-value"></div>{{ rating }}
+            <div class="main-value"></div>{{ rate }}
             <div class="over-ten"> /10</div>
             </p>
         </span>
@@ -16,7 +17,6 @@ import vue3starRatings from "vue3-star-ratings";
 export default {
     data() {
         return {
-            rating: this.$props.rate,
             color: "#0195ff"
         }
     },
@@ -27,6 +27,11 @@ export default {
         rate: {
             type: Number,
             default: 0
+        }
+    },
+    computed: {
+        rateValue() {
+            return this.rate / 2;
         }
     },
 }

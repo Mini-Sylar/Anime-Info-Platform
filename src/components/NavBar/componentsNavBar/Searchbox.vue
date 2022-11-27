@@ -52,7 +52,7 @@ export default {
   height: 10px;
   width: 0px;
   border-style: none;
-  padding: 10px;
+  padding: 12px 10px;
   font-size: 16px;
   outline: none;
   border-radius: 25px;
@@ -78,14 +78,14 @@ export default {
   border-radius: 50%;
   position: absolute;
   right: 2px;
-  top: 15%;
+  top: 12%;
   color: #ffffff;
   background-color: transparent !important;
   pointer-events: painted;
 }
 
 .btn-search:focus~.input-search {
-  width: 200px;
+  width: 250px;
   border-radius: 0px;
   background-color: transparent !important;
   border-bottom: 1px solid #ffffff80;
@@ -93,7 +93,7 @@ export default {
 }
 
 .input-search:focus {
-  width: 200px;
+  width: 250px;
   border-radius: 0px;
   background-color: transparent !important;
   border-bottom: 1px solid #ffffff80;
