@@ -1,7 +1,8 @@
 <template lang="">
     <div class="is-a-container">
         <h1 class="anime-title">{{titleDescription.animeTitle}}</h1>
-        <p class="anime-synposis">{{titleDescription.description}}</p>
+        <p class="anime-synposis" v-html="titleDescription.description">
+        </p>
     </div>
 </template>
 <script>
