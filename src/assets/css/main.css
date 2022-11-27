@@ -13,8 +13,7 @@ main {
   min-height: 92vh;
 }
 .right-side-main {
-  background-color: darkred;
-  width: 80%;
+  width: 40%;
   flex-direction: column;
   justify-content: flex-end;
   align-items: flex-end;
