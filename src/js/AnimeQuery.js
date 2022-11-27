@@ -62,4 +62,5 @@ let response = await fetch("https://graphql.anilist.co/?id", {
   headers: headersList,
 });
 
+
 export let main_data = await response.json();
