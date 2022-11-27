@@ -9,7 +9,7 @@ let response = await fetch("https://graphql.anilist.co/?id", {
 });
 // Main Data Here
 let main_data = await response.json();
-console.log(main_data);
+
 export const useAnimeData = defineStore("animeData", {
   state: () => ({
     animeData: main_data,
@@ -41,6 +41,18 @@ export const useAnimeData = defineStore("animeData", {
         ? state.animeData.data.Media.trailer.id
         : null;
       return trailer;
+    },
+  },
+  actions: {
+    async fetchAnimeData(searchQuery) {
+      let response = await fetch("https://graphql.anilist.co/?id", {
+        method: "POST",
+        body: prepareAnimeData(searchQuery),
+        headers: headersList,
+      });
+      // Main Data Here
+      let main_data = await response.json();
+      this.animeData = main_data;
     },
   },
 });

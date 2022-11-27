@@ -1,14 +1,13 @@
+export let headersList = {
+  Accept: "*/*",
+  "User-Agent": "Thunder Client (https://www.thunderclient.com)",
+  "Content-Type": "application/json",
+};
 
-   export let headersList = {
-     Accept: "*/*",
-     "User-Agent": "Thunder Client (https://www.thunderclient.com)",
-     "Content-Type": "application/json",
-   };
-
-export function prepareAnimeData(animeID = 111) {
+export function prepareAnimeData(searchQuery = "naruto") {
   let gqlBody = {
-    query: `query ($id: Int) {
-  Media (id: $id, type: ANIME) { 
+    query: `query ($id: Int,$search: String) {
+  Media (id: $id, search: $search type: ANIME) { 
     id
     title {
       english
@@ -46,17 +45,7 @@ export function prepareAnimeData(animeID = 111) {
   }
 }
 `,
-    variables: { id: animeID },
+    variables: { search: searchQuery },
   };
-
   return JSON.stringify(gqlBody);
 }
-
-// let response = await fetch("https://graphql.anilist.co/?id", {
-//   method: "POST",
-//   body: prepareAnimeData(),
-//   headers: headersList,
-// });
-
-// let data = await response.text();
-// console.log(data);

@@ -1,7 +1,7 @@
 <template lang="">
     <div>
          <div class="search-box">
-            <form action="" method="" id="search-form" name="anime-search">
+            <form id="search-form" name="anime-search">
               <button class="btn-search" type="submit">
                 <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
               </button>
@@ -10,6 +10,7 @@
                 class="input-search dynamic-color"
                 placeholder="Search for anime..."
                 autocomplete="off"
+                required
               />
             </form>
           </div>
