@@ -56,24 +56,10 @@ export function prepareAnimeData(
   return JSON.stringify(gqlBody);
 }
 // Store Anime data
-// let response = await fetch("https://graphql.anilist.co/?id", {
-//   method: "POST",
-//   body: prepareAnimeData(),
-//   headers: headersList,
-// });
+let response = await fetch("https://graphql.anilist.co/?id", {
+  method: "POST",
+  body: prepareAnimeData(),
+  headers: headersList,
+});
 
-const getFileStream = async (url) => {
-  return fetch(url, {
-    method: "POST",
-    body: prepareAnimeData(),
-    headers: headersList,
-  });
-};
-
-export let containsAnimeData = (async () => {
-  const stream = await getFileStream("https://graphql.anilist.co/?id");
-  const data = await stream.json();
-  return data;
-})();
-
-console.log(await containsAnimeData);
+export let main_data = await response.json();

@@ -1,10 +1,8 @@
 import { defineStore } from "pinia";
-import {
-  prepareAnimeData,
-  headersList,
-  containsAnimeData,
-} from "../js/AnimeQuery";
-let main_data = await containsAnimeData;
+import { prepareAnimeData, headersList, main_data } from "../js/AnimeQuery";
+
+
+
 export const useAnimeData = defineStore("animeData", {
   state: () => ({
     animeData: main_data,
