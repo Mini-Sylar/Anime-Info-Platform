@@ -1,7 +1,7 @@
 <template lang="">
     <div>
          <div class="search-box">
-            <form id="search-form" name="anime-search">
+            <form @submit.prevent="handlesubmit" id="search-form" name="anime-search">
               <button class="btn-search" type="submit">
                 <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
               </button>
@@ -11,14 +11,30 @@
                 placeholder="Search for anime..."
                 autocomplete="off"
                 required
+                v-model="searchQuery"
               />
             </form>
           </div>
     </div>
 </template>
 <script>
-export default {
+// useAnimeStore Here
+import { useAnimeData } from '@/stores/anime_data.js'
+import { ref } from 'vue'
 
+export default {
+  setup() {
+    const mainAnimeData = useAnimeData()
+    const searchQuery = ref('')
+    const handlesubmit = () => {
+      mainAnimeData.fetchAnimeData(searchQuery.value)
+      searchQuery.value = ''
+    }
+    return {
+      searchQuery,
+      handlesubmit,
+    }
+  }
 }
 </script>
 <style scoped>
