@@ -13,7 +13,7 @@ main {
   min-height: 92vh;
 }
 .right-side-main {
-  width: 40%;
+  width: 45%;
   flex-direction: column;
   justify-content: flex-end;
   align-items: flex-end;

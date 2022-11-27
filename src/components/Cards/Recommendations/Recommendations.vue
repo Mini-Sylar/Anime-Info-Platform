@@ -3,8 +3,8 @@
         <!-- Todo add function to refresh manually -->
         <swiper :slides-per-view="4" :space-between="2" @swiper="onSwiper" @slideChange="onSlideChange"
             :effect="'coverflow'" :centeredSlides="true" :coverflowEffect="{
-                rotate: 50,
-                stretch: 0,
+                rotate: 10,
+                stretch: 1,
                 depth: 100,
                 modifier: 3,
                 slideShadows: true,
