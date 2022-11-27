@@ -5,7 +5,7 @@
         <Rating :rate="mainAnimeData.getRating" />
         <Actions />
         <MoreInfo />
-        <Trailer />
+        <Trailer :trailer="mainAnimeData.getTrailer" />
     </div>
 </template>
 <script setup>

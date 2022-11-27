@@ -1,11 +1,21 @@
-<template lang="">
-    <div class="trailer-component">
-        <iframe width="400" height="200" src="https://www.youtube.com/embed/9qJyDlZst8c" title="The Misfit of Demon King Academy | OFFICIAL TRAILER" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<template >
+    <div class="trailer-component" v-if="trailer!==null">
+        <iframe width="400" height="200" :src="trailerUrl" title="The Misfit of Demon King Academy | OFFICIAL TRAILER" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
 </template>
 <script>
 export default {
-
+    data() {
+        return {
+            trailerUrl: `https://www.youtube.com/embed/${this.$props.trailer}`
+        }
+    },
+    props: {
+        trailer: {
+            type: String,
+            default: ""
+        }
+    }
 }
 </script>
 <style scoped>

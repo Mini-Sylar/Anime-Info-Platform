@@ -20,7 +20,6 @@ export const useAnimeData = defineStore("animeData", {
       const animeTitle = state.animeData.data.Media.title.english
         ? state.animeData.data.Media.title.english
         : state.animeData.data.Media.title.romaji;
-
       // set Anime Description
       const description = state.animeData.data.Media.description;
       return { animeTitle, description };
@@ -36,6 +35,12 @@ export const useAnimeData = defineStore("animeData", {
     getRating: (state) => {
       const rating = state.animeData.data.Media.averageScore / 10;
       return rating;
+    },
+    getTrailer: (state) => {
+      const trailer = state.animeData.data.Media.trailer
+        ? state.animeData.data.Media.trailer.id
+        : null;
+      return trailer;
     },
   },
 });
