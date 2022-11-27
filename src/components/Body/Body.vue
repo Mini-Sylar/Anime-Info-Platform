@@ -1,11 +1,20 @@
 <template>
     <div class="is-a-container body-container">
         <TitleSynopsis :titleDescription="mainAnimeData.getAnimeTitleDescription"></TitleSynopsis>
-        <AnimeData :animeMetaData="mainAnimeData.getMetaDescription" />
-        <Rating :rate="mainAnimeData.getRating" />
-        <Actions />
-        <MoreInfo />
-        <Trailer :trailer="mainAnimeData.getTrailer" />
+
+        <div class="info-trailer-container">
+            <div class="info-container">
+                <AnimeData :animeMetaData="mainAnimeData.getMetaDescription" />
+                <Rating :rate="mainAnimeData.getRating" />
+                <Actions />
+                <MoreInfo />
+            </div>
+            <div class="trailer-container">
+                <Trailer :trailer="mainAnimeData.getTrailer" />
+            </div>
+        </div>
+
+
     </div>
 </template>
 <script setup>
