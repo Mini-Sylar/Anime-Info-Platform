@@ -7,9 +7,10 @@ let response = await fetch("https://graphql.anilist.co/?id", {
   body: prepareAnimeData(),
   headers: headersList,
 });
-
+// Main Data Here
 let main_data = await response.json();
-// console.log(data);
+console.log(main_data);
+console.log(main_data.data.Media.description);
 
 export const useAnimeData = defineStore("animeData", {
   state: () => ({
@@ -17,10 +18,17 @@ export const useAnimeData = defineStore("animeData", {
     animeData: {
       main_data,
     },
-    getters:{
-        getAnimeTitle(){
-            
-        }
-    }
+    getters: {
+      getAnimeDetails() {
+        let isTitleEnglish = main_data.data.Media.title.english
+          ? main_data.data.Media.title.english
+          : main_data.data.Media.title.romaji;
+        //   Return Anime Details as object
+        return {
+          title: isTitleEnglish,
+          synopsis: main_data.data.Media.description,
+        };
+      },
+    },
   }),
 });
