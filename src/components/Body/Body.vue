@@ -1,6 +1,6 @@
 <template>
     <div class="is-a-container body-container">
-        <TitleSynopsis :anime-data="animeData.getAnimeDetails" />
+        <TitleSynopsis :titleDescription="mainAnimeData.getAnimeData" />
         <AnimeData />
         <Rating />
         <Actions />
@@ -15,14 +15,9 @@ import Rating from './Rating/Rating.vue'
 import Actions from './Actions/Actions.vue'
 import MoreInfo from './MoreInfo/MoreInfo.vue';
 import Trailer from './Trailer/Trailer.vue';
-const getProps = defineProps(
-    {
-        animeData: {
-            type: Object,
-            required: true
-        }
-    }
-);
+// useAnimeDataHere
+import { useAnimeData } from '@/stores/anime_data.js'
+const mainAnimeData = useAnimeData()
 </script>
 
 <style scoped>

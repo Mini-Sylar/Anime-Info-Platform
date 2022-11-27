@@ -1,7 +1,7 @@
 <template lang="">
     <div class="is-a-container">
-        <h1 class="anime-title">{{animeTitle}}</h1>
-        <p class="anime-synposis">{{synopsis}}</p>
+        <h1 class="anime-title">{{titleDescription.animeTitle}}</h1>
+        <p class="anime-synposis">{{titleDescription.description}}</p>
     </div>
 </template>
 <script>
@@ -11,9 +11,8 @@ export default {
         };
     },
     props: {
-        animeData: {
+        titleDescription: {
             type: Object,
-            required: true
         },
     },
 }
