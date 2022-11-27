@@ -1,10 +1,15 @@
 <template>
     <div class="is-a-container swiper-container">
+        <!-- Todo add function to refresh manually -->
         <swiper :slides-per-view="4" :space-between="2" @swiper="onSwiper" @slideChange="onSlideChange">
-            <swiper-slide class="swiper-slide-instance" v-for="(item, index) in recommended" :key="index"> {{
-                    item.mediaRecommendation.title ? item.mediaRecommendation.title.english :
-                        item.mediaRecommendation.romaji
-            }}
+            <swiper-slide class="swiper-slide-instance" v-for="(item, index) in recommended" :key="index">
+                <img :src=item.mediaRecommendation.coverImage.large alt="">
+                <p class="noselect">
+                    {{
+        item.mediaRecommendation.title ? item.mediaRecommendation.title.english :
+            item.mediaRecommendation.romaji
+                    }}
+                </p>
             </swiper-slide>
         </swiper>
     </div>
@@ -60,5 +65,22 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 15px;
+    position: relative;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+    position: absolute;
+    filter: brightness(0.5);
+}
+
+p {
+    z-index: 100;
+    color: white;
+    font-weight: 900;
 }
 </style>
