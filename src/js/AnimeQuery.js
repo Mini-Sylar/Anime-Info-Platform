@@ -62,13 +62,18 @@ export function prepareAnimeData(
 //   headers: headersList,
 // });
 
-export let main_data = await (async () => {
-  const response = await fetch("https://graphql.anilist.co/?id", {
+const getFileStream = async (url) => {
+  return fetch(url, {
     method: "POST",
     body: prepareAnimeData(),
     headers: headersList,
   });
-  return response.json().then((data) => data);
+};
+
+export let containsAnimeData = (async () => {
+  const stream = await getFileStream("https://graphql.anilist.co/?id");
+  const data = await stream.json();
+  return data;
 })();
 
-console.log(main_data);
+console.log(await containsAnimeData);
