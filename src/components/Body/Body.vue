@@ -2,7 +2,7 @@
     <div class="is-a-container body-container">
         <TitleSynopsis :titleDescription="mainAnimeData.getAnimeTitleDescription"></TitleSynopsis>
         <AnimeData :animeMetaData="mainAnimeData.getMetaDescription" />
-        <Rating />
+        <Rating :rate="mainAnimeData.getRating" />
         <Actions />
         <MoreInfo />
         <Trailer />

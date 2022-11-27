@@ -16,12 +16,18 @@ import vue3starRatings from "vue3-star-ratings";
 export default {
     data() {
         return {
-            rating: 8.5,
+            rating: this.$props.rate,
             color: "#0195ff"
         }
     },
     components: {
         "vue3-star-ratings": vue3starRatings,
+    },
+    props: {
+        rate: {
+            type: Number,
+            default: 0
+        }
     },
 }
 </script>

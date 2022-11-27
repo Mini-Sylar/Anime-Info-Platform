@@ -28,8 +28,14 @@ export const useAnimeData = defineStore("animeData", {
     getMetaDescription: (state) => {
       const year = state.animeData.data.Media.seasonYear;
       const genre = state.animeData.data.Media.genres;
-      const episodes = state.animeData.data.Media.episodes;
+      const episodes = state.animeData.data.Media.episodes
+        ? state.animeData.data.Media.episodes
+        : "Unknown";
       return { year, genre, episodes };
+    },
+    getRating: (state) => {
+      const rating = state.animeData.data.Media.averageScore / 10;
+      return rating;
     },
   },
 });
