@@ -1,19 +1,28 @@
 <template>
     <div class="is-a-container">
-        <p>{{ year }}</p>
-        <p>{{ genre }}</p>
-        <p>{{ episodes }} episodes</p>
+        <p>{{ animeMetaData.year }}</p>
+        <p>{{ formatGenre }}</p>
+        <p>{{ animeMetaData.episodes }} episodes</p>
     </div>
 </template>
 <script>
 export default {
     data() {
         return {
-            year: 2021,
-            genre: "Action / Comedy / Slice of Life / Supernatural",
-            episodes: 12,
         };
     },
+    props: {
+        animeMetaData: {
+            type: Object,
+            required: true,
+        },
+    },
+    computed: {
+        formatGenre: function () {
+            // Join elements in array seperated by a backslash
+            return this.animeMetaData.genre.join(" / ");
+        }
+    }
 }
 </script>
 <style scoped>

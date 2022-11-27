@@ -1,7 +1,7 @@
 <template>
     <div class="is-a-container body-container">
-        <TitleSynopsis :titleDescription="mainAnimeData.getAnimeData"></TitleSynopsis>
-        <AnimeData />
+        <TitleSynopsis :titleDescription="mainAnimeData.getAnimeTitleDescription"></TitleSynopsis>
+        <AnimeData :animeMetaData="mainAnimeData.getMetaDescription" />
         <Rating />
         <Actions />
         <MoreInfo />
