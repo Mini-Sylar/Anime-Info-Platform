@@ -1,7 +1,7 @@
 <template>
     <div class="ratings-container">
         <vue3-star-ratings v-model="rating" class="star-rating" :inactiveColor="'#c0c0c0'" :numberOfStars='5'
-            :showControl="false" :starColor="'#0195ff'" :starSize="14" :disableClick="true" />
+            :showControl="false" :starColor="'#0195ff'" :starSize="'14'" :disableClick="true" />
         <span>
             <p>
             <div class="main-value"></div>{{ rating }}
