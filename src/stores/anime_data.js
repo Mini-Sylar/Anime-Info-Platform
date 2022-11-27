@@ -45,14 +45,16 @@ export const useAnimeData = defineStore("animeData", {
   },
   actions: {
     async fetchAnimeData(searchQuery) {
-        let response = await fetch("https://graphql.anilist.co/?id", {
-            method: "POST",
-            body: prepareAnimeData(searchQuery),
-            headers: headersList,
-        });
-        // Main Data Here
-        let main_data = await response.json();
-        this.animeData = main_data;
-        },
+      let response = await fetch("https://graphql.anilist.co/?id", {
+        method: "POST",
+        body: prepareAnimeData(searchQuery),
+        headers: headersList,
+      });
+      // Main Data Here
+      let main_data = await response.json();
+      this.animeData = main_data;
+    //   Set to local storage to save search query after refresh
+      localStorage.setItem("searchQuery", searchQuery);
+    },
   },
 });

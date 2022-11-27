@@ -1,10 +1,17 @@
+// local storage set query
+
+
 export let headersList = {
   Accept: "*/*",
   "User-Agent": "Thunder Client (https://www.thunderclient.com)",
   "Content-Type": "application/json",
 };
 
-export function prepareAnimeData(searchQuery = "naruto") {
+export function prepareAnimeData(
+  searchQuery = localStorage.getItem("searchQuery")
+    ? localStorage.getItem("searchQuery")
+    : "Naruto"
+) {
   let gqlBody = {
     query: `query ($id: Int,$search: String) {
   Media (id: $id, search: $search type: ANIME) { 
