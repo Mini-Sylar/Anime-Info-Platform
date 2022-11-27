@@ -1,7 +1,14 @@
 <template>
     <div class="is-a-container swiper-container">
         <!-- Todo add function to refresh manually -->
-        <swiper :slides-per-view="4" :space-between="2" @swiper="onSwiper" @slideChange="onSlideChange">
+        <swiper :slides-per-view="4" :space-between="2" @swiper="onSwiper" @slideChange="onSlideChange"
+            :effect="'coverflow'" :centeredSlides="true" :coverflowEffect="{
+                rotate: 50,
+                stretch: 0,
+                depth: 100,
+                modifier: 3,
+                slideShadows: true,
+            }" :modules="modules" :grabCursor="true">
             <swiper-slide class="swiper-slide-instance" v-for="(item, index) in recommended" :key="index">
                 <img :src=item.mediaRecommendation.coverImage.large alt="">
                 <p class="noselect">
@@ -18,10 +25,11 @@
 import { useAnimeData } from '@/stores/anime_data.js'
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from 'swiper/vue';
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+import { Navigation, Pagination, Scrollbar, A11y, EffectCoverflow } from 'swiper';
 
 // Import Swiper styles
 import 'swiper/css';
+import "swiper/css/effect-coverflow";
 export default {
     components: {
         Swiper,
@@ -42,7 +50,7 @@ export default {
         return {
             onSwiper,
             onSlideChange,
-            modules: [Navigation, Pagination, Scrollbar, A11y],
+            modules: [Navigation, Pagination, Scrollbar, A11y, EffectCoverflow],
             recommended
         };
     },
@@ -58,9 +66,9 @@ export default {
 }
 
 .swiper-slide-instance {
-    background-color: #fff;
+    background-color: transparent;
     width: 100%;
-    height: 10rem;
+    height: 15rem;
     text-align: center;
     display: flex;
     align-items: center;
