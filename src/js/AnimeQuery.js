@@ -1,6 +1,5 @@
 // local storage set query
 
-
 export let headersList = {
   Accept: "*/*",
   "User-Agent": "Thunder Client (https://www.thunderclient.com)",
@@ -56,3 +55,12 @@ export function prepareAnimeData(
   };
   return JSON.stringify(gqlBody);
 }
+// Store Anime data
+let response = await fetch("https://graphql.anilist.co/?id", {
+  method: "POST",
+  body: prepareAnimeData(),
+  headers: headersList,
+});
+
+// Main Data Here
+export let main_data = await response.json();

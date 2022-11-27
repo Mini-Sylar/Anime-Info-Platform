@@ -1,14 +1,5 @@
 import { defineStore } from "pinia";
-import { prepareAnimeData, headersList } from "../js/AnimeQuery";
-
-// Store Anime data
-let response = await fetch("https://graphql.anilist.co/?id", {
-  method: "POST",
-  body: prepareAnimeData(),
-  headers: headersList,
-});
-// Main Data Here
-let main_data = await response.json();
+import { prepareAnimeData, headersList, main_data } from "../js/AnimeQuery";
 
 export const useAnimeData = defineStore("animeData", {
   state: () => ({
