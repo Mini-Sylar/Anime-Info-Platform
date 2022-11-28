@@ -1,5 +1,5 @@
 <template>
-    <div class="is-a-container swiper-container">
+    <div class="is-a-container swiper-container noselect">
         <!-- Todo add function to refresh manually -->
         <swiper :slides-per-view="4" :space-between="2" @swiper="onSwiper" @slideChange="onSlideChange"
             :effect="'coverflow'" :centeredSlides="true" :coverflowEffect="{
