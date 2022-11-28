@@ -78,7 +78,6 @@ export default {
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
-    width: 100%;
     min-width: 100%;
     height: 90%;
 }
