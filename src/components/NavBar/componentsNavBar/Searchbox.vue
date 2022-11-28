@@ -52,7 +52,7 @@ export default {
   height: 10px;
   width: 0px;
   border-style: none;
-  padding: 12px 10px;
+  padding: 10px 10px;
   font-size: 16px;
   outline: none;
   border-radius: 25px;

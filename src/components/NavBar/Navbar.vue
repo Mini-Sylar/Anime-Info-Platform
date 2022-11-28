@@ -23,7 +23,7 @@ import SearchboxVue from "./componentsNavBar/Searchbox.vue";
 .navigation-bar {
     display: flex;
     padding: 1rem;
-    width: min(90%, 1200px);
+    width: min(90%, 1400px);
 }
 
 .main-links {
