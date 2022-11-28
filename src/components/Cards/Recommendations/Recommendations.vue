@@ -35,6 +35,7 @@ import {
     Scrollbar,
     A11y,
     EffectCoverflow,
+    Autoplay
 } from "swiper";
 
 // Import Swiper styles
@@ -66,7 +67,7 @@ export default {
         return {
             onSwiper,
             onSlideChange,
-            modules: [Navigation, Pagination, Scrollbar, A11y, EffectCoverflow],
+            modules: [Navigation, Pagination, Scrollbar, A11y, EffectCoverflow, Autoplay],
             recommendations,
         };
     },
