@@ -10,7 +10,7 @@
                 slideShadows: true,
             }" :modules="modules" :grabCursor="true" :autoplay="{
     delay: 2500,
-    disableOnInteraction: true,
+    disableOnInteraction: false,
 }">
             <swiper-slide class="swiper-slide-instance" v-for="(item, index) in populateCards" :key="index">
                 <img :src="item.mediaRecommendation.coverImage.large" alt="" />
