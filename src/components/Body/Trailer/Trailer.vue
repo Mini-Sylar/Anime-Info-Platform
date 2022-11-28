@@ -10,7 +10,6 @@
 export default {
     data() {
         return {
-            trailerUrl: `https://www.youtube.com/embed/${this.$props.trailer}`
         }
     },
     props: {
@@ -18,11 +17,15 @@ export default {
             type: String,
             default: ""
         }
+    },
+    computed: {
+        trailerUrl() {
+            return `https://www.youtube.com/embed/${this.$props.trailer}`
+        }
     }
 }
 </script>
 <style scoped>
-
 iframe {
     border: 2px solid #0195ff;
     border-radius: 20px;
