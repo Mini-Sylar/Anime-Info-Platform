@@ -9,7 +9,7 @@
                 modifier: 3,
                 slideShadows: true,
             }" :modules="modules" :grabCursor="true">
-            <swiper-slide class="swiper-slide-instance" v-for="(item, index) in recommended" :key="index">
+            <swiper-slide class="swiper-slide-instance" v-for="(item, index) in populateCards" :key="index">
                 <img :src=item.mediaRecommendation.coverImage.large alt="">
                 <p class="noselect">
                     {{
@@ -31,6 +31,12 @@ import { Navigation, Pagination, Scrollbar, A11y, EffectCoverflow } from 'swiper
 import 'swiper/css';
 import "swiper/css/effect-coverflow";
 export default {
+    data() {
+        return {
+            recommended: [],
+            triggerRefreshOnComponent: 0,
+        }
+    },
     components: {
         Swiper,
         SwiperSlide,
@@ -39,21 +45,32 @@ export default {
         // useAnimeStoreHere
 
         const mainAnimeData = useAnimeData()
-        const recommended = mainAnimeData.getRecommendations
+        const recommendations = mainAnimeData.getRecommendations
         // Container Here
         const onSwiper = (swiper) => {
-            console.log(swiper);
+            // console.log(swiper);
         };
         const onSlideChange = () => {
-            console.log('slide change');
+            // console.log('slide change');
         };
         return {
             onSwiper,
             onSlideChange,
             modules: [Navigation, Pagination, Scrollbar, A11y, EffectCoverflow],
-            recommended
+            recommendations
         };
     },
+    computed: {
+        populateCards() {
+            this.recommended = useAnimeData().getRecommendations
+            return this.recommended
+        }
+    },
+    methods: {
+        forceRender() {
+            this.triggerRefreshOnComponent += 1
+        }
+    }
 };
 </script>
 <style scoped>
@@ -62,6 +79,7 @@ export default {
     justify-content: flex-end;
     align-items: flex-end;
     width: 100%;
+    min-width: 100%;
     height: 90%;
 }
 
