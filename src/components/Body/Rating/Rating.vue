@@ -2,7 +2,8 @@
     <div class="ratings-container">
         <!-- TODO Call manual refresh on vue 3 star ratings -->
         <vue3-star-ratings v-model="rateValue" class="star-rating" :inactiveColor="'#c0c0c0'" :numberOfStars='5'
-            :showControl="false" :starColor="'#0195ff'" :starSize="'14'" :disableClick="true" />
+            :showControl="false" :starColor="'#0195ff'" :starSize="'14'" :disableClick="true"
+            :key="triggerRefreshOnComponent" />
         <span>
             <p>
             <div class="main-value"></div>{{ rate }}
@@ -17,7 +18,9 @@ import vue3starRatings from "vue3-star-ratings";
 export default {
     data() {
         return {
-            color: "#0195ff"
+            color: "#0195ff",
+            triggerRefreshOnComponent: 0,
+            rateValue: 0
         }
     },
     components: {
@@ -31,9 +34,16 @@ export default {
     },
     computed: {
         rateValue() {
-            return this.rate / 2;
-        }
+            this.rateValue = this.rate / 2
+            this.forceRender()
+            return this.rateValue
+        },
     },
+    methods: {
+        forceRender() {
+            this.triggerRefreshOnComponent += 1
+        }
+    }
 }
 </script>
 <style scoped>
