@@ -69,28 +69,26 @@ export let main_data = await response.json();
 // Surprise Me Cards
 export function surpriseMe(genre = "action") {
 let gqlBody_Cards = {
-  query: `query ($id: Int,$search: String) {
-  Media (id: $id, genre: $search type: ANIME) { 
-# Recommendations
- recommendations(page: 1,perPage:10,sort:RATING_DESC) {
-      nodes { # Array of character nodes
-        mediaRecommendation {
-          id
-          title{
-            english
-            romaji
-            }
-        coverImage
-            {
-              large
-            }
-        }
+  query: `query ( $page: Int, $perPage: Int, $search: String) {
+  Page (page: $page, perPage: $perPage) {
+    pageInfo {
+      perPage
+    }
+    media ( genre: $search  type: ANIME) {
+      id
+      title {
+        english
+        romaji
       }
+      
+       coverImage {
+        large
   }
+    }
+    
   }
-}
-`,
-  variables: { search: genre },
+}`,
+  variables: { search: genre, page: 1, perPage: 10 },
 };
   return JSON.stringify(gqlBody_Cards);
 }
