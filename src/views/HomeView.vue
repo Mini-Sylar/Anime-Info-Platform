@@ -1,6 +1,7 @@
 <script setup>
 import BodyVue from '../components/Body/Body.vue';
 import Recommendations from '../components/Cards/Recommendations/Recommendations.vue';
+import SurpriseMe from '../components/Cards/SurpriseMe/SurpriseMe.vue';
 
 </script>
 
@@ -10,6 +11,7 @@ import Recommendations from '../components/Cards/Recommendations/Recommendations
   </div>
   <div class="right-side-main">
     <Recommendations />
+    <SurpriseMe></SurpriseMe>
   </div>
 
 </template>
