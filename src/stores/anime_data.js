@@ -1,11 +1,12 @@
 import { defineStore } from "pinia";
-import { prepareAnimeData, headersList, main_data } from "../js/AnimeQuery";
+import { prepareAnimeData, headersList, main_data,surpriseMe } from "../js/AnimeQuery";
 
 
 
 export const useAnimeData = defineStore("animeData", {
   state: () => ({
     animeData: main_data,
+    // recomendationData:
   }),
   getters: {
     getAnimeTitleDescription: (state) => {
@@ -35,9 +36,9 @@ export const useAnimeData = defineStore("animeData", {
         : null;
       return trailer;
     },
-    getRecommendations: (state) => {
-      const recommendations = state.animeData.data.Media.recommendations.nodes;
-      console.log(state.animeData.data.Media.recommendations.nodes);
+    getRecommendations: (state,whichState=state.animeData) => {
+      console.log(whichState.data.Media.recommendations.nodes);
+      const recommendations = whichState.data.Media.recommendations.nodes;
       return recommendations;
     },
   },
@@ -54,5 +55,15 @@ export const useAnimeData = defineStore("animeData", {
       //   Set to local storage to save search query after refresh
       localStorage.setItem("searchQuery", searchQuery);
     },
-  },
+    async fetchSurprise(genre){
+      let response_cards = await fetch("https://graphql.anilist.co/?id", {
+        method: "POST",
+        body: surpriseMe(genre),
+        headers: headersList,
+      });
+      let surpriseCards_gotten = await response_cards.json()
+      this.animeData.data.Media.recommendations =
+        surpriseCards_gotten.data.Media.recommendations;
+    },
+  }
 });
