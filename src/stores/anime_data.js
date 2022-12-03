@@ -65,11 +65,9 @@ export const useAnimeData = defineStore("animeData", {
         headers: headersList,
       });
       let surpriseCards_gotten = await response_cards.json();
-      surpriseCards_gotten.data.Page["mediaRecommendation"] =
-        surpriseCards_gotten.data.Page["media"];
       // Create a new object to store the data
       let newNodes = [
-        ...surpriseCards_gotten.data.Page.mediaRecommendation.map((item) => {
+        ...surpriseCards_gotten.data.Page.media.map((item) => {
           return { mediaRecommendation: item };
         }),
       ];
