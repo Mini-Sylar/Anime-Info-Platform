@@ -1,7 +1,7 @@
 <template>
     <div class="surprise-me-container">
         <select>
-            <option v-for="(item, index) in genres" :key="index">{{ item }}</option>
+            <option v-for="(item, index) in genres" :key="index" :value="item">{{ item }}</option>
         </select>
         <button type="button">
             Surprise Me
@@ -38,6 +38,7 @@ export default {
     justify-content: center;
     padding: 1rem;
     margin-top: .5rem;
+    gap: 1rem;
 }
 
 button {
