@@ -52,7 +52,7 @@ export default {
     display: flex;
     justify-content: center;
     padding: 1rem;
-    margin-top: .5rem;
+    margin-top: .1rem;
     gap: 1rem;
 }
 
