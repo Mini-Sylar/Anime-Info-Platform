@@ -1,7 +1,10 @@
 import { defineStore } from "pinia";
-import { prepareAnimeData, headersList, main_data,surpriseMe } from "../js/AnimeQuery";
-
-
+import {
+  prepareAnimeData,
+  headersList,
+  main_data,
+  surpriseMe,
+} from "../js/AnimeQuery";
 
 export const useAnimeData = defineStore("animeData", {
   state: () => ({
@@ -36,9 +39,8 @@ export const useAnimeData = defineStore("animeData", {
         : null;
       return trailer;
     },
-    getRecommendations: (state,whichState=state.animeData) => {
-      console.log(whichState.data.Media.recommendations.nodes);
-      const recommendations = whichState.data.Media.recommendations.nodes;
+    getRecommendations: (state) => {
+      const recommendations = state.animeData.data.Media.recommendations.nodes;
       return recommendations;
     },
   },
@@ -55,15 +57,23 @@ export const useAnimeData = defineStore("animeData", {
       //   Set to local storage to save search query after refresh
       localStorage.setItem("searchQuery", searchQuery);
     },
-    async fetchSurprise(genre){
+    async fetchSurprise(genre) {
+      // Add loading parameters here
       let response_cards = await fetch("https://graphql.anilist.co/?id", {
         method: "POST",
         body: surpriseMe(genre),
         headers: headersList,
       });
-      let surpriseCards_gotten = await response_cards.json()
-      this.animeData.data.Media.recommendations =
-        surpriseCards_gotten.data.Media.recommendations;
+      let surpriseCards_gotten = await response_cards.json();
+      surpriseCards_gotten.data.Page["mediaRecommendation"] =
+        surpriseCards_gotten.data.Page["media"];
+      // Create a new object to store the data
+      let newNodes = [
+        ...surpriseCards_gotten.data.Page.mediaRecommendation.map((item) => {
+          return { mediaRecommendation: item };
+        }),
+      ];
+     this.animeData.data.Media.recommendations.nodes = newNodes;
     },
-  }
+  },
 });
