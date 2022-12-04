@@ -42,7 +42,7 @@ export default {
             this.forceRender()
             return this.rateValue
         },
-        
+
     },
     methods: {
         forceRender() {
@@ -95,7 +95,8 @@ p {
     /* background-color: red; */
 }
 
-svg{
-    
+/* TODO: fix star rating color transition */
+*{
+    transition: all 3s ease-in  !important;
 }
 </style>

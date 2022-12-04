@@ -38,15 +38,17 @@ export default {
 button {
   background-color: v-bind("setColor") !important;
   color: white !important;
+  transition: all .5s ease-in-out;
 }
 
 .action-button {
   background-color: transparent !important;
-  color: v-bind("setColor");
+  color: v-bind("setColor") !important;
 }
 
 iframe {
   border: 2px solid v-bind('setColor');
+  transition: all .5s ease-in-out;
 }
 
 *::-webkit-scrollbar-thumb {
