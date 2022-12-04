@@ -7,22 +7,11 @@
 </template>
 <script>
 export default {
-    props: {
-        accentColor: {
-            type: String,
-            // required: true
-        }
-    },
-    computed: {
-        setColor: function () {
-            return this.accentColor
-        }
-    }
 }
 </script>
 <style scoped>
 button {
-    background-color: v-bind("setColor");
+    /* background-color: v-bind("setColor"); */
     padding: 10px 20px;
     border-radius: 25px;
     cursor: pointer;

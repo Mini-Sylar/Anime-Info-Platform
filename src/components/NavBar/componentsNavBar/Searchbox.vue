@@ -23,9 +23,15 @@ import { useAnimeData } from '@/stores/anime_data.js'
 import { ref } from 'vue'
 
 export default {
+  computed: {
+    setColor() {
+      return this.AccentColor
+    },
+  },
   setup() {
     const mainAnimeData = useAnimeData()
     const searchQuery = ref('')
+    let AccentColor = ref(mainAnimeData.getAccentColor)
     const handlesubmit = () => {
       mainAnimeData.fetchAnimeData(searchQuery.value)
       searchQuery.value = ''
@@ -33,6 +39,7 @@ export default {
     return {
       searchQuery,
       handlesubmit,
+      AccentColor
     }
   }
 }
@@ -57,7 +64,7 @@ export default {
   outline: none;
   border-radius: 25px;
   transition: all 0.5s ease-in-out;
-  background-color: #0195ff;
+  background-color: v-bind('setColor');
   padding-right: 40px;
   color: #fff;
 }
