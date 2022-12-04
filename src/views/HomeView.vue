@@ -14,16 +14,10 @@ export default {
   },
   computed: {
     setColor() {
-      return this.AccentColor;
+      const mainAnimeData = useAnimeData()
+      return mainAnimeData.getAccentColor;
     }
   },
-  setup() {
-    const mainAnimeData = useAnimeData()
-    let AccentColor = ref(mainAnimeData.getAccentColor)
-    return {
-      AccentColor
-    }
-  }
 }
 
 </script>
@@ -56,5 +50,9 @@ iframe {
 
 *::-webkit-scrollbar-thumb {
   background-color: v-bind("setColor") !important;
+}
+
+.input-search{
+  background-color: v-bind('setColor') !important;
 }
 </style>

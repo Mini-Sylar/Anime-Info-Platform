@@ -1,4 +1,4 @@
-<template lang="">
+<template>
     <div>
          <div class="search-box">
             <form @submit.prevent="handlesubmit" id="search-form" name="anime-search">
@@ -23,15 +23,9 @@ import { useAnimeData } from '@/stores/anime_data.js'
 import { ref } from 'vue'
 
 export default {
-  computed: {
-    setColor() {
-      return this.AccentColor
-    },
-  },
   setup() {
     const mainAnimeData = useAnimeData()
     const searchQuery = ref('')
-    let AccentColor = ref(mainAnimeData.getAccentColor)
     const handlesubmit = () => {
       mainAnimeData.fetchAnimeData(searchQuery.value)
       searchQuery.value = ''
@@ -39,7 +33,6 @@ export default {
     return {
       searchQuery,
       handlesubmit,
-      AccentColor
     }
   }
 }
@@ -64,7 +57,7 @@ export default {
   outline: none;
   border-radius: 25px;
   transition: all 0.5s ease-in-out;
-  background-color: v-bind('setColor');
+  background-color: red;
   padding-right: 40px;
   color: #fff;
 }
