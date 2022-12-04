@@ -43,6 +43,10 @@ export const useAnimeData = defineStore("animeData", {
       const recommendations = state.animeData.data.Media.recommendations.nodes;
       return recommendations;
     },
+    getAccentColor:(state)=>{
+      const color = state.animeData.data.Media.coverImage.color;
+      return color
+    }
   },
   actions: {
     async fetchAnimeData(searchQuery) {

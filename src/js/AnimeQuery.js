@@ -83,6 +83,7 @@ let gqlBody_Cards = {
       
        coverImage {
         large
+        color
   }
     }
     

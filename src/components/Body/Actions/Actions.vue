@@ -12,19 +12,29 @@
 </template>
 <script>
 export default {
-
+    props: {
+        accentColor: {
+            type: String,
+            // required: true
+        }
+    },
+    computed: {
+        setColor: function () {
+            return this.accentColor
+        }
+    }
 }
 </script>
 <style scoped>
 button {
-    color: #0195ff;
+    color: v-bind('setColor');
     background-color: transparent;
     border: none;
     cursor: pointer;
 }
 
 button:hover * {
-    color: #047bd0;
+    color: v-bind('setColor');
     cursor: pointer;
 }
 

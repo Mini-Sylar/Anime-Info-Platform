@@ -2,7 +2,7 @@
     <div class="ratings-container">
         <!-- TODO Call manual refresh on vue 3 star ratings -->
         <vue3-star-ratings v-model="rateValueUpdate" class="star-rating" :inactiveColor="'#c0c0c0'" :numberOfStars='5'
-            :showControl="false" :starColor="'#0195ff'" :starSize="'14'" :disableClick="true"
+            :showControl="false" :starColor="setColor()" :starSize="'14'" :disableClick="true"
             :key="triggerRefreshOnComponent" />
         <span>
             <p>
@@ -30,6 +30,10 @@ export default {
         rate: {
             type: Number,
             default: 0
+        },
+        accentColor: {
+            type: String,
+            // required: true
         }
     },
     computed: {
@@ -38,10 +42,14 @@ export default {
             this.forceRender()
             return this.rateValue
         },
+        
     },
     methods: {
         forceRender() {
             this.triggerRefreshOnComponent += 1
+        },
+        setColor: function () {
+            return this.accentColor
         }
     }
 }
@@ -85,5 +93,9 @@ p {
     left: -25px;
     top: 1px;
     /* background-color: red; */
+}
+
+svg{
+    
 }
 </style>

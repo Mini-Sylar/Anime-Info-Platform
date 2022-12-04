@@ -5,12 +5,12 @@
         <div class="info-trailer-container">
             <div class="info-container">
                 <AnimeData :animeMetaData="mainAnimeData.getMetaDescription" />
-                <Rating :rate="mainAnimeData.getRating" />
-                <Actions />
-                <MoreInfo />
+                <Rating :rate="mainAnimeData.getRating"  :accentColor ="mainAnimeData.getAccentColor"/>
+                <Actions :accentColor ="mainAnimeData.getAccentColor"/>
+                <MoreInfo :accentColor ="mainAnimeData.getAccentColor"/>
             </div>
             <div class="trailer-container">
-                <Trailer :trailer="mainAnimeData.getTrailer" />
+                <Trailer :trailer="mainAnimeData.getTrailer" :accentColor ="mainAnimeData.getAccentColor" />
             </div>
         </div>
 

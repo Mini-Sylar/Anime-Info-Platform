@@ -15,19 +15,27 @@ export default {
     props: {
         trailer: {
             type: String,
-            default: ""
+            default: "",
+        },
+        accentColor: {
+            type: String,
+            // required: true
         }
+
     },
     computed: {
         trailerUrl() {
             return `https://www.youtube.com/embed/${this.$props.trailer}`
+        },
+        setColor: function () {
+            return this.accentColor
         }
     }
 }
 </script>
 <style scoped>
 iframe {
-    border: 2px solid #0195ff;
+    border: 2px solid v-bind('setColor');
     border-radius: 20px;
 
 }
