@@ -28,6 +28,5 @@ export default {
 <style scoped>
 iframe {
     border-radius: 20px;
-
 }
 </style>

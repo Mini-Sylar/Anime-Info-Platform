@@ -48,10 +48,12 @@ button {
 
 iframe {
   border: 2px solid v-bind('setColor');
-  transition: all .5s ease-in-out;
+  transition: border .5s ease-in-out;
 }
 
 *::-webkit-scrollbar-thumb {
   background-color: v-bind("setColor") !important;
+  transition: all .5s ease-in-out;
 }
+
 </style>
