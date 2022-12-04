@@ -37,6 +37,7 @@ export default {
 <style>
 button {
   background-color: v-bind("setColor") !important;
+  color: white !important;
 }
 
 .action-button {
@@ -50,9 +51,5 @@ iframe {
 
 *::-webkit-scrollbar-thumb {
   background-color: v-bind("setColor") !important;
-}
-
-.input-search{
-  background-color: v-bind('setColor') !important;
 }
 </style>

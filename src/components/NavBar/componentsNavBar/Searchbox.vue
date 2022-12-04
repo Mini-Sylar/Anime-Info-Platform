@@ -1,21 +1,15 @@
 <template>
-    <div>
-         <div class="search-box">
-            <form @submit.prevent="handlesubmit" id="search-form" name="anime-search">
-              <button class="btn-search" type="submit">
-                <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
-              </button>
-              <input
-                type="text"
-                class="input-search dynamic-color"
-                placeholder="Search for anime..."
-                autocomplete="off"
-                required
-                v-model="searchQuery"
-              />
-            </form>
-          </div>
+  <div>
+    <div class="search-box">
+      <form @submit.prevent="handlesubmit" id="search-form" name="anime-search">
+        <button class="btn-search" type="submit">
+          <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
+        </button>
+        <input type="text" class="input-search dynamic-color" placeholder="Search for anime..." autocomplete="off"
+          required v-model="searchQuery" />
+      </form>
     </div>
+  </div>
 </template>
 <script>
 // useAnimeStore Here
@@ -34,7 +28,13 @@ export default {
       searchQuery,
       handlesubmit,
     }
-  }
+  },
+  computed: {
+    setColor() {
+      const mainAnimeData = useAnimeData()
+      return mainAnimeData.getAccentColor;
+    }
+  },
 }
 </script>
 <style scoped>
@@ -57,7 +57,7 @@ export default {
   outline: none;
   border-radius: 25px;
   transition: all 0.5s ease-in-out;
-  background-color: red;
+  background-color: v-bind('setColor');
   padding-right: 40px;
   color: #fff;
 }
