@@ -1,4 +1,5 @@
 // local storage set query
+import {randomIntFromInterval} from './helpers';
 
 export let headersList = {
   Accept: "*/*",
@@ -89,7 +90,7 @@ let gqlBody_Cards = {
     
   }
 }`,
-  variables: { search: genre, page: 1, perPage: 10 },
+  variables: { search: genre, page: randomIntFromInterval(1,200), perPage: 10 },
 };
   return JSON.stringify(gqlBody_Cards);
 }

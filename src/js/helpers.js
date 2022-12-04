@@ -24,3 +24,8 @@ export const setOpacity = (hex, alpha) =>
   `${hex}${Math.floor(alpha * 255)
     .toString(16)
     .padStart(2, 0)}`;
+
+export function randomIntFromInterval(min, max) {
+  // min and max included
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
