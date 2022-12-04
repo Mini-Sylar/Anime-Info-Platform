@@ -10,15 +10,14 @@
                 slideShadows: true,
             }" :modules="modules" :grabCursor="true" :autoplay="{
     delay: 2500,
-    disableOnInteraction: false,
 }">
             <swiper-slide class="swiper-slide-instance" v-for="(item, index) in populateCards" :key="index">
                 <img :src="item.mediaRecommendation.coverImage.large" alt="" />
-                <p class="noselect">
+                <p class="noselect" role="link">
                     {{
-        item.mediaRecommendation.title
+        item.mediaRecommendation.title.english
             ? item.mediaRecommendation.title.english
-            : item.mediaRecommendation.romaji
+            : item.mediaRecommendation.title.romaji
                     }}
                 </p>
             </swiper-slide>
@@ -118,5 +117,6 @@ p {
     z-index: 100;
     color: white;
     font-weight: 900;
+    cursor: pointer;
 }
 </style>
