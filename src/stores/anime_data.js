@@ -6,6 +6,8 @@ import {
   surpriseMe,
 } from "../js/AnimeQuery";
 
+import { shadeColor } from "../js/helpers";
+
 export const useAnimeData = defineStore("animeData", {
   state: () => ({
     animeData: main_data,
@@ -45,7 +47,7 @@ export const useAnimeData = defineStore("animeData", {
     },
     getAccentColor:(state)=>{
       const color = state.animeData.data.Media.coverImage.color;
-      return color
+      return shadeColor(color,-30);
     }
   },
   actions: {
