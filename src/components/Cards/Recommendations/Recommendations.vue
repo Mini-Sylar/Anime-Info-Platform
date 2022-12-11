@@ -102,6 +102,7 @@ export default {
     justify-content: center;
     border-radius: 15px;
     position: relative;
+    min-width: 10rem;
 }
 
 img {
