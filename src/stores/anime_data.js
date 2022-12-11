@@ -49,6 +49,10 @@ export const useAnimeData = defineStore("animeData", {
       const color = state.animeData.data.Media.coverImage.color;
       // TODO: Add way to shade color dynamically
       return shadeColor(color,-10);
+    },
+    getBackground:(state)=>{
+      const background = state.animeData.data.Media.bannerImage;
+      return background
     }
   },
   actions: {

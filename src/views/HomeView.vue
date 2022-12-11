@@ -2,7 +2,6 @@
 import BodyVue from '../components/Body/Body.vue';
 import Recommendations from '../components/Cards/Recommendations/Recommendations.vue';
 import SurpriseMe from '../components/Cards/SurpriseMe/SurpriseMe.vue';
-import { ref } from 'vue';
 import { useAnimeData } from '../stores/anime_data';
 
 export default {
