@@ -55,4 +55,8 @@ iframe {
   transition: all .5s ease-in-out;
 }
 
+.card-hovered:hover{
+  color: v-bind("setColor") !important;
+  transition: all .2s ease;
+}
 </style>

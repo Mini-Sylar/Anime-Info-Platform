@@ -12,14 +12,15 @@
     delay: 2500,
 }">
             <swiper-slide class="swiper-slide-instance" v-for="(item, index) in populateCards" :key="index">
-                <img :src="item.mediaRecommendation.coverImage.large" alt="" />
-                <p class="noselect" role="link">
+                <p class="noselect card-hovered" role="link">
                     {{
-        item.mediaRecommendation.title.english
-            ? item.mediaRecommendation.title.english
-            : item.mediaRecommendation.title.romaji
+                            item.mediaRecommendation.title.english
+                                ? item.mediaRecommendation.title.english
+                                : item.mediaRecommendation.title.romaji
                     }}
                 </p>
+                <img :src="item.mediaRecommendation.coverImage.large" alt="" class="anime-images" />
+
             </swiper-slide>
         </swiper>
     </div>
@@ -119,5 +120,13 @@ p {
     color: white;
     font-weight: 900;
     cursor: pointer;
+    padding: 10px;
+    height: 10vh;
+    /* background-color: red; */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
 </style>
