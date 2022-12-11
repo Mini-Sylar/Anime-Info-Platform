@@ -24,7 +24,6 @@ export default {
 }
 
 .image-container {
-    background-color: springgreen;
     height: 100vh;
 }
 
