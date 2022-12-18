@@ -1,8 +1,14 @@
-<template>
+<template  >
     <div class="is-a-container">
-        <h1 class="anime-title">{{titleDescription.animeTitle}}</h1>
-        <p class="anime-synposis" v-html="titleDescription.description">
-        </p>
+        <transition appear mode="out-in">
+            <h1 class="anime-title" :key="title">{{ title }}</h1>
+        </transition>
+        <!-- Add transtion to description -->
+        <transition  appear mode="out-in">
+            <p class="anime-synposis" v-html="titleDescription.description" :key="title" >
+            </p>
+        </transition>
+
     </div>
 </template>
 <script>
@@ -15,6 +21,12 @@ export default {
         titleDescription: {
             type: Object,
         },
+    },
+    computed: {
+        title() {
+            return this.$props.titleDescription.animeTitle
+        }
+
     },
 }
 </script>
@@ -30,5 +42,18 @@ export default {
     font-family: DexaPro-Bold;
     font-size: clamp(1.5rem, 3vw, 3.5rem);
     line-height: 3rem;
+    transition: all 1s ease-in;
+    content: "hello world";
+}
+
+/* we will explain what these classes do next! */
+.v-enter-active,
+.v-leave-active {
+    transition: opacity 0.2s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+    opacity: 0;
 }
 </style>
