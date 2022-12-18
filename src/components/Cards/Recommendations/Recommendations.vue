@@ -1,28 +1,29 @@
 <template>
     <div class="is-a-container swiper-container noselect">
-        <!-- Todo add function to refresh manually -->
-        <swiper :slides-per-view="4" :space-between="2" @swiper="onSwiper" @slideChange="onSlideChange"
-            :effect="'coverflow'" :centeredSlides="true" :coverflowEffect="{
-                rotate: 10,
-                stretch: 1,
-                depth: 100,
-                modifier: 3,
-                slideShadows: true,
-            }" :modules="modules" :grabCursor="true" :autoplay="{
+        <transition appear mode="out-in">
+            <swiper :slides-per-view="4" :space-between="2" @swiper="onSwiper" @slideChange="onSlideChange"
+                :effect="'coverflow'" :centeredSlides="true" :coverflowEffect="{
+                    rotate: 10,
+                    stretch: 1,
+                    depth: 100,
+                    modifier: 3,
+                    slideShadows: true,
+                }" :modules="modules" :grabCursor="true" :autoplay="{
     delay: 2500,
-}">
-            <swiper-slide class="swiper-slide-instance" v-for="(item, index) in populateCards" :key="index">
-                <p class="noselect card-hovered" role="link">
-                    {{
-                            item.mediaRecommendation.title.english
-                                ? item.mediaRecommendation.title.english
-                                : item.mediaRecommendation.title.romaji
-                    }}
-                </p>
-                <img :src="item.mediaRecommendation.coverImage.large" alt="" class="anime-images" />
+}" :key="populateCards">
+                <swiper-slide class="swiper-slide-instance" v-for="(item, index) in populateCards" :key="index">
+                    <p class="noselect card-hovered" role="link">
+                        {{
+                                item.mediaRecommendation.title.english
+                                    ? item.mediaRecommendation.title.english
+                                    : item.mediaRecommendation.title.romaji
+                        }}
+                    </p>
+                    <img :src="item.mediaRecommendation.coverImage.large" alt="" class="anime-images" />
 
-            </swiper-slide>
-        </swiper>
+                </swiper-slide>
+            </swiper>
+        </transition>
     </div>
 </template>
 <script>
@@ -128,5 +129,4 @@ p {
     justify-content: center;
     align-items: center;
 }
-
 </style>
