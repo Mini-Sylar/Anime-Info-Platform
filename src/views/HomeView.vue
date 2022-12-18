@@ -59,4 +59,15 @@ iframe {
   color: v-bind("setColor") !important;
   transition: all .2s ease;
 }
+
+/* we will explain what these classes do next! */
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
 </style>
