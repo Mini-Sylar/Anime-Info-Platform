@@ -9,10 +9,10 @@
                     modifier: 3,
                     slideShadows: true,
                 }" :modules="modules" :grabCursor="true" :autoplay="{
-    delay: 2500,
-}" :key="populateCards">
+                    delay: 2500,
+                }" :key="populateCards">
                 <swiper-slide class="swiper-slide-instance" v-for="(item, index) in populateCards" :key="index">
-                    <p class="noselect card-hovered" role="link">
+                    <p class="noselect card-hovered" role="link" @click="searchFromRecommended(item.mediaRecommendation.title)">
                         {{
                                 item.mediaRecommendation.title.english
                                     ? item.mediaRecommendation.title.english
@@ -46,7 +46,6 @@ export default {
     data() {
         return {
             recommended: [],
-            triggerRefreshOnComponent: 0,
         };
     },
     components: {
@@ -55,21 +54,20 @@ export default {
     },
     setup() {
         // useAnimeStoreHere
-
         const mainAnimeData = useAnimeData();
         const recommendations = mainAnimeData.getRecommendations;
+        let useFetchFromRecommendations = mainAnimeData.fetchFromRecommended
         // Container Here
         const onSwiper = (swiper) => {
-            // console.log(swiper);
         };
         const onSlideChange = () => {
-            // console.log('slide change');
         };
         return {
             onSwiper,
             onSlideChange,
             modules: [Navigation, Pagination, Scrollbar, A11y, EffectCoverflow, Autoplay],
             recommendations,
+            useFetchFromRecommendations
         };
     },
     computed: {
@@ -79,8 +77,9 @@ export default {
         },
     },
     methods: {
-        forceRender() {
-            this.triggerRefreshOnComponent += 1;
+        searchFromRecommended(query) {
+            let getTitle  = query.english ? query.english : query.romaji;
+            this.useFetchFromRecommendations(getTitle)
         },
     },
 };

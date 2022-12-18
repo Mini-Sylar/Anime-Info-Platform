@@ -45,15 +45,15 @@ export const useAnimeData = defineStore("animeData", {
       const recommendations = state.animeData.data.Media.recommendations.nodes;
       return recommendations;
     },
-    getAccentColor:(state)=>{
+    getAccentColor: (state) => {
       const color = state.animeData.data.Media.coverImage.color;
       // TODO: Add way to shade color dynamically
-      return shadeColor(color,-10);
+      return shadeColor(color, -10);
     },
-    getBackground:(state)=>{
+    getBackground: (state) => {
       const background = state.animeData.data.Media.bannerImage;
-      return background
-    }
+      return background;
+    },
   },
   actions: {
     async fetchAnimeData(searchQuery) {
@@ -82,7 +82,24 @@ export const useAnimeData = defineStore("animeData", {
           return { mediaRecommendation: item };
         }),
       ];
-     this.animeData.data.Media.recommendations.nodes = newNodes;
+      this.animeData.data.Media.recommendations.nodes = newNodes;
+    },
+    async fetchFromRecommended(title) {
+      let response = await fetch("https://graphql.anilist.co/?id", {
+        method: "POST",
+        body: prepareAnimeData(title),
+        headers: headersList,
+      });
+      let main_data = await response.json();
+      main_data.data.Media.recommendations = null;
+      let omitNull = (obj) => {
+        Object.keys(obj)
+          .filter((k) => obj[k] === null)
+          .forEach((k) => delete obj[k]);
+        return obj;
+      };
+      this.animeData.data.Media = { ...omitNull(this.animeData.data.Media), ...omitNull(main_data.data.Media) };
+      localStorage.setItem("searchQuery", title);
     },
   },
 });
