@@ -39,8 +39,6 @@ The Anime Information Platform is built completely with
 - CSS
 - Vanilla Javascript
 
-The javascript here is responsible for fetching data from the AniList API written in GraphQl as well as updating the page with the data fetched. View [index.js](https://github.com/Mini-Sylar/Anime-Info-Platform/blob/master/javascript/index.js) for more information
-
 ## Contribution
 
 Moved into [contributions](CONTRIBUTION.md)
@@ -50,6 +48,16 @@ Moved into [contributions](CONTRIBUTION.md)
 <a href="https://github.com/Mini-Sylar/Anime-Info-Platform/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=Mini-Sylar/Anime-Info-Platform" />
 </a>
+
+## ❗ Version 2.0.0
+
+Version 2.0.0 is currently in development, a beta version can be accessed below using the following link
+[Anime Info Platform v.2.0.0](https://anime-info-platform-nemmb4sjp-mini-sylar.vercel.app/)
+
+### What's new in version 2.0.0?
+Check out the pre-release section to see what's new and changed [What's New In 2.0.0](https://github.com/Mini-Sylar/Anime-Info-Platform/releases)
+
+<hr/>
 
 ## Screenshots
 
