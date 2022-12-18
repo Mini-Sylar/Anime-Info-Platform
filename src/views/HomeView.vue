@@ -57,7 +57,10 @@ iframe {
 
 .card-hovered:hover{
   color: v-bind("setColor") !important;
+  min-height: 100%;
+  background-color: rgba(0, 0, 0, 0.622);
   transition: all .2s ease;
+  /* filter:brightness(200%); */
 }
 
 /* we will explain what these classes do next! */

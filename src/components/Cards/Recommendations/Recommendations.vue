@@ -128,5 +128,8 @@ p {
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 15px;
 }
+
+
 </style>
