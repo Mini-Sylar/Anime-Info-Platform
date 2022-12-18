@@ -1,9 +1,13 @@
 <template>
     <div class="ratings-container">
         <!-- TODO Call manual refresh on vue 3 star ratings -->
-        <vue3-star-ratings v-model="rateValueUpdate" class="star-rating" :inactiveColor="'#c0c0c0'" :numberOfStars='5'
-            :showControl="false" :starColor="setColor()" :starSize="'14'" :disableClick="true"
-            :key="triggerRefreshOnComponent" />
+        <transition appear mode="out-in">
+
+
+            <vue3-star-ratings v-model="rateValueUpdate" class="star-rating" :inactiveColor="'#c0c0c0'"
+                :numberOfStars='5' :showControl="false" :starColor="setColor()" :starSize="'14'" :disableClick="true"
+                :key="triggerRefreshOnComponent" />
+        </transition>
         <span>
             <p>
             <div class="main-value"></div>{{ rate }}
@@ -95,8 +99,16 @@ p {
     /* background-color: red; */
 }
 
-/* TODO: fix star rating color transition */
-*{
-    transition: all 3s ease-in  !important;
+
+/* we will explain what these classes do next! */
+.v-enter-active,
+.v-leave-active {
+    transition: opacity 0.2s ease;
 }
+
+.v-enter-from,
+.v-leave-to {
+    opacity: 0;
+}
+
 </style>
