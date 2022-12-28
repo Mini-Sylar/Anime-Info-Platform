@@ -646,8 +646,8 @@ function ValidateForm() {
     let mySearchValue = here.searchParams.get("show");
     SearchAnime(mySearchValue);
     localStorage["searchKey"] = mySearchValue;
-//     set attribute to animename for splitbee
-    form.setAttribute('data-splitbee-event', mySearchValue)
+// //     set attribute to animename for splitbee
+//     form.setAttribute('data-splitbee-event', mySearchValue)
     // Add query text to URL in address bar if you want to copy and paste
     window.history.pushState(null, "", `?show=${search_value.value}`);
   }
