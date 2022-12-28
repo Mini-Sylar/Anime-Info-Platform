@@ -569,6 +569,9 @@ function SearchAnime(searchQuery) {
 
 // Add event listners here
 form.addEventListener("submit", function (e) {
+  splitbee.track("Anime Show", {
+  title: search_value.value
+})
   e.preventDefault();
   ValidateForm();
   form.reset();
