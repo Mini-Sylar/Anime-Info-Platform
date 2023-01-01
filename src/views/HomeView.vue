@@ -55,12 +55,18 @@ iframe {
   transition: all .5s ease-in-out;
 }
 
-.card-hovered:hover{
+.card-hovered:hover {
   color: v-bind("setColor") !important;
   min-height: 100%;
   background-color: rgba(0, 0, 0, 0.622);
   transition: all .2s ease;
-  filter:brightness(200%);
+  filter: brightness(200%);
+}
+
+select {
+  background-color: v-bind("setColor") !important;
+  color: white !important;
+  transition: all .5s ease-in-out;
 }
 
 /* we will explain what these classes do next! */

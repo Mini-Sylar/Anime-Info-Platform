@@ -61,6 +61,8 @@ let response = await fetch("https://graphql.anilist.co/?id", {
   method: "POST",
   body: prepareAnimeData(),
   headers: headersList,
+}).catch((err) => {
+  console.log(err);
 });
 
 

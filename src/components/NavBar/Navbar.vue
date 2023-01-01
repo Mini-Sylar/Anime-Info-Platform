@@ -3,8 +3,8 @@ import { RouterLink, RouterView } from "vue-router";
 import SearchboxVue from "./componentsNavBar/Searchbox.vue";
 </script>
 
-<template>
-    <header>
+<template v-once>
+    <header >
         <nav class="navigation-bar">
             <div class="main-links">
                 <a href="http://" target="_blank" rel="noopener noreferrer">Current Season</a>

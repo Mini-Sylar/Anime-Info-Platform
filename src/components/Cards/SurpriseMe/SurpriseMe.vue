@@ -1,12 +1,12 @@
 <template>
     <div class="surprise-me-container">
         <form @submit.prevent="handlesubmit">
-            <select v-model="genreQuery">
-                <option v-for="(item, index) in genres" :key="index" :value="item" >{{ item }}</option>
-            </select>
             <button type="submit">
                 Surprise Me
             </button>
+            <select v-model="genreQuery">
+                <option v-for="(item, index) in genres" :key="index" :value="item">{{ item }}</option>
+            </select>
         </form>
     </div>
 </template>
@@ -37,6 +37,7 @@ export default {
         const mainAnimeData = useAnimeData()
         const genreQuery = ref('Action')
         const handlesubmit = () => {
+            console.log("Surprise me button clicked");
             mainAnimeData.fetchSurprise(genreQuery.value)
         }
         return {
@@ -54,6 +55,7 @@ export default {
     padding: 1rem;
     margin-top: .1rem;
     gap: 1rem;
+    position: relative;
 }
 
 button {
@@ -62,5 +64,20 @@ button {
     border-radius: 25px;
     cursor: pointer;
     border: none;
+    position: absolute;
+    z-index: 22;
+}
+
+select{
+    background-color: #0195ff;
+    padding: 9.4px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    border: none;
+    color: white;
+    position: fixed;
+    z-index: 1;
+    outline: none;
+    
 }
 </style>
