@@ -1,5 +1,5 @@
 // local storage set query
-import {randomIntFromInterval} from './helpers';
+import { randomIntFromInterval } from "./helpers";
 
 export let headersList = {
   Accept: "*/*",
@@ -65,14 +65,12 @@ let response = await fetch("https://graphql.anilist.co/?id", {
   console.log(err);
 });
 
-
 export let main_data = await response.json();
-
 
 // Surprise Me Cards
 export function surpriseMe(genre = "action") {
-let gqlBody_Cards = {
-  query: `query ( $page: Int, $perPage: Int, $search: String) {
+  let gqlBody_Cards = {
+    query: `query ( $page: Int, $perPage: Int, $search: String) {
   Page (page: $page, perPage: $perPage) {
     pageInfo {
       perPage
@@ -92,7 +90,22 @@ let gqlBody_Cards = {
     
   }
 }`,
-  variables: { search: genre, page: randomIntFromInterval(1,200), perPage: 10 },
-};
+    variables: {
+      search: genre,
+      page:
+        genre !== "Ecchi" &&
+        genre !== "Horror" && // remove horror
+        genre !== "Mahou Shoujo" && // remove horror
+        genre !== "Mecha" &&
+        genre !== "Music" && //Remove Music
+        genre !== "Mystery" &&
+        genre !== "Psychological"
+          ? randomIntFromInterval(1, 200) // for none of the values above
+          : genre !== "Horror" && genre !== "Mahou Shoujo" && genre !== "Music"
+          ? randomIntFromInterval(1, 90)
+          : randomIntFromInterval(1, 50),
+      perPage: 10,
+    },
+  };
   return JSON.stringify(gqlBody_Cards);
 }
