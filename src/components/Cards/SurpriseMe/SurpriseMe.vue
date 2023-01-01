@@ -37,7 +37,7 @@ export default {
         const mainAnimeData = useAnimeData()
         const genreQuery = ref('Action')
         const handlesubmit = () => {
-            console.log(genreQuery.value);
+            // console.log(genreQuery.value);
             mainAnimeData.fetchSurprise(genreQuery.value)
         }
         return {
