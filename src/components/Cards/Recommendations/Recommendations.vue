@@ -89,8 +89,9 @@ export default {
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
-    min-width: 100%;
+    min-width: 40rem;
     height: 90%;
+    /* background-color: red; */
 }
 
 .swiper-slide-instance {

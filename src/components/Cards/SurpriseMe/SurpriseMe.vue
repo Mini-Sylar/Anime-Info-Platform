@@ -37,7 +37,6 @@ export default {
         const mainAnimeData = useAnimeData()
         const genreQuery = ref('Action')
         const handlesubmit = () => {
-            console.log("Surprise me button clicked");
             mainAnimeData.fetchSurprise(genreQuery.value)
         }
         return {
@@ -75,7 +74,7 @@ select{
     cursor: pointer;
     border: none;
     color: white;
-    position: fixed;
+    position: absolute;
     z-index: 1;
     outline: none;
     
