@@ -52,7 +52,7 @@ export const useAnimeData = defineStore("animeData", {
     },
     getBackground: (state) => {
       const background = state.animeData.data.Media.bannerImage;
-      return background;
+      return background?background:"public/images/404-no-wallpaper.jpg";
     },
   },
   actions: {
