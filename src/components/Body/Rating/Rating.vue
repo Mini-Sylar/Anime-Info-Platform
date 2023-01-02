@@ -2,8 +2,6 @@
     <div class="ratings-container">
         <!-- TODO Call manual refresh on vue 3 star ratings -->
         <transition appear mode="out-in">
-
-
             <vue3-star-ratings v-model="rateValueUpdate" class="star-rating" :inactiveColor="'#c0c0c0'"
                 :numberOfStars='5' :showControl="false" :starColor="setColor()" :starSize="'14'" :disableClick="true"
                 :key="triggerRefreshOnComponent" />

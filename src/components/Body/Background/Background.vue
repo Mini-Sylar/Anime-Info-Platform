@@ -1,6 +1,10 @@
 <template >
     <div>
-        <div class="image-container"><img :src="backgroundImage" alt="Main body image"></div>
+        <div class="image-container">
+            <transition appear mode="out-in">
+                <img :src="backgroundImage" alt="Main body image" :key="backgroundImage">
+            </transition>
+        </div>
     </div>
 </template>
 <script>
@@ -27,7 +31,18 @@ export default {
     height: 100vh;
 }
 
-img{
+img {
     filter: brightness(10%);
+}
+
+/* we will explain what these classes do next! */
+.v-enter-active,
+.v-leave-active {
+    transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+    opacity: 0;
 }
 </style>
