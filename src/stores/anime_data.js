@@ -47,7 +47,6 @@ export const useAnimeData = defineStore("animeData", {
     },
     getAccentColor: (state) => {
       const color = state.animeData.data.Media.coverImage.color;
-      console.log(color,"color");
       // TODO: Add way to shade color dynamically
       return color !== null ? shadeColor(color, -10) : "#0195ff";
     },
