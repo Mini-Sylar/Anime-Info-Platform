@@ -47,12 +47,15 @@ export const useAnimeData = defineStore("animeData", {
     },
     getAccentColor: (state) => {
       const color = state.animeData.data.Media.coverImage.color;
+      console.log(color,"color");
       // TODO: Add way to shade color dynamically
-      return shadeColor(color, -10);
+      return color !== null ? shadeColor(color, -10) : "#0195ff";
     },
     getBackground: (state) => {
       const background = state.animeData.data.Media.bannerImage;
-      return background?background:"public/images/404-no-wallpaper.jpg";
+      return background !== null
+        ? background
+        : "public/images/404-no-wallpaper.jpg";
     },
   },
   actions: {
@@ -98,7 +101,10 @@ export const useAnimeData = defineStore("animeData", {
           .forEach((k) => delete obj[k]);
         return obj;
       };
-      this.animeData.data.Media = { ...omitNull(this.animeData.data.Media), ...omitNull(main_data.data.Media) };
+      this.animeData.data.Media = {
+        ...omitNull(this.animeData.data.Media),
+        ...omitNull(main_data.data.Media),
+      };
       localStorage.setItem("searchQuery", title);
     },
   },
