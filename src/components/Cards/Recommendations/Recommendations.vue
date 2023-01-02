@@ -41,11 +41,14 @@
                 : item.mediaRecommendation.title.romaji
             }}
           </p>
-          <img
+          <transition>
+           <img
             :src="item.mediaRecommendation.coverImage.large"
             alt=""
             class="anime-images"
           />
+          </transition>
+         
         </swiper-slide>
       </swiper>
     </transition>
