@@ -52,9 +52,7 @@ export const useAnimeData = defineStore("animeData", {
     },
     getBackground: (state) => {
       const background = state.animeData.data.Media.bannerImage;
-      return background !== null
-        ? background
-        : "public/images/404-no-wallpaper.jpg";
+      return background !== null ? background : "/images/404-no-wallpaper.jpg";
     },
   },
   actions: {
@@ -94,6 +92,10 @@ export const useAnimeData = defineStore("animeData", {
       });
       let main_data = await response.json();
       main_data.data.Media.recommendations = null;
+      // Set background to no image if not found
+      if (main_data.data.Media.bannerImage === null) {
+        main_data.data.Media.bannerImage = "/images/404-no-wallpaper.jpg";
+      }
       let omitNull = (obj) => {
         Object.keys(obj)
           .filter((k) => obj[k] === null)

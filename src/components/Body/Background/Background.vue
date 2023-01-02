@@ -1,6 +1,7 @@
 <template >
     <div>
         <div class="image-container">
+
             <transition appear mode="out-in">
                 <img :src="backgroundImage" alt="Main body image" :key="backgroundImage">
             </transition>
@@ -13,7 +14,7 @@ export default {
         backgroundImage: {
             required: false,
         }
-    }
+    },
 }
 </script>
 <style scoped>
