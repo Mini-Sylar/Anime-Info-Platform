@@ -1,5 +1,5 @@
 <template>
-    <div class="more-info-container">
+    <div class="more-info-container"  v-once>
         <button>
             More Info
         </button>

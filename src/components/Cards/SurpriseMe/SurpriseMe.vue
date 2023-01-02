@@ -1,5 +1,5 @@
 <template>
-    <div class="surprise-me-container">
+    <div class="surprise-me-container"  v-once>
         <form @submit.prevent="handlesubmit">
             <button type="submit">
                 Surprise Me

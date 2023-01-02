@@ -41,11 +41,12 @@
                 : item.mediaRecommendation.title.romaji
             }}
           </p>
-          <transition>
+          <transition appear mode="out-in">
            <img
             :src="item.mediaRecommendation.coverImage.large"
             alt=""
             class="anime-images"
+            :key="item.mediaRecommendation.coverImage.large"
           />
           </transition>
          
@@ -162,5 +163,15 @@ p {
   justify-content: center;
   align-items: center;
   border-radius: 15px;
+}
+
+.v-enter-active,
+.v-leave-active {
+    transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+    opacity: 0;
 }
 </style>

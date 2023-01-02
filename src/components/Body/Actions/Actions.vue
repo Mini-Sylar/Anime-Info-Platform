@@ -1,6 +1,6 @@
 <template >
     <div>
-        <div class="actions-container">
+        <div class="actions-container"  v-once>
             <div class="share">
                 <button type="button" class="action-button">
                     <font-awesome-icon icon="fa-solid fa-share-nodes" />
