@@ -28,7 +28,15 @@ import Trailer from './Trailer/Trailer.vue';
 import Background from './Background/Background.vue';
 // useAnimeStoreHere
 import { useAnimeData } from '@/stores/anime_data.js'
-const mainAnimeData = useAnimeData()
+import { ref } from 'vue';
+const mainAnimeData = ref(null)
+const getAnimeData = async () => {
+    await new Promise (resolve => setTimeout(resolve, 2000))
+    mainAnimeData.value = await useAnimeData()
+}
+
+await getAnimeData()
+// const mainAnimeData = await useAnimeData()
 </script>
 
 <style scoped>

@@ -2,6 +2,7 @@
 import BodyVue from '../components/Body/Body.vue';
 import Recommendations from '../components/Cards/Recommendations/Recommendations.vue';
 import SurpriseMe from '../components/Cards/SurpriseMe/SurpriseMe.vue';
+import BodyLoading from '../components/Body/Loading/BodyLoading.vue';
 import { useAnimeData } from '../stores/anime_data';
 
 export default {
@@ -9,7 +10,8 @@ export default {
   components: {
     BodyVue,
     Recommendations,
-    SurpriseMe
+    SurpriseMe,
+    BodyLoading
   },
   computed: {
     setColor() {
@@ -17,13 +19,36 @@ export default {
       return mainAnimeData.getAccentColor;
     }
   },
+  methods: {
+    pending() {
+      console.log('pending')
+    },
+    fallback() {
+      console.log('fallback')
+    },
+    resolved() {
+      console.log('resolved')
+    }
+  },
+  errorCaptured() {
+    console.log('error')
+  }
 }
 
 </script>
 
 <template>
   <div class="left-side-main">
-    <BodyVue />
+    <Suspense :timeout="0"  @pending="pending" @fallback="fallback" @resolved="resolved">
+      <template #default>
+            <BodyVue />
+      </template>
+    <template #fallback>
+    <div class="loading-container">
+      <BodyLoading></BodyLoading>
+    </div>
+    </template>
+    </Suspense>
   </div>
   <div class="right-side-main">
     <Recommendations />
@@ -78,5 +103,14 @@ select {
 .v-enter-from,
 .v-leave-to {
   opacity: 0;
+}
+
+.loading-container{
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  height: 60%;
+  padding-left: 2rem;
 }
 </style>
