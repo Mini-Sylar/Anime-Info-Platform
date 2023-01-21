@@ -12,7 +12,7 @@ export default {
 
 }
 </script>
-<style >
+<style scoped>
 div {
     overflow: hidden;
 }
@@ -58,8 +58,8 @@ div {
     -webkit-mask: linear-gradient(-60deg, #000 30%, #0005, #000 70%) right/350% 100%;
     background-repeat: no-repeat;
     animation: shimmer 2.5s infinite;
-    background-color: #929090d2;
-        opacity: .4;
+    background-color: #ffffffd2;
+    opacity: .5;
 }
 
 @keyframes shimmer {

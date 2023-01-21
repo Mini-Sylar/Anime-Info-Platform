@@ -31,7 +31,6 @@ import { useAnimeData } from '@/stores/anime_data.js'
 import { ref } from 'vue';
 const mainAnimeData = ref(null)
 const getAnimeData = async () => {
-    await new Promise (resolve => setTimeout(resolve, 2000))
     mainAnimeData.value = await useAnimeData()
 }
 

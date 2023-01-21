@@ -31,7 +31,7 @@ export default {
     }
   },
   errorCaptured() {
-    console.log('error')
+    this.$router.push({ name: '404' })
   }
 }
 
@@ -39,7 +39,7 @@ export default {
 
 <template>
   <div class="left-side-main">
-    <Suspense :timeout="0"  @pending="pending" @fallback="fallback" @resolved="resolved">
+    <Suspense @pending="pending" @fallback="fallback" @resolved="resolved">
       <template #default>
             <BodyVue />
       </template>
