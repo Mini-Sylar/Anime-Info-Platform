@@ -17,7 +17,6 @@ export default {
   },
   computed: {
     setColor() {
-      const mainAnimeData = useAnimeData()
       return mainAnimeData.getAccentColor;
     }
   },
@@ -32,21 +31,16 @@ export default {
       console.log('resolved')
     }
   },
-  errorCaptured() {
-    this.$router.push({ name: '404' })
-
-  },
   setup() {
     const mainAnimeData = useAnimeData()
-    const unsubscribe = mainAnimeData.$onAction(({
-      onError
-    }) => {
-      onError((error) => {
-        console.log("error edaedaejdaeda")
-      })
-    })
-
-    unsubscribe()
+    return {
+      mainAnimeData
+    }
+  },
+  errorCaptured() {
+    console.log('error')
+    this.$router.push({ name: '404' })
+    this.$router.go(1)
   }
 }
 

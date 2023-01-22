@@ -23,6 +23,11 @@ const router = createRouter({
       name: "404",
       component: NotFound,
     },
+    {
+      path: "/:pathMatch(.*)*",
+      redirect: "/not-found",
+      component: NotFound,
+    },
   ],
 });
 

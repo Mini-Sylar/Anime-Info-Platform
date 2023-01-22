@@ -28,20 +28,15 @@ import Trailer from './Trailer/Trailer.vue';
 import Background from './Background/Background.vue';
 // useAnimeStoreHere
 import { useAnimeData } from '@/stores/anime_data.js'
-import { ref,onErrorCaptured } from 'vue';
+import { ref,onErrorCaptured,onBeforeMount } from 'vue';
 const mainAnimeData = ref(null)
 const getAnimeData = async () => {
     mainAnimeData.value = await useAnimeData()
+    return mainAnimeData.value
 }
-
-onErrorCaptured(() => {
-    this.$router.push({ name: "404" })
-}),
-
-await getAnimeData()
-
-
-// const mainAnimeData = await useAnimeData()
+onErrorCaptured(async () => {
+    await getAnimeData()
+})
 </script>
 
 <style scoped>
