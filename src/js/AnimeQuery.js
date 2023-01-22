@@ -65,10 +65,7 @@ let response = await fetch("https://graphql.anilist.co/?id", {
   console.log(err);
 });
 
-export let main_data = await response.json().catch(() => {
-  console.log("Error");
-  return {}
-});
+export let main_data = await response.json()
 
 // Surprise Me Cards
 export function surpriseMe(genre = "action") {

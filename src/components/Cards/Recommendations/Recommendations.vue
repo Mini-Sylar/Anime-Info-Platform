@@ -57,6 +57,7 @@
 </template>
 <script>
 import { useAnimeData } from "@/stores/anime_data.js";
+import { ref } from 'vue';
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from "swiper/vue";
 import {
@@ -81,9 +82,12 @@ export default {
     Swiper,
     SwiperSlide,
   },
-  setup() {
+  async setup() {
+    const mainAnimeData = ref(null)
+    const getAnimeData = async () => {
+      mainAnimeData.value = await useAnimeData()
+    }
     // useAnimeStoreHere
-    const mainAnimeData = useAnimeData();
     const recommendations = mainAnimeData.getRecommendations;
     let useFetchFromRecommendations = mainAnimeData.fetchFromRecommended;
     // Container Here

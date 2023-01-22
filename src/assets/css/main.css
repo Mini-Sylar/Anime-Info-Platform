@@ -19,3 +19,27 @@ main {
   align-items: flex-end;
   min-height: 92vh;
 }
+
+.main-card-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  min-height: 85vh;
+  width: 100%;
+}
+
+.shimmer {
+  -webkit-mask: linear-gradient(-60deg, #000 30%, #0005, #000 70%) right/350%
+    100%;
+  background-repeat: no-repeat;
+  animation: shimmer 2.5s infinite;
+  background-color: #ffffffd2;
+  opacity: 0.5;
+}
+
+@keyframes shimmer {
+  100% {
+    -webkit-mask-position: left;
+  }
+}

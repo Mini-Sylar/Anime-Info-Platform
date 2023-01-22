@@ -3,6 +3,7 @@ import BodyVue from '../components/Body/Body.vue';
 import Recommendations from '../components/Cards/Recommendations/Recommendations.vue';
 import SurpriseMe from '../components/Cards/SurpriseMe/SurpriseMe.vue';
 import BodyLoading from '../components/Body/Loading/BodyLoading.vue';
+import CardLoading from '../components/Cards/Loading/CardLoading.vue';
 import { useAnimeData } from '../stores/anime_data';
 
 export default {
@@ -11,7 +12,8 @@ export default {
     BodyVue,
     Recommendations,
     SurpriseMe,
-    BodyLoading
+    BodyLoading,
+    CardLoading
   },
   computed: {
     setColor() {
@@ -32,6 +34,19 @@ export default {
   },
   errorCaptured() {
     this.$router.push({ name: '404' })
+
+  },
+  setup() {
+    const mainAnimeData = useAnimeData()
+    const unsubscribe = mainAnimeData.$onAction(({
+      onError
+    }) => {
+      onError((error) => {
+        console.log("error edaedaejdaeda")
+      })
+    })
+
+    unsubscribe()
   }
 }
 
@@ -41,18 +56,29 @@ export default {
   <div class="left-side-main">
     <Suspense @pending="pending" @fallback="fallback" @resolved="resolved">
       <template #default>
-            <BodyVue />
+        <BodyVue />
       </template>
-    <template #fallback>
-    <div class="loading-container">
-      <BodyLoading></BodyLoading>
-    </div>
-    </template>
+      <template #fallback>
+        <div class="loading-container">
+          <BodyLoading></BodyLoading>
+        </div>
+      </template>
     </Suspense>
   </div>
   <div class="right-side-main">
-    <Recommendations />
-    <SurpriseMe></SurpriseMe>
+    <Suspense>
+      <template #default>
+        <div class="main-card-section">
+          <Recommendations />
+          <SurpriseMe></SurpriseMe>
+        </div>
+      </template>
+      <template #fallback>
+        <div class="main-card-section">
+          <CardLoading></CardLoading>
+        </div>
+      </template>
+    </Suspense>
   </div>
 
 </template>
@@ -105,7 +131,7 @@ select {
   opacity: 0;
 }
 
-.loading-container{
+.loading-container {
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
