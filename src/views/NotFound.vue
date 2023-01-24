@@ -10,6 +10,7 @@
     </div>
 </template>
 <script>
+import { useAnimeData } from '@/stores/anime_data.js'
 export default {
     mounted() {
         const mainAnimeData = useAnimeData()
