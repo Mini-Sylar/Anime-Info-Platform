@@ -34,9 +34,7 @@ const getAnimeData = async () => {
     mainAnimeData.value = await useAnimeData()
     return mainAnimeData.value
 }
-onBeforeMount(async () => {
     await getAnimeData()
-})
 
 </script>
 

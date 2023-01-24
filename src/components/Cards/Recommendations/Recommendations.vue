@@ -4,8 +4,6 @@
       <swiper
         :slides-per-view="4"
         :space-between="2"
-        @swiper="onSwiper"
-        @slideChange="onSlideChange"
         :effect="'coverflow'"
         :centeredSlides="true"
         :coverflowEffect="{
@@ -86,16 +84,14 @@ export default {
     const mainAnimeData = ref(null)
     const getAnimeData = async () => {
       mainAnimeData.value = await useAnimeData()
+     
     }
+    
+    await getAnimeData()
+    const recommendations = mainAnimeData.value.getRecommendations;
+    let useFetchFromRecommendations = mainAnimeData.value.fetchFromRecommended;
     // useAnimeStoreHere
-    const recommendations = mainAnimeData.getRecommendations;
-    let useFetchFromRecommendations = mainAnimeData.fetchFromRecommended;
-    // Container Here
-    const onSwiper = (swiper) => {};
-    const onSlideChange = () => {};
     return {
-      onSwiper,
-      onSlideChange,
       modules: [
         Navigation,
         Pagination,

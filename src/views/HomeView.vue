@@ -17,6 +17,7 @@ export default {
   },
   computed: {
     setColor() {
+      const mainAnimeData = useAnimeData()
       return mainAnimeData.getAccentColor;
     }
   },
@@ -29,12 +30,6 @@ export default {
     },
     resolved() {
       console.log('resolved')
-    }
-  },
-  setup() {
-    const mainAnimeData = useAnimeData()
-    return {
-      mainAnimeData
     }
   },
   errorCaptured() {
