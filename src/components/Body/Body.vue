@@ -34,9 +34,10 @@ const getAnimeData = async () => {
     mainAnimeData.value = await useAnimeData()
     return mainAnimeData.value
 }
-onErrorCaptured(async () => {
+onBeforeMount(async () => {
     await getAnimeData()
 })
+
 </script>
 
 <style scoped>

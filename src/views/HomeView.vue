@@ -38,7 +38,6 @@ export default {
     }
   },
   errorCaptured() {
-    console.log('error')
     this.$router.push({ name: '404' })
     this.$router.go(1)
   }
