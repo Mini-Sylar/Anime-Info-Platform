@@ -130,10 +130,10 @@ select {
   padding-left: 2rem;
 }
 
-.main-div{
+.main-div {
   display: flex;
- position: absolute;
+ 
+  width: 100%;
   overflow: hidden;
-
 }
 </style>
