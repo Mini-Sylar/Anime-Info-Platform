@@ -41,32 +41,34 @@ export default {
 </script>
 
 <template>
-  <div class="left-side-main">
-    <Suspense @pending="pending" @fallback="fallback" @resolved="resolved">
-      <template #default>
-        <BodyVue />
-      </template>
-      <template #fallback>
-        <div class="loading-container">
-          <BodyLoading></BodyLoading>
-        </div>
-      </template>
-    </Suspense>
-  </div>
-  <div class="right-side-main">
-    <Suspense>
-      <template #default>
-        <div class="main-card-section">
-          <Recommendations />
-          <SurpriseMe></SurpriseMe>
-        </div>
-      </template>
-      <template #fallback>
-        <div class="main-card-section">
-          <CardLoading></CardLoading>
-        </div>
-      </template>
-    </Suspense>
+  <div class="main-div">
+    <div class="left-side-main">
+      <Suspense @pending="pending" @fallback="fallback" @resolved="resolved">
+        <template #default>
+          <BodyVue />
+        </template>
+        <template #fallback>
+          <div class="loading-container">
+            <BodyLoading></BodyLoading>
+          </div>
+        </template>
+      </Suspense>
+    </div>
+    <div class="right-side-main">
+      <Suspense>
+        <template #default>
+          <div class="main-card-section">
+            <Recommendations />
+            <SurpriseMe></SurpriseMe>
+          </div>
+        </template>
+        <template #fallback>
+          <div class="main-card-section">
+            <CardLoading></CardLoading>
+          </div>
+        </template>
+      </Suspense>
+    </div>
   </div>
 
 </template>
@@ -126,5 +128,12 @@ select {
   width: 100%;
   height: 60%;
   padding-left: 2rem;
+}
+
+.main-div{
+  display: flex;
+ position: absolute;
+  overflow: hidden;
+
 }
 </style>

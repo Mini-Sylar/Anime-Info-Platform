@@ -8,10 +8,25 @@ import { RouterLink, RouterView } from "vue-router";
     <NavbarVue />
   </header>
   <main>
-    <RouterView />
+    <router-view v-slot="{ Component }">
+      <transition name="slide" mode="out-in">
+        <component :is="Component" :key="$route.path"></component>
+      </transition>
+    </router-view>
   </main>
 </template>
 
 <style scoped>
+.slide-enter-active,
+.slide-leave-active {
+  position: absolute;
+  transition: opacity 1s, transform 1s;
+}
 
+.slide-enter-from,
+.slide-leave-to {
+  opacity: 0;
+  position: absolute;
+  transform: translateX(-30%);
+}
 </style>
