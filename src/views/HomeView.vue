@@ -132,8 +132,11 @@ select {
 
 .main-div {
   display: flex;
- 
   width: 100%;
-  overflow: hidden;
+  /* overflow: hidden; */
+  position: absolute;
+  top: 0;
+  z-index: -1;
+  
 }
 </style>

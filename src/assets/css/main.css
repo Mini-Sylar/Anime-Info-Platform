@@ -10,7 +10,7 @@ main {
   flex-direction: column;
   justify-content: flex-end;
   align-items: flex-end;
-  min-height: 92vh;
+  min-height: 100vh;
 }
 .right-side-main {
   width: 45%;
@@ -25,7 +25,7 @@ main {
   flex-direction: column;
   justify-content: flex-end;
   align-items: flex-end;
-  min-height: 85vh;
+  min-height: 95vh;
   width: 100%;
 }
 
