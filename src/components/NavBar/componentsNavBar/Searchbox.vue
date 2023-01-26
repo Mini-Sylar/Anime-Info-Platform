@@ -1,15 +1,17 @@
 <template>
-  <div>
-    <div class="search-box">
-      <form @submit.prevent="handlesubmit" id="search-form" name="anime-search">
-        <button class="btn-search" type="submit">
-          <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
-        </button>
-        <input type="text" class="input-search dynamic-color" placeholder="Search for anime..." autocomplete="off"
-          required v-model="searchQuery" />
-      </form>
+  <transition appear mode="out-in">
+    <div>
+      <div class="search-box">
+        <form @submit.prevent="handlesubmit" id="search-form" name="anime-search">
+          <button class="btn-search" type="submit">
+            <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
+          </button>
+          <input type="text" class="input-search dynamic-color" placeholder="Search for anime..." autocomplete="off"
+            required v-model="searchQuery" />
+        </form>
+      </div>
     </div>
-  </div>
+  </transition>
 </template>
 <script>
 // useAnimeStore Here

@@ -16,7 +16,7 @@ import { RouterLink, RouterView } from "vue-router";
   </main>
 </template>
 
-<style scoped>
+<style>
 .slide-enter-active,
 .slide-leave-active {
   position: absolute;
