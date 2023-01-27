@@ -1,6 +1,14 @@
 <script setup>
 import NavbarVue from "./components/NavBar/Navbar.vue";
 import { RouterLink, RouterView } from "vue-router";
+import { useAnimeData } from '@/stores/anime_data';
+import { computed } from 'vue'
+
+
+const setColor = computed(() => {
+  return useAnimeData().getAccentColor
+});
+console.log(setColor)
 </script>
 
 <template>
@@ -28,5 +36,10 @@ import { RouterLink, RouterView } from "vue-router";
   opacity: 0;
   position: absolute;
   transform: translateX(-30%);
+}
+
+.is-url:hover{
+  color: v-bind("setColor") !important;
+  transition: color .5s ease-in-out;
 }
 </style>
