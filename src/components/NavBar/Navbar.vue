@@ -7,7 +7,7 @@ import SearchboxVue from "./componentsNavBar/Searchbox.vue";
     <header >
         <nav class="navigation-bar">
             <div class="main-links">
-                <a href="http://" target="_blank" rel="noopener noreferrer" class="is-url">Current Season</a>
+                <a href="https://anilist.co/search/anime/this-season" target="_blank" rel="noopener noreferrer" class="is-url">Current Season</a>
                 <RouterLink to="/" class="is-url">Home</RouterLink>
                 <RouterLink to="/about" class="is-url">About</RouterLink>
                 <RouterLink to="/about" class="is-url">Contact</RouterLink>
