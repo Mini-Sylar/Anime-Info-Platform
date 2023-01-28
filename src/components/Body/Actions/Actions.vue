@@ -49,6 +49,8 @@ button * {
     align-items: center;
     border-left: 2px solid rgba(110, 110, 110, 0.311);
     padding-left: 5px;
+    justify-content: flex-end;
+    width: 100%;
 }
 
 .share {
