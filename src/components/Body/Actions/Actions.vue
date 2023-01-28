@@ -1,11 +1,18 @@
 <template >
     <div>
-        <div class="actions-container"  v-once>
+        <div class="actions-container" v-once>
             <div class="share">
-                <button type="button" class="action-button">
-                    <font-awesome-icon icon="fa-solid fa-share-nodes" />
+                <button type="button" class="action-button share-main" title="Share show">
+                    <font-awesome-icon icon="fa-solid fa-share-nodes" class="share-hover" />
                 </button>
-
+                <button class="action-button" title="Take a screenshot">
+                    <font-awesome-icon icon="fa-solid fa-camera" class="grow-shrink"/>
+                </button>
+            </div>
+            <div class="settings">
+                <button type="button" class="action-button" title="Modify site settings">
+                    <font-awesome-icon icon="fa-solid fa-cog fa-spin " class="settings-icon" />
+                </button>
             </div>
         </div>
     </div>
@@ -33,5 +40,91 @@ button * {
 
 .actions-container {
     display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 50%;
+}
+
+.settings {
+    display: flex;
+    align-items: center;
+    border-left: 2px solid rgba(110, 110, 110, 0.311);
+    padding-left: 5px;
+}
+
+.share {
+    display: flex;
+    gap: 1rem;
+}
+.settings-icon:hover {
+    animation: elastic-spin 3000ms;
+}
+
+/* CSS animation to grow and shrink while bouncing */
+.grow-shrink:hover {
+    animation: hithere 1s ease;
+}
+
+.share-main:hover .share-hover{
+    animation: flip 1s ease-in;
+}
+
+@keyframes hithere {
+    30% {
+        transform: scale(1.2);
+    }
+
+    40%,
+    60% {
+        transform: rotate(-20deg) scale(1.2);
+    }
+
+    50% {
+        transform: rotate(20deg) scale(1.2);
+    }
+
+    70% {
+        transform: rotate(0deg) scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes elastic-spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(720deg);
+    }
+}
+
+@keyframes flip {
+    0% {
+        transform: perspective(700px) rotateY(0);
+        animation-timing-function: ease-out;
+    }
+
+    40% {
+        transform: perspective(700px) translateZ(150px) rotateY(170deg);
+        animation-timing-function: ease-out;
+    }
+
+    50% {
+        transform: perspective(700px) translateZ(150px) rotateY(190deg) scale(1);
+        animation-timing-function: ease-in;
+    }
+
+    80% {
+        transform: perspective(700px) rotateY(360deg) scale(1);
+        animation-timing-function: ease-in;
+    }
+
+    100% {
+        transform: perspective(700px) scale(1);
+        animation-timing-function: ease-in;
+    }
 }
 </style>
