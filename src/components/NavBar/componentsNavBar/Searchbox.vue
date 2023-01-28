@@ -60,6 +60,7 @@ export default {
   border-radius: 25px;
   transition: all 0.5s ease-in-out;
   background-color: v-bind('setColor');
+  caret-color: v-bind('setColor');
   padding-right: 40px;
   color: #fff;
 }

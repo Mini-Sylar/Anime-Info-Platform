@@ -4,15 +4,16 @@ import SearchboxVue from "./componentsNavBar/Searchbox.vue";
 </script>
 
 <template v-once>
-    <header >
+    <header>
         <nav class="navigation-bar">
             <div class="main-links">
-                <a href="https://anilist.co/search/anime/this-season" target="_blank" rel="noopener noreferrer" class="is-url">Current Season</a>
+                <a href="https://anilist.co/search/anime/this-season" target="_blank" rel="noopener noreferrer"
+                    class="is-url">Current Season</a>
                 <RouterLink to="/" class="is-url">Home</RouterLink>
                 <RouterLink to="/about" class="is-url">About</RouterLink>
                 <RouterLink to="/contact" class="is-url">Contact</RouterLink>
             </div>
-            <div class="search-bar"  v-if="$route.path === '/'">
+            <div class="search-bar" v-if="$route.path === '/'">
                 <SearchboxVue />
             </div>
         </nav>
@@ -32,5 +33,10 @@ import SearchboxVue from "./componentsNavBar/Searchbox.vue";
     justify-content: flex-start;
     gap: min(5rem, 10rem);
     padding-left: .5rem;
+}
+
+header {
+    backdrop-filter: blur(10px);
+
 }
 </style>
