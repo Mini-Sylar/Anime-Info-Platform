@@ -1,6 +1,6 @@
 <template>
     <div class="more-info-container" v-once>
-        <button class="btn btn-reverse btn-arrow" type="button" onclick="location.href = '/">
+        <button class="btn btn-reverse btn-arrow" type="button" @click="openNewLink" title="Read more on AniList">
             <span>More Info<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 36.1 25.8"
                     enable-background="new 0 0 36.1 25.8" xml:space="preserve">
@@ -16,6 +16,19 @@
 </template>
 <script>
 export default {
+    props: {
+        animeID: {
+            type: Number,
+        }
+    },
+    methods: {
+        openNewLink() {
+            return window.open(
+                `https://anilist.co/anime/${this.$props.animeID}`,
+                '_blank' // <- This is what makes it open in a new window.
+            );
+        }
+    },
 }
 </script>
 <style scoped>

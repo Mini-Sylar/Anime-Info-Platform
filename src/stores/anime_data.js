@@ -54,6 +54,10 @@ export const useAnimeData = defineStore("animeData", {
       const background = state.animeData.data.Media.bannerImage;
       return background !== null ? background : "/images/404-no-wallpaper.jpg";
     },
+    getAnimeId:(state)=>{
+      const animeID = state.animeData.data.Media.id
+      return animeID
+    }
   },
   actions: {
     async fetchAnimeData(searchQuery) {

@@ -8,7 +8,6 @@ import { computed } from 'vue'
 const setColor = computed(() => {
   return useAnimeData().getAccentColor
 });
-console.log(setColor)
 </script>
 
 <template>
