@@ -65,7 +65,6 @@ export default {
     const mainAnimeData = ref(null)
     const getAnimeData = async () => {
       mainAnimeData.value = await useAnimeData()
-
     }
 
     await getAnimeData()

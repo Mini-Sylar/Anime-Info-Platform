@@ -46,4 +46,9 @@ const setColor = computed(() => {
 ::selection {
   background-color: v-bind("setColor + '80'");
 }
+
+.contains-genres,
+.carrette_button {
+  background-color: v-bind("setColor") !important;
+}
 </style>
