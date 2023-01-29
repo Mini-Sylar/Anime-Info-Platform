@@ -2,7 +2,7 @@
     <div class="surprise-me-container" v-once>
         <form @submit.prevent="handlesubmit">
             <div class="splitbutton">
-                <button>Surprise Me</button>
+                <button type="submit">Surprise Me</button>
                 <span class="dropdown-button">
                     <input type="checkbox" name="dropdown" id="dropdown">
                     <label for="dropdown" class="carrette_button"><font-awesome-icon icon="fa-solid fa-caret-down"
@@ -44,6 +44,15 @@ export default {
         }
     },
     setup() {
+        // if my pointer is not close to contain-genre and I click, close the dropdown
+        window.addEventListener('click', (e) => {
+            const containsGenres = document.querySelector('.contains-genres')
+            const dropdownButton = document.querySelector('.dropdown-button')
+            if (!containsGenres.contains(e.target) && !dropdownButton.contains(e.target)) {
+                document.querySelector('input[name="dropdown"]').checked = false
+            }
+        })
+
         const mainAnimeData = useAnimeData()
         const genreQuery = ref('Action')
         const handlesubmit = () => {
@@ -53,7 +62,7 @@ export default {
             genreQuery,
             handlesubmit,
         }
-    }
+    },
 }
 </script>
 <style scoped>
@@ -75,11 +84,11 @@ button {
     border: none;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
-    /* position: absolute; */
     z-index: 22;
 }
 
 .dropdown-button {
+    border-left: 1px solid transparent;
     cursor: pointer;
 }
 
@@ -106,16 +115,20 @@ input:checked+label>.carret-toggle {
 .contains-genres {
     position: absolute;
     bottom: 3rem;
-    left: 0;
+    right: 0;
     width: 100%;
-    background-color: #0195ff;
-    border-radius: 15px;
+    background-color: #0195ff2c;
+    border-radius: 10px;
     z-index: 1;
-    padding: .5rem;
+    padding: .3rem;
     padding-top: 0;
     padding-bottom: 0;
     overflow: hidden;
     max-height: 0;
+    border-color: red;
+    backdrop-filter: blur(10px);
+    color: white;
+
     transition: max-height .2s ease-in-out;
 
 }
@@ -150,4 +163,6 @@ label {
     border-bottom-right-radius: 25px;
     background-color: #0195ff;
 }
+
+
 </style>

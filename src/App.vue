@@ -47,8 +47,18 @@ const setColor = computed(() => {
   background-color: v-bind("setColor + '80'");
 }
 
-.contains-genres,
+
 .carrette_button {
   background-color: v-bind("setColor") !important;
+  transition: background-color .5s ease-in-out;
+}
+
+.contains-genres{
+  background-color: v-bind("setColor+'20'") !important;
+}
+
+*{
+  accent-color: v-bind("setColor") !important;
+  transition: accent-color .5s ease-in-out;
 }
 </style>
