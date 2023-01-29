@@ -128,13 +128,13 @@ img {
   object-fit: cover;
   border-radius: 15px;
   position: absolute;
-  filter: brightness(0.5);
+  filter: brightness(0.4);
 }
 
 p {
   z-index: 100;
-  color: white;
-  font-weight: 900;
+  color: hsl(0, 0%, 90%);
+  font-weight: 600;
   cursor: pointer;
   padding: 10px;
   height: 10vh;
