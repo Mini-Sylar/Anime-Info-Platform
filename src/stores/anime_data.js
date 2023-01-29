@@ -54,10 +54,10 @@ export const useAnimeData = defineStore("animeData", {
       const background = state.animeData.data.Media.bannerImage;
       return background !== null ? background : "/images/404-no-wallpaper.jpg";
     },
-    getAnimeId:(state)=>{
-      const animeID = state.animeData.data.Media.id
-      return animeID
-    }
+    getAnimeId: (state) => {
+      const animeID = state.animeData.data.Media.id;
+      return animeID;
+    },
   },
   actions: {
     async fetchAnimeData(searchQuery) {
@@ -94,6 +94,7 @@ export const useAnimeData = defineStore("animeData", {
         body: prepareAnimeData(title),
         headers: headersList,
       });
+      this.animeData.data.Media.trailer = null;
       let main_data = await response.json();
       main_data.data.Media.recommendations = null;
       // Set background to no image if not found
