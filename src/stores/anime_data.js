@@ -8,6 +8,13 @@ import {
 
 import { shadeColor } from "../js/helpers";
 
+let omitNull = (obj) => {
+  Object.keys(obj)
+    .filter((k) => obj[k] === null)
+    .forEach((k) => delete obj[k]);
+  return obj;
+};
+
 export const useAnimeData = defineStore("animeData", {
   state: () => ({
     animeData: main_data,
@@ -68,6 +75,10 @@ export const useAnimeData = defineStore("animeData", {
       });
       // Main Data Here
       let main_data = await response.json();
+      // loop through array  main_data.data.Media.recommendations.nodes and drop object with null values using filter
+      main_data.data.Media.recommendations.nodes = main_data.data.Media.recommendations.nodes.filter(
+        (item) => item.mediaRecommendation !== null
+      );
       this.animeData = main_data;
       //   Set to local storage to save search query after refresh
       localStorage.setItem("searchQuery", searchQuery);
@@ -101,12 +112,6 @@ export const useAnimeData = defineStore("animeData", {
       if (main_data.data.Media.bannerImage === null) {
         main_data.data.Media.bannerImage = "/images/404-no-wallpaper.jpg";
       }
-      let omitNull = (obj) => {
-        Object.keys(obj)
-          .filter((k) => obj[k] === null)
-          .forEach((k) => delete obj[k]);
-        return obj;
-      };
       this.animeData.data.Media = {
         ...omitNull(this.animeData.data.Media),
         ...omitNull(main_data.data.Media),
