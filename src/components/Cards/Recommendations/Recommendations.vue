@@ -1,53 +1,30 @@
 <template>
   <div class="is-a-container swiper-container noselect">
     <transition appear mode="out-in">
-      <swiper
-        :slides-per-view="4"
-        :space-between="2"
-        :effect="'coverflow'"
-        :centeredSlides="true"
-        :coverflowEffect="{
-          rotate: 10,
-          stretch: 1,
-          depth: 100,
-          modifier: 3,
-          slideShadows: true,
-        }"
-        :modules="modules"
-        :grabCursor="true"
-        :autoplay="{
-          delay: 2500,
-          disableOnInteraction: false,
-          pauseOnMouseEnter: true,
-        }"
-        
-        :key="populateCards"
-      >
-        <swiper-slide
-          class="swiper-slide-instance"
-          v-for="(item, index) in populateCards"
-          :key="index"
-        >
-          <p
-            class="noselect card-hovered"
-            role="link"
-            @click="searchFromRecommended(item.mediaRecommendation.title)"
-          >
+      <swiper :slides-per-view="4" :space-between="2" :effect="'coverflow'" :centeredSlides="true" :coverflowEffect="{
+        rotate: 10,
+        stretch: 1,
+        depth: 100,
+        modifier: 3,
+        slideShadows: true,
+      }" :modules="modules" :grabCursor="true" :autoplay="{
+  delay: 2500,
+  disableOnInteraction: false,
+  pauseOnMouseEnter: true,
+}" :key="populateCards">
+        <swiper-slide class="swiper-slide-instance" v-for="(item, index) in populateCards" :key="index">
+          <p class="noselect card-hovered" role="link" @click="searchFromRecommended(item.mediaRecommendation.title)">
             {{
-              item.mediaRecommendation.title.english
+              item.mediaRecommendation.title.english != null
                 ? item.mediaRecommendation.title.english
                 : item.mediaRecommendation.title.romaji
             }}
           </p>
           <transition appear mode="out-in">
-           <img
-            :src="item.mediaRecommendation.coverImage.large"
-            alt=""
-            class="anime-images"
-            :key="item.mediaRecommendation.coverImage.large"
-          />
+            <img :src="item.mediaRecommendation.coverImage.large" alt="" class="anime-images"
+              :key="item.mediaRecommendation.coverImage.large" />
           </transition>
-         
+
         </swiper-slide>
       </swiper>
     </transition>
@@ -84,9 +61,9 @@ export default {
     const mainAnimeData = ref(null)
     const getAnimeData = async () => {
       mainAnimeData.value = await useAnimeData()
-     
+
     }
-    
+
     await getAnimeData()
     const recommendations = mainAnimeData.value.getRecommendations;
     let useFetchFromRecommendations = mainAnimeData.value.fetchFromRecommended;
@@ -167,11 +144,11 @@ p {
 
 .v-enter-active,
 .v-leave-active {
-    transition: opacity 0.5s ease;
+  transition: opacity 0.5s ease;
 }
 
 .v-enter-from,
 .v-leave-to {
-    opacity: 0;
+  opacity: 0;
 }
 </style>

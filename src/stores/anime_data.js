@@ -15,6 +15,11 @@ let omitNull = (obj) => {
   return obj;
 };
 
+main_data.data.Media.recommendations.nodes =
+  main_data.data.Media.recommendations.nodes.filter(
+    (item) => item.mediaRecommendation !== null
+  );
+
 export const useAnimeData = defineStore("animeData", {
   state: () => ({
     animeData: main_data,
@@ -76,9 +81,10 @@ export const useAnimeData = defineStore("animeData", {
       // Main Data Here
       let main_data = await response.json();
       // loop through array  main_data.data.Media.recommendations.nodes and drop object with null values using filter
-      main_data.data.Media.recommendations.nodes = main_data.data.Media.recommendations.nodes.filter(
-        (item) => item.mediaRecommendation !== null
-      );
+      main_data.data.Media.recommendations.nodes =
+        main_data.data.Media.recommendations.nodes.filter(
+          (item) => item.mediaRecommendation !== null
+        );
       this.animeData = main_data;
       //   Set to local storage to save search query after refresh
       localStorage.setItem("searchQuery", searchQuery);

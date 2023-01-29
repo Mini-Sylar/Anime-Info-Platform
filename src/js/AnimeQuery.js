@@ -61,10 +61,8 @@ let response = await fetch("https://graphql.anilist.co/?id", {
   method: "POST",
   body: prepareAnimeData(),
   headers: headersList,
-})
-
-export let main_data = await response.json()
-
+});
+export let main_data = await response.json();
 // Surprise Me Cards
 export function surpriseMe(genre = "action") {
   let gqlBody_Cards = {
