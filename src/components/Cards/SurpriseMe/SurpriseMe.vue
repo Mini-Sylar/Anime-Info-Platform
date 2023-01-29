@@ -6,7 +6,7 @@
                 <span class="dropdown-button">
                     <input type="checkbox" name="dropdown" id="dropdown">
                     <label for="dropdown" class="carrette_button"><font-awesome-icon icon="fa-solid fa-caret-down"
-                            class="carret-toggle" /></label>
+                            class="carret-toggle" title="Select genre" /></label>
                     <div class="contains-genres">
                         <ul>
                             <li v-for="(item, index) in genres" :key="index">
