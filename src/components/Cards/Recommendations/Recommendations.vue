@@ -8,10 +8,14 @@
         modifier: 3,
         slideShadows: true,
       }" :modules="modules" :grabCursor="true" :autoplay="{
-  delay: 2500,
-  disableOnInteraction: false,
-  pauseOnMouseEnter: true,
-}" :key="populateCards">
+        delay: 2500,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: true,
+        // Disable preloading of all images
+        preloadImages: false,
+        // Enable lazy loading
+        lazy: true,
+      }" :key="populateCards">
         <swiper-slide class="swiper-slide-instance" v-for="(item, index) in populateCards" :key="index">
           <p class="noselect card-hovered" role="link" @click="searchFromRecommended(item.mediaRecommendation.title)">
             {{
