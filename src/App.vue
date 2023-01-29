@@ -8,6 +8,7 @@ import { computed } from 'vue'
 const setColor = computed(() => {
   return useAnimeData().getAccentColor
 });
+
 </script>
 
 <template>
@@ -37,8 +38,12 @@ const setColor = computed(() => {
   transform: translateX(-30%);
 }
 
-.is-url:hover{
+.is-url:hover {
   color: v-bind("setColor") !important;
   transition: color .5s ease-in-out;
+}
+
+::selection {
+  background-color: v-bind("setColor + '80'");
 }
 </style>
