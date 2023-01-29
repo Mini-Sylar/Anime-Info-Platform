@@ -41,7 +41,7 @@ button * {
 .actions-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    width: 50%;
+    max-width: 15rem;
 }
 
 .settings {
