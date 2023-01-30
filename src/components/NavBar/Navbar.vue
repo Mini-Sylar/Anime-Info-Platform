@@ -37,5 +37,6 @@ import SearchboxVue from "./componentsNavBar/Searchbox.vue";
 
 header {
     backdrop-filter: blur(10px);
+    transition: all .5s ease;
 }
 </style>

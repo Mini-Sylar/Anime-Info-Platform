@@ -57,6 +57,11 @@ const setColor = computed(() => {
   background-color: v-bind("setColor+'20'") !important;
 }
 
+header:hover{
+  box-shadow: 0 -10px 50px v-bind("setColor+'20'") !important;
+  transition: all .5s ease-in-out;
+}
+
 *{
   accent-color: v-bind("setColor") !important;
   transition: accent-color .5s ease-in-out;
