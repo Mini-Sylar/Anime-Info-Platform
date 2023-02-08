@@ -85,6 +85,8 @@ button {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     z-index: 22;
+    color: white;
+    font-weight: 900;
 }
 
 .dropdown-button {
@@ -163,6 +165,4 @@ label {
     border-bottom-right-radius: 25px;
     background-color: #0195ff;
 }
-
-
 </style>

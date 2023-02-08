@@ -84,6 +84,8 @@ button:hover {
     position: relative;
     transition: all 300ms ease-out;
     will-change: transform;
+    color: white;
+    font-weight: 900;
 }
 
 .btn-arrow:hover span {

@@ -3,7 +3,7 @@
     <div>
       <div class="search-box">
         <form @submit.prevent="handlesubmit" id="search-form" name="anime-search">
-          <button class="btn-search" type="submit">
+          <button class="btn-search" type="submit" aria-label="Search Button">
             <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
           </button>
           <input type="text" class="input-search dynamic-color" placeholder="Search for anime..." autocomplete="off"

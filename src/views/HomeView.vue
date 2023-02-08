@@ -23,13 +23,13 @@ export default {
   },
   methods: {
     pending() {
-      console.log('pending')
+      // console.log('pending')
     },
     fallback() {
-      console.log('fallback')
+      // console.log('fallback')
     },
     resolved() {
-      console.log('resolved')
+      // console.log('resolved')
     }
   },
   errorCaptured() {
