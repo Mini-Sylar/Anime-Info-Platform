@@ -129,8 +129,11 @@ export const useAnimeData = defineStore("animeData", {
       const animeTitle = this.animeData.data.Media.title.english
         ? this.animeData.data.Media.title.english
         : this.animeData.data.Media.title.romaji;
+      const formattedTitle = animeTitle
+        .replace(/[^\w\s]/g, "") // Replace special characters with empty string
+        .replace(/\s+/g, "-"); //
       const animeUrl = router.currentRoute.value.fullPath;
-      shareAnime(animeTitle, animeUrl);
+      shareAnime(animeTitle, animeUrl, formattedTitle);
     },
   },
 });

@@ -21,7 +21,6 @@
 import { useAnimeData } from "@/stores/anime_data";
 
 const useShareAnime = () => {
-    console.log("test")
     useAnimeData().shareAnimeMain()
 }
 </script>

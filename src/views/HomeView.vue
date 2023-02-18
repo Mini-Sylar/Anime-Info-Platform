@@ -70,7 +70,6 @@ export default {
       </Suspense>
     </div>
   </div>
-
 </template>
 
 
@@ -137,6 +136,6 @@ select {
   position: absolute;
   top: 0;
   z-index: -1;
-  
+
 }
 </style>

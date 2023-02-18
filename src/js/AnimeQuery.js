@@ -7,10 +7,10 @@ export let headersList = {
   "Content-Type": "application/json",
 };
 
+let sharedValue = window.location.href.split("/")[3];
+let storedValue = localStorage.getItem("searchQuery");
 export function prepareAnimeData(
-  searchQuery = localStorage.getItem("searchQuery")
-    ? localStorage.getItem("searchQuery")
-    : "Naruto"
+  searchQuery = sharedValue ? sharedValue : storedValue ? storedValue : "Naruto"
 ) {
   let gqlBody = {
     query: `query ($id: Int,$search: String) {

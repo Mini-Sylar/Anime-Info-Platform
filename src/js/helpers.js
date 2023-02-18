@@ -31,12 +31,12 @@ export function randomIntFromInterval(min, max) {
 }
 
 // Share Anime
-export function shareAnime(title, url) {
+export function shareAnime(title, url, formattedTitle) {
   if (navigator.share) {
     navigator
       .share({
         title: title,
-        url: url + title,
+        url: url + formattedTitle,
         text: `Check out ${title} on Anime Info Platform`,
       })
       .then()
