@@ -17,7 +17,7 @@ const setColor = computed(() => {
   </header>
   <main>
     <router-view v-slot="{ Component }">
-      <transition name="slide" mode="out-in">
+      <transition name="fade" mode="out-in">
         <component :is="Component" :key="$route.path"></component>
       </transition>
     </router-view>
@@ -25,6 +25,7 @@ const setColor = computed(() => {
 </template>
 
 <style>
+/* Slide Animation */
 .slide-enter-active,
 .slide-leave-active {
   position: absolute;
@@ -37,6 +38,32 @@ const setColor = computed(() => {
   position: absolute;
   transform: translateX(-30%);
 }
+
+
+/* Fade Animation */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity .3s;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+
+/* Scale Animation */
+.scale-enter-active,
+.scale-leave-active {
+  transition: transform 1s;
+}
+
+.scale-enter-from,
+.scale-leave-to {
+  transform: scale(0);
+}
+
+
 
 .is-url:hover {
   color: v-bind("setColor") !important;
@@ -53,16 +80,16 @@ const setColor = computed(() => {
   transition: background-color .5s ease-in-out;
 }
 
-.contains-genres{
-  background-color: v-bind("setColor+'20'") !important;
+.contains-genres {
+  background-color: v-bind("setColor + '20'") !important;
 }
 
-header:hover{
-  box-shadow: 0 -10px 50px v-bind("setColor+'20'") !important;
+header:hover {
+  box-shadow: 0 -10px 50px v-bind("setColor + '20'") !important;
   transition: all .5s ease-in-out;
 }
 
-*{
+* {
   accent-color: v-bind("setColor") !important;
   transition: accent-color .5s ease-in-out;
 }
