@@ -34,8 +34,11 @@ const useShareAnime = () => {
 const takeScreenshot = () => {
     const el = document.body;
     html2canvas(el, {
-        allowTaint: false,
-        useCORS: true
+        allowTaint: true,
+        useCORS: true,
+        foreignObjectRendering: true,
+        backgroundColor: "none",
+        letterRendering: true,
     }).then(canvas => {
         const link = document.createElement('a');
         link.download = 'screenshot.png';
