@@ -1,15 +1,16 @@
 <template >
     <div class="history-container">
         <ul>
-            <li>Naruto</li>
-            <li>?/Rhythmic Triangle Fighting Cards</li>
-            <li>History 1</li>
-            <li>History 1</li>
-            <li>History 1</li>
+            <li v-for="(history, index) in getHistory" :key="index">{{ history }}</li>
         </ul>
     </div>
 </template>
 <script setup>
+import { useAnimeData } from '../../../stores/anime_data';
+import { ref, computed } from 'vue';
+
+const mainAnimeData = useAnimeData();
+const getHistory = computed(() => mainAnimeData.searchHistory);
 
 </script>
 <style scoped>

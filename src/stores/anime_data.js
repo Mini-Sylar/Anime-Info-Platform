@@ -24,7 +24,7 @@ main_data.data.Media.recommendations.nodes =
 export const useAnimeData = defineStore("animeData", {
   state: () => ({
     animeData: main_data,
-    searchHistory: [],
+    searchHistory: JSON.parse(localStorage.getItem("searchHistory")) || [],
     // recomendationData:
   }),
   getters: {
@@ -91,10 +91,7 @@ export const useAnimeData = defineStore("animeData", {
       //   Set to local storage to save search query after refresh
       localStorage.setItem("searchQuery", searchQuery);
       //  Add to search history
-      this.searchHistory.push(searchQuery);
-      if (this.searchHistory.length > 10) {
-        this.searchHistory.shift();
-      }
+      this.addToHistory();
     },
     async fetchSurprise(genre) {
       // Add loading parameters here
@@ -140,6 +137,16 @@ export const useAnimeData = defineStore("animeData", {
         .replace(/\s+/g, "-"); //
       const animeUrl = router.currentRoute.value.fullPath;
       shareAnime(animeTitle, animeUrl, formattedTitle);
+    },
+    async addToHistory() {
+      const animeTitle = this.animeData.data.Media.title.english
+        ? this.animeData.data.Media.title.english
+        : this.animeData.data.Media.title.romaji;
+      this.searchHistory.push(animeTitle);
+      if (this.searchHistory.length > 10) {
+        this.searchHistory.shift();
+      }
+      localStorage.setItem("searchHistory", JSON.stringify(this.searchHistory));
     },
   },
 });
