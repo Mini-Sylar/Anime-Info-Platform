@@ -1,7 +1,17 @@
 <template >
     <div class="history-container">
-        <ul>
-            <li v-for="(history, index) in getHistory" :key="index">{{ history }}</li>
+        <h5>Search History</h5>
+        <hr>
+        <div v-if="getHistory.length == 0" class="no-search-history">
+            <h6>No Search History Yet 😢</h6>
+        </div>
+        <ul v-else>
+            <li v-for="(history, index) in getHistory" :key="index">
+                <div class="history-content">
+                    <span class="history-title">{{ history }}</span>
+                    <button>Search</button>
+                </div>
+            </li>
         </ul>
     </div>
 </template>
@@ -30,5 +40,30 @@ const getHistory = computed(() => mainAnimeData.searchHistory);
 .show-history {
     height: 20rem;
     visibility: visible;
+}
+
+.history-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.history-content * {
+    font-size: clamp(1rem, 1rem, 2rem);
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+}
+
+.no-search-history {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }
 </style>
