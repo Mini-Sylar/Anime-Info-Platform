@@ -5,7 +5,7 @@
                 <button type="button" class="action-button share-main" title="Share show" @click="useShareAnime">
                     <font-awesome-icon icon="fa-solid fa-share-nodes" class="share-hover" />
                 </button>
-                <button class="action-button" title="Take a screenshot">
+                <button class="action-button" title="Take a screenshot" @click="takeScreenshot">
                     <font-awesome-icon icon="fa-solid fa-camera" class="grow-shrink" />
                 </button>
                 <button class="action-button" title="View History">
@@ -22,9 +22,39 @@
 </template>
 <script setup>
 import { useAnimeData } from "@/stores/anime_data";
+import html2canvas from 'html2canvas';
 
 const useShareAnime = () => {
     useAnimeData().shareAnimeMain()
+}
+
+const takeScreenshot = () => {
+    const el = document.body;
+    window.scrollTo(0, 0);
+    const images = el.querySelectorAll('img');
+    let loadedCount = 0;
+
+    const checkLoaded = () => {
+        loadedCount++;
+        if (loadedCount === images.length) {
+            html2canvas(el).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'screenshot.png';
+                link.href = canvas.toDataURL('image/png').replace(/^data:image\/[^;]/, 'data:application/octet-stream');
+                link.click();
+            });
+        }
+    };
+
+    for (let i = 0; i < images.length; i++) {
+        if (images[i].complete) {
+            checkLoaded();
+        } else {
+            images[i].addEventListener('load', checkLoaded);
+            images[i].addEventListener('error', checkLoaded);
+        }
+    }
+
 }
 </script>
 <style scoped>
