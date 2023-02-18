@@ -37,7 +37,7 @@ const takeScreenshot = () => {
     const checkLoaded = () => {
         loadedCount++;
         if (loadedCount === images.length) {
-            html2canvas(el).then(canvas => {
+            html2canvas(el, { useCORS: true, foreignObjectRendering: true }).then(canvas => {
                 const link = document.createElement('a');
                 link.download = 'screenshot.png';
                 link.href = canvas.toDataURL('image/png').replace(/^data:image\/[^;]/, 'data:application/octet-stream');
