@@ -9,7 +9,7 @@
                     <font-awesome-icon icon="fa-solid fa-camera" class="grow-shrink" />
                 </button>
                 <button class="action-button" title="View History">
-                    <font-awesome-icon icon="fa-solid fa-clock-rotate-left" />
+                    <font-awesome-icon icon="fa-solid fa-clock-rotate-left fa-spin" class="history-icon" />
                 </button>
             </div>
             <div class="settings">
@@ -66,6 +66,10 @@ button * {
 
 .settings-icon:hover {
     animation: elastic-spin 3000ms;
+}
+
+.history-icon:hover {
+    animation: elastic-spin 1500ms reverse;
 }
 
 /* CSS animation to grow and shrink while bouncing */
