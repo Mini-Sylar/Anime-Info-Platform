@@ -6,7 +6,7 @@ import {
   surpriseMe,
 } from "../js/AnimeQuery";
 
-import { shadeColor } from "../js/helpers";
+import { shadeColor, shareAnime } from "../js/helpers";
 
 let omitNull = (obj) => {
   Object.keys(obj)
@@ -123,6 +123,13 @@ export const useAnimeData = defineStore("animeData", {
         ...omitNull(main_data.data.Media),
       };
       localStorage.setItem("searchQuery", title);
+    },
+    async shareAnime() {
+      const animeTitle = this.animeData.data.Media.title.english
+        ? this.animeData.data.Media.title.english
+        : this.animeData.data.Media.title.romaji;
+      const animeUrl = window.location.href;
+      shareAnime(animeTitle, animeUrl);
     },
   },
 });

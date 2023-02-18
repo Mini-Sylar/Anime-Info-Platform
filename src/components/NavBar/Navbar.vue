@@ -13,7 +13,7 @@ import SearchboxVue from "./componentsNavBar/Searchbox.vue";
                 <RouterLink to="/about" class="is-url">About</RouterLink>
                 <RouterLink to="/contact" class="is-url">Contact</RouterLink>
             </div>
-            <div class="search-bar" v-if="$route.path === '/'">
+            <div class="search-bar" v-if="$route.path === '/' || $route.params.search">
                 <SearchboxVue />
             </div>
         </nav>

@@ -29,3 +29,16 @@ export function randomIntFromInterval(min, max) {
   // min and max included
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
+
+// Share Anime
+export function shareAnime(title, url) {
+  if (navigator.share) {
+    navigator
+      .share({
+        title: title,
+        url: url,
+      })
+      .then(() => console.log("Successful share"))
+      .catch((error) => console.log("Error sharing", error));
+  }
+}

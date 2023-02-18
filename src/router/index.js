@@ -29,6 +29,11 @@ const router = createRouter({
       component: NotFound,
     },
     {
+      path: "/:search",
+      name: "anime",
+      component: HomeView,
+    },
+    {
       path: "/:pathMatch(.*)*",
       redirect: "/not-found",
       component: NotFound,
