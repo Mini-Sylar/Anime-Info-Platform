@@ -8,6 +8,9 @@
                 <button class="action-button" title="Take a screenshot">
                     <font-awesome-icon icon="fa-solid fa-camera" class="grow-shrink" />
                 </button>
+                <button class="action-button" title="View History">
+                    <font-awesome-icon icon="fa-solid fa-clock-rotate-left" />
+                </button>
             </div>
             <div class="settings">
                 <button type="button" class="action-button" title="Modify site settings">
