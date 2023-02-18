@@ -35,10 +35,9 @@ const getHistory = computed(() => mainAnimeData.searchHistory);
     overflow: hidden;
     visibility: hidden;
     opacity: 0;
-    padding: 1rem;
+    /* padding: 1rem; */
     width: 20rem;
     left: 8rem;
-
     transition: height .2s ease-in-out, visibility .2s ease-in-out, opacity .2s ease-in-out;
 }
 
@@ -68,8 +67,6 @@ ul {
     margin-top: 1rem;
 }
 
-li {}
-
 .no-search-history {
     display: flex;
     justify-content: center;
@@ -88,6 +85,10 @@ li {}
     width: 20rem;
     overflow-y: auto;
     height: 17rem;
-    margin: 0 auto;
+    margin: 0;
+}
+
+h4 {
+    margin-left: 1rem;
 }
 </style>

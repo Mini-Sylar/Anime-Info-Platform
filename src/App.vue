@@ -51,7 +51,6 @@ const setColor = computed(() => {
   opacity: 0;
 }
 
-
 /* Scale Animation */
 .scale-enter-active,
 .scale-leave-active {
@@ -62,8 +61,6 @@ const setColor = computed(() => {
 .scale-leave-to {
   transform: scale(0);
 }
-
-
 
 .is-url:hover {
   color: v-bind("setColor") !important;
@@ -80,7 +77,8 @@ const setColor = computed(() => {
   transition: background-color .5s ease-in-out;
 }
 
-.contains-genres {
+.contains-genres,
+.history-container {
   background-color: v-bind("setColor + '20'") !important;
 }
 

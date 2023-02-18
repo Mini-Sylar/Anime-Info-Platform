@@ -27,49 +27,39 @@ import html2canvas from 'html2canvas';
 import { ref, onMounted } from "vue";
 import History from './History.vue';
 
-let showHistory = ref('');
-
 const useShareAnime = () => {
     useAnimeData().shareAnimeMain()
 }
 
 const takeScreenshot = () => {
     const el = document.body;
-    window.scrollTo(0, 0);
-    const images = el.querySelectorAll('img');
-    let loadedCount = 0;
+    html2canvas(el, {
+        allowTaint: false,
+        useCORS: true
+    }).then(canvas => {
+        const link = document.createElement('a');
+        link.download = 'screenshot.png';
+        link.href = canvas.toDataURL('image/png').replace(/^data:image\/[^;]/, 'data:application/octet-stream');
+        link.click();
+    })
 
-    const checkLoaded = () => {
-        loadedCount++;
-        if (loadedCount === images.length) {
-            html2canvas(el, { useCORS: true, foreignObjectRendering: true }).then(canvas => {
-                const link = document.createElement('a');
-                link.download = 'screenshot.png';
-                link.href = canvas.toDataURL('image/png').replace(/^data:image\/[^;]/, 'data:application/octet-stream');
-                link.click();
-            });
-        }
-    };
-
-    for (let i = 0; i < images.length; i++) {
-        if (images[i].complete) {
-            checkLoaded();
-        } else {
-            images[i].addEventListener('load', checkLoaded);
-            images[i].addEventListener('error', checkLoaded);
-        }
-    }
 }
 
 onMounted(() => {
-    const historyButton = document.querySelector('.history-show');
-    const historyContainer = document.querySelector('.history-container');
-    historyButton.addEventListener('click', () => {
-        historyContainer.classList.toggle('show-history');
+    window.addEventListener('click', (e) => {
+        const historyContainer = document.querySelector('.history-container');
+        const historyButton = document.querySelector('.history-show');
+        historyButton.addEventListener('click', () => {
+            historyContainer.classList.toggle('show-history');
+        })
+        if (!historyContainer.contains(e.target) && !historyButton.contains(e.target)) {
+            historyContainer.classList.remove('show-history');
+        }
     })
-    // if history container is visible and i click outside of it, hide it
 
+    // if history container is visible and i click outside of it, hide it
 })
+
 
 </script>
 <style scoped>
@@ -107,6 +97,7 @@ button * {
 .share {
     display: flex;
     gap: 1rem;
+    margin-right: 1.5rem;
 }
 
 .settings-icon:hover {
