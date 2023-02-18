@@ -5,14 +5,15 @@
         <div v-if="getHistory.length == 0" class="no-search-history">
             <h6>No Search History Yet 😢</h6>
         </div>
-        <ul v-else>
-            <li v-for="(history, index) in getHistory" :key="index">
-                <div class="history-content">
-                    <span class="history-title">{{ history }}</span>
-                    <button>Search</button>
-                </div>
-            </li>
-        </ul>
+        <div class="search-history" v-else>
+            <ul>
+                <li v-for="(history, index) in getHistory" :key="index">
+                    <div class="history-content">
+                        <button class="history-title">{{ history }}</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </div>
 </template>
 <script setup>
@@ -28,25 +29,27 @@ const getHistory = computed(() => mainAnimeData.searchHistory);
     position: absolute;
     bottom: 7rem;
     background-color: #0195ff2c;
-    padding: 2rem;
     border-radius: 10px;
     backdrop-filter: blur(10px);
     height: 0;
     overflow: hidden;
     visibility: hidden;
-    transition: height .2s ease-in-out, visibility .2s ease-in-out;
+    opacity: 0;
+
+    transition: height .2s ease-in-out, visibility .2s ease-in-out, opacity .2s ease-in-out;
 }
 
 .show-history {
     height: 20rem;
     visibility: visible;
+    opacity: 1;
 }
 
 .history-content {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    gap: 1rem;
+    width: 100%;
 }
 
 .history-content * {
@@ -55,15 +58,33 @@ const getHistory = computed(() => mainAnimeData.searchHistory);
 
 ul {
     list-style: none;
-    padding: 0;
-    margin: 0;
-
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    margin-top: 1rem;
 }
+
+li {}
 
 .no-search-history {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
+}
+
+.history-title {
+    background-color: transparent !important;
+    border: none;
+    cursor: pointer;
+    font-size: clamp(1rem, 1rem, 2rem);
+}
+
+.search-history {
+    width: 20rem;
+    overflow-y: auto;
+    height: 17rem;
+    margin: 0 auto;
 }
 </style>

@@ -93,4 +93,9 @@ header:hover {
   accent-color: v-bind("setColor") !important;
   transition: accent-color .5s ease-in-out;
 }
+
+.history-title:hover {
+  color: v-bind("setColor") !important;
+  transition: color .2s ease-in-out;
+}
 </style>
