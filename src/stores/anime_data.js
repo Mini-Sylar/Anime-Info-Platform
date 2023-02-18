@@ -24,6 +24,7 @@ main_data.data.Media.recommendations.nodes =
 export const useAnimeData = defineStore("animeData", {
   state: () => ({
     animeData: main_data,
+    searchHistory: [],
     // recomendationData:
   }),
   getters: {
@@ -89,6 +90,11 @@ export const useAnimeData = defineStore("animeData", {
       this.animeData = main_data;
       //   Set to local storage to save search query after refresh
       localStorage.setItem("searchQuery", searchQuery);
+      //  Add to search history
+      this.searchHistory.push(searchQuery);
+      if (this.searchHistory.length > 10) {
+        this.searchHistory.shift();
+      }
     },
     async fetchSurprise(genre) {
       // Add loading parameters here

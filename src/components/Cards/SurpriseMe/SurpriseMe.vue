@@ -127,7 +127,6 @@ input:checked+label>.carret-toggle {
     padding-bottom: 0;
     overflow: hidden;
     max-height: 0;
-    border-color: red;
     backdrop-filter: blur(10px);
     color: white;
 

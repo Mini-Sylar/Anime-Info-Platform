@@ -8,8 +8,9 @@
                 <button class="action-button" title="Take a screenshot" @click="takeScreenshot">
                     <font-awesome-icon icon="fa-solid fa-camera" class="grow-shrink" />
                 </button>
-                <button class="action-button" title="View History">
+                <button class="action-button history-show" title="View History">
                     <font-awesome-icon icon="fa-solid fa-clock-rotate-left fa-spin" class="history-icon" />
+                    <History />
                 </button>
             </div>
             <div class="settings">
@@ -23,6 +24,10 @@
 <script setup>
 import { useAnimeData } from "@/stores/anime_data";
 import html2canvas from 'html2canvas';
+import { ref, onMounted } from "vue";
+import History from './History.vue';
+
+let showHistory = ref('');
 
 const useShareAnime = () => {
     useAnimeData().shareAnimeMain()
@@ -54,8 +59,18 @@ const takeScreenshot = () => {
             images[i].addEventListener('error', checkLoaded);
         }
     }
-
 }
+
+onMounted(() => {
+    const historyButton = document.querySelector('.history-show');
+    const historyContainer = document.querySelector('.history-container');
+    historyButton.addEventListener('click', () => {
+        historyContainer.classList.toggle('show-history');
+    })
+    // if history container is visible and i click outside of it, hide it
+    
+})
+
 </script>
 <style scoped>
 button {
