@@ -5,6 +5,7 @@ import {
   main_data,
   surpriseMe,
 } from "../js/AnimeQuery";
+import router from "../router";
 
 import { shadeColor, shareAnime } from "../js/helpers";
 
@@ -124,11 +125,11 @@ export const useAnimeData = defineStore("animeData", {
       };
       localStorage.setItem("searchQuery", title);
     },
-    async shareAnime() {
+    async shareAnimeMain() {
       const animeTitle = this.animeData.data.Media.title.english
         ? this.animeData.data.Media.title.english
         : this.animeData.data.Media.title.romaji;
-      const animeUrl = window.location.href;
+      const animeUrl = router.currentRoute.value.fullPath;
       shareAnime(animeTitle, animeUrl);
     },
   },

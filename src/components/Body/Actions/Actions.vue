@@ -2,11 +2,11 @@
     <div>
         <div class="actions-container" v-once>
             <div class="share">
-                <button type="button" class="action-button share-main" title="Share show">
+                <button type="button" class="action-button share-main" title="Share show" @click="useShareAnime">
                     <font-awesome-icon icon="fa-solid fa-share-nodes" class="share-hover" />
                 </button>
                 <button class="action-button" title="Take a screenshot">
-                    <font-awesome-icon icon="fa-solid fa-camera" class="grow-shrink"/>
+                    <font-awesome-icon icon="fa-solid fa-camera" class="grow-shrink" />
                 </button>
             </div>
             <div class="settings">
@@ -17,8 +17,12 @@
         </div>
     </div>
 </template>
-<script>
-export default {
+<script setup>
+import { useAnimeData } from "@/stores/anime_data";
+
+const useShareAnime = () => {
+    console.log("test")
+    useAnimeData().shareAnimeMain()
 }
 </script>
 <style scoped>
@@ -57,6 +61,7 @@ button * {
     display: flex;
     gap: 1rem;
 }
+
 .settings-icon:hover {
     animation: elastic-spin 3000ms;
 }
@@ -66,7 +71,7 @@ button * {
     animation: hithere 1s ease;
 }
 
-.share-main:hover .share-hover{
+.share-main:hover .share-hover {
     animation: flip 1s ease-in;
 }
 

@@ -36,9 +36,10 @@ export function shareAnime(title, url) {
     navigator
       .share({
         title: title,
-        url: url,
+        url: url + title,
+        text: `Check out ${title} on Anime Info Platform`,
       })
-      .then(() => console.log("Successful share"))
+      .then()
       .catch((error) => console.log("Error sharing", error));
   }
 }
