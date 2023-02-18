@@ -1,9 +1,9 @@
 <template >
     <div class="history-container">
-        <h5>Search History</h5>
-        <hr>
+        <h4>Search History</h4>
+        <hr class="line">
         <div v-if="getHistory.length == 0" class="no-search-history">
-            <h6>No Search History Yet 😢</h6>
+            <h4>No Search History Yet 😢</h4>
         </div>
         <div class="search-history" v-else>
             <ul>
@@ -35,6 +35,9 @@ const getHistory = computed(() => mainAnimeData.searchHistory);
     overflow: hidden;
     visibility: hidden;
     opacity: 0;
+    padding: 1rem;
+    width: 20rem;
+    left: 8rem;
 
     transition: height .2s ease-in-out, visibility .2s ease-in-out, opacity .2s ease-in-out;
 }

@@ -8,9 +8,9 @@
                 <button class="action-button" title="Take a screenshot" @click="takeScreenshot">
                     <font-awesome-icon icon="fa-solid fa-camera" class="grow-shrink" />
                 </button>
+                <History />
                 <button class="action-button history-show" title="View History">
                     <font-awesome-icon icon="fa-solid fa-clock-rotate-left fa-spin" class="history-icon" />
-                    <History />
                 </button>
             </div>
             <div class="settings">
@@ -68,7 +68,7 @@ onMounted(() => {
         historyContainer.classList.toggle('show-history');
     })
     // if history container is visible and i click outside of it, hide it
-    
+
 })
 
 </script>
