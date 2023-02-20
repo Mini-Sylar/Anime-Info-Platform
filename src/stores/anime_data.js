@@ -74,7 +74,7 @@ export const useAnimeData = defineStore("animeData", {
     },
   },
   actions: {
-    async fetchAnimeData(searchQuery) {
+    async fetchAnimeData(searchQuery, logHistory = true) {
       let response = await fetch("https://graphql.anilist.co/?id", {
         method: "POST",
         body: prepareAnimeData(searchQuery),
@@ -91,7 +91,9 @@ export const useAnimeData = defineStore("animeData", {
       //   Set to local storage to save search query after refresh
       localStorage.setItem("searchQuery", searchQuery);
       //  Add to search history
-      this.addToHistory();
+      if (logHistory) {
+        this.addToHistory();
+      }
     },
     async fetchSurprise(genre) {
       // Add loading parameters here

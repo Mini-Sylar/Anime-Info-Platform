@@ -9,7 +9,7 @@
             <ul>
                 <li v-for="(history, index) in getHistory" :key="index">
                     <div class="history-content">
-                        <button class="history-title">{{ history }}</button>
+                        <button class="history-title" @click="searchHistory(history)">{{ history }}</button>
                     </div>
                 </li>
             </ul>
@@ -22,6 +22,9 @@ import { ref, computed } from 'vue';
 
 const mainAnimeData = useAnimeData();
 const getHistory = computed(() => mainAnimeData.searchHistory);
+const searchHistory = (history) => {
+    mainAnimeData.fetchAnimeData(history, false);
+}
 
 </script>
 <style scoped>

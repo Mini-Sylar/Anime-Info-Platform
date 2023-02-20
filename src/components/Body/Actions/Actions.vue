@@ -9,7 +9,7 @@
                     <font-awesome-icon icon="fa-solid fa-camera" class="grow-shrink" />
                 </button>
                 <History />
-                <button class="action-button history-show" title="View History">
+                <button class="action-button history-show" title="View History" @click="showHistoryMenu">
                     <font-awesome-icon icon="fa-solid fa-clock-rotate-left fa-spin" class="history-icon" />
                 </button>
             </div>
@@ -24,11 +24,16 @@
 <script setup>
 import { useAnimeData } from "@/stores/anime_data";
 import html2canvas from 'html2canvas';
-import { ref, onMounted } from "vue";
+import { ref, onMounted, onBeforeMount } from "vue";
 import History from './History.vue';
 
 const useShareAnime = () => {
     useAnimeData().shareAnimeMain()
+}
+
+const showHistoryMenu = () => {
+    const historyContainer = document.querySelector('.history-container');
+    historyContainer.classList.toggle('show-history');
 }
 
 const takeScreenshot = () => {
@@ -48,13 +53,13 @@ const takeScreenshot = () => {
 
 }
 
-onMounted(() => {
+onBeforeMount(() => {
     window.addEventListener('click', (e) => {
         const historyContainer = document.querySelector('.history-container');
         const historyButton = document.querySelector('.history-show');
-        historyButton.addEventListener('click', () => {
-            historyContainer.classList.toggle('show-history');
-        })
+        // historyButton.addEventListener('click', () => {
+        //     historyContainer.classList.toggle('show-history');
+        // })
         if (!historyContainer.contains(e.target) && !historyButton.contains(e.target)) {
             historyContainer.classList.remove('show-history');
         }
