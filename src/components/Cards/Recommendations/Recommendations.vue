@@ -105,7 +105,6 @@ export default {
       return this.mainAnimeData.getRecommendations.length < 2 ? 2 : 4
     },
     isCardsLoading() {
-      console.log(this.mainAnimeData.cardsLoading)
       return this.mainAnimeData.cardsLoading
     }
   },
