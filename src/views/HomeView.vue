@@ -7,7 +7,6 @@ import { useAnimeData } from '../stores/anime_data';
 import { defineAsyncComponent } from 'vue'
 
 const RecommendationsWrapper = defineAsyncComponent(() => import('../components/Cards/Recommendations/Recommendations.vue'));
-console.log(RecommendationsWrapper)
 
 export default {
   name: 'Home',
@@ -24,6 +23,17 @@ export default {
       return mainAnimeData.getAccentColor;
     }
   },
+  methods: {
+    pending() {
+      // console.log('pending')
+    },
+    fallback() {
+      // console.log('fallback')
+    },
+    resolved() {
+      // console.log('resolved')
+    }
+  },
   errorCaptured() {
     this.$router.push({ name: '404' })
     this.$router.go(1)
@@ -35,7 +45,7 @@ export default {
 <template>
   <div class="main-div">
     <div class="left-side-main">
-      <Suspense>
+      <Suspense @pending="pending" @fallback="fallback" @resolved="resolved">
         <template #default>
           <BodyVue />
         </template>
