@@ -1,13 +1,14 @@
 <template>
   <div class="is-a-container swiper-container noselect">
     <transition appear mode="out-in">
-      <swiper :slides-per-view="4" :space-between="2" :effect="'coverflow'" :centeredSlides="true" :coverflowEffect="{
-        rotate: 10,
-        stretch: 1,
-        depth: 100,
-        modifier: 3,
-        slideShadows: true,
-      }" :modules="modules" :grabCursor="true" :autoplay="{
+      <swiper :slides-per-view="numberofCards" :space-between="2" :effect="'coverflow'" :centeredSlides="true"
+        :coverflowEffect="{
+          rotate: 10,
+          stretch: 1,
+          depth: 100,
+          modifier: 3,
+          slideShadows: true,
+        }" :modules="modules" :grabCursor="true" :autoplay="{
   delay: 2500,
   disableOnInteraction: false,
   pauseOnMouseEnter: true,
@@ -81,6 +82,9 @@ export default {
     populateCards() {
       return this.mainAnimeData.getRecommendations
     },
+    numberofCards() {
+      return this.mainAnimeData.getRecommendations.length < 2 ? 2 : 4
+    }
   },
   methods: {
     searchFromRecommended(query) {

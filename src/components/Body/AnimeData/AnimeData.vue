@@ -1,5 +1,5 @@
 <template>
-    <div class="is-a-container"  v-once>
+    <div class="is-a-container">
         <p>{{ animeMetaData.year }}</p>
         <p>{{ formatGenre }}</p>
         <p>{{ animeMetaData.episodes }} episodes</p>
