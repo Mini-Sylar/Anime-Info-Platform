@@ -55,7 +55,7 @@ export default {
       </Suspense>
     </div>
     <div class="right-side-main">
-      <Suspense>
+      <Suspense :timeout="0">
         <template #default>
           <div class="main-card-section">
             <Recommendations />

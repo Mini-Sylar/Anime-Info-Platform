@@ -8,20 +8,20 @@
         modifier: 3,
         slideShadows: true,
       }" :modules="modules" :grabCursor="true" :autoplay="{
-        delay: 2500,
-        disableOnInteraction: false,
-        pauseOnMouseEnter: true,
-        // Disable preloading of all images
-        preloadImages: false,
-        // Enable lazy loading
-        lazy: true,
-      }" :key="populateCards">
+  delay: 2500,
+  disableOnInteraction: false,
+  pauseOnMouseEnter: true,
+  // Disable preloading of all images
+  preloadImages: false,
+  // Enable lazy loading
+  lazy: true,
+}" :key="populateCards">
         <swiper-slide class="swiper-slide-instance" v-for="(item, index) in populateCards" :key="index">
           <p class="noselect card-hovered" role="link" @click="searchFromRecommended(item.mediaRecommendation.title)">
             {{
               item.mediaRecommendation.title.english != null
-                ? item.mediaRecommendation.title.english
-                : item.mediaRecommendation.title.romaji
+              ? item.mediaRecommendation.title.english
+              : item.mediaRecommendation.title.romaji
             }}
           </p>
           <transition appear mode="out-in">
@@ -66,9 +66,8 @@ export default {
     const getAnimeData = async () => {
       mainAnimeData.value = await useAnimeData()
     }
-
     await getAnimeData()
-    const recommendations = mainAnimeData.value.getRecommendations;
+
     let useFetchFromRecommendations = mainAnimeData.value.fetchFromRecommended;
     // useAnimeStoreHere
     return {
@@ -80,14 +79,13 @@ export default {
         EffectCoverflow,
         Autoplay,
       ],
-      recommendations,
+      mainAnimeData,
       useFetchFromRecommendations,
     };
   },
   computed: {
     populateCards() {
-      this.recommended = useAnimeData().getRecommendations;
-      return this.recommended;
+      return this.mainAnimeData.getRecommendations;
     },
   },
   methods: {
