@@ -36,7 +36,7 @@
 </template>
 <script>
 import { useAnimeData } from "@/stores/anime_data.js";
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from "swiper/vue";
 import {
@@ -52,23 +52,17 @@ import {
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 export default {
-  data() {
-    return {
-      recommended: [],
-    };
-  },
   components: {
     Swiper,
     SwiperSlide,
   },
   async setup() {
-    const mainAnimeData = ref(null)
+    const mainAnimeData = ref([])
     const getAnimeData = async () => {
       mainAnimeData.value = await useAnimeData()
     }
     await getAnimeData()
-
-    let useFetchFromRecommendations = mainAnimeData.value.fetchFromRecommended;
+    let useFetchFromRecommendations = mainAnimeData.value.fetchFromRecommended
     // useAnimeStoreHere
     return {
       modules: [
@@ -80,12 +74,12 @@ export default {
         Autoplay,
       ],
       mainAnimeData,
-      useFetchFromRecommendations,
+      useFetchFromRecommendations
     };
   },
   computed: {
     populateCards() {
-      return this.mainAnimeData.getRecommendations;
+      return this.mainAnimeData.getRecommendations
     },
   },
   methods: {

@@ -40,6 +40,6 @@ export function shareAnime(title, url, formattedTitle) {
         text: `Check out ${title} on Anime Info Platform`,
       })
       .then()
-      .catch((error) => console.log("Error sharing", error));
+      .catch(() => {});
   }
 }

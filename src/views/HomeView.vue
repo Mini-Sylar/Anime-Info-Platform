@@ -1,16 +1,19 @@
 <script>
 import BodyVue from '../components/Body/Body.vue';
-import Recommendations from '../components/Cards/Recommendations/Recommendations.vue';
 import SurpriseMe from '../components/Cards/SurpriseMe/SurpriseMe.vue';
 import BodyLoading from '../components/Body/Loading/BodyLoading.vue';
 import CardLoading from '../components/Cards/Loading/CardLoading.vue';
 import { useAnimeData } from '../stores/anime_data';
+import { defineAsyncComponent } from 'vue'
+
+const RecommendationsWrapper = defineAsyncComponent(() => import('../components/Cards/Recommendations/Recommendations.vue'));
+console.log(RecommendationsWrapper)
 
 export default {
   name: 'Home',
   components: {
     BodyVue,
-    Recommendations,
+    RecommendationsWrapper,
     SurpriseMe,
     BodyLoading,
     CardLoading
@@ -58,7 +61,7 @@ export default {
       <Suspense :timeout="0">
         <template #default>
           <div class="main-card-section">
-            <Recommendations />
+            <RecommendationsWrapper></RecommendationsWrapper>
             <SurpriseMe></SurpriseMe>
           </div>
         </template>
