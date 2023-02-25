@@ -20,7 +20,7 @@
       </div>
     </transition>
     <transition appear mode="out-in">
-      <swiper :slides-per-view="numberofCards" :space-between="2" :effect="'coverflow'" :centeredSlides="true"
+      <swiper :slides-per-view="numberofCards" :space-between="2" :effect="'coverflow'" :centeredSlides="centerSlides"
         :coverflowEffect="{
           rotate: 10,
           stretch: 1,
@@ -106,6 +106,9 @@ export default {
     },
     isCardsLoading() {
       return this.mainAnimeData.cardsLoading
+    },
+    centerSlides() {
+      return this.mainAnimeData.getRecommendations.length < 2 ? false : true
     }
   },
   methods: {
