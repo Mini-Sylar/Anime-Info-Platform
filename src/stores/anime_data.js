@@ -25,6 +25,7 @@ export const useAnimeData = defineStore("animeData", {
   state: () => ({
     animeData: main_data,
     searchHistory: JSON.parse(localStorage.getItem("searchHistory")) || [],
+    cardsLoading: false,
     // recomendationData:
   }),
   getters: {
@@ -97,6 +98,7 @@ export const useAnimeData = defineStore("animeData", {
     },
     async fetchSurprise(genre) {
       // Add loading parameters here
+      this.cardsLoading = true;
       let response_cards = await fetch("https://graphql.anilist.co/?id", {
         method: "POST",
         body: surpriseMe(genre),
@@ -110,6 +112,9 @@ export const useAnimeData = defineStore("animeData", {
         }),
       ];
       this.animeData.data.Media.recommendations.nodes = newNodes;
+      setTimeout(() => {
+        this.cardsLoading = false;
+      }, 1000);
     },
     async fetchFromRecommended(title) {
       let response = await fetch("https://graphql.anilist.co/?id", {
