@@ -1,13 +1,13 @@
 <template>
     <div class="main-loading-cards">
-            <div class="all-cards shimmer"></div>
-            <div class="surprise-me-loading shimmer"></div>
+        <div class="all-cards shimmer"></div>
+        <div class="surprise-me-loading shimmer"></div>
     </div>
 </template>
 
 <style scoped >
 .main-loading-cards {
-    width: 100%;
+    width: 43.2rem;
     height: 100%;
     margin: 0 auto;
     display: flex;
@@ -24,7 +24,7 @@
     width: 100%;
 }
 
-.surprise-me-loading{
+.surprise-me-loading {
     display: flex;
     justify-content: center;
     align-items: center;
