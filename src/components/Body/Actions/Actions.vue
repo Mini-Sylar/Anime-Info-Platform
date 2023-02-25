@@ -13,18 +13,18 @@
                     <font-awesome-icon icon="fa-solid fa-clock-rotate-left fa-spin" class="history-icon" />
                 </button>
             </div>
-            <div class="settings">
+            <!-- <div class="settings">
                 <button type="button" class="action-button" title="Modify site settings">
                     <font-awesome-icon icon="fa-solid fa-cog fa-spin " class="settings-icon" />
                 </button>
-            </div>
+            </div> -->
         </div>
     </div>
 </template>
 <script setup>
 import { useAnimeData } from "@/stores/anime_data";
 import html2canvas from 'html2canvas';
-import { ref, onMounted, onBeforeMount } from "vue";
+import { onBeforeMount } from "vue";
 import History from './History.vue';
 
 const useShareAnime = () => {

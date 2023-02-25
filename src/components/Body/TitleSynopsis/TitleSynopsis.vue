@@ -35,7 +35,7 @@ export default {
     height: 20vh;
     overflow-y: scroll;
     margin-block: 1.5rem;
-    font-size: clamp(.5rem, .8rem, 1.1rem);
+    font-size: clamp(.8rem, .95vw, 2rem);
 }
 
 .anime-title {
