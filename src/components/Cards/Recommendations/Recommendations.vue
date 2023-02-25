@@ -192,8 +192,8 @@ p {
   height: 100px;
   display: inline-block;
   position: absolute;
-  top: 50%;
+  top: 40%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-70%, -70%);
 }
 </style>
