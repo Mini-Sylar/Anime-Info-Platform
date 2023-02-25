@@ -76,6 +76,7 @@ export const useAnimeData = defineStore("animeData", {
   },
   actions: {
     async fetchAnimeData(searchQuery, logHistory = true) {
+      this.cardsLoading = true;
       let response = await fetch("https://graphql.anilist.co/?id", {
         method: "POST",
         body: prepareAnimeData(searchQuery),
@@ -95,6 +96,9 @@ export const useAnimeData = defineStore("animeData", {
       if (logHistory) {
         this.addToHistory();
       }
+      setTimeout(() => {
+        this.cardsLoading = false;
+      }, 1000);
     },
     async fetchSurprise(genre) {
       // Add loading parameters here

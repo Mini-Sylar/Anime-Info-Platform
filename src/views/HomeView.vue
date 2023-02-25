@@ -1,6 +1,7 @@
 <script>
 import BodyVue from '../components/Body/Body.vue';
 import SurpriseMe from '../components/Cards/SurpriseMe/SurpriseMe.vue';
+import Recommendations from '../components/Cards/Recommendations/Recommendations.vue';
 import BodyLoading from '../components/Body/Loading/BodyLoading.vue';
 import CardLoading from '../components/Cards/Loading/CardLoading.vue';
 import { useAnimeData } from '../stores/anime_data';
@@ -13,6 +14,7 @@ export default {
   components: {
     BodyVue,
     RecommendationsWrapper,
+    Recommendations,
     SurpriseMe,
     BodyLoading,
     CardLoading
@@ -49,7 +51,7 @@ export default {
       <Suspense :timeout="2000">
         <template #default>
           <div class="main-card-section">
-            <RecommendationsWrapper></RecommendationsWrapper>
+            <Recommendations />
             <SurpriseMe></SurpriseMe>
           </div>
         </template>

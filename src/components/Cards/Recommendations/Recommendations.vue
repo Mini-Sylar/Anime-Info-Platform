@@ -56,7 +56,7 @@
 </template>
 <script>
 import { useAnimeData } from "@/stores/anime_data.js";
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from "swiper/vue";
 import {
