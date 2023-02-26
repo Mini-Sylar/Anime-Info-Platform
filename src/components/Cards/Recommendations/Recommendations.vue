@@ -167,6 +167,8 @@ p {
   border-radius: 20px;
   z-index: 200;
   overflow: hidden;
+  border-radius: 20px;
+  padding: 20px;
 }
 
 .swiper-loading svg {

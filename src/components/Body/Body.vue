@@ -60,10 +60,13 @@ const setBodyLoading = computed(() => {
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 105%;
+    height: 40rem;
     backdrop-filter: blur(10px);
+    background: transparent;
     z-index: 1;
     padding: 1rem;
+    border-radius: 20px;
+    padding: 20px;
 }
 
 .body-loading-blur svg {

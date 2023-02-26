@@ -106,4 +106,9 @@ header:hover {
 .v-leave-to {
   opacity: 0;
 }
+
+.is-loader * {
+  fill: v-bind('setColor') !important;
+  transition: fill .2s ease-in-out;
+}
 </style>
