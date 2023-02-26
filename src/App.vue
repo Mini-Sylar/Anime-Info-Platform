@@ -96,4 +96,14 @@ header:hover {
   color: v-bind("setColor") !important;
   transition: color .2s ease-in-out;
 }
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
 </style>
