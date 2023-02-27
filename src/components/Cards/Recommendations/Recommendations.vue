@@ -1,11 +1,6 @@
 <template>
   <div class="is-a-container swiper-container noselect">
     <transition appear mode="out-in">
-      <div class="swiper-loading" v-if="isCardsLoading">
-        <Bars></Bars>
-      </div>
-    </transition>
-    <transition appear mode="out-in">
       <swiper :slides-per-view="numberofCards" :space-between="2" :effect="'coverflow'" :centeredSlides="centerSlides"
         :coverflowEffect="{
           rotate: 10,
@@ -37,6 +32,11 @@
 
         </swiper-slide>
       </swiper>
+    </transition>
+    <transition appear mode="out-in">
+      <div class="swiper-loading" v-if="isCardsLoading">
+        <Bars></Bars>
+      </div>
     </transition>
   </div>
 </template>
@@ -159,10 +159,10 @@ p {
 
 .swiper-loading {
   position: absolute;
-  top: -1rem;
+  bottom: -4.5rem;
   left: 0;
   width: 100%;
-  height: 140%;
+  height: 25rem;
   backdrop-filter: blur(10px);
   border-radius: 20px;
   z-index: 200;
@@ -176,7 +176,7 @@ p {
   height: 100px;
   display: inline-block;
   position: absolute;
-  top: 40%;
+  top: 50%;
   left: 50%;
   transform: translate(-70%, -70%);
 }
