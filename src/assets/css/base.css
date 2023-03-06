@@ -109,3 +109,9 @@ body {
   margin: 20px;
   display: inline-block;
 }
+
+@media screen and (max-width: 600px) {
+  .info-trailer-container {
+    flex-direction: column;
+  }
+}

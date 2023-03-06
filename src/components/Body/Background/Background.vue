@@ -45,4 +45,12 @@ img {
 .v-leave-to {
     opacity: 0;
 }
+
+@media screen and (max-width: 600px) {
+    * {
+        min-height: 100%;
+
+    }
+
+}
 </style>

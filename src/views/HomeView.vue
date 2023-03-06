@@ -131,4 +131,11 @@ select {
   z-index: -1;
 
 }
+
+@media screen and (max-width:600px) {
+  .main-div {
+    flex-direction: column;
+    gap: 4rem;
+  }
+}
 </style>

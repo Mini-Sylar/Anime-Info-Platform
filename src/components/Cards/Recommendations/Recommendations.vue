@@ -90,6 +90,7 @@ export default {
       return this.mainAnimeData.getRecommendations
     },
     numberofCards() {
+      if (screen.width < 768) return 2
       return this.mainAnimeData.getRecommendations.length < 2 ? 2 : 4
     },
     isCardsLoading() {
@@ -179,5 +180,22 @@ p {
   top: 50%;
   left: 50%;
   transform: translate(-70%, -70%);
+}
+
+@media screen and (max-width: 768px) {
+  .swiper-container {
+    min-width: 100%;
+    height: 100%;
+  }
+
+  .swiper-slide-instance {
+    height: 15rem;
+  }
+
+  .swiper-loading {
+    height: 15rem;
+  }
+
+
 }
 </style>
