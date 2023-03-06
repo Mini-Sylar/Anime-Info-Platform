@@ -49,7 +49,6 @@ const hasTrailer = computed(() => mainAnimeData.getTrailer == null ? "7rem" : "1
     height: 20rem;
     visibility: visible;
     opacity: 1;
-    bottom: 0;
 }
 
 .history-content {
