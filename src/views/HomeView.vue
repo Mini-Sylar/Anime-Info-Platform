@@ -132,7 +132,7 @@ select {
 
 }
 
-@media screen and (max-width:600px) {
+@media screen and (max-width:821px) {
   .main-div {
     flex-direction: column;
     gap: 4rem;

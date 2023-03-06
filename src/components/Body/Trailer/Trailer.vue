@@ -33,7 +33,7 @@ iframe {
     transition: all .2s ease;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 821px) {
     iframe {
         width: 100%;
         height: 100%;

@@ -193,7 +193,7 @@ p {
   }
 
   .swiper-loading {
-    height: 15rem;
+    height: 20rem;
   }
 
 

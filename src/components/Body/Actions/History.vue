@@ -94,4 +94,17 @@ ul {
 h4 {
     margin-left: 1rem;
 }
+
+@media screen and (max-width: 821px) {
+    .history-container {
+        left: min(3rem, 1rem);
+        width: 90%;
+        bottom: 17rem;
+    }
+
+    .search-history {
+        width: auto;
+    }
+
+}
 </style>

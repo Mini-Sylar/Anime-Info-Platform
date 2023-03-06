@@ -52,7 +52,7 @@ main {
   }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 821px) {
   .left-side-main {
     width: 100%;
   }
