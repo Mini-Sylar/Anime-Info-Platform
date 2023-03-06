@@ -18,7 +18,7 @@
 </template>
 <script setup>
 import { useAnimeData } from '../../../stores/anime_data';
-import { ref, computed } from 'vue';
+import { computed } from 'vue';
 
 const mainAnimeData = useAnimeData();
 const getHistory = computed(() => mainAnimeData.searchHistory);
@@ -26,7 +26,7 @@ const searchHistory = (history) => {
     mainAnimeData.fetchAnimeData(history, false);
 }
 
-const hasTrailer = computed(() => mainAnimeData.getTrailer == null ? "15%" : "17rem");
+const hasTrailer = computed(() => mainAnimeData.getTrailer == null ? "7rem" : "17rem");
 </script>
 <style scoped>
 .history-container {
