@@ -29,6 +29,7 @@ export default {
     showHam() {
       document.querySelector(".nav-mobile").classList.toggle(this.showNav);
       const mobile_nav = document.querySelector(".nav-mobile");
+      document.querySelector(".hamburger").classList.toggle("open");
       document.querySelector(".first").classList.toggle(this.showNav);
       if (mobile_nav.classList.contains("show-nav")) {
         document.body.style.overflow = 'hidden';
@@ -43,7 +44,7 @@ export default {
   },
   mounted() {
 
-  },
+  }
 };
 </script>
 <style scoped>
@@ -56,6 +57,9 @@ export default {
   width: 100%;
   overflow: hidden;
   z-index: 35;
+  align-items: center;
+  position: relative;
+  top: 5px;
 }
 
 .logo img {
@@ -72,8 +76,8 @@ export default {
 /* Ham */
 #nav-icon1 {
   display: block;
-  width: 50px;
-  height: 45px;
+  width: 40px;
+  height: 30px;
   position: absolute;
   margin: 0 auto;
   -webkit-transform: rotate(0deg);
@@ -113,11 +117,11 @@ export default {
 }
 
 #nav-icon1 span:nth-child(2) {
-  top: 12px;
+  top: 8px;
 }
 
 #nav-icon1 span:nth-child(3) {
-  top: 24px;
+  top: 17px;
 }
 
 #nav-icon1.open span:nth-child(1) {

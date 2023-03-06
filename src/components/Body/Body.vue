@@ -72,4 +72,11 @@ const setBodyLoading = computed(() => {
 .body-loading-blur svg {
     transform: translate(-80%, -50%) !important;
 }
+
+@media screen and (max-width: 768px) {
+    .body-loading-blur {
+        height: 100%;
+    }
+
+}
 </style>

@@ -4,8 +4,8 @@
             <h1 class="anime-title" :key="title">{{ title }}</h1>
         </transition>
         <!-- Add transtion to description -->
-        <transition  appear mode="out-in">
-            <p class="anime-synposis" v-html="titleDescription.description" :key="title" >
+        <transition appear mode="out-in">
+            <p class="anime-synposis" v-html="titleDescription.description" :key="title">
             </p>
         </transition>
 
@@ -47,4 +47,14 @@ export default {
 }
 
 
+@media screen and (max-width: 768px) {
+    .anime-title {
+        font-size: clamp(1.5rem, 3vw, 3.5rem);
+        height: 35vh;
+        line-height: 1.5rem;
+        display: flex;
+        align-items: flex-end;
+    }
+
+}
 </style>

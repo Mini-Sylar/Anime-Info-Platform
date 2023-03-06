@@ -62,7 +62,8 @@ header {
     .search-bar {
         display: flex;
         justify-content: center;
-        margin-block: 3rem;
+        position: relative;
+        left: 1rem;
     }
 
 }
