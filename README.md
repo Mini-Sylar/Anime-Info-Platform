@@ -52,7 +52,7 @@ Moved into [contributions](CONTRIBUTION.md)
 ## ❗ Version 2.0.0
 
 Version 2.0.0 is currently in development, a beta version can be accessed below using the following link
-[Anime Info Platform v.2.0.0](https://anime-info-platform-2ptrayunp-mini-sylar.vercel.app/)
+[Anime Info Platform v.2.0.0](https://anime-info-platform-kf1cr6n01-mini-sylar.vercel.app/)
 
 ### What's new in version 2.0.0?
 Check out the pre-release section to see what's new and changed [What's New In 2.0.0](https://github.com/Mini-Sylar/Anime-Info-Platform/releases)
