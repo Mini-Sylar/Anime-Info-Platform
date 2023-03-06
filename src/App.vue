@@ -111,4 +111,12 @@ header:hover {
   fill: v-bind('setColor') !important;
   transition: fill .2s ease-in-out;
 }
+
+#nav-icon1 span {
+  background: v-bind('setColor') !important;
+}
+
+.first {
+  background: v-bind('setColor') !important;
+}
 </style>
