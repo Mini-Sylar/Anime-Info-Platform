@@ -29,7 +29,8 @@ export default {
 <style scoped>
 .nav-mobile {
     width: 0;
-    height: 100vmax;
+    height: 100vh;
+    height: 100dvh;
     background-color: #333;
     position: absolute;
     display: flex;

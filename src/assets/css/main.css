@@ -58,7 +58,7 @@ main {
   align-items: center;
   z-index: 100;
 }
-.loading svg {
+.loading img {
   width: 100px;
   height: 100px;
   margin: 20px;
