@@ -5,9 +5,9 @@
                 <button type="button" class="action-button share-main" title="Share show" @click="useShareAnime">
                     <font-awesome-icon icon="fa-solid fa-share-nodes" class="share-hover" />
                 </button>
-                <button class="action-button" title="Take a screenshot" @click="takeScreenshot">
+                <!-- <button class="action-button" title="Take a screenshot" @click="takeScreenshot">
                     <font-awesome-icon icon="fa-solid fa-camera" class="grow-shrink" />
-                </button>
+                </button> -->
                 <History />
                 <button class="action-button history-show" title="View History" @click="showHistoryMenu">
                     <font-awesome-icon icon="fa-solid fa-clock-rotate-left fa-spin" class="history-icon" />

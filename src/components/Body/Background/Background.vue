@@ -53,7 +53,7 @@ img {
     }
 
     img {
-        filter: brightness(50%);
+        filter: brightness(45%);
     }
 
 }
