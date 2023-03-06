@@ -64,6 +64,7 @@ header {
         justify-content: center;
         position: relative;
         left: 1rem;
+        margin-top: 1rem;
     }
 
 }

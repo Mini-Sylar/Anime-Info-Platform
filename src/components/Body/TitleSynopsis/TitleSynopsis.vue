@@ -50,7 +50,7 @@ export default {
 @media screen and (max-width: 768px) {
     .anime-title {
         font-size: clamp(1.5rem, 3vw, 3.5rem);
-        height: 35vh;
+        height: 40vh;
         line-height: 1.5rem;
         display: flex;
         align-items: flex-end;
