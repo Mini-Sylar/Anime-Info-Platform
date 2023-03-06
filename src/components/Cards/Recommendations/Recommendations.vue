@@ -190,12 +190,17 @@ p {
 
   .swiper-slide-instance {
     height: 15rem;
+    min-width: 4rem;
+    max-width: 10rem;
   }
 
   .swiper-loading {
     height: 20rem;
   }
 
+  p {
+    font-size: 12px;
+  }
 
 }
 </style>
