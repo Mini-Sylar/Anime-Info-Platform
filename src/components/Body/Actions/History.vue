@@ -26,6 +26,7 @@ const searchHistory = (history) => {
     mainAnimeData.fetchAnimeData(history, false);
 }
 
+const hasTrailer = computed(() => mainAnimeData.getTrailer == null ? "15%" : "17rem");
 </script>
 <style scoped>
 .history-container {
@@ -40,7 +41,7 @@ const searchHistory = (history) => {
     opacity: 0;
     /* padding: 1rem; */
     width: 20rem;
-    left: 8rem;
+    left: 5rem;
     transition: height .2s ease-in-out, visibility .2s ease-in-out, opacity .2s ease-in-out;
 }
 
@@ -48,6 +49,7 @@ const searchHistory = (history) => {
     height: 20rem;
     visibility: visible;
     opacity: 1;
+    bottom: 0;
 }
 
 .history-content {
@@ -99,7 +101,7 @@ h4 {
     .history-container {
         left: min(3rem, 1rem);
         width: 90%;
-        bottom: 17rem;
+        bottom: v-bind(hasTrailer);
     }
 
     .search-history {

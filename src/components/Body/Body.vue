@@ -60,7 +60,7 @@ const setBodyLoading = computed(() => {
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 40rem;
+    height: 120%;
     backdrop-filter: blur(10px);
     background: transparent;
     z-index: 1;
