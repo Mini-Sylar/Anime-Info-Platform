@@ -55,6 +55,7 @@ main {
 @media screen and (max-width: 821px) {
   .left-side-main {
     width: 100%;
+    min-height: 50rem;
   }
   .right-side-main {
     width: 100%;
