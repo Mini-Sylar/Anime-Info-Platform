@@ -19,6 +19,7 @@ export default {
         hideMenu() {
             document.querySelector(".nav-mobile").classList.remove("show-nav");
             document.querySelector(".first").classList.remove("show-nav");
+            document.querySelector(".hamburger").classList.remove("open");
             document.body.style.overflow = 'scroll';
         }
     },
