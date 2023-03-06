@@ -1,7 +1,7 @@
 <template>
   <div class="is-a-container swiper-container noselect">
     <transition appear mode="out-in">
-      <swiper :slides-per-view="numberofCards" :space-between="2" :effect="'coverflow'" :centeredSlides="centerSlides"
+      <swiper :slides-per-view="numberofCards" :space-between="0" :effect="'coverflow'" :centeredSlides="centerSlides"
         :coverflowEffect="{
           rotate: 10,
           stretch: 1,
@@ -18,8 +18,7 @@
   lazy: true,
 }" :key="populateCards">
         <swiper-slide class="swiper-slide-instance" v-for="(item, index) in populateCards" :key="index">
-          <p class="noselect card-hovered" role="link"
-            @click="searchFromRecommended(item.mediaRecommendation.title)">
+          <p class="noselect card-hovered" role="link" @click="searchFromRecommended(item.mediaRecommendation.title)">
             {{
               item.mediaRecommendation.title.english != null
               ? item.mediaRecommendation.title.english
@@ -91,7 +90,7 @@ export default {
       return this.mainAnimeData.getRecommendations
     },
     numberofCards() {
-      if (screen.width < 768) return 2
+      if (screen.width < 768) return 2.7
       return this.mainAnimeData.getRecommendations.length < 2 ? 2 : 4
     },
     isCardsLoading() {
@@ -191,7 +190,7 @@ p {
 
   .swiper-slide-instance {
     height: 15rem;
-    min-width: 4rem;
+    min-width: 7rem;
     max-width: 10rem;
   }
 
@@ -203,5 +202,8 @@ p {
     font-size: 12px;
   }
 
+  .swiper-loading svg {
+    transform: translate(-30%, -60%);
+  }
 }
 </style>

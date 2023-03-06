@@ -49,7 +49,11 @@ img {
 @media screen and (max-width: 821px) {
     * {
         min-height: 100%;
+        filter: blur(20px);
+    }
 
+    img {
+        filter: brightness(50%);
     }
 
 }

@@ -78,5 +78,9 @@ const setBodyLoading = computed(() => {
         height: 100%;
     }
 
+    .body-loading-blur svg {
+        transform: translate(-40%, -60%) !important;
+    }
+
 }
 </style>
