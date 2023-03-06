@@ -189,7 +189,7 @@ p {
   }
 
   .swiper-slide-instance {
-    height: 15rem;
+    height: 12rem;
     min-width: 7rem;
     max-width: 10rem;
   }
