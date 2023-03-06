@@ -40,6 +40,31 @@ main {
   backdrop-filter: blur(20px);
 }
 
+[v-cloak] > * {
+  display: none;
+}
+[v-cloak]::before {
+  background-color: black;
+}
+
+.loading {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #090909;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+.loading svg {
+  width: 100px;
+  height: 100px;
+  margin: 20px;
+  display: inline-block;
+}
+
 @keyframes shimmer {
   100% {
     -webkit-mask-position: left;
