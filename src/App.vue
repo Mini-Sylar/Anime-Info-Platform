@@ -1,6 +1,6 @@
 <script setup>
 import NavbarVue from "./components/NavBar/Navbar.vue";
-import { RouterLink, RouterView } from "vue-router";
+import { RouterView } from "vue-router";
 import { useAnimeData } from '@/stores/anime_data';
 import { computed } from 'vue'
 

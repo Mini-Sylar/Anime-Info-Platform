@@ -23,6 +23,11 @@ export default {
             document.body.style.overflow = 'scroll';
         }
     },
+    watch: {
+        $route() {
+            this.hideMenu();
+        }
+    }
 
 }
 </script>
