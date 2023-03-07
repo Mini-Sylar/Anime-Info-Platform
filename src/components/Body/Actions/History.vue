@@ -6,7 +6,9 @@
             <h4>No Search History Yet 😢</h4>
         </div>
         <div class="search-history" v-else>
-            <div class="clear-history-loading"></div>
+            <div class="clear-history-loading" v-if="checkClearHistory">
+                <Bars></Bars>
+            </div>
             <ul>
                 <li v-for="(history, index) in getHistory" :key="index">
                     <div class="history-content">
@@ -21,6 +23,7 @@
 <script setup>
 import { useAnimeData } from '../../../stores/anime_data';
 import { computed } from 'vue';
+import Bars from '../../Loaders/Bars.vue';
 
 const mainAnimeData = useAnimeData();
 const getHistory = computed(() => mainAnimeData.searchHistory);
@@ -30,6 +33,10 @@ const searchHistory = (history) => {
 
 const hasTrailer = computed(() => mainAnimeData.getTrailer == null ? "7rem" : "17rem");
 
+const checkClearHistory = computed(() => {
+    console.log(mainAnimeData.clearHistoryLoading)
+    return mainAnimeData.clearHistoryLoading
+})
 const clearHistory = () => {
     mainAnimeData.clearHistory();
 }
@@ -82,6 +89,7 @@ ul {
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 15rem;
 }
 
 .history-title {
@@ -118,15 +126,16 @@ h4 {
 
 .clear-history-loading {
     position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
-    height: 100%;
+    height: 18rem;
     background-color: #0195ff2c;
     border-radius: 10px;
-    backdrop-filter: blur(10px);
-    z-index: 1;
-    display: none;
+    backdrop-filter: blur(20px);
+    z-index: 28 !important;
+}
+
+.clear-history-loading svg {
+    transform: translate(-35%, -50%) !important;
 }
 
 @media screen and (max-width: 821px) {
