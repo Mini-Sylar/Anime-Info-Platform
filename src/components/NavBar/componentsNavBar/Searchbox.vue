@@ -7,7 +7,7 @@
             <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
           </button>
           <input type="text" class="input-search dynamic-color" placeholder="Search for anime..." autocomplete="off"
-            required v-model="searchQuery" />
+            v-model="searchQuery" />
         </form>
       </div>
     </div>
@@ -23,6 +23,7 @@ export default {
     const mainAnimeData = useAnimeData()
     const searchQuery = ref('')
     const handlesubmit = () => {
+      if (searchQuery.value === '') return
       mainAnimeData.fetchAnimeData(searchQuery.value)
       searchQuery.value = ''
     }
