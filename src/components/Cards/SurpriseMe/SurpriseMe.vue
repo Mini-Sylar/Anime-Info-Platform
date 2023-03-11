@@ -5,7 +5,8 @@
                 <button type="submit">Surprise Me</button>
                 <OnClickOutside @trigger="hideWhenClickedOutside">
                     <span class="dropdown-button">
-                        <span role="button" @click.prevent="toggleShowGenre" class="carrette_button">
+                        <span role="button" aria-label="Button to show genres" @click.prevent="toggleShowGenre"
+                            class="carrette_button">
                             <svg :class="[showGenre == true ? 'carret-toggle rotate' : 'carret-toggle']"
                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
                                 <path

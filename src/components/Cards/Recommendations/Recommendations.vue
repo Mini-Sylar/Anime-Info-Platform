@@ -18,7 +18,8 @@
   lazy: true,
 }" :key="populateCards">
         <swiper-slide class="swiper-slide-instance" v-for="(item, index) in populateCards" :key="index">
-          <p class="noselect card-hovered" role="link" @click="searchFromRecommended(item.mediaRecommendation.title)">
+          <p class="noselect card-hovered" role="link" aria-label="link to anime in card"
+            @click="searchFromRecommended(item.mediaRecommendation.title)">
             {{
               item.mediaRecommendation.title.english != null
               ? item.mediaRecommendation.title.english
