@@ -17,7 +17,6 @@ const initiaChangeWidth = ref(animeData.toggleAbout);
 
 const changeWidth = () => {
     initiaChangeWidth.value = !initiaChangeWidth.value;
-    console.log(initiaChangeWidth.value)
     animeData.reduceWidth(initiaChangeWidth.value);
 
 }
@@ -48,7 +47,6 @@ const changeWidth = () => {
 }
 
 .icon * {
-    border: 1px solid #0195ff;
     padding: 1rem;
     border-radius: 50%;
     transition: all 0.3s ease-in-out;

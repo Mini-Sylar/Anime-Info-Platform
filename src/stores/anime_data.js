@@ -179,7 +179,6 @@ export const useAnimeData = defineStore("animeData", {
     },
     async reduceWidth(reduce) {
       this.toggleAbout = reduce;
-      console.log("reduceWidth0");
       if (this.toggleAbout == true) {
         this.aboutWidth = "170%";
       } else {

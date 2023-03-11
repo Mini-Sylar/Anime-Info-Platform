@@ -34,7 +34,6 @@ const searchHistory = (history) => {
 const hasTrailer = computed(() => mainAnimeData.getTrailer == null ? "7rem" : "17rem");
 
 const checkClearHistory = computed(() => {
-    console.log(mainAnimeData.clearHistoryLoading)
     return mainAnimeData.clearHistoryLoading
 })
 const clearHistory = () => {

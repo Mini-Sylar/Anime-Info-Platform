@@ -38,6 +38,7 @@ const isMobile = computed(() => {
     display: flex;
     padding: 1rem;
     width: min(90%, 1400px);
+    height: 4rem;
 }
 
 .main-links {

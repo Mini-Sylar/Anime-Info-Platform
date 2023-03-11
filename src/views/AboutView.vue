@@ -17,6 +17,7 @@
 .about-container {
   display: flex;
   max-height: 80vh;
+  gap: 1rem;
 }
 
 main {
@@ -26,6 +27,7 @@ main {
   justify-content: center;
   height: 100%;
   width: 100%;
+
 }
 
 .socials {

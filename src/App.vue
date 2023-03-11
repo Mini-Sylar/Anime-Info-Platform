@@ -18,7 +18,7 @@ const setColor = computed(() => {
   <main>
     <router-view v-slot="{ Component }">
       <transition name="fade" mode="out-in">
-        <component :is="Component" :key="$route.path"></component>
+        <component :is="Component"></component>
       </transition>
     </router-view>
   </main>
@@ -130,6 +130,6 @@ const setColor = computed(() => {
 }
 
 .arrow-icon-divider * {
-  border: 1px solid v-bind('setColor') !important;
+  border: 3px solid v-bind('setColor') !important;
 }
 </style>
