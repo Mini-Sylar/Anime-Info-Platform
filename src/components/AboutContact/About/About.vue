@@ -62,4 +62,15 @@ p {
 
 }
 
+@media screen and (max-width:768px) {
+
+    .anime-image {
+        width: 10%;
+    }
+
+    p {
+        width: 100%;
+        height: 70vh;
+    }
+}
 </style>

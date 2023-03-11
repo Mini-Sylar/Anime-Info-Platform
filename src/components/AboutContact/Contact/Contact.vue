@@ -201,4 +201,32 @@ button:hover {
     justify-content: center;
     margin-top: 2rem;
 }
+
+@media screen and (max-width:768px) {
+    .right-contact {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0 1rem;
+        transition: all 0.3s ease-in-out;
+        position: static;
+    }
+
+    .contact-form {
+        width: 100%;
+        height: 70vh;
+        overflow: auto;
+        position: static;
+    }
+
+    input,
+    textarea {
+        width: 100%;
+    }
+
+    button {
+        position: static;
+    }
+
+}
 </style>
