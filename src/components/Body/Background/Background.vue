@@ -1,7 +1,6 @@
 <template >
     <div>
         <div class="image-container">
-
             <transition appear mode="out-in">
                 <img loading="lazy" :src="backgroundImage" alt="Main body image" :key="backgroundImage">
             </transition>

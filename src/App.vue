@@ -83,7 +83,8 @@ const setColor = computed(() => {
 }
 
 .contains-genres,
-.history-container {
+.history-container,
+.send-message {
   background-color: v-bind("setColor + '20'") !important;
 }
 
@@ -117,7 +118,8 @@ const setColor = computed(() => {
   background: v-bind('setColor') !important;
 }
 
-.first {
+.first,
+.send-message {
   background: v-bind('setColor') !important;
 }
 
@@ -132,5 +134,15 @@ const setColor = computed(() => {
 
 .arrow-icon-divider * {
   border: 3px solid v-bind('setColor') !important;
+}
+
+.contact-form {
+  background-color: v-bind('setColor + "20"') !important;
+  box-shadow: 0 0 10px 0 v-bind('setColor + "20"') !important;
+  ;
+}
+
+.form-input {
+  border-bottom: 1px solid v-bind('setColor') !important;
 }
 </style>
