@@ -76,6 +76,7 @@ button {
 .action-button {
   background-color: transparent !important;
   color: v-bind("setColor") !important;
+  fill: v-bind("setColor") !important;
 }
 
 iframe {

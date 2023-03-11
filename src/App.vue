@@ -123,6 +123,7 @@ const setColor = computed(() => {
 
 .uses-dynamic {
   color: v-bind('setColor') !important;
+  fill: v-bind('setColor') !important;
 }
 
 .dividers {
