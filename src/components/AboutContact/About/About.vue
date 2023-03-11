@@ -63,14 +63,22 @@ p {
 }
 
 @media screen and (max-width:768px) {
+    .left-about {
+        position: static;
+    }
 
     .anime-image {
         width: 10%;
+        bottom: 1rem;
     }
 
     p {
         width: 100%;
-        height: 70vh;
+        height: 65vh;
+    }
+
+    .about-title {
+        position: static;
     }
 }
 </style>

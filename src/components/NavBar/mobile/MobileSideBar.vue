@@ -34,14 +34,13 @@ export default {
 <style scoped>
 .nav-mobile {
     width: 0;
-    height: 100vh;
-    height: 100dvh;
+    height: calc(100vh + 20vh);
     background-color: #333;
     position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 99999;
+    z-index: 5;
     flex-direction: column;
     gap: 2rem;
     right: 0;
@@ -56,7 +55,7 @@ export default {
     content: "";
     position: absolute;
     width: 10%;
-    height: 100vmax;
+    height: calc(100vh + 20vh);
     background-color: #0195ff;
     z-index: 1;
     right: 0;
