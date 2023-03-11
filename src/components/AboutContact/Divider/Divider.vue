@@ -1,0 +1,66 @@
+<template>
+    <div>
+        <div class="top-line"></div>
+        <div class="icon" @click=changeWidth>
+            <font-awesome-icon icon="fa-solid fa-arrow-right"
+                :class="[initiaChangeWidth == true ? 'rotate-right' : 'rotate-left']" />
+        </div>
+        <div class="bottom-line"></div>
+    </div>
+</template>
+<script setup>
+import { useAnimeData } from '../../../stores/anime_data';
+import { ref } from 'vue';
+const animeData = useAnimeData();
+
+const initiaChangeWidth = ref(false);
+
+const changeWidth = () => {
+    initiaChangeWidth.value = !initiaChangeWidth.value;
+    console.log(initiaChangeWidth.value)
+    animeData.reduceWidth(initiaChangeWidth.value);
+
+}
+</script>
+<style scoped>
+* {
+    color: #0195ff;
+}
+
+.top-line,
+.bottom-line {
+    width: 5px;
+  height: min(30em, 30vh);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    background-color: #0195ff;
+    border-radius: 3px;
+}
+
+.icon {
+    width: 100%;
+    height: min(10em, 20vh);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon * {
+    border: 1px solid #0195ff;
+    padding: 1rem;
+    border-radius: 50%;
+    transition: all 0.3s ease-in-out;
+}
+
+.rotate-right {
+    transform: rotate(180deg);
+    transition: all 0.3s ease-in-out;
+}
+
+.rotate-left {
+    transform: rotate(0deg);
+    transition: all 0.3s ease-in-out;
+}
+</style>

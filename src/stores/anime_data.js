@@ -28,6 +28,7 @@ export const useAnimeData = defineStore("animeData", {
     cardsLoading: false,
     bodyLoading: false,
     clearHistoryLoading: false,
+    aboutWidth: "50%",
     // recomendationData:
   }),
   getters: {
@@ -168,12 +169,20 @@ export const useAnimeData = defineStore("animeData", {
       localStorage.setItem("searchHistory", JSON.stringify(this.searchHistory));
     },
     async clearHistory() {
-      this.clearHistoryLoading= true;
+      this.clearHistoryLoading = true;
       this.searchHistory = [];
       localStorage.setItem("searchHistory", JSON.stringify(this.searchHistory));
       setTimeout(() => {
         this.clearHistoryLoading = false;
       }, 1000);
+    },
+    async reduceWidth(reduce) {
+      console.log("reduceWidth0")
+      if (reduce == true) {
+        this.aboutWidth = "170%";
+      } else {
+        this.aboutWidth = "20%";
+      }
     },
   },
 });
