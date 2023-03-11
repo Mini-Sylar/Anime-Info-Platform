@@ -41,7 +41,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 3;
+    z-index: 99999;
     flex-direction: column;
     gap: 2rem;
     right: 0;
