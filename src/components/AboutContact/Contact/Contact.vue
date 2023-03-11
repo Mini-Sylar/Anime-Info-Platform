@@ -32,9 +32,19 @@
     </div>
 </template>
 <script setup>
+import { useToast } from "vue-toastification";
+const toast = useToast();
 const submitForm = () => {
-    console.log('submitting form')
+    emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this.$refs.form, 'YOUR_PUBLIC_KEY')
+        .then((result) => {
+            toast.success("Message sent successfully!");
+        }, (error) => {
+            toast.error("There was a problem sending your message, try again");
+        });
+
 }
+
+
 </script>
 <style scoped>
 .right-contact {
