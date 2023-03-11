@@ -23,7 +23,6 @@
 </template>
 <script setup>
 import { useAnimeData } from "@/stores/anime_data";
-import html2canvas from 'html2canvas';
 import { onBeforeMount } from "vue";
 import History from './History.vue';
 
@@ -36,22 +35,7 @@ const showHistoryMenu = () => {
     historyContainer.classList.toggle('show-history');
 }
 
-const takeScreenshot = () => {
-    const el = document.body;
-    html2canvas(el, {
-        allowTaint: true,
-        useCORS: true,
-        foreignObjectRendering: true,
-        backgroundColor: "none",
-        letterRendering: true,
-    }).then(canvas => {
-        const link = document.createElement('a');
-        link.download = 'screenshot.png';
-        link.href = canvas.toDataURL('image/png').replace(/^data:image\/[^;]/, 'data:application/octet-stream');
-        link.click();
-    })
 
-}
 
 onBeforeMount(() => {
     window.addEventListener('click', (e) => {
