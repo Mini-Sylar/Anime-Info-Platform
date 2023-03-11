@@ -6,8 +6,8 @@
             <div class="contact-form">
                 <div class="contact-form-left">
                     <div class="contains-input">
-                        <label for="email">Email</label>
-                        <input class="form-input" name="email" type="email" placeholder="The way for me to reach you"
+                        <label for="reply_to">Email</label>
+                        <input class="form-input" name="reply_to" type="email" placeholder="The way for me to reach you.📧"
                             required>
                     </div>
                     <div class="contains-input">
@@ -18,7 +18,7 @@
                 </div>
                 <div class="contact-form-right">
                     <label for="message">Message</label>
-                    <textarea class="form-input" name="message" cols="20" rows="10" placeholder="What you want to tell me"
+                    <textarea class="form-input" name="message" cols="20" rows="10" placeholder="Your message goes here 👈"
                         required></textarea>
                 </div>
                 <div class="send-message-container" v-once>
