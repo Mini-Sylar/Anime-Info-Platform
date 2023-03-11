@@ -3,27 +3,39 @@
         <form @submit.prevent="handlesubmit">
             <div class="splitbutton">
                 <button type="submit">Surprise Me</button>
-                <span class="dropdown-button">
-                    <input type="checkbox" name="dropdown" id="dropdown">
-                    <label for="dropdown" class="carrette_button"><font-awesome-icon icon="fa-solid fa-caret-down"
-                            class="carret-toggle" title="Select genre" /></label>
-                    <div class="contains-genres">
-                        <ul>
-                            <li v-for="(item, index) in genres" :key="index">
-                                <input type="radio" :id="item" :value="item" name="animeGenre" v-model="genreQuery" />
-                                <label :for="item">{{ item }}</label>
-                            </li>
-                        </ul>
-                    </div>
-                </span>
+                <OnClickOutside @trigger="hideWhenClickedOutside">
+                    <span class="dropdown-button">
+                        <span role="button" @click.prevent="toggleShowGenre" class="carrette_button"><font-awesome-icon
+                                icon="fa-solid fa-caret-down"
+                                :class="[showGenre == true ? 'carret-toggle rotate' : 'carret-toggle']"
+                                title="Select genre" /></span>
+
+                        <transition name="show-genre">
+                            <div class="contains-genres" v-if="showGenre">
+                                <ul>
+                                    <li v-for="(item, index) in             genres" :key="index">
+                                        <input type="radio" :id="item" :value="item" name="animeGenre"
+                                            v-model="genreQuery" />
+                                        <label :for="item">{{ item }}</label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </transition>
+
+                    </span>
+                </OnClickOutside>
             </div>
         </form>
     </div>
 </template>
 <script>
 import { useAnimeData } from '@/stores/anime_data.js'
+import { OnClickOutside } from '@vueuse/components'
 import { ref } from 'vue'
 export default {
+    components: {
+        OnClickOutside
+    },
     data() {
         return {
             genres: [
@@ -40,7 +52,8 @@ export default {
                 "Mystery",
                 "Psychological",
                 "Romance",
-            ]
+            ],
+            showGenre: false
         }
     },
     setup() {
@@ -49,9 +62,18 @@ export default {
         const handlesubmit = () => {
             mainAnimeData.fetchSurprise(genreQuery.value)
         }
+
         return {
             genreQuery,
             handlesubmit,
+        }
+    },
+    methods: {
+        toggleShowGenre() {
+            this.showGenre = !this.showGenre
+        },
+        hideWhenClickedOutside() {
+            if (this.showGenre == true) { this.showGenre = false }
         }
     },
 }
@@ -85,12 +107,6 @@ button {
     cursor: pointer;
 }
 
-input:checked+label>.carret-toggle {
-    transform: rotate(180deg);
-
-}
-
-
 .carret-toggle {
     transition: transform .2s ease-in-out;
     color: white;
@@ -117,11 +133,10 @@ input:checked+label>.carret-toggle {
     padding-top: 0;
     padding-bottom: 0;
     overflow: hidden;
-    max-height: 0;
+    height: 21rem;
     backdrop-filter: blur(10px);
     color: white;
-
-    transition: max-height .2s ease-in-out;
+    transition: all .2s ease-in-out;
 
 }
 
@@ -137,22 +152,27 @@ input:checked+label>.carret-toggle {
     gap: .5rem;
 }
 
-input:checked~.contains-genres {
-    max-height: 21rem;
-}
-
-input[type="checkbox"] {
-    display: none;
-}
-
-label {
-    cursor: pointer;
-}
-
 .carrette_button {
     padding: 8px;
     border-top-right-radius: 25px;
     border-bottom-right-radius: 25px;
     background-color: #0195ff;
+}
+
+
+.show-genre-active,
+.show-genre-leave-active {
+    height: 21em;
+    transition: opacity 0.2s ease height 0.2 ease;
+}
+
+.show-genre-enter-from,
+.show-genre-leave-to {
+    height: 0;
+    opacity: 0;
+}
+
+.rotate {
+    transform: rotate(180deg);
 }
 </style>
