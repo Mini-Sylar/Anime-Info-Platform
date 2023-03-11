@@ -6,9 +6,9 @@
       <Contact />
     </div>
     <div class="socials">
-      <a class="social-link" href="#"><font-awesome-icon icon="fa-brands fa-github" /></a>
-      <a class="social-link" href="#"><font-awesome-icon icon="fa-brands fa-linkedin-in" /></a>
-      <a class="social-link" href="#"><font-awesome-icon icon="fa-brands fa-twitter" /></a>
+      <a class="social-link uses-dynamic" href="#"><font-awesome-icon icon="fa-brands fa-github" /></a>
+      <a class="social-link uses-dynamic" href="#"><font-awesome-icon icon="fa-brands fa-linkedin-in" /></a>
+      <a class="social-link uses-dynamic" href="#"><font-awesome-icon icon="fa-brands fa-twitter" /></a>
     </div>
   </main>
 </template>

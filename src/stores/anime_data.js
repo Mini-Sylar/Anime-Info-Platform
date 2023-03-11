@@ -28,7 +28,7 @@ export const useAnimeData = defineStore("animeData", {
     cardsLoading: false,
     bodyLoading: false,
     clearHistoryLoading: false,
-    aboutWidth: "50%",
+    aboutWidth: "20%",
     // recomendationData:
   }),
   getters: {
@@ -177,7 +177,7 @@ export const useAnimeData = defineStore("animeData", {
       }, 1000);
     },
     async reduceWidth(reduce) {
-      console.log("reduceWidth0")
+      console.log("reduceWidth0");
       if (reduce == true) {
         this.aboutWidth = "170%";
       } else {

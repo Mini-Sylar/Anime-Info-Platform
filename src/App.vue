@@ -120,4 +120,16 @@ const setColor = computed(() => {
 .first {
   background: v-bind('setColor') !important;
 }
+
+.uses-dynamic {
+  color: v-bind('setColor') !important;
+}
+
+.dividers {
+  background-color: v-bind('setColor') !important;
+}
+
+.arrow-icon-divider * {
+  border: 1px solid v-bind('setColor') !important;
+}
 </style>

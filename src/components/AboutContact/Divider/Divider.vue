@@ -1,11 +1,11 @@
 <template>
     <div>
-        <div class="top-line"></div>
-        <div class="icon" @click=changeWidth>
+        <div class="top-line dividers"></div>
+        <div class="icon arrow-icon-divider" @click=changeWidth>
             <font-awesome-icon icon="fa-solid fa-arrow-right"
-                :class="[initiaChangeWidth == true ? 'rotate-right' : 'rotate-left']" />
+                :class="[initiaChangeWidth == true ? 'rotate-right uses-dynamic' : 'rotate-left uses-dynamic']" />
         </div>
-        <div class="bottom-line"></div>
+        <div class="bottom-line dividers"></div>
     </div>
 </template>
 <script setup>
@@ -30,7 +30,7 @@ const changeWidth = () => {
 .top-line,
 .bottom-line {
     width: 5px;
-  height: min(30em, 30vh);
+    height: min(30em, 30vh);
     display: flex;
     justify-content: center;
     align-items: center;

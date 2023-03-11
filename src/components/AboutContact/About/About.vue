@@ -1,15 +1,23 @@
 <template >
     <div class="left-about">
         <h1 class="about-title">About</h1>
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. A ut placeat suscipit! Voluptatibus dolores nihil
-            consequuntur tempore rerum, libero provident voluptatem suscipit mollitia commodi et debitis sapiente quod fugit
-            saepe? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Mollitia molestiae fugiat aliquam ut beatae.
-            Explicabo at aperiam alias mollitia quidem fuga nesciunt praesentium quos, amet reiciendis, repudiandae quas
-            nihil tempora eos reprehenderit dolores. Iusto, itaque accusamus magnam perferendis corporis quae distinctio
-            nostrum quam dolorem. Expedita deleniti iusto voluptatum nisi atque fugit dolore maxime earum ut sit est fugiat
-            vel rerum aliquam eveniet magni, quos blanditiis, labore veritatis commodi veniam. Itaque amet eos et cumque
-            repudiandae magni neque officiis, totam necessitatibus, minima facere quos? Expedita, quo vitae delectus quia
-            sunt suscipit molestiae, itaque autem sequi iste non labore placeat commodi reiciendis.</p>
+        <p>Hey there! <br> Welcome to <span class="uses-dynamic">Anime Info Platform v.2.0.0</span>. A complete rewrite
+            using
+            Vue
+            including all its
+            performance benefits. All your favorite features are here including a new history section that shows your
+            recently searched anime! The new redesigned site also comes with a redesigned mobile view making it easier to
+            use on the go. I hope you enjoy the new site and be sure to follow me on social media to stay up-to-date with my
+            latest updates and projects!. <br> This site is made possible with the help of <span
+                class="uses-dynamic">AniList's </span>GraphQl
+            API. Be
+            sure to check it out!
+            <br> <br> Thanks for stopping by, and be sure to follow me on social media to stay up-to-date with my latest
+            updates and projects! <br><br>
+            <span class="uses-dynamic">~ Terence</span>
+
+        </p>
+        <img class="anime-image" src="@/assets/images/anime_hiding.png" alt="Anime girl hiding">
     </div>
 </template>
 <script setup>
@@ -28,19 +36,30 @@ const aboutWidth = computed(() => {
     height: min(40em, 80vh);
     padding: 0 2rem;
     overflow-x: hidden;
-    background-color: darkblue;
+    /* background-color: darkblue; */
     transition: all 0.3s ease-in-out;
+    position: relative;
 }
 
 .about-title {
     position: sticky;
     top: 0;
     width: 100%;
-    background-color: darkblue;
+    margin-bottom: 2rem;
+    /* background-color: darkblue; */
 }
 
 p {
     width: 30ch;
     overflow-x: hidden;
 }
+
+.anime-image {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 50%;
+
+}
+
 </style>
