@@ -22,7 +22,8 @@
                         required></textarea>
                 </div>
                 <div class="send-message-container" v-once>
-                    <button class="btn btn-reverse btn-arrow send-message" type="submit" title="Reach out to me">
+                    <button class="btn btn-reverse btn-arrow send-message" type="submit" title="Reach out to me"
+                        :disabled="buttonDisabled">
                         Send Message
                     </button>
                 </div>
@@ -33,13 +34,19 @@
 </template>
 <script setup>
 import { useToast } from "vue-toastification";
+import { ref } from "vue";
+import emailjs from '@emailjs/browser';
+const buttonDisabled = ref(false)
 const toast = useToast();
 const submitForm = () => {
+    buttonDisabled.value = true
     emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this.$refs.form, 'YOUR_PUBLIC_KEY')
         .then((result) => {
             toast.success("Message sent successfully!");
+            buttonDisabled.value = false
         }, (error) => {
             toast.error("There was a problem sending your message, try again");
+            buttonDisabled.value = false
         });
 
 }
@@ -116,6 +123,12 @@ button {
     border-radius: 25px;
     cursor: pointer;
     border-color: transparent;
+    transition: all .2s ease;
+}
+
+.send-message:disabled {
+    background-color: gray !important;
+    transition: all .2s ease;
 }
 
 .more-info-container {
