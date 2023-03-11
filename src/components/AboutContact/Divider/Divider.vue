@@ -13,7 +13,7 @@ import { useAnimeData } from '../../../stores/anime_data';
 import { ref } from 'vue';
 const animeData = useAnimeData();
 
-const initiaChangeWidth = ref(false);
+const initiaChangeWidth = ref(animeData.toggleAbout);
 
 const changeWidth = () => {
     initiaChangeWidth.value = !initiaChangeWidth.value;
