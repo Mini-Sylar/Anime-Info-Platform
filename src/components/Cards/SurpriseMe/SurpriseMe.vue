@@ -44,15 +44,6 @@ export default {
         }
     },
     setup() {
-        // if my pointer is not close to contain-genre and I click, close the dropdown
-        window.addEventListener('click', (e) => {
-            const containsGenres = document.querySelector('.contains-genres')
-            const dropdownButton = document.querySelector('.dropdown-button')
-            if (!containsGenres.contains(e.target) && !dropdownButton.contains(e.target)) {
-                document.querySelector('input[name="dropdown"]').checked = false
-            }
-        })
-
         const mainAnimeData = useAnimeData()
         const genreQuery = ref('Action')
         const handlesubmit = () => {
