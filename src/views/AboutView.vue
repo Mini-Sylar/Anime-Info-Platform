@@ -1,9 +1,9 @@
 <template>
   <main>
     <div class="is-a-container about-container">
-      <About />
-      <Divider />
-      <Contact />
+      <About v-if="hideContactWhenOnAboutMobile" />
+      <Divider v-if="hideDivider" />
+      <Contact v-if="hideAboutWhenOnContactMobile" />
     </div>
     <div class="socials">
       <a class="social-link uses-dynamic" href="#">
@@ -58,11 +58,26 @@ main {
   transition: all 0.3s ease-in-out;
 }
 
-.image-background{
+.image-background {
   filter: blur(20px) brightness(1.7)
 }
 
+@media screen and (max-width:768px) {
+  .about-container {
+    margin: 0 auto;
+  }
 
+  .social-link {
+    width: 30px;
+    height: 30px;
+  }
+
+  .socials {
+    width: 100%;
+    justify-content: space-evenly;
+  }
+
+}
 </style>
 
 <script setup>
@@ -71,10 +86,27 @@ import Contact from '../components/AboutContact/Contact/Contact.vue';
 import Divider from '../components/AboutContact/Divider/Divider.vue';
 import Background from '../components/Body/Background/Background.vue';
 import { useAnimeData } from '../stores/anime_data';
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
+import { detectMobile } from '../js/helpers';
+import { useRouter } from 'vue-router';
+
 
 const mainAnimeData = ref(useAnimeData());
+const hideDivider = ref(!detectMobile());
+const route = useRouter();
 
+const hideAboutWhenOnContactMobile = computed(() => {
+  if (detectMobile() && route.currentRoute.value.path === '/about') {
+    return false
+  }
+  return true
+})
 
+const hideContactWhenOnAboutMobile = computed(() => {
+  if (detectMobile() && route.currentRoute.value.path === '/contact') {
+    return false
+  }
+  return true
+})
 
 </script>
