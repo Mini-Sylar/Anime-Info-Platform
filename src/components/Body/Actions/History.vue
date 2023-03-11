@@ -12,11 +12,11 @@
             <ul>
                 <li v-for="(history, index) in getHistory" :key="index">
                     <div class="history-content">
-                        <button class="history-title" @click="searchHistory(history)">{{ history }}</button>
+                        <button type="button" class="history-title" @click="searchHistory(history)">{{ history }}</button>
                     </div>
                 </li>
             </ul>
-            <button class="clear-history" @click="clearHistory">Clear History</button>
+            <button type="button" class="clear-history" @click="clearHistory">Clear History</button>
         </div>
     </div>
 </template>

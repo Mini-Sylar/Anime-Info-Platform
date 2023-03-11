@@ -8,7 +8,7 @@
                 <transition name="show-history">
                     <History v-if="showModal == true" v-on-click-outside="closeModal" />
                 </transition>
-                <button class="action-button history-show" title="View History" @click="showHistoryMenu">
+                <button type="button" class="action-button history-show" title="View History" @click="showHistoryMenu">
                     <font-awesome-icon icon="fa-solid fa-clock-rotate-left fa-spin" class="history-icon" />
                 </button>
             </div>
@@ -103,6 +103,4 @@ button * {
     height: 0;
     opacity: 0;
 }
-
-
 </style>
