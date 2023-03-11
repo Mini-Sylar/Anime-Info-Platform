@@ -5,52 +5,35 @@
                 <button type="button" class="action-button share-main" title="Share show" @click="useShareAnime">
                     <font-awesome-icon icon="fa-solid fa-share-nodes" class="share-hover" />
                 </button>
-                <!-- <button class="action-button" title="Take a screenshot" @click="takeScreenshot">
-                    <font-awesome-icon icon="fa-solid fa-camera" class="grow-shrink" />
-                </button> -->
-                <History />
+                <transition name="show-history">
+                    <History v-if="showModal == true" v-on-click-outside="closeModal" />
+                </transition>
                 <button class="action-button history-show" title="View History" @click="showHistoryMenu">
                     <font-awesome-icon icon="fa-solid fa-clock-rotate-left fa-spin" class="history-icon" />
                 </button>
             </div>
-            <!-- <div class="settings">
-                <button type="button" class="action-button" title="Modify site settings">
-                    <font-awesome-icon icon="fa-solid fa-cog fa-spin " class="settings-icon" />
-                </button>
-            </div> -->
         </div>
     </div>
 </template>
 <script setup>
 import { useAnimeData } from "@/stores/anime_data";
-import { onBeforeMount } from "vue";
+import { ref } from "vue";
 import History from './History.vue';
+import { vOnClickOutside } from '@vueuse/components'
 
 const useShareAnime = () => {
     useAnimeData().shareAnimeMain()
 }
 
+const showModal = ref(false)
+
 const showHistoryMenu = () => {
-    const historyContainer = document.querySelector('.history-container');
-    historyContainer.classList.toggle('show-history');
+    showModal.value = !showModal.value
 }
 
-
-
-onBeforeMount(() => {
-    window.addEventListener('click', (e) => {
-        const historyContainer = document.querySelector('.history-container');
-        const historyButton = document.querySelector('.history-show');
-        // historyButton.addEventListener('click', () => {
-        //     historyContainer.classList.toggle('show-history');
-        // })
-        if (!historyContainer.contains(e.target) && !historyButton.contains(e.target)) {
-            historyContainer.classList.remove('show-history');
-        }
-    })
-
-    // if history container is visible and i click outside of it, hide it
-})
+function closeModal() {
+    showModal.value = false
+}
 
 
 </script>
@@ -107,6 +90,18 @@ button * {
 
 .share-main:hover .share-hover {
     animation: flip 1s ease-in;
+}
+
+.show-history-active,
+.show-history-leave-active {
+    height: 20em;
+    transition: opacity 0.3s ease height 0.2 ease;
+}
+
+.show-history-enter-from,
+.show-history-leave-to {
+    height: 0;
+    opacity: 0;
 }
 
 @keyframes hithere {

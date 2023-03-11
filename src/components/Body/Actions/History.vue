@@ -47,20 +47,11 @@ const clearHistory = () => {
     background-color: #0195ff2c;
     border-radius: 10px;
     backdrop-filter: blur(10px);
-    height: 0;
+    height: 20em;
     overflow: hidden;
-    visibility: hidden;
-    opacity: 0;
-    /* padding: 1rem; */
     width: 20rem;
     left: 5rem;
     transition: height .2s ease-in-out, visibility .2s ease-in-out, opacity .2s ease-in-out;
-}
-
-.show-history {
-    height: 20rem;
-    visibility: visible;
-    opacity: 1;
 }
 
 .history-content {
