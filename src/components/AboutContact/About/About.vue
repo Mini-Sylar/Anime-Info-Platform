@@ -17,7 +17,7 @@
             <span class="uses-dynamic">~ Terence</span>
 
         </p>
-        <img class="anime-image" src="@/assets/images/anime_hiding.png" alt="Anime girl hiding">
+        <img loading="lazy" class="anime-image" src="@/assets/images/anime_hiding.png" alt="Anime girl hiding">
     </div>
 </template>
 <script setup>

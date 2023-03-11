@@ -26,7 +26,7 @@
             }}
           </p>
           <transition appear mode="out-in">
-            <img :src="item.mediaRecommendation.coverImage.large" alt="" class="anime-images"
+            <img loading="lazy" :src="item.mediaRecommendation.coverImage.large" alt="" class="anime-images"
               :key="item.mediaRecommendation.coverImage.large" />
           </transition>
 

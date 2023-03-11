@@ -3,7 +3,7 @@
         <div class="image-container">
 
             <transition appear mode="out-in">
-                <img :src="backgroundImage" alt="Main body image" :key="backgroundImage">
+                <img loading="lazy" :src="backgroundImage" alt="Main body image" :key="backgroundImage">
             </transition>
         </div>
     </div>

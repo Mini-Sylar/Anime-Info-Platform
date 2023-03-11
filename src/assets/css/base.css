@@ -6,10 +6,12 @@
 @font-face {
   font-family: DexaPro-Regular;
   src: url("../fonts/DexaPro-Regular.ttf");
+  font-display: swap;
 }
 @font-face {
   font-family: DexaPro-Bold;
   src: url("../fonts/DexaPro-Bold.ttf");
+  font-display: swap;
 }
 
 *,
@@ -84,7 +86,6 @@ body {
   user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
 }
-
 
 @media screen and (max-width: 821px) {
   .info-trailer-container {
