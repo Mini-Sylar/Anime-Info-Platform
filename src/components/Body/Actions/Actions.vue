@@ -38,7 +38,9 @@ const showHistoryMenu = () => {
 }
 
 function closeModal() {
-    showModal.value = false
+    if (showModal.value == true) {
+        showModal.value = false
+    }
 }
 
 
