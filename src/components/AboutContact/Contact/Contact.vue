@@ -57,6 +57,7 @@
 import { useToast } from "vue-toastification";
 import { ref, computed } from "vue";
 import emailjs from '@emailjs/browser';
+import mixpanel from "mixpanel-browser";
 
 const serviceID = import.meta.env.VITE_SERVICE_ID
 const templateID = import.meta.env.VITE_TEMPLATE_ID
@@ -67,12 +68,17 @@ const isButtonDisable = computed(() => {
 })
 const getForm = ref(null)
 const toast = useToast();
+
+
 const submitForm = () => {
     buttonDisabled.value = true
     emailjs.sendForm(serviceID, templateID, getForm.value, publicKey)
         .then((result) => {
             toast.success("Message sent successfully!");
             buttonDisabled.value = false
+            mixpanel.track("Used Contact Form", {
+                email: getForm.value.querySelector('input[name=reply_to]').value
+            })
             getForm.value.reset()
         }, (error) => {
             toast.error("There was a problem sending your message, try again");
@@ -80,7 +86,6 @@ const submitForm = () => {
         });
 
 }
-
 </script>
 <style scoped>
 .right-contact {

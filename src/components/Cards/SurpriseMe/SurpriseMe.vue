@@ -66,6 +66,7 @@ export default {
         const genreQuery = ref('Action')
         const handlesubmit = () => {
             mainAnimeData.fetchSurprise(genreQuery.value)
+            $mixpanel.track('Surprise Me', { genre: genreQuery.value })
         }
 
         return {

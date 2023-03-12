@@ -3,6 +3,7 @@ import HomeView from "../views/HomeView.vue";
 import AboutView from "../views/AboutView.vue";
 import NotFound from "../views/NotFound.vue";
 import { useAnimeData } from "../stores/anime_data";
+import mixpanel from "mixpanel-browser";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -18,6 +19,7 @@ const router = createRouter({
       component: AboutView,
       beforeEnter: (to, from, next) => {
         useAnimeData().reduceWidth(true);
+        mixpanel.track("About Page");
         next();
       },
       meta: {
@@ -30,6 +32,7 @@ const router = createRouter({
       component: AboutView,
       beforeEnter: (to, from, next) => {
         useAnimeData().reduceWidth(false);
+        mixpanel.track("Contact Page");
         next();
       },
     },
@@ -42,11 +45,19 @@ const router = createRouter({
       path: "/:search",
       name: "anime",
       component: HomeView,
+      beforeEnter(to, from) {
+        mixpanel.track("Used share link", {
+          title: to.params.search,
+        });
+      },
     },
     {
       path: "/:pathMatch(.*)*",
       redirect: "/not-found",
       component: NotFound,
+      beforeEnter() {
+        mixpanel.track("404 Page");
+      },
     },
   ],
 });

@@ -28,7 +28,10 @@ export default {
   errorCaptured() {
     this.$router.push({ name: '404' })
     this.$router.go(1)
-  }
+  },
+  mounted() {
+    this.$mixpanel.track("Home Page")
+  },
 }
 
 </script>

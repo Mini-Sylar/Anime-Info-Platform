@@ -6,6 +6,7 @@ import {
   surpriseMe,
 } from "../js/AnimeQuery";
 import router from "../router";
+import mixpanel from "mixpanel-browser";
 
 import { shadeColor, shareAnime } from "../js/helpers";
 
@@ -89,6 +90,12 @@ export const useAnimeData = defineStore("animeData", {
       });
       // Main Data Here
       let main_data = await response.json();
+      const showTitle = main_data.data.Media.title.romaji
+        ? main_data.data.Media.title.romaji
+        : main_data.data.Media.title.english;
+      mixpanel.track("Searched Anime", {
+        title: showTitle,
+      });
       // loop through array  main_data.data.Media.recommendations.nodes and drop object with null values using filter
       main_data.data.Media.recommendations.nodes =
         main_data.data.Media.recommendations.nodes.filter(
@@ -158,6 +165,9 @@ export const useAnimeData = defineStore("animeData", {
         .replace(/\s+/g, "-"); //
       const animeUrl = router.currentRoute.value.fullPath;
       shareAnime(animeTitle, animeUrl, formattedTitle);
+      mixpanel.track("Shared Anime", {
+        title: animeTitle,
+      });
     },
     async addToHistory() {
       const animeTitle = this.animeData.data.Media.title.english

@@ -6,10 +6,13 @@ import { computed, watch } from 'vue'
 import { useNetwork } from '@vueuse/core'
 import { useToast } from "vue-toastification";
 
+
 const toast = useToast();
 const setColor = computed(() => {
   return useAnimeData().getAccentColor
 });
+
+
 
 const { isOnline } = useNetwork()
 
