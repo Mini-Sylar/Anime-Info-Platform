@@ -63,6 +63,9 @@ let response = await fetch("https://graphql.anilist.co/?id", {
   headers: headersList,
 });
 export let main_data = await response.json();
+if (main_data.data.Media === null) {
+  window.location.href = "/not-found";
+}
 // Surprise Me Cards
 export function surpriseMe(genre = "action") {
   let gqlBody_Cards = {
