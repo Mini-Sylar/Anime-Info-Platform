@@ -94,7 +94,8 @@ const setColor = computed(() => {
   transition: accent-color .5s ease-in-out;
 }
 
-.history-title:hover {
+.history-title:hover,
+.go-back-home {
   color: v-bind("setColor") !important;
   transition: color .2s ease-in-out;
 }
@@ -142,7 +143,8 @@ const setColor = computed(() => {
   ;
 }
 
-.send-message {
+.send-message,
+.go-back-home {
   background-color: v-bind('setColor + "30"') !important;
 }
 
