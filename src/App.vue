@@ -142,6 +142,10 @@ const setColor = computed(() => {
   ;
 }
 
+.send-message {
+  background-color: v-bind('setColor + "30"') !important;
+}
+
 .form-input {
   border-bottom: 1px solid v-bind('setColor') !important;
 }

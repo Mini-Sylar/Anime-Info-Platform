@@ -1,7 +1,7 @@
 <template >
     <div class="right-contact">
         <h1>Get in touch</h1>
-        <form @submit.prevent.default="submitForm">
+        <form @submit.prevent.default="submitForm" ref="getForm">
             <!-- contact form -->
             <div class="contact-form">
                 <div class="contact-form-left">
@@ -23,24 +23,49 @@
                 </div>
                 <div class="send-message-container" v-once>
                     <button class="btn btn-reverse btn-arrow send-message" type="submit" title="Reach out to me"
-                        :disabled="buttonDisabled">
+                        :disabled="isButtonDisable">
+
+                        <transition name="fade">
+                            <span v-if="isButtonDisable"><svg class="is-contact-loader" version="1.1" id="L9"
+                                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                                    y="0px" viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
+                                    <rect x="20" y="50" width="4" height="10" fill="#fff">
+                                        <animateTransform attributeType="xml" attributeName="transform" type="translate"
+                                            values="0 0; 0 20; 0 0" begin="0" dur="0.6s" repeatCount="indefinite" />
+                                    </rect>
+                                    <rect x="30" y="50" width="4" height="10" fill="#fff">
+                                        <animateTransform attributeType="xml" attributeName="transform" type="translate"
+                                            values="0 0; 0 20; 0 0" begin="0.2s" dur="0.6s" repeatCount="indefinite" />
+                                    </rect>
+                                    <rect x="40" y="50" width="4" height="10" fill="#fff">
+                                        <animateTransform attributeType="xml" attributeName="transform" type="translate"
+                                            values="0 0; 0 20; 0 0" begin="0.4s" dur="0.6s" repeatCount="indefinite" />
+                                    </rect>
+                                </svg></span>
+
+                        </transition>
                         Send Message
                     </button>
                 </div>
-            </div>
 
+            </div>
         </form>
+
     </div>
 </template>
 <script setup>
 import { useToast } from "vue-toastification";
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import emailjs from '@emailjs/browser';
 const buttonDisabled = ref(false)
+const isButtonDisable = computed(() => {
+    return buttonDisabled.value
+})
+const getForm = ref(null)
 const toast = useToast();
 const submitForm = () => {
     buttonDisabled.value = true
-    emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this.$refs.form, 'YOUR_PUBLIC_KEY')
+    emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', getForm.value, 'YOUR_PUBLIC_KEY')
         .then((result) => {
             toast.success("Message sent successfully!");
             buttonDisabled.value = false
@@ -50,7 +75,6 @@ const submitForm = () => {
         });
 
 }
-
 
 </script>
 <style scoped>
@@ -119,16 +143,31 @@ textarea:focus {
 }
 
 button {
-    padding: 10px 20px;
     border-radius: 25px;
     cursor: pointer;
     border-color: transparent;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 50px;
     transition: all .2s ease;
 }
 
-.send-message:disabled {
+span {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 1rem;
+}
+
+button:disabled {
     background-color: gray !important;
     transition: all .2s ease;
+    cursor: not-allowed;
 }
 
 .more-info-container {
@@ -136,8 +175,6 @@ button {
     margin-block: .8rem;
     position: relative;
 }
-
-
 
 .send-message-container {
     display: flex;
