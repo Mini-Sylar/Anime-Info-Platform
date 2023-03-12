@@ -2,13 +2,24 @@
 import NavbarVue from "./components/NavBar/Navbar.vue";
 import { RouterView } from "vue-router";
 import { useAnimeData } from '@/stores/anime_data';
-import { computed } from 'vue'
+import { computed, watch } from 'vue'
+import { useNetwork } from '@vueuse/core'
+import { useToast } from "vue-toastification";
 
-
+const toast = useToast();
 const setColor = computed(() => {
   return useAnimeData().getAccentColor
 });
 
+const { isOnline } = useNetwork()
+
+watch(isOnline, (value) => {
+  if (value) {
+    toast.success("Back Online!", { duration: 1000 })
+  } else {
+    toast.error("Offline!, You won't be able to search for anime or reach out to me.", { duration: 1000 })
+  }
+})
 </script>
 
 <template>
