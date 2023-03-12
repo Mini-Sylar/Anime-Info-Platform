@@ -73,6 +73,7 @@ const submitForm = () => {
         .then((result) => {
             toast.success("Message sent successfully!");
             buttonDisabled.value = false
+            getForm.value.reset()
         }, (error) => {
             toast.error("There was a problem sending your message, try again");
             buttonDisabled.value = false
