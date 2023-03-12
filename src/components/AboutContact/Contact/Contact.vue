@@ -57,6 +57,10 @@
 import { useToast } from "vue-toastification";
 import { ref, computed } from "vue";
 import emailjs from '@emailjs/browser';
+
+const serviceID = import.meta.env.VITE_SERVICE_ID
+const templateID = import.meta.env.VITE_TEMPLATE_ID
+const publicKey = import.meta.env.VITE_PUBLIC_API_KEY
 const buttonDisabled = ref(false)
 const isButtonDisable = computed(() => {
     return buttonDisabled.value
@@ -65,7 +69,7 @@ const getForm = ref(null)
 const toast = useToast();
 const submitForm = () => {
     buttonDisabled.value = true
-    emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', getForm.value, 'YOUR_PUBLIC_KEY')
+    emailjs.sendForm(serviceID, templateID, getForm.value, publicKey)
         .then((result) => {
             toast.success("Message sent successfully!");
             buttonDisabled.value = false
