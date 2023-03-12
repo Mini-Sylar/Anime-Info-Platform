@@ -36,7 +36,6 @@ const aboutWidth = computed(() => {
     height: min(40em, 80vh);
     padding: 0 2rem;
     overflow-x: hidden;
-    /* background-color: darkblue; */
     transition: all 0.3s ease-in-out;
     position: relative;
 }
@@ -46,7 +45,6 @@ const aboutWidth = computed(() => {
     top: 0;
     width: 100%;
     margin-bottom: 2rem;
-    /* background-color: darkblue; */
 }
 
 p {
@@ -75,6 +73,7 @@ p {
     p {
         width: 100%;
         height: 65vh;
+        overflow-y: scroll;
     }
 
     .about-title {
