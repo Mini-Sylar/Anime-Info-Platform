@@ -74,7 +74,7 @@ main {
 }
 
 .image-background {
-  filter: blur(20px) brightness(1.7)
+  filter: blur(20px) brightness(0.7)
 }
 
 @media screen and (max-width:768px) {
