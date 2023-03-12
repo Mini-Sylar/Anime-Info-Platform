@@ -49,10 +49,10 @@ Moved into [contributions](CONTRIBUTION.md)
   <img src="https://contrib.rocks/image?repo=Mini-Sylar/Anime-Info-Platform" />
 </a>
 
-## ❗ Version 2.0.0
+## ❗❗❗ Version 2.0.0
 
-Version 2.0.0 is currently in development, a beta version can be accessed below using the following link
-[Anime Info Platform v.2.0.0](https://anime-info-platform-iqzwm80o2-mini-sylar.vercel.app/)
+Version 2.0.0 is ready and will avaialble on 13th March,2022,You can still use the latest beta version using the following link
+[Anime Info Platform v.2.0.0](https://anime-info-platform-iqzwm80o2-mini-sylar.vercel.app/). The same URL will be used!
 
 ### What's new in version 2.0.0?
 Check out the pre-release section to see what's new and changed [What's New In 2.0.0](https://github.com/Mini-Sylar/Anime-Info-Platform/releases)
