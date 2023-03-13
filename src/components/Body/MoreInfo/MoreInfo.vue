@@ -23,7 +23,7 @@ export default {
     },
     methods: {
         openNewLink() {
-            $mixpanel.track('More Info Button Clicked', {
+            this.$mixpanel.track('More Info Button Clicked', {
                 animeID: this.$props.animeID
             });
             return window.open(
