@@ -37,6 +37,7 @@
 import { useAnimeData } from '@/stores/anime_data.js'
 import { OnClickOutside } from '@vueuse/components'
 import { ref } from 'vue'
+import mixpanel from "mixpanel-browser";
 export default {
     components: {
         OnClickOutside
@@ -66,7 +67,7 @@ export default {
         const genreQuery = ref('Action')
         const handlesubmit = () => {
             mainAnimeData.fetchSurprise(genreQuery.value)
-            $mixpanel.track('Surprise Me', { genre: genreQuery.value })
+            mixpanel.track('Surprise Me', { genre: genreQuery.value })
         }
 
         return {
