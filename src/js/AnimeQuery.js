@@ -6,9 +6,11 @@ export let headersList = {
   "User-Agent": "Thunder Client (https://www.thunderclient.com)",
   "Content-Type": "application/json",
 };
-
+// Global Variables
 let sharedValue = window.location.href.split("/")[3];
 let storedValue = localStorage.getItem("searchQuery");
+let currentYear = new Date().getFullYear();
+
 export function prepareAnimeData(
   searchQuery = sharedValue ? sharedValue : storedValue ? storedValue : "Naruto"
 ) {
@@ -127,7 +129,7 @@ export function currentSeason() {
   }
 }
 `,
-    variables: { seasonYear: new Date().getFullYear() },
+    variables: { seasonYear: currentYear },
   };
 
   return JSON.stringify(gqlBody);

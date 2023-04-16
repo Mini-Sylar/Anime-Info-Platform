@@ -4,11 +4,12 @@ import {
   headersList,
   main_data,
   surpriseMe,
+  currentSeason,
 } from "../js/AnimeQuery";
 import router from "../router";
 import mixpanel from "mixpanel-browser";
 
-import { shadeColor, shareAnime } from "../js/helpers";
+import { shadeColor, shareAnime, generateNewNodes } from "../js/helpers";
 
 let omitNull = (obj) => {
   Object.keys(obj)
@@ -193,6 +194,18 @@ export const useAnimeData = defineStore("animeData", {
       } else {
         this.aboutWidth = "20%";
       }
+    },
+    async fetchCurrentSeason() {
+      this.cardsLoading = true;
+      let response = await fetch("https://graphql.anilist.co/", {
+        method: "POST",
+        body: currentSeason(),
+        headers: headersList,
+      });
+      const currentSeasonList = await response.json();
+      this.animeData.data.Media.recommendations.nodes =
+        generateNewNodes(currentSeasonList);
+      this.cardsLoading = false;
     },
   },
 });

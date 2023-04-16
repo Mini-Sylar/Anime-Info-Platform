@@ -5,8 +5,7 @@
        </ui-sidebar>
     <nav>
       <div class="logo">
-         <a href="https://anilist.co/search/anime/this-season" target="_blank" rel="noopener noreferrer"
-                    class="is-url">Current Season</a>
+         <a @click="getCurrentSeasonShows()" title="get current anime data" role="button" class="is-url">Current Season</a>
       </div>
       <div id="nav-icon1" class="hamburger" v-on:click="showHam">
         <span></span>
@@ -19,6 +18,7 @@
 </template>
 <script>
 import MobileSideBar from "./MobileSideBar.vue";
+import { useAnimeData } from "../../../stores/anime_data";
 export default {
   data() {
     return {
@@ -36,8 +36,16 @@ export default {
       } else {
         document.body.style.overflow = 'scroll';
       }
-
     },
+    getCurrentSeasonShows() {
+      if (document.querySelector(".nav-mobile").classList.contains("show-nav")) {
+        document.querySelector(".nav-mobile").classList.remove(this.showNav);
+        document.querySelector(".hamburger").classList.remove("open");
+        document.querySelector(".first").classList.remove(this.showNav);
+        document.body.style.overflow = 'scroll';
+      }
+      return useAnimeData().fetchCurrentSeason();
+    }
   },
   components: {
     "ui-sidebar": MobileSideBar,
@@ -143,6 +151,10 @@ export default {
   -moz-transform: rotate(-135deg);
   -o-transform: rotate(-135deg);
   transform: rotate(-135deg);
+}
+
+.is-url {
+  cursor: pointer;
 }
 
 @media screen and (max-width:821px) {

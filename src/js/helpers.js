@@ -59,3 +59,13 @@ export function detectMobile() {
   })(navigator.userAgent || navigator.vendor || window.opera);
   return check;
 }
+
+export function generateNewNodes(received_response) {
+  let newNodes = [
+    ...received_response.data.Page.media.map((item) => {
+      return { mediaRecommendation: item };
+    }),
+  ];
+
+  return newNodes;
+}
