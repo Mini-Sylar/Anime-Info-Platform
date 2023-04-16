@@ -1,7 +1,7 @@
 <template >
     <div>
-        <div class="actions-container" v-once>
-            <div class="share">
+        <div class="actions-container">
+            <div class="share" v-on-click-outside="showHistoryMenu">
                 <button type="button" class="action-button share-main" title="Share show" @click="useShareAnime">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="share-hover">
                         <path
@@ -9,7 +9,7 @@
                     </svg>
                 </button>
                 <transition name="show-history">
-                    <History v-if="showModal == true" v-on-click-outside="closeModal" />
+                    <History v-if="showModal == true" />
                 </transition>
                 <button type="button" class="action-button history-show" title="View History" @click="showHistoryMenu">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="history-icon">
@@ -40,11 +40,6 @@ const showHistoryMenu = () => {
     showModal.value = !showModal.value
 }
 
-function closeModal() {
-    if (showModal.value == true) {
-        showModal.value = false
-    }
-}
 
 
 </script>
