@@ -42,10 +42,11 @@ const getAnimeData = async () => {
 }
 await getAnimeData()
 
-
 const setBodyLoading = computed(() => {
     return mainAnimeData.value.bodyLoading
 })
+
+
 
 </script>
 

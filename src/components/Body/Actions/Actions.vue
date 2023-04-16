@@ -1,6 +1,15 @@
 <template >
     <div>
         <div class="actions-container">
+            <div class="Starred">
+                <button @click="starShow" :title="isStarred ? 'Unstar Show' : 'Star Show'"
+                    :class="[isStarred == true ? 'star-show-container starred' : 'star-show-container unstarred']">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="star-button star-icon">
+                        <path
+                            d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                    </svg>
+                </button>
+            </div>
             <div class="share" v-on-click-outside="showHistoryMenu">
                 <button type="button" class="action-button share-main" title="Share show" @click="useShareAnime">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="share-hover">
@@ -18,21 +27,23 @@
                     </svg>
                 </button>
             </div>
-            <div class="Starred">
-                <button>Starred Shows</button>
-            </div>
+
         </div>
     </div>
 </template>
 <script setup>
 import { useAnimeData } from "@/stores/anime_data";
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import History from './History.vue';
 import { vOnClickOutside } from '@vueuse/components'
 
 const useShareAnime = () => {
     useAnimeData().shareAnimeMain()
 }
+const showID = ref(useAnimeData().getAnimeId.toString())
+// check if anime was starred 
+useAnimeData().initializeIsStarred(showID)
+
 
 const showModal = ref(false)
 
@@ -41,6 +52,14 @@ const showHistoryMenu = () => {
 }
 
 
+const isStarred = computed(() => {
+    return useAnimeData().isStarred
+})
+
+const starShow = () => {
+    const title = useAnimeData().getAnimeTitleDescription.animeTitle
+    useAnimeData().toggleStarredStatus(showID.value, title, !isStarred.value)
+}
 
 </script>
 <style scoped>
@@ -113,5 +132,47 @@ button * {
 .action-button svg {
     width: 40px;
     height: 40px;
+}
+
+.star-show-container {
+    background-color: transparent !important;
+}
+
+.star-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .2s ease-in;
+    color: #fff;
+}
+
+.star-button {
+    width: 40px;
+    height: 40px;
+    padding: 5px;
+    font-size: clamp(1rem, 1.5rem, 2rem);
+    fill: #969696;
+}
+
+.starred {
+    animation: spin .6s forwards;
+    transform-origin: 50% 50%;
+    transition-timing-function: ease-in-out;
+}
+
+.starred .star-icon {
+    fill: yellow;
+    animation: spin .6s forwards;
+    transform-origin: 50% 50%;
+    -webkit-transform-origin: 50% 50%;
+    transition-timing-function: ease-in-out;
+}
+
+
+.unstarred .star-icon {
+    animation: unspin .3s forwards;
+    transform-origin: 50% 50%;
+    -webkit-transform-origin: 50% 50%;
+    transition-timing-function: ease-in-out;
 }
 </style>

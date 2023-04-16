@@ -8,15 +8,14 @@ import {
 } from "../js/AnimeQuery";
 import router from "../router";
 import mixpanel from "mixpanel-browser";
-
-import { shadeColor, shareAnime, generateNewNodes } from "../js/helpers";
-
-let omitNull = (obj) => {
-  Object.keys(obj)
-    .filter((k) => obj[k] === null)
-    .forEach((k) => delete obj[k]);
-  return obj;
-};
+import {
+  shadeColor,
+  shareAnime,
+  generateNewNodes,
+  isShowStarred,
+  omitNull,
+  starAnime,
+} from "../js/helpers";
 
 main_data.data.Media.recommendations.nodes =
   main_data.data.Media.recommendations.nodes.filter(
@@ -32,7 +31,7 @@ export const useAnimeData = defineStore("animeData", {
     clearHistoryLoading: false,
     aboutWidth: "20%",
     toggleAbout: false,
-    // recomendationData:
+    isStarred: false,
   }),
   getters: {
     getAnimeTitleDescription: (state) => {
@@ -40,7 +39,6 @@ export const useAnimeData = defineStore("animeData", {
       const animeTitle = state.animeData.data.Media.title.english
         ? state.animeData.data.Media.title.english
         : state.animeData.data.Media.title.romaji;
-      // set Anime Description
       const description = state.animeData.data.Media.description;
       return { animeTitle, description };
     },
@@ -90,12 +88,6 @@ export const useAnimeData = defineStore("animeData", {
       });
       // Main Data Here
       let main_data = await response.json();
-      const showTitle = main_data.data.Media.title.romaji
-        ? main_data.data.Media.title.romaji
-        : main_data.data.Media.title.english;
-      mixpanel.track("Searched Anime", {
-        title: showTitle,
-      });
       // loop through array  main_data.data.Media.recommendations.nodes and drop object with null values using filter
       main_data.data.Media.recommendations.nodes =
         main_data.data.Media.recommendations.nodes.filter(
@@ -108,6 +100,10 @@ export const useAnimeData = defineStore("animeData", {
       if (logHistory) {
         this.addToHistory();
       }
+      //check if starred
+      isShowStarred(main_data.data.Media.id).then((value) => {
+        this.isStarred = value;
+      });
       setTimeout(() => {
         this.cardsLoading = false;
         this.bodyLoading = false;
@@ -151,6 +147,10 @@ export const useAnimeData = defineStore("animeData", {
         ...omitNull(this.animeData.data.Media),
         ...omitNull(main_data.data.Media),
       };
+      //check if starred
+      isShowStarred(main_data.data.Media.id).then((value) => {
+        this.isStarred = value;
+      });
       setTimeout(() => {
         this.bodyLoading = false;
       }, 1000);
@@ -206,6 +206,17 @@ export const useAnimeData = defineStore("animeData", {
       this.animeData.data.Media.recommendations.nodes =
         generateNewNodes(currentSeasonList);
       this.cardsLoading = false;
+    },
+    async toggleStarredStatus(showId, showName, isStarred) {
+      try {
+        const result = await starAnime(showId, showName, isStarred);
+        this.$state.isStarred = result;
+      } catch (error) {
+      }
+    },
+    async initializeIsStarred(showId) {
+      const starred = await isShowStarred(showId.value);
+      this.$state.isStarred = starred;
     },
   },
 });
