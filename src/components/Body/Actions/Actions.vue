@@ -18,6 +18,9 @@
                     </svg>
                 </button>
             </div>
+            <div class="Starred">
+                <button>Starred Shows</button>
+            </div>
         </div>
     </div>
 </template>

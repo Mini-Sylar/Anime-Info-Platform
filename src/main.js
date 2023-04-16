@@ -7,11 +7,22 @@ import "./assets/css/main.css";
 import Toast from "vue-toastification";
 import "vue-toastification/dist/index.css";
 import mixpanel from "mixpanel-browser";
+import localforage from "localforage";
 
 mixpanel.init(import.meta.env.VITE_MIXPANEL_TOKEN);
 
 mixpanel.identify();
 mixpanel.people.set();
+
+// initialize local forge
+localforage.config({
+  driver: localforage.WEBSQL, // Force WebSQL; same as using setDriver()
+  name: "Anime Info Platform DB",
+  version: 1.0,
+  size: 4980736, // Size of database, in bytes. WebSQL-only for now.
+  storeName: "User_Saved_Info", // Should be alphanumeric, with underscores.
+  description: "Contains user info on anime",
+});
 
 const app = createApp(App);
 const mixpanelPlugin = {
@@ -27,4 +38,5 @@ app.use(Toast, {
   newestOnTop: true,
 });
 app.use(mixpanelPlugin);
+app.use(localforage);
 app.mount("#app");

@@ -108,3 +108,27 @@ export function surpriseMe(genre = "action") {
   };
   return JSON.stringify(gqlBody_Cards);
 }
+
+export function currentSeason() {
+  let gqlBody = {
+    query: `query($seasonYear: Int!) {
+  Page(page: 1, perPage: 50) {
+    media(seasonYear: $seasonYear, status: RELEASING, type: ANIME, sort: POPULARITY_DESC) {
+      id
+      title {
+        romaji
+        english
+        native
+      }
+      coverImage {
+      large
+      }
+    }
+  }
+}
+`,
+    variables: { seasonYear: new Date().getFullYear() },
+  };
+
+  return JSON.stringify(gqlBody);
+}
