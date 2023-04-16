@@ -10,7 +10,7 @@
                     </svg>
                 </button>
             </div>
-            <div class="share" v-on-click-outside="showHistoryMenu">
+            <div class="share" v-on-click-outside="hideWhenClickedOutside">
                 <button type="button" class="action-button share-main" title="Share show" @click="useShareAnime">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="share-hover">
                         <path
@@ -51,6 +51,9 @@ const showHistoryMenu = () => {
     showModal.value = !showModal.value
 }
 
+const hideWhenClickedOutside = () => {
+    if (showModal.value == true) { showModal.value = false }
+}
 
 const isStarred = computed(() => {
     return useAnimeData().isStarred
