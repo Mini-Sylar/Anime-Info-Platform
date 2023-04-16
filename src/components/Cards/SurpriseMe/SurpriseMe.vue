@@ -58,6 +58,7 @@ export default {
                 "Mystery",
                 "Psychological",
                 "Romance",
+                "Current Season"
             ],
             showGenre: false
         }
@@ -66,6 +67,12 @@ export default {
         const mainAnimeData = useAnimeData()
         const genreQuery = ref('Action')
         const handlesubmit = () => {
+            if (genreQuery.value == 'Current Season') {
+                mainAnimeData.fetchCurrentSeason()
+                mixpanel.track('Surprise Me', { genre: genreQuery.value })
+                return
+            }
+
             mainAnimeData.fetchSurprise(genreQuery.value)
             mixpanel.track('Surprise Me', { genre: genreQuery.value })
         }
@@ -137,7 +144,8 @@ button {
     position: absolute;
     bottom: 3rem;
     right: 0;
-    width: 100%;
+    left: -8%;
+    width: 120%;
     background-color: #0195ff2c;
     border-radius: 10px;
     z-index: 1;
