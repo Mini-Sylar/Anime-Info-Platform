@@ -211,8 +211,7 @@ export const useAnimeData = defineStore("animeData", {
       try {
         const result = await starAnime(showId, showName, isStarred);
         this.$state.isStarred = result;
-      } catch (error) {
-      }
+      } catch (error) {}
     },
     async initializeIsStarred(showId) {
       const starred = await isShowStarred(showId.value);

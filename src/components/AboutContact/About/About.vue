@@ -14,7 +14,7 @@
             sure to check it out!
             <br> <br> Thanks for stopping by, and be sure to follow me on social media to stay up-to-date with my latest
             updates and projects! <br><br>
-            <span class="uses-dynamic">~ Terence</span>
+            <span class="uses-dynamic"><a href="https://github.com/Mini-Sylar" target="_blank">~ Terence</a></span>
 
         </p>
         <img loading="lazy" class="anime-image" src="@/assets/images/anime_hiding.png" alt="Anime girl hiding">
