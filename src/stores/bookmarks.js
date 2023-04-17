@@ -1,5 +1,8 @@
 import { defineStore } from "pinia";
 import localforage from "localforage";
+import { useToast } from "vue-toastification";
+
+let toast = useToast();
 
 export const useBookmarks = defineStore("bookmarks", {
   state: () => ({
@@ -42,7 +45,9 @@ export const useBookmarks = defineStore("bookmarks", {
               localforage
                 .removeItem(showId)
                 .then(() => {
-                  console.log("show removed successfully");
+                  toast.success("Show unstarred successfully!", {
+                    duration: 1000,
+                  });
                   resolve(false);
                 })
                 .catch((err) => {
@@ -54,7 +59,9 @@ export const useBookmarks = defineStore("bookmarks", {
               localforage
                 .setItem(showId, showName)
                 .then(() => {
-                  console.log("Show Starred Successfully");
+                  toast.success("Show starred successfully!", {
+                    duration: 1000,
+                  });
                   resolve(true);
                 })
                 .catch((err) => {
@@ -62,7 +69,9 @@ export const useBookmarks = defineStore("bookmarks", {
                   reject(err);
                 });
             } else {
-              console.log("Not Starred");
+              toast.error("Something went wrong!", {
+                duration: 1000,
+              });
               // Show is already starred or unstarred, nothing to do
               resolve(false);
             }
