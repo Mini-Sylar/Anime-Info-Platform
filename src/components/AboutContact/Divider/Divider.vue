@@ -12,16 +12,9 @@
     </div>
 </template>
 <script setup>
-import { useAnimeData } from '../../../stores/anime_data';
-import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-const animeData = useAnimeData();
-
-const initiaChangeWidth = ref(animeData.toggleAbout);
-
 const router = useRouter();
 const changeWidth = () => {
-    console.log(router.currentRoute.value.path)
     if (router.currentRoute.value.path == '/contact') {
         router.push('/about')
         return
