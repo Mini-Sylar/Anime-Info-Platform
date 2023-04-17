@@ -16,6 +16,7 @@ import {
   omitNull,
   starAnime,
 } from "../js/helpers";
+import localforage from "localforage";
 
 main_data.data.Media.recommendations.nodes =
   main_data.data.Media.recommendations.nodes.filter(
@@ -32,6 +33,7 @@ export const useAnimeData = defineStore("animeData", {
     aboutWidth: "20%",
     toggleAbout: false,
     isStarred: false,
+    starredAnime: localforage.getItem() || [],
   }),
   getters: {
     getAnimeTitleDescription: (state) => {
