@@ -1,5 +1,3 @@
-import localforage from "localforage";
-
 // Shade Color
 export function shadeColor(color, percent) {
   var R = parseInt(color.substring(1, 3), 16);
@@ -70,57 +68,6 @@ export function generateNewNodes(received_response) {
   ];
 
   return newNodes;
-}
-
-export async function isShowStarred(showId) {
-  showId = showId.toString();
-  try {
-    const value = await localforage.getItem(showId);
-    return !!value;
-  } catch (err) {
-    console.error(err);
-    return false;
-  }
-}
-
-export function starAnime(showId, showName, isStarred) {
-  return new Promise((resolve, reject) => {
-    localforage.getItem(showId, function (err, value) {
-      if (err) {
-        console.error(err);
-        reject(err);
-      } else {
-        if (value && !isStarred) {
-          // Show already exists in LocalForge and needs to be removed
-          localforage
-            .removeItem(showId)
-            .then(() => {
-              console.log("show removed successfully");
-              resolve(false);
-            })
-            .catch((err) => {
-              console.error(err);
-              reject(err);
-            });
-        } else if (!value && isStarred) {
-          // Show does not exist in LocalForge and needs to be added
-          localforage
-            .setItem(showId, showName)
-            .then(() => {
-              console.log("Show Starred Successfully");
-              resolve(true);
-            })
-            .catch((err) => {
-              console.error(err);
-              reject(err);
-            });
-        } else {
-          // Show is already starred or unstarred, nothing to do
-          resolve(false);
-        }
-      }
-    });
-  });
 }
 
 export const omitNull = (obj) => {

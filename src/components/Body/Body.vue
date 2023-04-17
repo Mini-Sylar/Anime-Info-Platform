@@ -34,6 +34,7 @@ import Background from './Background/Background.vue';
 import Bars from '../Loaders/Bars.vue';
 // useAnimeStoreHere
 import { useAnimeData } from '@/stores/anime_data.js'
+import { useBookmarks } from '@/stores/bookmarks.js';
 import { ref, computed } from 'vue';
 const mainAnimeData = ref(null)
 const getAnimeData = async () => {
@@ -41,6 +42,8 @@ const getAnimeData = async () => {
     return mainAnimeData.value
 }
 await getAnimeData()
+
+useBookmarks().getSavedShows()
 
 const setBodyLoading = computed(() => {
     return mainAnimeData.value.bodyLoading

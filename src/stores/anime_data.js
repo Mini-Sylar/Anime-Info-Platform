@@ -12,11 +12,11 @@ import {
   shadeColor,
   shareAnime,
   generateNewNodes,
-  isShowStarred,
   omitNull,
-  starAnime,
 } from "../js/helpers";
 import localforage from "localforage";
+
+import { useBookmarks } from "./bookmarks";
 
 main_data.data.Media.recommendations.nodes =
   main_data.data.Media.recommendations.nodes.filter(
@@ -33,7 +33,7 @@ export const useAnimeData = defineStore("animeData", {
     aboutWidth: "20%",
     toggleAbout: false,
     isStarred: false,
-    starredAnime: localforage.getItem() || [],
+    bookMarkStore: useBookmarks(),
   }),
   getters: {
     getAnimeTitleDescription: (state) => {
@@ -103,9 +103,11 @@ export const useAnimeData = defineStore("animeData", {
         this.addToHistory();
       }
       //check if starred
-      isShowStarred(main_data.data.Media.id).then((value) => {
-        this.isStarred = value;
-      });
+      this.bookMarkStore
+        .isShowStarred(main_data.data.Media.id)
+        .then((value) => {
+          this.isStarred = value;
+        });
       setTimeout(() => {
         this.cardsLoading = false;
         this.bodyLoading = false;
@@ -150,9 +152,11 @@ export const useAnimeData = defineStore("animeData", {
         ...omitNull(main_data.data.Media),
       };
       //check if starred
-      isShowStarred(main_data.data.Media.id).then((value) => {
-        this.isStarred = value;
-      });
+      this.bookMarkStore
+        .isShowStarred(main_data.data.Media.id)
+        .then((value) => {
+          this.isStarred = value;
+        });
       setTimeout(() => {
         this.bodyLoading = false;
       }, 1000);
@@ -211,12 +215,17 @@ export const useAnimeData = defineStore("animeData", {
     },
     async toggleStarredStatus(showId, showName, isStarred) {
       try {
-        const result = await starAnime(showId, showName, isStarred);
+        const result = await this.bookMarkStore.starAnime(
+          showId,
+          showName,
+          isStarred
+        );
         this.$state.isStarred = result;
       } catch (error) {}
     },
     async initializeIsStarred(showId) {
-      const starred = await isShowStarred(showId.value);
+      const starred = await this.bookMarkStore.isShowStarred(showId.value);
+      // const starred = await isShowStarred(showId.value);
       this.$state.isStarred = starred;
     },
   },
