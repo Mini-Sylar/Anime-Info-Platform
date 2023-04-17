@@ -170,6 +170,8 @@ button * {
     color: #fff;
 }
 
+
+
 .star-button {
     width: 40px;
     height: 40px;
@@ -198,5 +200,13 @@ button * {
     transform-origin: 50% 50%;
     -webkit-transform-origin: 50% 50%;
     transition-timing-function: ease-in-out;
+}
+
+.unstarred .star-icon:hover {
+    animation: hithere 1s ease;
+}
+
+.starred .star-icon:hover {
+    animation: gelatine 1s ease-in;
 }
 </style>
