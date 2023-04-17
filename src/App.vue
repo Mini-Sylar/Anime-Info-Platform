@@ -98,7 +98,8 @@ watch(isOnline, (value) => {
 
 .contains-genres,
 .history-container,
-.send-message {
+.send-message,
+.bookmarked-container {
   background-color: v-bind("setColor + '20'") !important;
 }
 
@@ -109,7 +110,8 @@ watch(isOnline, (value) => {
 }
 
 .history-title:hover,
-.go-back-home {
+.go-back-home,
+.bookmarked-show:hover {
   color: v-bind("setColor") !important;
   transition: color .2s ease-in-out;
 }

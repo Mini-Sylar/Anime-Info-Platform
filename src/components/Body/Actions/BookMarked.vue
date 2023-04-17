@@ -6,7 +6,8 @@
             <div class="has-bookmarks">
                 <ul>
                     <li v-for="(bookmark, index) in bookmarks" :key="index">
-                        <p class="show" @click="searchAnime(bookmark.value)">{{ bookmark.value }}</p>
+                        <button type="button" class="bookmarked-show" @click="searchAnime(bookmark.value)">{{ bookmark.value
+                        }}</button>
                     </li>
                 </ul>
             </div>
@@ -74,11 +75,14 @@ ul {
     cursor: pointer;
 }
 
-p {
+.bookmarked-show {
     margin-block: 1rem;
+    background-color: transparent !important;
+    border: none;
+    text-align: left;
 }
 
-p:hover {
+.bookmarked-show:hover {
     text-decoration: underline;
     cursor: pointer;
 }
