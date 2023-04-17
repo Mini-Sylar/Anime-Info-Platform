@@ -1,6 +1,6 @@
 <template >
     <div>
-        <div class="actions-container">
+        <div class="actions-container" v-on-click-outside="hideWhenClickedOutside">
             <div class="Starred">
                 <button @click="starShow" :title="isStarred ? 'Unstar Show' : 'Star Show'"
                     :class="[isStarred == true ? 'star-show-container starred' : 'star-show-container unstarred']">
@@ -10,7 +10,7 @@
                     </svg>
                 </button>
             </div>
-            <div class="share" v-on-click-outside="hideWhenClickedOutside">
+            <div class="share">
                 <button type="button" class="action-button share-main" title="Share show" @click="useShareAnime">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="share-hover">
                         <path
@@ -63,10 +63,12 @@ const showBookmark = ref(false)
 
 const showHistoryMenu = () => {
     showModal.value = !showModal.value
+    if (showBookmark.value == true) { showBookmark.value = false }
 }
 
 const hideWhenClickedOutside = () => {
     if (showModal.value == true) { showModal.value = false }
+    if (showBookmark.value == true) { showBookmark.value = false }
 }
 
 const isStarred = computed(() => {
@@ -80,6 +82,7 @@ const starShow = () => {
 
 const showMiniBookmarkMenu = () => {
     showBookmark.value = !showBookmark.value
+    if (showModal.value == true) { showModal.value = false }
 }
 
 </script>
