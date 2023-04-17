@@ -6,7 +6,7 @@
             <div class="has-bookmarks">
                 <ul>
                     <li v-for="(bookmark, index) in bookmarks" :key="index">
-                        <p>{{ bookmark.value }}</p>
+                        <p class="show" @click="searchAnime(bookmark.value)">{{ bookmark.value }}</p>
                     </li>
                 </ul>
             </div>
@@ -23,7 +23,10 @@ import { useBookmarks } from '../../../stores/bookmarks';
 import { useAnimeData } from '../../../stores/anime_data';
 import { ref } from 'vue';
 
+const searchAnime = (bookmark) => {
 
+    useAnimeData().fetchAnimeData(bookmark, false);
+}
 
 const bookmarks = ref(useBookmarks().getBookmarks.slice(0, 10) || [])
 </script>
@@ -68,6 +71,15 @@ ul {
     border-radius: 5px;
     padding: .5rem;
     margin: 0 auto;
+    cursor: pointer;
+}
+
+p {
+    margin-block: 1rem;
+}
+
+p:hover {
+    text-decoration: underline;
     cursor: pointer;
 }
 </style>
