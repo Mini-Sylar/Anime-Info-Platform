@@ -13,13 +13,15 @@ export const useBookmarks = defineStore("bookmarks", {
   actions: {
     getSavedShows() {
       return new Promise((resolve, reject) => {
+        const shows = [];
+
         localforage
           .iterate((value, key) => {
-            return { key, value };
+            shows.push({ key, value });
           })
-          .then((result) => {
-            this.$state.bookmarks = [result];
-            resolve(result);
+          .then(() => {
+            this.$state.bookmarks = shows;
+            resolve(shows);
           })
           .catch((err) => {
             console.error(err);
