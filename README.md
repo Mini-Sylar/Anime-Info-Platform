@@ -19,6 +19,14 @@ Remember you can always reach out to me using the contact form
 - Vite 💜
 - AniList API 🧡
 
+# Previews
+
+More features will be added as time goes on. to get early access visit [the releases page](https://github.com/Mini-Sylar/Anime-Info-Platform/releases)
+
+## Upcoming features
+- Bookmark 🎉
+- Current Season 🎉
+
 # Contribution
 
 Coming soon...
