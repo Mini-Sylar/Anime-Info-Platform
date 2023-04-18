@@ -147,6 +147,7 @@ button {
     /* background-color: #0195ff78 !important; */
     color: white !important;
     border: none;
+    cursor: pointer;
 }
 
 .pag-button {
