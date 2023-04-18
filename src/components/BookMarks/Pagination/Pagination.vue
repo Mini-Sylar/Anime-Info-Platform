@@ -87,7 +87,6 @@ export default {
         },
         pages() {
             const range = [];
-
             for (let i = this.startPage; i <= this.endPage; i += 1) {
                 range.push({
                     name: i,

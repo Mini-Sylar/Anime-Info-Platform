@@ -7,16 +7,12 @@ import { useAnimeData } from "../../stores/anime_data";
 import { detectMobile } from "../../js/helpers";
 
 const animeData = useAnimeData();
-
-
-
-
 const isMobile = computed(() => {
     return detectMobile();
 })
 </script>
 
-<template v-once>
+<template >
     <header>
         <nav class="navigation-bar">
             <div class="main-links" v-if="!isMobile">

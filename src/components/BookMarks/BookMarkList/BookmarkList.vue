@@ -58,10 +58,12 @@
             </table>
 
         </div>
-        <div class="pagination">
-            <Pagination :total-pages="totalPages" :total="total" :per-page="10" :current-page="currentPage"
-                @pagechanged="onPageChange" />
-        </div>
+        <transition name="fade">
+            <div class="pagination" v-if="bookmark_details.length > 0">
+                <Pagination :total-pages="totalPages" :total="total" :per-page="10" :current-page="currentPage"
+                    @pagechanged="onPageChange" />
+            </div>
+        </transition>
     </div>
 </template>
 <script setup>
