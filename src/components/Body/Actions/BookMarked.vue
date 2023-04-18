@@ -23,12 +23,14 @@
 <script setup>
 import { useBookmarks } from '../../../stores/bookmarks';
 import { useAnimeData } from '../../../stores/anime_data';
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 
 const searchAnime = (bookmark) => {
 
     useAnimeData().fetchAnimeData(bookmark, false);
 }
+
+const hasTrailer = computed(() => useAnimeData().getTrailer == null ? "7rem" : "17rem");
 
 const bookmarks = ref(useBookmarks().getBookmarks.slice(0, 10) || [])
 </script>
@@ -93,5 +95,18 @@ ul {
     justify-content: center;
     align-items: center;
     height: 100%;
+}
+
+@media screen and (max-width: 821px) {
+    .bookmarked-container {
+        left: min(3rem, 1rem);
+        width: 90%;
+        bottom: v-bind(hasTrailer);
+    }
+
+    .has-bookmarks {
+        width: auto;
+    }
+
 }
 </style>
