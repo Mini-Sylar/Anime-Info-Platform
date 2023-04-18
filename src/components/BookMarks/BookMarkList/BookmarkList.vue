@@ -73,7 +73,6 @@ bookmarks.getSavedShows().then((data) => {
     gotBookMarks.value = data
     bookmarks.fetchFromBookmarks().then(() => {
         bookmark_details.value = bookmarks.getBookmarkedDetials
-        console.log(bookmark_details.value)
     })
 })
 

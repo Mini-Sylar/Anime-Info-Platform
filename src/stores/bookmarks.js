@@ -34,7 +34,9 @@ export const useBookmarks = defineStore("bookmarks", {
             resolve(shows);
           })
           .catch((err) => {
-            console.error(err);
+            toast.error(
+              "There was an issue fetching your bookmarks! Report this issue via email"
+            );
             reject(err);
           });
       });
@@ -44,7 +46,9 @@ export const useBookmarks = defineStore("bookmarks", {
       return new Promise((resolve, reject) => {
         localforage.getItem(showId, function (err, value) {
           if (err) {
-            console.error(err);
+            toast.error("Something went wrong!", {
+              duration: 500,
+            });
             reject(err);
           } else {
             if (value && !isStarred) {
@@ -52,13 +56,15 @@ export const useBookmarks = defineStore("bookmarks", {
               localforage
                 .removeItem(showId)
                 .then(() => {
-                  toast.success("Show unstarred successfully!", {
+                  toast.success("Show removed successfully!", {
                     duration: 1000,
                   });
                   resolve(false);
                 })
                 .catch((err) => {
-                  console.error(err);
+                  toast.error("Something went wrong!", {
+                    duration: 500,
+                  });
                   reject(err);
                 });
             } else if (!value && isStarred) {
@@ -67,17 +73,19 @@ export const useBookmarks = defineStore("bookmarks", {
                 .setItem(showId, showName)
                 .then(() => {
                   toast.success("Show starred successfully!", {
-                    duration: 1000,
+                    duration: 500,
                   });
                   resolve(true);
                 })
                 .catch((err) => {
-                  console.error(err);
+                  toast.error("Something went wrong!", {
+                    duration: 500,
+                  });
                   reject(err);
                 });
             } else {
               toast.error("Something went wrong!", {
-                duration: 1000,
+                duration: 500,
               });
               // Show is already starred or unstarred, nothing to do
               resolve(false);
@@ -92,7 +100,9 @@ export const useBookmarks = defineStore("bookmarks", {
       return new Promise((resolve, reject) => {
         localforage.getItem(showId, function (err, value) {
           if (err) {
-            console.error(err);
+            toast.error("Something went wrong!", {
+              duration: 500,
+            });
             reject(err);
           } else {
             if (value) {

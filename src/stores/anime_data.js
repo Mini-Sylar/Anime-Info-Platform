@@ -14,7 +14,7 @@ import {
   generateNewNodes,
   omitNull,
 } from "../js/helpers";
-import localforage from "localforage";
+import { useToast } from "vue-toastification";
 
 import { useBookmarks } from "./bookmarks";
 
@@ -22,6 +22,8 @@ main_data.data.Media.recommendations.nodes =
   main_data.data.Media.recommendations.nodes.filter(
     (item) => item.mediaRecommendation !== null
   );
+
+let toast = useToast();
 
 export const useAnimeData = defineStore("animeData", {
   state: () => ({
@@ -88,26 +90,30 @@ export const useAnimeData = defineStore("animeData", {
         body: prepareAnimeData(searchQuery),
         headers: headersList,
       });
-      // Main Data Here
-      let main_data = await response.json();
-      // loop through array  main_data.data.Media.recommendations.nodes and drop object with null values using filter
-      main_data.data.Media.recommendations.nodes =
-        main_data.data.Media.recommendations.nodes.filter(
-          (item) => item.mediaRecommendation !== null
-        );
-      this.animeData = main_data;
-      //   Set to local storage to save search query after refresh
-      localStorage.setItem("searchQuery", searchQuery);
-      //  Add to search history
-      if (logHistory) {
-        this.addToHistory();
+      try {
+        // Main Data Here
+        let main_data = await response.json();
+        // loop through array  main_data.data.Media.recommendations.nodes and drop object with null values using filter
+        main_data.data.Media.recommendations.nodes =
+          main_data.data.Media.recommendations.nodes.filter(
+            (item) => item.mediaRecommendation !== null
+          );
+        this.animeData = main_data;
+        //   Set to local storage to save search query after refresh
+        localStorage.setItem("searchQuery", searchQuery);
+        //  Add to search history
+        if (logHistory) {
+          this.addToHistory();
+        }
+        //check if starred
+        this.bookMarkStore
+          .isShowStarred(main_data.data.Media.id)
+          .then((value) => {
+            this.isStarred = value;
+          });
+      } catch (error) {
+        toast.error("Error Fetching Data");
       }
-      //check if starred
-      this.bookMarkStore
-        .isShowStarred(main_data.data.Media.id)
-        .then((value) => {
-          this.isStarred = value;
-        });
       setTimeout(() => {
         this.cardsLoading = false;
         this.bodyLoading = false;
@@ -115,48 +121,56 @@ export const useAnimeData = defineStore("animeData", {
     },
     async fetchSurprise(genre) {
       // Add loading parameters here
-      this.cardsLoading = true;
-      let response_cards = await fetch("https://graphql.anilist.co/?id", {
-        method: "POST",
-        body: surpriseMe(genre),
-        headers: headersList,
-      });
-      let surpriseCards_gotten = await response_cards.json();
-      // Create a new object to store the data
-      let newNodes = [
-        ...surpriseCards_gotten.data.Page.media.map((item) => {
-          return { mediaRecommendation: item };
-        }),
-      ];
-      this.animeData.data.Media.recommendations.nodes = newNodes;
+      try {
+        this.cardsLoading = true;
+        let response_cards = await fetch("https://graphql.anilist.co/?id", {
+          method: "POST",
+          body: surpriseMe(genre),
+          headers: headersList,
+        });
+        let surpriseCards_gotten = await response_cards.json();
+        // Create a new object to store the data
+        let newNodes = [
+          ...surpriseCards_gotten.data.Page.media.map((item) => {
+            return { mediaRecommendation: item };
+          }),
+        ];
+        this.animeData.data.Media.recommendations.nodes = newNodes;
+      } catch (error) {
+        toast.error("There was an issue fetching the this show");
+      }
       setTimeout(() => {
         this.cardsLoading = false;
       }, 1000);
     },
     async fetchFromRecommended(title) {
       this.bodyLoading = true;
-      let response = await fetch("https://graphql.anilist.co/?id", {
-        method: "POST",
-        body: prepareAnimeData(title),
-        headers: headersList,
-      });
-      this.animeData.data.Media.trailer = null;
-      let main_data = await response.json();
-      main_data.data.Media.recommendations = null;
-      // Set background to no image if not found
-      if (main_data.data.Media.bannerImage === null) {
-        main_data.data.Media.bannerImage = "/images/404-no-wallpaper.jpg";
-      }
-      this.animeData.data.Media = {
-        ...omitNull(this.animeData.data.Media),
-        ...omitNull(main_data.data.Media),
-      };
-      //check if starred
-      this.bookMarkStore
-        .isShowStarred(main_data.data.Media.id)
-        .then((value) => {
-          this.isStarred = value;
+      try {
+        let response = await fetch("https://graphql.anilist.co/?id", {
+          method: "POST",
+          body: prepareAnimeData(title),
+          headers: headersList,
         });
+        this.animeData.data.Media.trailer = null;
+        let main_data = await response.json();
+        main_data.data.Media.recommendations = null;
+        // Set background to no image if not found
+        if (main_data.data.Media.bannerImage === null) {
+          main_data.data.Media.bannerImage = "/images/404-no-wallpaper.jpg";
+        }
+        this.animeData.data.Media = {
+          ...omitNull(this.animeData.data.Media),
+          ...omitNull(main_data.data.Media),
+        };
+        //check if starred
+        this.bookMarkStore
+          .isShowStarred(main_data.data.Media.id)
+          .then((value) => {
+            this.isStarred = value;
+          });
+      } catch (error) {
+        toast.error("Error Fetching Data");
+      }
       setTimeout(() => {
         this.bodyLoading = false;
       }, 1000);
@@ -203,14 +217,18 @@ export const useAnimeData = defineStore("animeData", {
     },
     async fetchCurrentSeason() {
       this.cardsLoading = true;
-      let response = await fetch("https://graphql.anilist.co/", {
-        method: "POST",
-        body: currentSeason(),
-        headers: headersList,
-      });
-      const currentSeasonList = await response.json();
-      this.animeData.data.Media.recommendations.nodes =
-        generateNewNodes(currentSeasonList);
+      try {
+        let response = await fetch("https://graphql.anilist.co/", {
+          method: "POST",
+          body: currentSeason(),
+          headers: headersList,
+        });
+        const currentSeasonList = await response.json();
+        this.animeData.data.Media.recommendations.nodes =
+          generateNewNodes(currentSeasonList);
+      } catch (error) {
+        toast.error("There was an issue fetching the current season list");
+      }
       this.cardsLoading = false;
     },
     async toggleStarredStatus(showId, showName, isStarred) {
@@ -222,7 +240,11 @@ export const useAnimeData = defineStore("animeData", {
         );
         this.bookMarkStore.getSavedShows();
         this.$state.isStarred = result;
-      } catch (error) {}
+      } catch (error) {
+        toast.error(
+          "There was an issue checking the starred status of this show"
+        );
+      }
     },
     async initializeIsStarred(showId) {
       const starred = await this.bookMarkStore.isShowStarred(showId.value);
