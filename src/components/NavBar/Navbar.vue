@@ -5,11 +5,18 @@ import MobileHeader from "./mobile/MobileHeader.vue";
 import { computed } from "vue";
 import { useAnimeData } from "../../stores/anime_data";
 import { detectMobile } from "../../js/helpers";
-
+import { useRouter } from "vue-router";
 const animeData = useAnimeData();
 const isMobile = computed(() => {
     return detectMobile();
 })
+
+const router = useRouter()
+
+const redirectToHomeAndFetch = () => {
+    router.push('/')
+    animeData.fetchCurrentSeason()
+}
 </script>
 
 <template >
@@ -17,7 +24,7 @@ const isMobile = computed(() => {
         <nav class="navigation-bar">
             <div class="main-links" v-if="!isMobile">
                 <a role="button" title="get current season list" class="is-url is-link"
-                    @click="animeData.fetchCurrentSeason()">Current Season</a>
+                    @click="redirectToHomeAndFetch">Current Season</a>
                 <RouterLink to="/" class="is-url">Home</RouterLink>
                 <RouterLink to="/bookmarks" class="is-url">Bookmarks</RouterLink>
                 <RouterLink to="/about" class="is-url">About</RouterLink>
