@@ -1,7 +1,7 @@
 <template >
     <div>
-        <div class="is-a-container">
-            BookMark View
+        <div class="min-container">
+            <p>BookMark View</p>
         </div>
     </div>
 </template>
@@ -10,4 +10,10 @@ export default {
 
 }
 </script>
-<style></style>
+<style scoped>
+.min-container {
+    width: min(90%, 1200px);
+    background-color: springgreen;
+    margin: 0 auto;
+}
+</style>

@@ -23,6 +23,7 @@ const isMobile = computed(() => {
                 <a role="button" title="get current season list" class="is-url is-link"
                     @click="animeData.fetchCurrentSeason()">Current Season</a>
                 <RouterLink to="/" class="is-url">Home</RouterLink>
+                <RouterLink to="/bookmarks" class="is-url">Bookmarks</RouterLink>
                 <RouterLink to="/about" class="is-url">About</RouterLink>
                 <RouterLink to="/contact" class="is-url">Contact</RouterLink>
             </div>
