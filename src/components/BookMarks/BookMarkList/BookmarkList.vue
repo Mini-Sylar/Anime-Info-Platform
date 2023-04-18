@@ -76,7 +76,7 @@ import Pagination from '../Pagination/Pagination.vue';
 
 const bookmarks = useBookmarks();
 const search = ref('')
-const bookRef = ref([])
+const bookRef = ref(bookmarks.getBookmarkedDetials)
 const bookmarkloading = computed(() => bookmarks.bookmarksloading)
 
 
