@@ -2,6 +2,7 @@
     <div>
         <aside class="nav-mobile">
             <RouterLink to="/" class="is-url" @click="hideMenu">Home</RouterLink>
+            <RouterLink to="/bookmarks" class="is-url" @click="hideMenu">Bookmarks</RouterLink>
             <RouterLink to="/about" class="is-url" @click="hideMenu">About</RouterLink>
             <RouterLink to="/contact" class="is-url" @click="hideMenu">Contact</RouterLink>
         </aside>

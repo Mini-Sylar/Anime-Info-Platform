@@ -74,5 +74,13 @@ header {
         margin-top: 1rem;
     }
 
+    header {
+        position: relative;
+        top: 0;
+        width: 100%;
+        height: 2rem;
+        z-index: 300;
+    }
+
 }
 </style>

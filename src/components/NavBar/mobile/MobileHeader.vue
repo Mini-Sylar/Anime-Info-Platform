@@ -1,18 +1,18 @@
-<template lang="">
+<template>
   <div>
-       <ui-sidebar>
-        
-       </ui-sidebar>
+    <ui-sidebar>
+
+    </ui-sidebar>
     <nav>
       <div class="logo">
-         <a @click="getCurrentSeasonShows()" title="get current anime data" role="button" class="is-url">Current Season</a>
+        <a @click="getCurrentSeasonShows()" title="get current anime data" role="button" class="is-url">Current Season</a>
       </div>
       <div id="nav-icon1" class="hamburger" v-on:click="showHam">
         <span></span>
         <span></span>
         <span></span>
       </div>
-     
+
     </nav>
   </div>
 </template>
