@@ -24,7 +24,7 @@
                 <tbody>
 
                     <TransitionGroup name="pop">
-                        <tr v-for="(bookmark, index) in bookmark_details" :key="index">
+                        <tr v-for="(bookmark, index) in bookmark_details" :key="index" v-if="bookmark_details.length > 0">
                             <td>
                                 <div class="contains-title">
                                     <div class="bg-image"><img :src="bookmark.coverImage.medium" alt=""></div>
@@ -46,6 +46,11 @@
                                 </button></td>
 
                         </tr>
+                        <div class="empty" v-else>
+                            <h2>
+                                NO SHOWS BOOKMARKED...😢
+                            </h2>
+                        </div>
                     </TransitionGroup>
                 </tbody>
             </table>
@@ -189,6 +194,7 @@ img {
 }
 
 .empty {
+    position: absolute;
     height: min(100px, 200px);
     display: flex;
     align-items: center;
