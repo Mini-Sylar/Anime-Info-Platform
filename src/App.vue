@@ -102,7 +102,8 @@ watch(isOnline, (value) => {
 
 .tbl-content,
 td,
-.table-item {
+.table-item,
+.latest-episode {
   border-color: v-bind("setColor + '20'") !important;
 }
 
