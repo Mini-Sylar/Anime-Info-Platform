@@ -1,5 +1,8 @@
 <template>
     <div>
+        <div class="search-box">
+            <input type="text" class="search-bookmark" placeholder="Search" v-model="search">
+        </div>
         <div class="tbl-header bookmarked-container">
             <table cellpadding="0" cellspacing="0" border="0">
                 <thead>
@@ -54,27 +57,39 @@
                     </TransitionGroup>
                 </tbody>
             </table>
+
+        </div>
+        <div class="pagination">
+            <p>
+                dead
+                <Pagination :total-pages="totalPages" :total="total" :per-page="11" :current-page="currentPage"
+                    @pagechanged="onPageChange" />
+            </p>
         </div>
     </div>
 </template>
 <script setup>
 import { useBookmarks } from '../../../stores/bookmarks';
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import Bars from '../../Loaders/Bars.vue';
+import Pagination from '../Pagination/Pagination.vue';
 
 const bookmarks = useBookmarks();
-const gotBookMarks = ref([])
-const bookmark_details = ref([])
-
+const search = ref('')
+const bookRef = ref([])
 const bookmarkloading = computed(() => bookmarks.bookmarksloading)
 
+
 bookmarks.getSavedShows().then((data) => {
-    gotBookMarks.value = data
     bookmarks.fetchFromBookmarks().then(() => {
-        bookmark_details.value = bookmarks.getBookmarkedDetials
+        bookRef.value = bookmarks.getBookmarkedDetials
     })
 })
-
+const bookmark_details = computed(() => {
+    return bookRef.value.filter((show) => {
+        return show.title.english?.toLowerCase().includes(search.value.toLowerCase()) || show.title.romaji?.toLowerCase().includes(search.value.toLowerCase())
+    }).slice((currentPage.value - 1) * 10, currentPage.value * 10)
+})
 
 const formatDate = (date) => {
     const options = {
@@ -94,11 +109,22 @@ const removeStar = (show) => {
     const showTitle = show.title.english ? show.title.english : show.title.romaji
     bookmarks.starAnime(showID, showTitle)
     // use splice instead of filter to remove the item from the array
-
-    bookmark_details.value.splice(bookmark_details.value.indexOf(show), 1)
-
+    bookRef.value.splice(bookRef.value.indexOf(show), 1)
 }
+// pagination
+const currentPage = ref(1)
+const onPageChange = (page) => {
+    currentPage.value = page;
+}
+const total = computed(() => bookRef.value.length)
+const totalPages = computed(() => Math.ceil(total.value / 10))
 
+
+watch(bookmark_details, () => {
+    if (bookmark_details.value.length === 0 && currentPage.value !== 1) {
+        currentPage.value = 1
+    }
+})
 </script>
 <style scoped>
 table {
@@ -113,7 +139,7 @@ table {
 
 .tbl-content {
     position: relative;
-    height: min(750px, 75vh);
+    height: min(750px, 65vh);
     min-height: 100%;
     overflow-x: auto;
     margin-top: 0px;
@@ -198,5 +224,32 @@ img {
     height: min(100px, 200px);
     display: flex;
     align-items: center;
+}
+
+.search-box {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: .5rem;
+}
+
+.search-box input {
+    width: 300px;
+    padding: 10px;
+    border: none;
+    /* border-radius: 5px; */
+    outline: none;
+    background-color: #0195ff2c;
+    backdrop-filter: blur(10px);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
 }
 </style>

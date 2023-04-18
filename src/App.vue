@@ -97,7 +97,8 @@ watch(isOnline, (value) => {
 .contains-genres,
 .history-container,
 .send-message,
-.bookmarked-container {
+.bookmarked-container,
+.search-bookmark {
   background-color: v-bind("setColor + '20'") !important;
 }
 
