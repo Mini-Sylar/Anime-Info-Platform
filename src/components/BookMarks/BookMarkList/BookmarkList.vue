@@ -14,7 +14,7 @@
                 </thead>
             </table>
         </div>
-        <div class="tbl-content" v-if="bookmark_details.length > 0">
+        <div class="tbl-content">
             <transition name="fade">
                 <div class="bookmarks-loading" v-if="bookmarkloading">
                     <Bars></Bars>
@@ -49,12 +49,6 @@
                     </TransitionGroup>
                 </tbody>
             </table>
-        </div>
-        <div class="empty" v-else>
-
-            <h2>
-                Your bookmarks are empty... 😢 <br>
-            </h2>
         </div>
     </div>
 </template>
@@ -94,8 +88,10 @@ const removeStar = (show) => {
     const showID = show.id.toString()
     const showTitle = show.title.english ? show.title.english : show.title.romaji
     bookmarks.starAnime(showID, showTitle)
-    // filter out the show from the bookmark_details
-    bookmark_details.value = bookmark_details.value.filter((item) => item.id !== show.id)
+    // use splice instead of filter to remove the item from the array
+
+    bookmark_details.value.splice(bookmark_details.value.indexOf(show), 1)
+
 }
 
 </script>
