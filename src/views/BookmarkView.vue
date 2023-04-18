@@ -1,19 +1,18 @@
 <template >
     <div>
         <div class="min-container">
-            <p>BookMark View</p>
+            <Tips></Tips>
+            <BookmarkList></BookmarkList>
         </div>
     </div>
 </template>
-<script>
-export default {
-
-}
+<script setup>
+import Tips from '../components/BookMarks/Tips/Tips.vue';
+import BookmarkList from '../components/BookMarks/BookMarkList/BookmarkList.vue';
 </script>
 <style scoped>
 .min-container {
-    width: min(90%, 1200px);
-    background-color: springgreen;
+    width: min(95%, 1600px);
     margin: 0 auto;
 }
 </style>

@@ -3,6 +3,9 @@
 main {
   display: flex;
 }
+* {
+  color: silver;
+}
 
 .left-side-main {
   width: 100%;
