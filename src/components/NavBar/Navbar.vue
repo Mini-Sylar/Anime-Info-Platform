@@ -78,7 +78,7 @@ header {
         position: relative;
         top: 0;
         width: 100%;
-        height: 2rem;
+        height: 6rem;
         z-index: 300;
     }
 

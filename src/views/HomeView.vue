@@ -156,5 +156,7 @@ select {
     flex-direction: column;
     gap: 4rem;
   }
+
 }
+
 </style>

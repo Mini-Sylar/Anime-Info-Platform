@@ -29,4 +29,10 @@ export default {
 div p {
     font-size: clamp(.7rem, .9vw, 2rem);
 }
+
+@media screen and (max-width: 768px) {
+    p {
+        color: #f1f1f1;
+    }
+}
 </style>

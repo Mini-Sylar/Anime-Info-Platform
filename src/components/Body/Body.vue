@@ -86,5 +86,6 @@ const setBodyLoading = computed(() => {
         transform: translate(-40%, -60%) !important;
     }
 
+
 }
 </style>

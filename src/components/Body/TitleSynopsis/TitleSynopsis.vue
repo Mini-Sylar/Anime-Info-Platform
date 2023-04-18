@@ -54,6 +54,11 @@ export default {
         line-height: 1.5rem;
         display: flex;
         align-items: flex-end;
+        color: white;
+    }
+
+    .anime-synposis {
+        color: #f1f1f1;
     }
 
 }
