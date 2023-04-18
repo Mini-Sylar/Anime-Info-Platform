@@ -2,34 +2,38 @@
     <div>
         <ul class="pagination">
             <li class="pagination-item">
-                <button type="button" @click="onClickFirstPage" :disabled="isInFirstPage" aria-label="Go to first page">
-                    First
+                <button type="button" @click="onClickFirstPage" class="first-last" :disabled="isInFirstPage"
+                    aria-label="Go to first page">
+                    First Page
                 </button>
             </li>
 
             <li class="pagination-item">
                 <button type="button" @click="onClickPreviousPage" :disabled="isInFirstPage"
-                    aria-label="Go to previous page">
-                    Previous
+                    aria-label="Go to previous page" class="next-prev">
+                    &lt;
                 </button>
             </li>
 
             <li v-for="page in pages" class="pagination-item">
                 <button type="button" @click="onClickPage(page.name)" :disabled="page.isDisabled"
-                    :class="{ active: isPageActive(page.name) }" :aria-label="`Go to page number ${page.name}`">
+                    :class="{ active: isPageActive(page.name), 'pag-button': true }"
+                    :aria-label="`Go to page number ${page.name}`">
                     {{ page.name }}
                 </button>
             </li>
 
             <li class="pagination-item">
-                <button type="button" @click="onClickNextPage" :disabled="isInLastPage" aria-label="Go to next page">
-                    Next
+                <button class="next-prev" type="button" @click="onClickNextPage" :disabled="isInLastPage"
+                    aria-label="Go to next page">
+                    >
                 </button>
             </li>
 
             <li class="pagination-item">
-                <button type="button" @click="onClickLastPage" :disabled="isInLastPage" aria-label="Go to last page">
-                    Last
+                <button type="button" class="first-last" @click="onClickLastPage" :disabled="isInLastPage"
+                    aria-label="Go to last page">
+                    Last Page
                 </button>
             </li>
         </ul>
@@ -140,6 +144,34 @@ export default {
 }
 
 button {
-    background-color: darkblue !important;
+    /* background-color: #0195ff78 !important; */
+    color: white !important;
+    border: none;
+}
+
+.pag-button {
+    padding: .5rem .8rem;
+    border-radius: 2px;
+}
+
+.next-prev {
+    padding: .3rem .8rem;
+    border-radius: 2px;
+    background-color: #0195ff78;
+    color: white !important;
+    border: none;
+}
+
+.first-last {
+    padding: .2rem .8rem;
+    border-radius: 2px;
+    background-color: #0195ff78;
+    color: white !important;
+    border: none;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
 }
 </style>

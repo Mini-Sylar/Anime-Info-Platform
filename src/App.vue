@@ -85,7 +85,7 @@ watch(isOnline, (value) => {
 }
 
 ::selection {
-  background-color: v-bind("setColor + '80'");
+  background-color: v-bind("setColor + '80'") !important;
 }
 
 
@@ -161,6 +161,12 @@ td {
   background-color: v-bind('setColor + "20"') !important;
   box-shadow: 0 0 10px 0 v-bind('setColor + "20"') !important;
   ;
+}
+
+.first-last,
+.next-prev {
+  background-color: v-bind('setColor + "50"') !important;
+  box-shadow: 0 0 10px 0 v-bind('setColor + "50"') !important;
 }
 
 .send-message,

@@ -60,11 +60,8 @@
 
         </div>
         <div class="pagination">
-            <p>
-                dead
-                <Pagination :total-pages="totalPages" :total="total" :per-page="11" :current-page="currentPage"
-                    @pagechanged="onPageChange" />
-            </p>
+            <Pagination :total-pages="totalPages" :total="total" :per-page="10" :current-page="currentPage"
+                @pagechanged="onPageChange" />
         </div>
     </div>
 </template>
