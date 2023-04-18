@@ -101,7 +101,8 @@ watch(isOnline, (value) => {
 }
 
 .tbl-content,
-td {
+td,
+.table-item {
   border-color: v-bind("setColor + '20'") !important;
 }
 

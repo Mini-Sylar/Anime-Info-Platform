@@ -24,32 +24,49 @@
                 </div>
             </transition>
             <table cellpadding="0" cellspacing="0" border="0">
-                <TransitionGroup name="pop" tag="tbody" class="container">
-                    <tr v-for="(bookmark, index) in bookmark_details" :key="index" v-if="bookmark_details.length > 0">
-                        <td>
-                            <div class="contains-title">
-                                <div class="bg-image"><img :src="bookmark.coverImage.medium" alt=""></div>
-                                <div class="title">{{ bookmark.title.english ? bookmark.title.english :
-                                    bookmark.title.romaji }}</div>
+                <TransitionGroup name="pop" tag="ul" class="container">
+                    <li class="table-item" v-for="(bookmark, index) in bookmark_details" :key="index"
+                        v-if="bookmark_details.length > 0">
+                        <div class="contains-title">
+                            <div class="bg-image"><img :src="bookmark.coverImage.medium" alt=""></div>
+                            <div class="title">
+                                <p>
+                                    {{ bookmark.title.english ? bookmark.title.english :
+                                        bookmark.title.romaji }}
+                                </p>
                             </div>
-                        </td>
-                        <td>{{ bookmark.airingSchedule.nodes[0]?.episode ? bookmark.airingSchedule.nodes[0]?.episode
-                            : bookmark?.episodes }}</td>
-                        <td>{{ formatDate(bookmark.airingSchedule.nodes[0]?.airingAt) }}</td>
-                        <td>{{ bookmark?.season }} {{ bookmark?.startDate.year }}</td>
-                        <td><span :class="[bookmark.status == 'FINISHED' ? 'finished' : 'releasing']">
+                        </div>
+                        <div class="latest-episode">
+                            <p>{{ bookmark.airingSchedule.nodes[0]?.episode ? bookmark.airingSchedule.nodes[0]?.episode
+                                : bookmark?.episodes }}</p>
+                        </div>
+
+                        <div class="schedule">
+                            <p>{{ formatDate(bookmark.airingSchedule.nodes[0]?.airingAt) }}</p>
+                        </div>
+
+                        <div class="season">
+                            <p>{{ bookmark?.season }} {{ bookmark?.startDate.year }}</p>
+                        </div>
+
+                        <div class="status">
+                            <span :class="[bookmark.status == 'FINISHED' ? 'finished' : 'releasing']">
                                 {{ bookmark.status }}
-                            </span></td>
-                        <td><button title="Remove show from your bookmarks" type="button" class="delete-button"
+                            </span>
+                        </div>
+
+                        <div class="action">
+                            <button title="Remove show from your bookmarks" type="button" class="delete-button"
                                 @click="removeStar(bookmark)">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="uses-dynamic delete-icon"
                                     viewBox="0 0 448 512">
                                     <path
                                         d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z" />
                                 </svg>
-                            </button></td>
+                            </button>
+                        </div>
 
-                    </tr>
+                    </li>
                     <div class="empty" v-else>
                         <h2>
                             NO SHOWS BOOKMARKED...😢
@@ -59,6 +76,7 @@
             </table>
 
         </div>
+
         <transition name="fade">
             <div class="pagination" v-if="bookmark_details.length > 0">
                 <Pagination :total-pages="totalPages" :total="total" :per-page="10" :current-page="currentPage"
@@ -158,7 +176,8 @@ th {
 }
 
 
-td {
+
+.table-item {
     padding: 15px;
     text-align: left;
     vertical-align: middle;
@@ -174,10 +193,7 @@ td {
     gap: 1rem;
 }
 
-img {
-    width: 50px;
-    object-fit: contain;
-}
+
 
 .delete-icon {
     width: 20px;
@@ -208,8 +224,9 @@ img {
       animations can be calculated correctly. */
 .pop-leave-active {
     position: absolute;
-    width: 100%;
-    transform: translateX(-100%);
+    display: table-row;
+    width: 100% !important;
+
 }
 
 .bookmarks-loading {
@@ -256,6 +273,48 @@ img {
     margin-top: 1rem;
 }
 
+
+.container {
+    position: relative;
+}
+
+.new-table {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    /* background-color: saddlebrown; */
+}
+
+.table-item {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.table-item * {
+    align-self: center;
+    width: 100%;
+    font-size: 13px;
+    color: white;
+    /* background-color: springgreen; */
+}
+
+img {
+    width: 50px !important;
+    object-fit: contain;
+}
+
+.bg-image {
+    width: auto;
+}
+
+.action * {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: auto;
+}
+
 .finished {
     color: #ee1838;
 }
@@ -264,9 +323,10 @@ img {
     color: #10de77;
 }
 
-.container {
-    position: relative;
-    /* display: inline-table; */
-    width: 100%;
+.latest-episode,
+.season,
+.status,
+.schedule {
+    margin-left: 20px;
 }
 </style>
