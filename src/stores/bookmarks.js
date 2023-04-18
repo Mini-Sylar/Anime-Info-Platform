@@ -1,16 +1,23 @@
 import { defineStore } from "pinia";
 import localforage from "localforage";
 import { useToast } from "vue-toastification";
+import { fetchDataFromBookmarks } from "../js/BookMarkQuery";
+import { headersList } from "../js/AnimeQuery";
 
 let toast = useToast();
 
 export const useBookmarks = defineStore("bookmarks", {
   state: () => ({
     bookmarks: [],
+    bookmarked_details: [],
+    bookmarksloading: false,
   }),
   getters: {
     getBookmarks: (state) => {
       return state.bookmarks;
+    },
+    getBookmarkedDetials: (state) => {
+      return state.bookmarked_details;
     },
   },
   actions: {
@@ -96,6 +103,24 @@ export const useBookmarks = defineStore("bookmarks", {
           }
         });
       });
+    },
+    async fetchFromBookmarks() {
+      this.bookmarksloading = true;
+      let showIDs = [];
+      this.getBookmarks.filter((show) => {
+        showIDs.push(parseInt(show.key));
+      });
+      let response = await fetch("https://graphql.anilist.co/?id", {
+        method: "POST",
+        body: fetchDataFromBookmarks(showIDs),
+        headers: headersList,
+      });
+
+      let data = await response.json();
+      this.bookmarked_details = data?.data.Page.media || [];
+      setTimeout(() => {
+        this.bookmarksloading = false;
+      }, 1000);
     },
   },
 });

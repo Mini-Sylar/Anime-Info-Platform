@@ -29,11 +29,11 @@ watch(isOnline, (value) => {
   <header>
     <NavbarVue />
   </header>
-    <router-view v-slot="{ Component }">
-      <transition name="fade" mode="out-in">
-        <component :is="Component"></component>
-      </transition>
-    </router-view>
+  <router-view v-slot="{ Component }">
+    <transition name="fade" mode="out-in">
+      <component :is="Component"></component>
+    </transition>
+  </router-view>
 </template>
 
 <style>
@@ -99,6 +99,11 @@ watch(isOnline, (value) => {
 .send-message,
 .bookmarked-container {
   background-color: v-bind("setColor + '20'") !important;
+}
+
+.tbl-content,
+td {
+  border-color: v-bind("setColor + '20'") !important;
 }
 
 
