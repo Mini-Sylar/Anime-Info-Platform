@@ -33,7 +33,8 @@
                                     bookmark.title.romaji }}</div>
                             </div>
                         </td>
-                        <td>{{ bookmark.airingSchedule.nodes[0]?.episode || bookmark.episodes }}</td>
+                        <td>{{ bookmark.airingSchedule.nodes[0]?.episode ? bookmark.airingSchedule.nodes[0]?.episode
+                            : bookmark?.episodes }}</td>
                         <td>{{ formatDate(bookmark.airingSchedule.nodes[0]?.airingAt) }}</td>
                         <td>{{ bookmark?.season }} {{ bookmark?.startDate.year }}</td>
                         <td><span :class="[bookmark.status == 'FINISHED' ? 'finished' : 'releasing']">
@@ -128,6 +129,7 @@ watch(bookmark_details, () => {
 table {
     width: 100%;
     table-layout: fixed;
+    position: relative;
 }
 
 .tbl-header {
@@ -206,8 +208,8 @@ img {
       animations can be calculated correctly. */
 .pop-leave-active {
     position: absolute;
-    display: inline-table;
     width: 100%;
+    transform: translateX(-100%);
 }
 
 .bookmarks-loading {
@@ -264,7 +266,7 @@ img {
 
 .container {
     position: relative;
-    display: inline-table;
+    /* display: inline-table; */
     width: 100%;
 }
 </style>

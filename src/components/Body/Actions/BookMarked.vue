@@ -11,7 +11,8 @@
                     </li>
                 </ul>
             </div>
-            <div class="button-container"><button class="btn">View All Bookmarks</button></div>
+            <div class="button-container"><button class="btn" @click="$router.push('/bookmarks')">View All
+                    Bookmarks</button></div>
 
         </div>
         <div v-else class="no-bookmarks">
