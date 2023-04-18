@@ -23,7 +23,7 @@
             <table cellpadding="0" cellspacing="0" border="0">
                 <tbody>
 
-                    <TransitionGroup name="list">
+                    <TransitionGroup name="pop">
                         <tr v-for="(bookmark, index) in bookmark_details" :key="index">
                             <td>
                                 <div class="contains-title">
@@ -114,6 +114,10 @@ table {
     border: 1px solid #0195ff2c;
 }
 
+tbody {
+    position: relative;
+}
+
 th {
     padding: 20px 15px;
     text-align: left;
@@ -156,18 +160,24 @@ img {
     cursor: pointer;
 }
 
-.list-move,
-/* apply transition to moving elements */
-.list-enter-active,
-.list-leave-active {
-    transition: all 0.5s ease;
+.pop-move,
+.pop-enter-active,
+.pop-leave-active {
+    transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1);
 }
 
-.list-enter-from,
-.list-leave-to {
+/* 2. declare enter from and leave to state */
+.pop-enter-from,
+.pop-leave-to {
     opacity: 0;
-    transform: translateX(30px);
+    transform: scaleY(0.01) translate(30px, 0);
 }
+
+/* 3. ensure leaving items are taken out of layout flow so that moving
+      animations can be calculated correctly. */
+/* .pop-leave-active {
+    position: absolute;
+} */
 
 .bookmarks-loading {
     position: absolute;
