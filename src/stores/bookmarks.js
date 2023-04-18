@@ -117,7 +117,10 @@ export const useBookmarks = defineStore("bookmarks", {
     async fetchFromBookmarks() {
       this.bookmarksloading = true;
       let showIDs = [];
-      if (this.getBookmarks.length < 1) {
+      if (
+        this.getBookmarks.length < 1 ||
+        this.bookmarked_details.length == this.bookmarks.length
+      ) {
         this.bookmarksloading = false;
         return;
       }
