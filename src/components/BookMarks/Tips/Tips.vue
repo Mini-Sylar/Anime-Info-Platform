@@ -1,6 +1,6 @@
 <template >
     <div>
-        Tips
+        
     </div>
 </template>
 <script>
