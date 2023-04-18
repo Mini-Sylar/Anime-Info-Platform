@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@emailjs/browser": "^3.10.0",
+    "@unhead/vue": "^1.1.26",
     "@vueuse/components": "^9.13.0",
     "@vueuse/core": "^9.13.0",
     "localforage": "^1.10.0",

@@ -8,6 +8,7 @@ import Toast from "vue-toastification";
 import "vue-toastification/dist/index.css";
 import mixpanel from "mixpanel-browser";
 import localforage from "localforage";
+import { createHead } from "@unhead/vue";
 
 mixpanel.init(import.meta.env.VITE_MIXPANEL_TOKEN);
 
@@ -38,4 +39,6 @@ app.use(Toast, {
   newestOnTop: true,
 });
 app.use(mixpanelPlugin);
+const head = createHead();
+app.use(head);
 app.mount("#app");

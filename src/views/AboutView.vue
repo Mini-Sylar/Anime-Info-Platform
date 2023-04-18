@@ -104,7 +104,7 @@ import { useAnimeData } from '../stores/anime_data';
 import { ref, computed } from 'vue';
 import { detectMobile } from '../js/helpers';
 import { useRouter } from 'vue-router';
-
+import { useHead } from '@unhead/vue'
 
 const mainAnimeData = ref(useAnimeData());
 const hideDivider = ref(!detectMobile());
@@ -122,6 +122,21 @@ const hideContactWhenOnAboutMobile = computed(() => {
     return false
   }
   return true
+})
+
+useHead({
+  title: route.currentRoute.value.path === '/about' ? 'Anime Info Platform | About' : 'Anime Info Platform | Contact',
+  meta: [
+    {
+      name: 'description',
+      content: 'About and contact page for the website of the anime fan and developer, Mini Sylar.'
+    },
+    {
+      name: 'keywords',
+      content: 'about, contact, anime, mini sylar, sylar, sylar mini, sylar mini anime, sylar mini anime website, sylar mini anime fan, sylar mini anime developer, sylar mini anime fan website, sylar mini anime developer website, sylar mini anime fan'
+
+    }
+  ]
 })
 
 </script>

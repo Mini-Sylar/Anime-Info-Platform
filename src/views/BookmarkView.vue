@@ -13,8 +13,23 @@ import Tips from '../components/BookMarks/Tips/Tips.vue';
 import BookmarkList from '../components/BookMarks/BookMarkList/BookmarkList.vue';
 import Background from '../components/Body/Background/Background.vue';
 import { useAnimeData } from '../stores/anime_data';
+import { useHead } from '@unhead/vue'
 
 const mainAnimeData = useAnimeData()
+
+useHead({
+    title: 'Anime Info Platform | Bookmarks',
+    meta: [
+        {
+            name: 'description',
+            content: 'Keep track of your favorite anime and get information, recommendations, and more using the anime info platform.'
+        },
+        {
+            name: 'keywords',
+            content: 'anime, anime info, anime info platform, anime info website, anime information'
+        }
+    ]
+})
 </script>
 <style scoped>
 .min-container {

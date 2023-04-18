@@ -6,7 +6,7 @@ import BodyLoading from '../components/Body/Loading/BodyLoading.vue';
 import CardLoading from '../components/Cards/Loading/CardLoading.vue';
 import { useAnimeData } from '../stores/anime_data';
 import { defineAsyncComponent } from 'vue'
-
+import { useHead } from '@unhead/vue'
 const RecommendationsWrapper = defineAsyncComponent(() => import('../components/Cards/Recommendations/Recommendations.vue'));
 
 export default {
@@ -32,6 +32,21 @@ export default {
   mounted() {
     this.$mixpanel.track("Home Page")
   },
+  setup() {
+    useHead({
+      title: 'Anime Info Platform | Home',
+      meta: [
+        {
+          name: 'description',
+          content: 'Search for your favorite anime and get information, recommendations, and more using the anime info platform.'
+        },
+        {
+          name: 'keywords',
+          content: 'anime, anime info, anime info platform, anime info website, anime information'
+        }
+      ]
+    })
+  }
 }
 
 </script>
