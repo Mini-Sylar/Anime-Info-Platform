@@ -24,38 +24,37 @@
                 </div>
             </transition>
             <table cellpadding="0" cellspacing="0" border="0">
-                <tbody>
+                <TransitionGroup name="pop" tag="tbody" class="container">
+                    <tr v-for="(bookmark, index) in bookmark_details" :key="index" v-if="bookmark_details.length > 0">
+                        <td>
+                            <div class="contains-title">
+                                <div class="bg-image"><img :src="bookmark.coverImage.medium" alt=""></div>
+                                <div class="title">{{ bookmark.title.english ? bookmark.title.english :
+                                    bookmark.title.romaji }}</div>
+                            </div>
+                        </td>
+                        <td>{{ bookmark.airingSchedule.nodes[0]?.episode || bookmark.episodes }}</td>
+                        <td>{{ formatDate(bookmark.airingSchedule.nodes[0]?.airingAt) }}</td>
+                        <td>{{ bookmark?.season }} {{ bookmark?.startDate.year }}</td>
+                        <td><span :class="[bookmark.status == 'FINISHED' ? 'finished' : 'releasing']">
+                                {{ bookmark.status }}
+                            </span></td>
+                        <td><button title="Remove show from your bookmarks" type="button" class="delete-button"
+                                @click="removeStar(bookmark)">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="uses-dynamic delete-icon"
+                                    viewBox="0 0 448 512">
+                                    <path
+                                        d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z" />
+                                </svg>
+                            </button></td>
 
-                    <TransitionGroup name="pop">
-                        <tr v-for="(bookmark, index) in bookmark_details" :key="index" v-if="bookmark_details.length > 0">
-                            <td>
-                                <div class="contains-title">
-                                    <div class="bg-image"><img :src="bookmark.coverImage.medium" alt=""></div>
-                                    <div class="title">{{ bookmark.title.english ? bookmark.title.english :
-                                        bookmark.title.romaji }}</div>
-                                </div>
-                            </td>
-                            <td>{{ bookmark.airingSchedule.nodes[0]?.episode || `N/A` }}</td>
-                            <td>{{ formatDate(bookmark.airingSchedule.nodes[0]?.airingAt) }}</td>
-                            <td>{{ bookmark?.season }} {{ bookmark?.startDate.year }}</td>
-                            <td>{{ bookmark.status }}</td>
-                            <td><button title="Remove show from your bookmarks" type="button" class="delete-button"
-                                    @click="removeStar(bookmark)">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="uses-dynamic delete-icon"
-                                        viewBox="0 0 448 512">
-                                        <path
-                                            d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z" />
-                                    </svg>
-                                </button></td>
-
-                        </tr>
-                        <div class="empty" v-else>
-                            <h2>
-                                NO SHOWS BOOKMARKED...😢
-                            </h2>
-                        </div>
-                    </TransitionGroup>
-                </tbody>
+                    </tr>
+                    <div class="empty" v-else>
+                        <h2>
+                            NO SHOWS BOOKMARKED...😢
+                        </h2>
+                    </div>
+                </TransitionGroup>
             </table>
 
         </div>
@@ -95,7 +94,7 @@ const formatDate = (date) => {
         day: 'numeric'
     };
     if (isNaN(date)) {
-        return "";
+        return "Finished Airing";
     }
     return `${new Date(date * 1000).toLocaleString('en-US', options)} at ${new Date(date * 1000).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}`
 }
@@ -141,11 +140,9 @@ table {
     overflow-x: auto;
     margin-top: 0px;
     border: 1px solid #0195ff2c;
+    backdrop-filter: blur(30px);
 }
 
-tbody {
-    position: relative;
-}
 
 th {
     padding: 20px 15px;
@@ -155,6 +152,7 @@ th {
     color: #fff;
     text-transform: uppercase;
 }
+
 
 td {
     padding: 15px;
@@ -204,9 +202,11 @@ img {
 
 /* 3. ensure leaving items are taken out of layout flow so that moving
       animations can be calculated correctly. */
-/* .pop-leave-active {
+.pop-leave-active {
     position: absolute;
-} */
+    display: inline-table;
+    width: 100%;
+}
 
 .bookmarks-loading {
     position: absolute;
@@ -218,8 +218,10 @@ img {
 
 .empty {
     position: absolute;
-    height: min(100px, 200px);
+    height: min(500px, 600px);
+    width: 100%;
     display: flex;
+    justify-content: center;
     align-items: center;
 }
 
@@ -248,5 +250,19 @@ img {
     align-items: center;
     gap: 1rem;
     margin-top: 1rem;
+}
+
+.finished {
+    color: #ee1838;
+}
+
+.releasing {
+    color: #10de77;
+}
+
+.container {
+    position: relative;
+    display: inline-table;
+    width: 100%;
 }
 </style>

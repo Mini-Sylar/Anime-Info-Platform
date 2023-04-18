@@ -17,6 +17,7 @@ export function fetchDataFromBookmarks(ids = []) {
       startDate {
         year
       }
+      episodes
       airingSchedule(notYetAired: true, perPage: 1) {
         nodes {
           episode
