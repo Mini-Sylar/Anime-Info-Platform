@@ -44,6 +44,12 @@ export default {
         document.querySelector(".first").classList.remove(this.showNav);
         document.body.style.overflow = 'scroll';
       }
+
+      if (this.$route.path == "/") {
+        return;
+      }
+
+      this.$router.push("/");
       return useAnimeData().fetchCurrentSeason();
     }
   },
