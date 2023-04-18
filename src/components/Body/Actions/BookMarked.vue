@@ -86,4 +86,11 @@ ul {
     text-decoration: underline;
     cursor: pointer;
 }
+
+.no-bookmarks {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
 </style>

@@ -14,7 +14,7 @@
                 </thead>
             </table>
         </div>
-        <div class="tbl-content">
+        <div class="tbl-content" v-if="bookmark_details.length > 0">
             <transition name="fade">
                 <div class="bookmarks-loading" v-if="bookmarkloading">
                     <Bars></Bars>
@@ -49,6 +49,12 @@
                     </TransitionGroup>
                 </tbody>
             </table>
+        </div>
+        <div class="empty" v-else>
+
+            <h2>
+                Your bookmarks are empty... 😢 <br>
+            </h2>
         </div>
     </div>
 </template>
@@ -185,5 +191,11 @@ img {
     height: 100%;
     z-index: 5;
     backdrop-filter: blur(10px);
+}
+
+.empty {
+    height: min(100px, 200px);
+    display: flex;
+    align-items: center;
 }
 </style>
