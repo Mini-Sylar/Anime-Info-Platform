@@ -17,7 +17,7 @@ mixpanel.people.set();
 
 // initialize local forge
 localforage.config({
-  driver: localforage.WEBSQL, // Force WebSQL; same as using setDriver()
+  driver: [localforage.WEBSQL, localforage.INDEXEDDB, localforage.INDEXEDDB], // Force WebSQL; same as using setDriver()
   name: "AnimeInfoDB",
   version: 1.0,
   size: 4980736, // Size of database, in bytes. WebSQL-only for now.
