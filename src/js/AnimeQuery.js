@@ -8,6 +8,9 @@ export let headersList = {
 };
 // Global Variables
 let sharedValue = window.location.href.split("/")[3];
+// prevent shared value from using 'about,contact,bookmarks'
+let doNotUse = ["about", "contact", "bookmarks"];
+sharedValue = doNotUse.includes(sharedValue) ? "" : sharedValue;
 let storedValue = localStorage.getItem("searchQuery");
 let currentYear = new Date().getFullYear();
 

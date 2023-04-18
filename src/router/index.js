@@ -4,6 +4,7 @@ import AboutView from "../views/AboutView.vue";
 import NotFound from "../views/NotFound.vue";
 import { useAnimeData } from "../stores/anime_data";
 import mixpanel from "mixpanel-browser";
+import BookmarkView from "../views/BookmarkView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,6 +13,11 @@ const router = createRouter({
       path: "/",
       name: "home",
       component: HomeView,
+    },
+    {
+      path: "/bookmarks",
+      name: "bookmark",
+      component: BookmarkView,
     },
     {
       path: "/about",
