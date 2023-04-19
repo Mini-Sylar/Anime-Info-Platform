@@ -27,7 +27,10 @@
                 <li class="table-item" v-for="(bookmark, index) in bookmark_details" :key="index"
                     v-if="bookmark_details.length > 0">
                     <div class="contains-title">
-                        <div class="bg-image"><img :src="bookmark.coverImage.medium" alt=""></div>
+                        <div class="bg-image"><img :src="bookmark.coverImage.medium" :alt="
+                            bookmark.title.english ? bookmark.title.english :
+                                bookmark.title.romaji
+                        "></div>
                         <div class="title">
                             <p>
                                 {{ bookmark.title.english ? bookmark.title.english :
@@ -37,7 +40,18 @@
                     </div>
                     <div class="latest-episode">
                         <p>{{ bookmark.airingSchedule.nodes[0]?.episode ? bookmark.airingSchedule.nodes[0]?.episode
-                            : bookmark?.episodes }}</p>
+                            : bookmark?.episodes }}
+                            <transition name="pop">
+                                <span class="watched" v-if="bookmarkWithStatusComputed[index]?.value[0].watched">
+                                    Watched
+                                </span>
+                                <span class="unwatched" v-else>
+                                    Unwatched
+                                </span>
+                            </transition>
+
+                        </p>
+
                     </div>
 
                     <div class="schedule">
@@ -55,6 +69,12 @@
                     </div>
 
                     <div class="action">
+                        <button class="delete-button" @click="toggleWatched(bookmark.id)">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="uses-dynamic delete-icon" viewBox="0 0 448 512">
+                                <path
+                                    d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
+                            </svg>
+                        </button>
                         <button title="Remove show from your bookmarks" type="button" class="delete-button"
                             @click="removeStar(bookmark)">
                             <svg xmlns="http://www.w3.org/2000/svg" class="uses-dynamic delete-icon" viewBox="0 0 448 512">
@@ -62,6 +82,7 @@
                                     d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z" />
                             </svg>
                         </button>
+
                     </div>
 
                 </li>
@@ -89,18 +110,29 @@ import Pagination from '../Pagination/Pagination.vue';
 
 const bookmarks = useBookmarks();
 const search = ref('')
-const bookRef = ref(bookmarks.getBookmarkedDetials)
+const bookRef = ref([])
+const bookmarkWithStatus = ref([])
 const bookmarkloading = computed(() => bookmarks.bookmarksloading)
 
+async function loadBookmarks() {
+    const fetchedData = await bookmarks.getSavedShows();
+    await bookmarks.fetchFromBookmarks(fetchedData);
+    bookRef.value = bookmarks.getBookmarkedDetials.reverse();
+    bookmarkWithStatus.value = bookmarks.bookmarks.reverse();
+}
 
-bookmarks.getSavedShows().then((data) => {
-    bookmarks.fetchFromBookmarks().then(() => {
-        bookRef.value = bookmarks.getBookmarkedDetials
-    })
-})
+loadBookmarks()
+
+
 const bookmark_details = computed(() => {
     return bookRef.value.filter((show) => {
         return show.title.english?.toLowerCase().includes(search.value.toLowerCase()) || show.title.romaji?.toLowerCase().includes(search.value.toLowerCase())
+    }).slice((currentPage.value - 1) * 10, currentPage.value * 10)
+})
+
+const bookmarkWithStatusComputed = computed(() => {
+    return bookmarkWithStatus.value.filter((show) => {
+        return show.value[0].title.toLowerCase().includes(search.value.toLowerCase())
     }).slice((currentPage.value - 1) * 10, currentPage.value * 10)
 })
 
@@ -138,6 +170,30 @@ watch(bookmark_details, () => {
         currentPage.value = 1
     }
 })
+
+
+// toggle watched
+const toggleWatched = async (showId) => {
+    try {
+        await bookmarks.toggleWatched(showId.toString());
+        // update the bookmarkWithStatus ref to reflect the new watched status
+        bookmarkWithStatus.value = bookmarkWithStatus.value.map((show) => {
+            if (show.key === showId.toString()) {
+                const updatedShow = { ...show };
+                updatedShow.value[0].watched = !updatedShow.value[0].watched;
+                return updatedShow;
+            }
+            return show;
+        });
+
+    } catch (error) {
+        return
+    }
+
+
+};
+
+
 </script>
 <style scoped>
 table {
@@ -220,7 +276,6 @@ th {
       animations can be calculated correctly. */
 .pop-leave-active {
     position: absolute;
-    display: table-row;
     width: 100% !important;
 
 }
@@ -305,6 +360,12 @@ img {
     width: auto;
 }
 
+.action {
+    display: flex;
+    gap: 2rem;
+}
+
+
 .action * {
     display: flex;
     justify-content: flex-start;
@@ -325,6 +386,28 @@ img {
 .status,
 .schedule {
     margin-left: 20px;
+}
+
+.latest-episode {
+    position: relative;
+}
+
+.latest-episode p {
+    display: flex;
+    position: relative;
+    gap: .5rem;
+}
+
+.watched {
+    position: absolute;
+    color: #10de77;
+    left: 3rem;
+}
+
+.unwatched {
+    position: absolute;
+    color: #ee1838;
+    left: 3rem;
 }
 
 
@@ -386,9 +469,16 @@ img {
         margin-left: auto;
     }
 
+    .watched,
+    .unwatched {
+        left: 20%;
+    }
+
+
+
     .action button {
         position: relative;
-        right: 45% !important;
+        right: 30% !important;
     }
 }
 </style>
