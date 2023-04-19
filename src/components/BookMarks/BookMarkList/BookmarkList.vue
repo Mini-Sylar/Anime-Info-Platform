@@ -43,9 +43,8 @@
                         <p>{{ bookmark.airingSchedule.nodes[0]?.episode ? bookmark.airingSchedule.nodes[0]?.episode
                             : bookmark?.episodes }}
 
-                            {{ bookmarkWithStatusComputed}}
                             <transition name="pop">
-                                <span class="watched" v-if="bookmarkWithStatusComputed[index]?.value[0].watched">
+                                <span class="watched" v-if="bookmarkWithStatusComputed[index]?.watched">
                                     Watched
                                 </span>
                                 <span class="unwatched" v-else>
@@ -121,8 +120,7 @@ async function loadBookmarks() {
     const fetchedData = await bookmarks.getSavedShows();
     await bookmarks.fetchFromBookmarks(fetchedData);
     bookRef.value = bookmarks.bookmarked_details;
-    console.log(bookRef.value, "Book Ref Value")
-    bookmarkWithStatus.value = bookmarks.bookmarks;
+    bookmarkWithStatus.value = fetchedData;
 }
 
 loadBookmarks()
@@ -141,9 +139,7 @@ const bookmark_details = computed(() => {
 
 
 const bookmarkWithStatusComputed = computed(() => {
-    return bookmarkWithStatus.value.filter((show) => {
-        return show.value[0].title.toLowerCase().includes(search.value.toLowerCase())
-    }).slice((currentPage.value - 1) * 10, currentPage.value * 10)
+    return bookmarkWithStatus.value.slice((currentPage.value - 1) * 10, currentPage.value * 10)
 })
 
 const formatDate = (date) => {
@@ -186,15 +182,15 @@ watch(bookmark_details, () => {
 const toggleWatched = async (showId) => {
     try {
         await bookmarks.toggleWatched(showId.toString());
-        // update the bookmarkWithStatus ref to reflect the new watched status
-        bookmarkWithStatus.value = bookmarkWithStatus.value.map((show) => {
-            if (show.key === showId.toString()) {
-                const updatedShow = { ...show };
-                updatedShow.value[0].watched = !updatedShow.value[0].watched;
-                return updatedShow;
+        // toggle the watched status of bookmarkWithStatus.value
+
+        const updatedBookmarks = bookmarkWithStatus.value.map((show) => {
+            if (show.id === showId.toString()) {
+                return { ...show, watched: !show.watched };
             }
             return show;
         });
+        bookmarkWithStatus.value = updatedBookmarks;
 
     } catch (error) {
         return
