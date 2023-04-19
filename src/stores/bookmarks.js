@@ -65,7 +65,10 @@ export const useBookmarks = defineStore("bookmarks", {
         }
         return true;
       } catch (err) {
-        console.error(err);
+        toast.error("Something went wrong!", {
+          timeout: 2000,
+        });
+
         return false;
       }
     },
@@ -92,13 +95,10 @@ export const useBookmarks = defineStore("bookmarks", {
     async fetchFromBookmarks(savedShows) {
       this.bookmarksloading = true;
       let showIDs = [];
-      // if (
-      //   savedShows.length < 1 ||
-      //   this.bookmarked_details.length == this.bookmarks.length
-      // ) {
-      //   this.bookmarksloading = false;
-      //   return;
-      // }
+    
+      // ! TODO: Fix refteching everytime when no new shows are added
+
+
       savedShows.filter((show) => {
         const id = parseInt(show.id);
         if (!isNaN(id)) {
