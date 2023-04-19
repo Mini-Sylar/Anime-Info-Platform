@@ -14,7 +14,6 @@ export const useBookmarks = defineStore("bookmarks", {
   }),
   getters: {
     getBookmarks: (state) => {
-      console.log(state.bookmarks, "Order");
       return state.bookmarks;
     },
     getBookmarkedDetials: (state) => {
@@ -22,84 +21,49 @@ export const useBookmarks = defineStore("bookmarks", {
     },
   },
   actions: {
-    getSavedShows() {
-      return new Promise((resolve, reject) => {
-        const shows = [];
-        localforage
-          .iterate((value, key) => {
-            shows.push({ key, value });
-          })
-          .then(() => {
-            this.$state.bookmarks = shows;
-            resolve(shows);
-          })
-          .catch((err) => {
-            toast.error(
-              "There was an issue fetching your bookmarks! Report this issue via email"
-            );
-            reject(err);
-          });
-      });
+    async getSavedShows() {
+      const bookmarkedShows = [];
+      const keys = await localforage.keys();
+      for (const key of keys) {
+        const data = await localforage.getItem(key);
+        if (data && data.length > 0) {
+          const bookmarkedShow = {
+            id: key,
+            title: data[0].title,
+            watched: data[0].watched,
+            latestEpisode: data[0].latestEpisode,
+            previousEpisode: data[0].previousEpisode,
+            timestamp: data[0].timestamp,
+          };
+          bookmarkedShows.push(bookmarkedShow);
+        }
+      }
+      bookmarkedShows.sort((a, b) => b.timestamp - a.timestamp);
+      return bookmarkedShows;
     },
 
-    starAnime(showId, showName, isStarred, watched = false) {
-      return new Promise((resolve, reject) => {
-        localforage.getItem(showId, function (err, value) {
-          if (err) {
-            toast.error("Something went wrong!", {
-              duration: 500,
-            });
-            reject(err);
-          } else {
-            if (value && !isStarred) {
-              // Show already exists in LocalForge and needs to be removed
-              localforage
-                .removeItem(showId)
-                .then(() => {
-                  toast.success("Show removed successfully!", {
-                    duration: 1000,
-                  });
-                  resolve(false);
-                })
-                .catch((err) => {
-                  toast.error("Something went wrong!", {
-                    duration: 500,
-                  });
-                  reject(err);
-                });
-            } else if (!value && isStarred) {
-              // Show does not exist in LocalForge and needs to be added
-              localforage
-                .setItem(showId, [
-                  {
-                    title: showName,
-                    watched: watched,
-                    latestEpisode: 0,
-                    previousEpisode: 0,
-                  },
-                ])
-                .then(() => {
-                  toast.success("Show starred successfully!", {
-                    duration: 500,
-                  });
-                  resolve(true);
-                })
-                .catch((err) => {
-                  toast.error("Something went wrong!", {
-                    duration: 500,
-                  });
-                  reject(err);
-                });
-            } else {
-              toast.error("Something went wrong!", {
-                duration: 500,
-              });
-              // Show is already starred or unstarred, nothing to do
-              resolve(false);
-            }
-          }
-        });
-      });
+    async starAnime(showId, showName, isStarred, watched = false) {
+      const timestamp = Date.now();
+      const showData = {
+        title: showName,
+        watched: watched,
+        latestEpisode: 0,
+        previousEpisode: 0,
+        timestamp: timestamp, // add timestamp field
+      };
+      try {
+        if (isStarred) {
+          await localforage.setItem(showId, [showData]);
+          console.log("Show starred successfully!");
+        } else {
+          await localforage.removeItem(showId);
+          console.log("Show removed successfully!");
+        }
+        return true;
+      } catch (err) {
+        console.error(err);
+        return false;
+      }
     },
     isShowStarred(showId) {
       // convert showId to string
@@ -124,33 +88,43 @@ export const useBookmarks = defineStore("bookmarks", {
     async fetchFromBookmarks(savedShows) {
       this.bookmarksloading = true;
       let showIDs = [];
-      if (
-        savedShows.length < 1 ||
-        this.bookmarked_details.length == this.bookmarks.length
-      ) {
-        this.bookmarksloading = false;
-        return;
-      }
+      // if (
+      //   savedShows.length < 1 ||
+      //   this.bookmarked_details.length == this.bookmarks.length
+      // ) {
+      //   this.bookmarksloading = false;
+      //   return;
+      // }
       savedShows.filter((show) => {
-        showIDs.push(parseInt(show.key));
+        const id = parseInt(show.id);
+        if (!isNaN(id)) {
+          showIDs.push(id);
+        }
       });
-      let response = await fetch("https://graphql.anilist.co/?id", {
+      let response = await fetch("https://graphql.anilist.co/", {
         method: "POST",
         body: fetchDataFromBookmarks(showIDs),
         headers: headersList,
       });
 
       let data = await response.json();
-      this.bookmarked_details = data?.data.Page.media || [];
 
+      this.bookmarked_details =
+        data?.data.Page.media.sort((a, b) => {
+          const aIndex = showIDs.indexOf(a.id);
+          const bIndex = showIDs.indexOf(b.id);
+          return aIndex - bIndex;
+        }) || [];
       let latestEpisodes = [];
 
       this.bookmarked_details.forEach((show) => {
         latestEpisodes.push({
           showId: show.id.toString(),
-          latestEpisode: show.airingSchedule.nodes[0]?.episode,
+          latestEpisode: show.airingSchedule.nodes[0]?.episode || show.episodes,
+          timestamp: savedShows.find((s) => s.id == show.id).timestamp,
         });
       });
+
       // Update all latest episodes
       this.updateAllLatestEpisodes(latestEpisodes);
       setTimeout(() => {
@@ -182,7 +156,7 @@ export const useBookmarks = defineStore("bookmarks", {
       }
     },
 
-    async updateLatestEpisode(showId, episode) {
+    async updateLatestEpisode(showId, episode, timestamp) {
       return new Promise((resolve, reject) => {
         localforage.getItem(showId, function (err, value) {
           if (err) {
@@ -199,6 +173,7 @@ export const useBookmarks = defineStore("bookmarks", {
                     watched: value[0].watched,
                     latestEpisode: episode,
                     previousEpisode: value[0].latestEpisode,
+                    timestamp: timestamp,
                   },
                 ])
                 .then(() => {
@@ -217,11 +192,16 @@ export const useBookmarks = defineStore("bookmarks", {
         });
       });
     },
+
     async updateAllLatestEpisodes(latestEpisodes) {
       await Promise.all(
-        latestEpisodes.map((episode) =>
-          this.updateLatestEpisode(episode.showId, episode.latestEpisode)
-        )
+        latestEpisodes.map((episode) => {
+          return this.updateLatestEpisode(
+            episode.showId,
+            episode.latestEpisode,
+            episode.timestamp
+          );
+        })
       );
       this.getSavedShows();
     },

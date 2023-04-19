@@ -23,6 +23,7 @@
                     <Bars></Bars>
                 </div>
             </transition>
+
             <TransitionGroup name="pop" tag="ul" class="container">
                 <li class="table-item" v-for="(bookmark, index) in bookmark_details" :key="index"
                     v-if="bookmark_details.length > 0">
@@ -41,6 +42,8 @@
                     <div class="latest-episode">
                         <p>{{ bookmark.airingSchedule.nodes[0]?.episode ? bookmark.airingSchedule.nodes[0]?.episode
                             : bookmark?.episodes }}
+
+                            {{ bookmarkWithStatusComputed}}
                             <transition name="pop">
                                 <span class="watched" v-if="bookmarkWithStatusComputed[index]?.value[0].watched">
                                     Watched
@@ -117,18 +120,25 @@ const bookmarkloading = computed(() => bookmarks.bookmarksloading)
 async function loadBookmarks() {
     const fetchedData = await bookmarks.getSavedShows();
     await bookmarks.fetchFromBookmarks(fetchedData);
-    bookRef.value = bookmarks.getBookmarkedDetials.reverse();
-    bookmarkWithStatus.value = bookmarks.bookmarks.reverse();
+    bookRef.value = bookmarks.bookmarked_details;
+    console.log(bookRef.value, "Book Ref Value")
+    bookmarkWithStatus.value = bookmarks.bookmarks;
 }
 
 loadBookmarks()
 
 
 const bookmark_details = computed(() => {
-    return bookRef.value.filter((show) => {
-        return show.title.english?.toLowerCase().includes(search.value.toLowerCase()) || show.title.romaji?.toLowerCase().includes(search.value.toLowerCase())
-    }).slice((currentPage.value - 1) * 10, currentPage.value * 10)
-})
+    const filteredShows = bookRef.value.filter((show) => {
+        return (
+            show.title.english?.toLowerCase().includes(search.value.toLowerCase()) ||
+            show.title.romaji?.toLowerCase().includes(search.value.toLowerCase())
+        );
+    });
+
+    return filteredShows;
+});
+
 
 const bookmarkWithStatusComputed = computed(() => {
     return bookmarkWithStatus.value.filter((show) => {
@@ -328,6 +338,8 @@ th {
 
 .container {
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 .new-table {
