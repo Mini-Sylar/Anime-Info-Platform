@@ -134,7 +134,7 @@ const bookmark_details = computed(() => {
         );
     });
 
-    return filteredShows;
+    return filteredShows.slice((currentPage.value - 1) * 10, currentPage.value * 10);
 });
 
 

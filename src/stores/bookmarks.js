@@ -54,10 +54,14 @@ export const useBookmarks = defineStore("bookmarks", {
       try {
         if (isStarred) {
           await localforage.setItem(showId, [showData]);
-          console.log("Show starred successfully!");
+          toast.info("Show starred successfully!", {
+            timeout: 1500,
+          });
         } else {
           await localforage.removeItem(showId);
-          console.log("Show removed successfully!");
+          toast.info("Show removed successfully!", {
+            timeout: 500,
+          });
         }
         return true;
       } catch (err) {
