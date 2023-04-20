@@ -224,6 +224,7 @@ table {
     margin-top: 0px;
     border: 1px solid #0195ff2c;
     backdrop-filter: blur(30px);
+    overflow-x: hidden;
 }
 
 .tbl-content::-webkit-scrollbar {
@@ -344,6 +345,7 @@ th {
     position: relative;
     display: flex;
     flex-direction: column;
+    list-style: none !important;
 }
 
 .table-item * {

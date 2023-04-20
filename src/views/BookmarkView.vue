@@ -14,7 +14,6 @@ import BookmarkList from '../components/BookMarks/BookMarkList/BookmarkList.vue'
 import Background from '../components/Body/Background/Background.vue';
 import { useAnimeData } from '../stores/anime_data';
 import { useHead } from '@unhead/vue'
-
 const mainAnimeData = useAnimeData()
 
 useHead({

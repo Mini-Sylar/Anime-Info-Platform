@@ -5,7 +5,7 @@ import { useAnimeData } from '@/stores/anime_data';
 import { computed, watch } from 'vue'
 import { useNetwork } from '@vueuse/core'
 import { useToast } from "vue-toastification";
-
+import Modal from './components/Modals/Modal.vue'
 
 const toast = useToast();
 const setColor = computed(() => {
@@ -106,6 +106,7 @@ watch(isOnline, (value) => {
   background-color: v-bind("setColor + '20'") !important;
 }
 
+
 .check::before,
 .check::after {
   background: v-bind("setColor") !important;
@@ -118,6 +119,7 @@ td,
 .latest-episode {
   border-color: v-bind("setColor + '20'") !important;
 }
+
 
 
 * {
