@@ -61,6 +61,12 @@ watch(isOnline, (value) => {
   opacity: 0;
 }
 
+.tbl-content::-webkit-scrollbar-thumb {
+  background-color: v-bind("setColor") !important;
+  transition: all .5s ease-in-out;
+}
+
+
 /* Scale Animation */
 .scale-enter-active,
 .scale-leave-active {

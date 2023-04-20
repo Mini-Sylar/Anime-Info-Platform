@@ -88,6 +88,9 @@
                     </div>
 
                 </li>
+                <div class="empty" v-else-if="bookmarkloading == true">
+
+                </div>
                 <div class="empty" v-else>
                     <h2>
                         NO SHOWS BOOKMARKED...😢
@@ -223,6 +226,14 @@ table {
     backdrop-filter: blur(30px);
 }
 
+.tbl-content::-webkit-scrollbar {
+    width: 15px;
+}
+
+.tbl-content::-webkit-scrollbar-thumb {
+    background-color: #004b81;
+    border-radius: 20px;
+}
 
 th {
     padding: 20px 15px;
@@ -271,11 +282,13 @@ th {
 .pop-leave-active {
     transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1);
 }
+
 .pop-enter-from,
 .pop-leave-to {
     opacity: 0;
     transform: scaleY(0.01) translate(30px, 0);
 }
+
 .pop-leave-active {
     position: absolute;
     width: 100% !important;
@@ -286,7 +299,7 @@ th {
     position: absolute;
     width: 100%;
     height: 100%;
-    z-index: 5;
+    z-index: 20;
     backdrop-filter: blur(10px);
 }
 
@@ -459,6 +472,7 @@ img {
 
     .tbl-content {
         min-height: 100%;
+        overflow-x: hidden;
     }
 
     .tbl-header {
@@ -507,7 +521,7 @@ img {
 
     .watched,
     .unwatched {
-        left: 20%;
+        left: 25%;
     }
 
 
@@ -515,6 +529,11 @@ img {
     .action button {
         position: relative;
         right: 30% !important;
+    }
+
+    .bookmarks-loading svg {
+
+        transform: translateX(-25%);
     }
 }
 </style>

@@ -4,8 +4,7 @@
             <li class="pagination-item">
                 <button type="button" @click="onClickFirstPage" class="first-last" :disabled="isInFirstPage"
                     aria-label="Go to first page">
-                    First Page
-                </button>
+                    {{ screenWidth ? '<<' : 'Fast Page' }} </button>
             </li>
 
             <li class="pagination-item">
@@ -33,8 +32,7 @@
             <li class="pagination-item">
                 <button type="button" class="first-last" @click="onClickLastPage" :disabled="isInLastPage"
                     aria-label="Go to last page">
-                    Last Page
-                </button>
+                    {{ screenWidth ? '>>' : 'Last Page' }} </button>
             </li>
         </ul>
     </div>
@@ -102,6 +100,11 @@ export default {
         isInLastPage() {
             return this.currentPage === this.totalPages;
         },
+        screenWidth() {
+            if (screen.width < 424) {
+                return true;
+            }
+        }
     },
 
     methods: {
@@ -173,5 +176,12 @@ button {
 button:disabled {
     cursor: not-allowed;
     opacity: 0.5;
+}
+
+@media screen and (max-width:424px) {
+    .pagination-item {
+        display: inline-block;
+        margin: 0 7px;
+    }
 }
 </style>

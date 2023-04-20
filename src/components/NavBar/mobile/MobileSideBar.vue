@@ -35,8 +35,8 @@ export default {
 <style scoped>
 .nav-mobile {
     width: 0;
-    height: calc(100vh + 20vh);
-    background-color: #333;
+    height: 100vh;
+    background-color: #333333;
     position: absolute;
     display: flex;
     justify-content: center;
@@ -56,7 +56,7 @@ export default {
     content: "";
     position: absolute;
     width: 10%;
-    height: calc(100vh + 20vh);
+    height: 100vh;
     background-color: #0195ff;
     z-index: 1;
     right: 0;
