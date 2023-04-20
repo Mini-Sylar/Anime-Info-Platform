@@ -23,7 +23,7 @@ const redirectToHomeAndFetch = () => {
     <header>
         <nav class="navigation-bar">
             <div class="main-links" v-if="!isMobile">
-                <a role="button" title="get current season list" class="is-url is-link"
+                <a role="button" title="get current season list" class="is-url is-link current-season"
                     @click="redirectToHomeAndFetch">Current Season</a>
                 <RouterLink to="/" class="is-url">Home</RouterLink>
                 <RouterLink to="/bookmarks" class="is-url">Bookmarks</RouterLink>
@@ -87,6 +87,10 @@ header {
         width: 100%;
         height: 6rem;
         z-index: 300;
+    }
+
+    .main-links {
+        gap: min(4rem, 10rem);
     }
 
 }
