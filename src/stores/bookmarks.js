@@ -206,6 +206,10 @@ export const useBookmarks = defineStore("bookmarks", {
     },
     async exportBookmarks() {
       const savedShows = await this.getSavedShows();
+      if (savedShows.length == 0) {
+        toast.info("No shows to export!", {});
+        return;
+      }
       const jsonStr = JSON.stringify(savedShows, null, 2); // 2 is for indentation level
       const blob = new Blob([jsonStr], { type: "application/json" });
       const url = URL.createObjectURL(blob);
@@ -225,7 +229,13 @@ export const useBookmarks = defineStore("bookmarks", {
       savedShows.forEach(async (show) => {
         await this.starAnime(show.id, show.title, true);
       });
-      location.reload();
+    },
+    async clearAllBookmarks() {
+      const savedShows = await this.getSavedShows();
+      savedShows.forEach((show) => {
+        this.starAnime(show.id, show.title, false);
+      });
+      await localforage.setItem("savedShows", savedShows);
     },
   },
 });

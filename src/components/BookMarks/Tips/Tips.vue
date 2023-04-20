@@ -14,7 +14,14 @@
                     d="M0 64C0 28.7 28.7 0 64 0H224V128c0 17.7 14.3 32 32 32H384V288H216c-13.3 0-24 10.7-24 24s10.7 24 24 24H384V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V64zM384 336V288H494.1l-39-39c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l80 80c9.4 9.4 9.4 24.6 0 33.9l-80 80c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l39-39H384zm0-208H256V0L384 128z" />
             </svg>
         </button>
-
+        <button @click="clearAll" class="clear-all" title="Import/Export bookmark list">
+            Clear Bookmarks
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48px" class="uses-dynamic">
+                <path d="M0 0h24v24H0V0z" fill="none" />
+                <path
+                    d="M16 16h2c.55 0 1 .45 1 1s-.45 1-1 1h-2c-.55 0-1-.45-1-1s.45-1 1-1zm0-8h5c.55 0 1 .45 1 1s-.45 1-1 1h-5c-.55 0-1-.45-1-1s.45-1 1-1zm0 4h4c.55 0 1 .45 1 1s-.45 1-1 1h-4c-.55 0-1-.45-1-1s.45-1 1-1zM3 18c0 1.1.9 2 2 2h6c1.1 0 2-.9 2-2V8H3v10zM13 5h-2l-.71-.71c-.18-.18-.44-.29-.7-.29H6.41c-.26 0-.52.11-.7.29L5 5H3c-.55 0-1 .45-1 1s.45 1 1 1h10c.55 0 1-.45 1-1s-.45-1-1-1z" />
+            </svg>
+        </button>
         <Teleport to="body">
             <!-- use the modal component, pass in the prop -->
             <modal class="tip-bookmark" :show="showInfo" @close="showInfo = false">
@@ -46,9 +53,13 @@
 <script setup>
 import Modal from "@/components/Modals/Modal.vue"
 import ImportExport from "../../Modals/ImportExport.vue";
+import { useBookmarks } from "../../../stores/bookmarks";
 import { ref } from 'vue'
 const showInfo = ref(false)
 const showImportExport = ref(false)
+const clearAll = () => {
+    useBookmarks().clearAllBookmarks()
+}
 </script>
 <style scoped>
 :global(.modal-body .notes) {
@@ -87,6 +98,15 @@ button {
 
 .export:hover svg {
     animation: gelatine 1s ease-in;
+}
+
+.clear-all {
+    left: 18%;
+}
+
+.clear-all svg {
+    width: 2rem;
+    height: 2rem;
 }
 
 
