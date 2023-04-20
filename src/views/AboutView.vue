@@ -33,7 +33,7 @@
 <style scoped>
 .about-container {
   display: flex;
-  max-height: 80vh;
+  max-height: min(500px, 100%);
   gap: 1rem;
 }
 
