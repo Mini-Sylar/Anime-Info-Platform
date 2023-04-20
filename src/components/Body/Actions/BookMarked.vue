@@ -6,7 +6,7 @@
             <div class="has-bookmarks">
                 <ul>
                     <li v-for="(bookmark, index) in bookmarks" :key="index">
-                        <button type="button" class="bookmarked-show" @click="searchAnime(bookmark.value)">{{ bookmark.value
+                        <button type="button" class="bookmarked-show" @click="searchAnime(bookmark.title)">{{ bookmark.title
                         }}</button>
                     </li>
                 </ul>
@@ -24,7 +24,7 @@
 import { useBookmarks } from '../../../stores/bookmarks';
 import { useAnimeData } from '../../../stores/anime_data';
 import { ref, computed } from 'vue';
-
+const bookmarks = ref([])
 const searchAnime = (bookmark) => {
 
     useAnimeData().fetchAnimeData(bookmark, false);
@@ -32,7 +32,10 @@ const searchAnime = (bookmark) => {
 
 const hasTrailer = computed(() => useAnimeData().getTrailer == null ? "7rem" : "17rem");
 
-const bookmarks = ref(useBookmarks().getBookmarks.slice(0, 10) || [])
+useBookmarks().getSavedShows().then((data) => {
+    bookmarks.value = data.slice(0, 10) || []
+    console.log(bookmarks.value)
+})
 </script>
 <style scoped>
 .bookmarked-container {
