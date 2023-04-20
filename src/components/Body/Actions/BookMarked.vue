@@ -34,7 +34,6 @@ const hasTrailer = computed(() => useAnimeData().getTrailer == null ? "7rem" : "
 
 useBookmarks().getSavedShows().then((data) => {
     bookmarks.value = data.slice(0, 10) || []
-    console.log(bookmarks.value)
 })
 </script>
 <style scoped>
