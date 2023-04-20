@@ -233,8 +233,6 @@ th {
     text-transform: uppercase;
 }
 
-
-
 .table-item {
     padding: 15px;
     text-align: left;
@@ -243,6 +241,9 @@ th {
     font-size: 12px;
     color: #fff;
     border-bottom: solid 1px #0195ff2c;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
 .contains-title {
@@ -270,16 +271,11 @@ th {
 .pop-leave-active {
     transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1);
 }
-
-/* 2. declare enter from and leave to state */
 .pop-enter-from,
 .pop-leave-to {
     opacity: 0;
     transform: scaleY(0.01) translate(30px, 0);
 }
-
-/* 3. ensure leaving items are taken out of layout flow so that moving
-      animations can be calculated correctly. */
 .pop-leave-active {
     position: absolute;
     width: 100% !important;
@@ -314,7 +310,6 @@ th {
     width: 300px;
     padding: 10px;
     border: none;
-    /* border-radius: 5px; */
     outline: none;
     background-color: #0195ff2c;
     backdrop-filter: blur(10px);
@@ -336,19 +331,6 @@ th {
     position: relative;
     display: flex;
     flex-direction: column;
-}
-
-.new-table {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    /* background-color: saddlebrown; */
-}
-
-.table-item {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
 }
 
 .table-item * {
@@ -432,17 +414,13 @@ img {
     width: .7em;
     border-radius: 3px;
     background: white;
-
     position: absolute;
     top: .85em;
     left: 0em;
     transform: rotate(45deg);
-    /*   transition: all .5s ease-in-out; */
-    /*   transition-property: transform, width, top, left; */
     transition: transform .5s ease-in-out, width .5s ease-in-out, top .5s ease-in-out, left .5s ease-in-out;
 }
 
-/* cubic-bezier(0.86, 0.98, 0.32, -0.01) */
 .check::after {
     content: "";
     height: .2em;
