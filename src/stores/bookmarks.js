@@ -54,14 +54,10 @@ export const useBookmarks = defineStore("bookmarks", {
       try {
         if (isStarred) {
           await localforage.setItem(showId, [showData]);
-          toast.info("Show starred successfully!", {
-            timeout: 1500,
-          });
+          toast.info("Show starred successfully!", {});
         } else {
           await localforage.removeItem(showId);
-          toast.info("Show removed successfully!", {
-            timeout: 500,
-          });
+          toast.info("Show removed successfully!", {});
         }
         return true;
       } catch (err) {
@@ -95,9 +91,8 @@ export const useBookmarks = defineStore("bookmarks", {
     async fetchFromBookmarks(savedShows) {
       this.bookmarksloading = true;
       let showIDs = [];
-    
-      // ! TODO: Fix refteching everytime when no new shows are added
 
+      // ! TODO: Fix refteching everytime when no new shows are added
 
       savedShows.filter((show) => {
         const id = parseInt(show.id);
