@@ -100,6 +100,12 @@ watch(isOnline, (value) => {
   background-color: v-bind("setColor + '20'") !important;
 }
 
+.check::before,
+.check::after {
+  background: v-bind("setColor") !important;
+  ;
+}
+
 .tbl-content,
 td,
 .table-item,

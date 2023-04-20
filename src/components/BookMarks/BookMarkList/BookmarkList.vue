@@ -72,10 +72,13 @@
 
                     <div class="action">
                         <button class="delete-button" @click="toggleWatched(bookmark.id)">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="uses-dynamic delete-icon" viewBox="0 0 448 512">
+                            <div
+                                :class="[bookmarkWithStatusComputed[index]?.watched ? `check check-watched` : `check uses-dynamic`]">
+                            </div>
+                            <!-- <svg xmlns="http://www.w3.org/2000/svg" class="uses-dynamic delete-icon" viewBox="0 0 448 512">
                                 <path
                                     d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
-                            </svg>
+                            </svg> -->
                         </button>
                         <button title="Remove show from your bookmarks" type="button" class="delete-button"
                             @click="removeStar(bookmark)">
@@ -417,6 +420,56 @@ img {
     color: #ee1838;
     left: 3rem;
 }
+
+.check {
+    font-size: 16px;
+    position: relative;
+    /* color: white; */
+    width: 1.3em;
+    height: 1.3em;
+}
+
+.check::before {
+    content: "";
+    height: .2em;
+    width: .7em;
+    border-radius: 3px;
+    background: white;
+
+    position: absolute;
+    top: .85em;
+    left: 0em;
+    transform: rotate(45deg);
+    /*   transition: all .5s ease-in-out; */
+    /*   transition-property: transform, width, top, left; */
+    transition: transform .5s ease-in-out, width .5s ease-in-out, top .5s ease-in-out, left .5s ease-in-out;
+}
+
+/* cubic-bezier(0.86, 0.98, 0.32, -0.01) */
+.check::after {
+    content: "";
+    height: .2em;
+    width: 1.2em;
+    border-radius: 3px;
+    background: white;
+    position: absolute;
+    top: .6em;
+    left: .25em;
+    transform: rotate(-55deg);
+    transition: transform .5s ease-in-out;
+}
+
+.check-watched::before {
+    transform: rotate(-45deg);
+    width: 1.2em;
+    top: .6em;
+    left: .25em;
+}
+
+.check-watched::after {
+    transform: rotate(45deg);
+}
+
 
 
 @media screen and (max-width:768px) {
