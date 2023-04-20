@@ -204,5 +204,28 @@ export const useBookmarks = defineStore("bookmarks", {
       );
       this.getSavedShows();
     },
+    async exportBookmarks() {
+      const savedShows = await this.getSavedShows();
+      const jsonStr = JSON.stringify(savedShows, null, 2); // 2 is for indentation level
+      const blob = new Blob([jsonStr], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      let dateNow = new Date();
+      a.download = `my-bookmarked-shows-${dateNow.toISOString()}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+    },
+    async importBookmarks(shows) {
+      console.log(shows, typeof shows);
+      const fileContent = await shows.text();
+      const savedShows = JSON.parse(fileContent);
+      savedShows.sort((a, b) => a.timestamp - b.timestamp);
+      console.log(savedShows);
+      savedShows.forEach(async (show) => {
+        await this.starAnime(show.id, show.title, true);
+      });
+      location.reload();
+    },
   },
 });
