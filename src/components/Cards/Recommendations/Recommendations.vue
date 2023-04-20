@@ -103,7 +103,7 @@ export default {
   },
   methods: {
     searchFromRecommended(query) {
-      let getTitle = query.english ? query.english : query.romaji;
+      let getTitle = query.romaji ? query.romaji : query.english;
       this.useFetchFromRecommendations(getTitle);
     },
   },
