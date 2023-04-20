@@ -34,9 +34,16 @@ iframe {
 }
 
 @media screen and (max-width:821px) {
+    .trailer-component {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
     iframe {
         width: 80%;
         height: min(15rem, 30rem);
+        margin: 0 auto;
     }
 }
 
