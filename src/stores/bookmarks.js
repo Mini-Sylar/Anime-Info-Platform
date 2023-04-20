@@ -231,11 +231,8 @@ export const useBookmarks = defineStore("bookmarks", {
       });
     },
     async clearAllBookmarks() {
-      const savedShows = await this.getSavedShows();
-      savedShows.forEach((show) => {
-        this.starAnime(show.id, show.title, false);
-      });
-      await localforage.setItem("savedShows", savedShows);
+      localforage.clear();
+      toast.info("All bookmarks cleared!", {});
     },
   },
 });
