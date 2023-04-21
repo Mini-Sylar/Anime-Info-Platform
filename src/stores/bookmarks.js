@@ -40,7 +40,6 @@ export const useBookmarks = defineStore("bookmarks", {
       }
       bookmarkedShows.sort((a, b) => b.timestamp - a.timestamp);
       this.bookmarks = bookmarkedShows;
-      console.log("called");
       return bookmarkedShows;
     },
 

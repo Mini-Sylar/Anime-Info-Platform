@@ -33,12 +33,19 @@ const exportShow = computed(() => {
     useBookmarks().exportBookmarks()
 })
 
-const importShows = () => {
+const importShows = async () => {
     if (file.value.files.length == 0) {
         toast.error("No file selected")
         return
     }
-    useBookmarks().importBookmarks(file.value.files[0])
+    try {
+        await useBookmarks().importBookmarks(file.value.files[0])
+        checkIfActive()
+    }
+    catch (e) {
+        toast.error("Invalid file")
+    }
+
 }
 
 
