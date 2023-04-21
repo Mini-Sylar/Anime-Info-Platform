@@ -238,7 +238,6 @@ export const useAnimeData = defineStore("animeData", {
           showName,
           isStarred
         );
-        this.bookMarkStore.getSavedShows();
         this.$state.isStarred = result;
       } catch (error) {
         toast.error(

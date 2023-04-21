@@ -39,6 +39,8 @@ export const useBookmarks = defineStore("bookmarks", {
         }
       }
       bookmarkedShows.sort((a, b) => b.timestamp - a.timestamp);
+      this.bookmarks = bookmarkedShows;
+      console.log("called");
       return bookmarkedShows;
     },
 
@@ -66,6 +68,8 @@ export const useBookmarks = defineStore("bookmarks", {
         });
 
         return false;
+      } finally {
+        this.getSavedShows();
       }
     },
     isShowStarred(showId) {
@@ -143,6 +147,7 @@ export const useBookmarks = defineStore("bookmarks", {
           toast.success("Episode watched status toggled!", {
             duration: 500,
           });
+          this.getSavedShows();
           return true;
         } else {
           return false;
@@ -205,7 +210,6 @@ export const useBookmarks = defineStore("bookmarks", {
           );
         })
       );
-      this.getSavedShows();
     },
     async exportBookmarks() {
       const savedShows = await this.getSavedShows();
@@ -224,18 +228,28 @@ export const useBookmarks = defineStore("bookmarks", {
       URL.revokeObjectURL(url);
     },
     async importBookmarks(shows) {
-      console.log(shows, typeof shows);
       const fileContent = await shows.text();
       const savedShows = JSON.parse(fileContent);
-      savedShows.sort((a, b) => a.timestamp - b.timestamp);
-      console.log(savedShows);
       savedShows.forEach(async (show) => {
-        await this.starAnime(show.id, show.title, true);
+        await localforage.setItem(show.id, [
+          {
+            title: show.title,
+            watched: show.watched,
+            latestEpisode: show.latestEpisode,
+            previousEpisode: show.previousEpisode,
+            timestamp: show.timestamp,
+          },
+        ]);
       });
+      await this.fetchFromBookmarks(savedShows);
+      this.getSavedShows();
+      toast.info("Bookmarks imported successfully!", {});
     },
     async clearAllBookmarks() {
-      localforage.clear();
+      await localforage.clear();
       toast.info("All bookmarks cleared!", {});
+      this.bookmarked_details = [];
+      this.bookmarks = [];
     },
   },
 });

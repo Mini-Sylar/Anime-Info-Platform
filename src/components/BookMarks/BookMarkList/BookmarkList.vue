@@ -28,10 +28,9 @@
                 <li class="table-item" v-for="(bookmark, index) in bookmark_details" :key="index"
                     v-if="bookmark_details.length > 0">
                     <div class="contains-title">
-                        <div class="bg-image"><img :src="bookmark.coverImage.medium" :alt="
-                            bookmark.title.english ? bookmark.title.english :
+                        <div class="bg-image"><img :src="bookmark.coverImage.medium" :alt="bookmark.title.english ? bookmark.title.english :
                                 bookmark.title.romaji
-                        "></div>
+                            "></div>
                         <div class="title">
                             <p>
                                 {{ bookmark.title.english ? bookmark.title.english :
@@ -42,9 +41,8 @@
                     <div class="latest-episode">
                         <p>{{ bookmark.airingSchedule.nodes[0]?.episode ? bookmark.airingSchedule.nodes[0]?.episode
                             : bookmark?.episodes }}
-
                             <transition name="pop">
-                                <span class="watched" v-if="bookmarkWithStatusComputed[index]?.watched">
+                                <span class="watched" v-if="bookmarkWithStatus[index]?.watched">
                                     Watched
                                 </span>
                                 <span class="unwatched" v-else>
@@ -73,8 +71,8 @@
                     <div class="action">
                         <button class="delete-button" @click="toggleWatched(bookmark.id)">
                             <div role="button"
-                                :title="bookmarkWithStatusComputed[index]?.watched ? 'Mark as unwatched' : 'Mark as watched'"
-                                :class="[bookmarkWithStatusComputed[index]?.watched ? `check check-watched` : `check uses-dynamic`]">
+                                :title="bookmarkWithStatus[index]?.watched ? 'Mark as unwatched' : 'Mark as watched'"
+                                :class="[bookmarkWithStatus[index]?.watched ? `check check-watched` : `check uses-dynamic`]">
                             </div>
                         </button>
                         <button title="Remove show from your bookmarks" type="button" class="delete-button"
@@ -115,20 +113,18 @@ import Pagination from '../Pagination/Pagination.vue';
 
 const bookmarks = useBookmarks();
 const search = ref('')
-const bookRef = ref([])
-const bookmarkWithStatus = ref([])
 const bookmarkloading = computed(() => bookmarks.bookmarksloading)
 
 async function loadBookmarks() {
-    // !TODO - make bookref computed
     const fetchedData = await bookmarks.getSavedShows();
     await bookmarks.fetchFromBookmarks(fetchedData);
-    bookRef.value = bookmarks.bookmarked_details;
-    bookmarkWithStatus.value = fetchedData;
 }
 
 loadBookmarks()
-
+// Set it to computed so it's always fetching the latest data
+// completed
+const bookRef = computed(() => bookmarks.bookmarked_details)
+const bookmarkWithStatus = computed(() => bookmarks.bookmarks.slice((currentPage.value - 1) * 10, currentPage.value * 10))
 
 const bookmark_details = computed(() => {
     const filteredShows = bookRef.value.filter((show) => {
@@ -141,10 +137,6 @@ const bookmark_details = computed(() => {
     return filteredShows.slice((currentPage.value - 1) * 10, currentPage.value * 10);
 });
 
-
-const bookmarkWithStatusComputed = computed(() => {
-    return bookmarkWithStatus.value.slice((currentPage.value - 1) * 10, currentPage.value * 10)
-})
 
 const formatDate = (date) => {
     const options = {
@@ -188,13 +180,13 @@ const toggleWatched = async (showId) => {
         await bookmarks.toggleWatched(showId.toString());
         // toggle the watched status of bookmarkWithStatus.value
 
-        const updatedBookmarks = bookmarkWithStatus.value.map((show) => {
-            if (show.id === showId.toString()) {
-                return { ...show, watched: !show.watched };
-            }
-            return show;
-        });
-        bookmarkWithStatus.value = updatedBookmarks;
+        // const updatedBookmarks = bookmarkWithStatus.value.map((show) => {
+        //     if (show.id === showId.toString()) {
+        //         return { ...show, watched: !show.watched };
+        //     }
+        //     return show;
+        // });
+        // bookmarkWithStatus.value = updatedBookmarks;
 
     } catch (error) {
         return
