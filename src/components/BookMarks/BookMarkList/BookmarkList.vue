@@ -120,6 +120,7 @@ const bookmarkWithStatus = ref([])
 const bookmarkloading = computed(() => bookmarks.bookmarksloading)
 
 async function loadBookmarks() {
+    // !TODO - make bookref computed
     const fetchedData = await bookmarks.getSavedShows();
     await bookmarks.fetchFromBookmarks(fetchedData);
     bookRef.value = bookmarks.bookmarked_details;
