@@ -222,10 +222,21 @@ export const useBookmarks = defineStore("bookmarks", {
       const a = document.createElement("a");
       a.href = url;
       let dateNow = new Date();
-      a.download = `bookmarked-shows-${dateNow.toISOString()}-Anime-Info-Platform.json`;
+      let formattedDate = dateNow.toLocaleString("en-US", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+        second: "numeric",
+        timeZoneName: "short",
+      });
+      a.download = `bookmarked-shows-${formattedDate}-Anime-Info-Platform.json`;
       a.click();
       URL.revokeObjectURL(url);
-      a.remove();
+      a.href = "";
+      a.download = null;
     },
     async importBookmarks(shows) {
       const fileContent = await shows.text();

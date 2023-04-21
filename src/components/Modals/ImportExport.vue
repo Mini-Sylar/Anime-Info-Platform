@@ -29,9 +29,9 @@ const showImport = () => {
     showExport.value = false
 }
 
-const exportShow = computed(() => {
+const exportShow = () => {
     useBookmarks().exportBookmarks()
-})
+}
 
 const importShows = async () => {
     if (file.value.files.length == 0) {
