@@ -213,7 +213,7 @@ export const useBookmarks = defineStore("bookmarks", {
     async exportBookmarks() {
       const savedShows = await this.getSavedShows();
       if (savedShows.length == 0) {
-        toast.info("No shows to export!", {});
+        toast.error("No shows to export!", {});
         return;
       }
       const jsonStr = JSON.stringify(savedShows, null, 2); // 2 is for indentation level
@@ -222,9 +222,10 @@ export const useBookmarks = defineStore("bookmarks", {
       const a = document.createElement("a");
       a.href = url;
       let dateNow = new Date();
-      a.download = `my-bookmarked-shows-${dateNow.toISOString()}.json`;
+      a.download = `bookmarked-shows-${dateNow.toISOString()}-Anime-Info-Platform.json`;
       a.click();
       URL.revokeObjectURL(url);
+      a.remove();
     },
     async importBookmarks(shows) {
       const fileContent = await shows.text();
