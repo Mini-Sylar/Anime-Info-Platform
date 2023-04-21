@@ -169,7 +169,10 @@ export const useBookmarks = defineStore("bookmarks", {
                 .setItem(showId, [
                   {
                     title: value[0].title,
-                    watched: value[0].watched,
+                    watched:
+                      episode == value[0].latestEpisode
+                        ? value[0].watched
+                        : false,
                     latestEpisode: episode,
                     previousEpisode: value[0].latestEpisode,
                     timestamp: timestamp,

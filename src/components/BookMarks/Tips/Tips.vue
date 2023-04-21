@@ -116,7 +116,7 @@ button {
         left: 0;
     }
 
-    .export {
+    .export,.clear-all {
         left: 0;
     }
 
