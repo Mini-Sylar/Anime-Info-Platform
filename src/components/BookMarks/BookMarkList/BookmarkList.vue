@@ -566,5 +566,9 @@ img {
         margin-top: 2rem;
         min-height: 8rem;
     }
+
+    .action {
+        gap: 15%;
+    }
 }
 </style>
