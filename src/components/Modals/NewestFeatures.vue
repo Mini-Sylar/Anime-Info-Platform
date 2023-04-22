@@ -119,14 +119,13 @@ a:hover {
 }
 
 .newest-title {
-    font-style: italic;
     margin-bottom: 0 !important;
     font-weight: 900;
 }
 
 .newest-description {
     margin-top: 0 !important;
-    color: rgb(159, 159, 159);
+    color: #9f9f9f;
 }
 
 .modal-body {
