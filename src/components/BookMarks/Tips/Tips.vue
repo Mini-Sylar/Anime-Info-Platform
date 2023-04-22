@@ -59,6 +59,24 @@ const showImportExport = ref(false)
 const clearAll = () => {
     useBookmarks().clearAllBookmarks()
 }
+
+// prevent body from scrolling when modal is open
+
+watch(showInfo, (val) => {
+    if (val) {
+        document.body.style.overflow = "hidden"
+    } else {
+        document.body.style.overflow = "auto"
+    }
+})
+
+watch(showImportExport, (val) => {
+    if (val) {
+        document.body.style.overflow = "hidden"
+    } else {
+        document.body.style.overflow = "auto"
+    }
+})
 </script>
 <style scoped>
 :global(.modal-body .notes) {

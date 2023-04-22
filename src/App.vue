@@ -22,6 +22,7 @@ watch(isOnline, (value) => {
   }
 })
 
+
 const newFeatures = ref([
   {
     timestamp: "22-04-2023",
@@ -42,7 +43,19 @@ const newFeatures = ref([
 
 
 
+
 const showNewFeatures = ref(false)
+
+// prevent scrolling when modal is active
+
+watch(showNewFeatures, (value) => {
+  if (value) {
+    document.body.style.overflow = 'hidden'
+  } else {
+    document.body.style.overflow = 'auto'
+  }
+}
+)
 
 const prepareNextFeature = () => {
   localStorage.setItem('newFeatures', JSON.stringify(newFeatures.value))
