@@ -110,13 +110,14 @@ const importShows = async () => {
     border: 1px solid v-bind(setColor + "20");
     transition: all 0.3s ease;
     backdrop-filter: blur(10px);
-    min-height: 25rem;
+
 }
 
 
 
 .modal-body {
     margin: 20px 0;
+    min-height: 12rem;
 }
 
 .modal-default-button {
