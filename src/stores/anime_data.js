@@ -189,6 +189,12 @@ export const useAnimeData = defineStore("animeData", {
         title: animeTitle,
       });
     },
+    async shareAnimeCard(animeTitle, animeUrl, formattedTitle) {
+      shareAnime(animeTitle, animeUrl, formattedTitle);
+      mixpanel.track("Shared Anime Bookmark", {
+        title: animeTitle,
+      });
+    },
     async addToHistory() {
       const animeTitle = this.animeData.data.Media.title.english
         ? this.animeData.data.Media.title.english
