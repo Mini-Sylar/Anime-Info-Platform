@@ -169,7 +169,7 @@ button {
 .contains-genres li {
     display: flex;
     align-items: center;
-    gap: .5rem;
+    gap: 1rem;
 }
 
 .carrette_button {
