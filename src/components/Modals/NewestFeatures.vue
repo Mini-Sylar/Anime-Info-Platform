@@ -121,6 +121,7 @@ a:hover {
 .newest-title {
     font-style: italic;
     margin-bottom: 0 !important;
+    font-weight: 900;
 }
 
 .newest-description {
