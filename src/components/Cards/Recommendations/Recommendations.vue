@@ -3,20 +3,16 @@
     <transition appear mode="out-in">
       <swiper :slides-per-view="numberofCards" :space-between="0" :effect="'coverflow'" :centeredSlides="centerSlides"
         :coverflowEffect="{
-          rotate: 10,
-          stretch: 1,
-          depth: 100,
-          modifier: 3,
-          slideShadows: true,
-        }" :modules="modules" :grabCursor="true" :autoplay="{
-  delay: 2500,
-  disableOnInteraction: false,
-  pauseOnMouseEnter: true,
-  // Disable preloading of all images
-  preloadImages: false,
-  // Enable lazy loading
-  lazy: true,
-}" :key="populateCards">
+            rotate: 10,
+            stretch: 1,
+            depth: 100,
+            modifier: 3,
+            slideShadows: true,
+          }" :modules="modules" :grabCursor="true" :autoplay="{
+      delay: 2500,
+      disableOnInteraction: false,
+      pauseOnMouseEnter: true,
+    }" :key="populateCards" :preload-images="false" :lazy="true">
         <swiper-slide class="swiper-slide-instance" v-for="(item, index) in populateCards" :key="index">
           <p class="noselect card-hovered" role="link" aria-label="link to anime in card"
             @click="searchFromRecommended(item.mediaRecommendation.title)">
