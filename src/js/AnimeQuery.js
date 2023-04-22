@@ -15,7 +15,11 @@ let storedValue = localStorage.getItem("searchQuery");
 let currentYear = new Date().getFullYear();
 
 export function prepareAnimeData(
-  searchQuery = sharedValue ? sharedValue : storedValue ? storedValue : "Naruto"
+  searchQuery = sharedValue
+    ? sharedValue
+    : storedValue
+    ? storedValue
+    : "Demon-Slayer-Kimetsu-no-Yaiba-Swordsmith-Village-Arc"
 ) {
   let gqlBody = {
     query: `query ($id: Int,$search: String) {
