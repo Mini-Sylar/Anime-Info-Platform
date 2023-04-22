@@ -257,5 +257,8 @@ export const useAnimeData = defineStore("animeData", {
       // const starred = await isShowStarred(showId.value);
       this.$state.isStarred = starred;
     },
+    showReleaseNotes() {
+      this.showNewFeatures = true;
+    },
   },
 });

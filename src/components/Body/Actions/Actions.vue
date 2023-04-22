@@ -34,6 +34,12 @@
                             d="M0 96C0 43 43 0 96 0h96V190.7c0 13.4 15.5 20.9 26 12.5L272 160l54 43.2c10.5 8.4 26 .9 26-12.5V0h32 32c17.7 0 32 14.3 32 32V352c0 17.7-14.3 32-32 32v64c17.7 0 32 14.3 32 32s-14.3 32-32 32H384 96c-53 0-96-43-96-96V96zM64 416c0 17.7 14.3 32 32 32H352V384H96c-17.7 0-32 14.3-32 32z" />
                     </svg>
                 </button>
+                <button type="button" class="action-button bookmarks" title="Show Release Notes" @click="showReleaseNotes">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="uses-dynamic">
+                        <path
+                            d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336h24V272H216c-13.3 0-24-10.7-24-24s10.7-24 24-24h48c13.3 0 24 10.7 24 24v88h8c13.3 0 24 10.7 24 24s-10.7 24-24 24H216c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64z" />
+                    </svg>
+                </button>
                 <transition name="show-history">
                     <BookMarked v-if="showBookmark == true" />
                 </transition>
@@ -84,6 +90,10 @@ const starShow = () => {
 const showMiniBookmarkMenu = () => {
     showBookmark.value = !showBookmark.value
     if (showModal.value == true) { showModal.value = false }
+}
+
+const showReleaseNotes = () => {
+    useAnimeData().showReleaseNotes()
 }
 
 </script>

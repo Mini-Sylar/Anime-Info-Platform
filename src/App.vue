@@ -44,9 +44,30 @@ const newFeatures = ref([
 
 
 
-const showNewFeatures = ref(false)
+// const showNewFeatures = ref(false)
+const showNewFeatures = computed(() => {
+  return useAnimeData().showNewFeatures
+})
 
-// prevent scrolling when modal is active
+const prepareNextFeature = () => {
+  localStorage.setItem('newFeatures', JSON.stringify(newFeatures.value))
+  useAnimeData().showNewFeatures = false
+}
+// watch localStorage for changes
+const checkLocalStorage = () => {
+  if (localStorage.getItem('newFeatures') === null) {
+    return useAnimeData().showNewFeatures = true
+  } else {
+    // check if content is the same
+    const newFeaturesFromStorage = JSON.parse(localStorage.getItem('newFeatures'))
+    if (JSON.stringify(newFeaturesFromStorage[0].timestamp) != JSON.stringify(newFeatures.value[0].timestamp)) {
+      return useAnimeData().showNewFeatures = true
+    }
+    return useAnimeData().showNewFeatures = false
+  }
+}
+
+checkLocalStorage()
 
 watch(showNewFeatures, (value) => {
   if (value) {
@@ -56,26 +77,6 @@ watch(showNewFeatures, (value) => {
   }
 }
 )
-
-const prepareNextFeature = () => {
-  localStorage.setItem('newFeatures', JSON.stringify(newFeatures.value))
-  showNewFeatures.value = false
-}
-// watch localStorage for changes
-const checkLocalStorage = () => {
-  if (localStorage.getItem('newFeatures') === null) {
-    return true
-  } else {
-    // check if content is the same
-    const newFeaturesFromStorage = JSON.parse(localStorage.getItem('newFeatures'))
-    if (JSON.stringify(newFeaturesFromStorage[0].timestamp) != JSON.stringify(newFeatures.value[0].timestamp)) {
-      return true
-    }
-    return false
-  }
-}
-
-showNewFeatures.value = checkLocalStorage()
 </script>
 
 <template>
