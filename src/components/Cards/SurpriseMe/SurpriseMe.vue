@@ -196,4 +196,11 @@ button {
 .rotate {
     transform: rotate(180deg);
 }
+
+@media screen and (max-width:500px) {
+    .contains-genres ul {
+        gap: 4rem;
+    }
+
+}
 </style>
