@@ -2,9 +2,10 @@
 import NavbarVue from "./components/NavBar/Navbar.vue";
 import { RouterView } from "vue-router";
 import { useAnimeData } from '@/stores/anime_data';
-import { computed, watch } from 'vue'
+import { computed, watch, ref } from 'vue'
 import { useNetwork } from '@vueuse/core'
 import { useToast } from "vue-toastification";
+import NewestFeatures from "./components/Modals/NewestFeatures.vue";
 
 const toast = useToast();
 const setColor = computed(() => {
@@ -15,11 +16,45 @@ const { isOnline } = useNetwork()
 
 watch(isOnline, (value) => {
   if (value) {
-    toast.success("Back Online!", { duration: 1000 })
+    toast.success("Back Online!", { timeout: 1000 })
   } else {
-    toast.error("Offline!, You won't be able to search for anime or reach out to me.", { duration: 1000 })
+    toast.error("Offline!, You won't be able to search for anime or reach out to me.", { timeout: 1000 })
   }
 })
+
+const newFeatures = ref([
+  {
+    timestamp: "22-04-2023",
+  },
+  {
+    title: "Bookmarks 🌟",
+    description: "Keep track of your shows with the new bookmark feature. <br>Star your show to get started"
+  },
+])
+
+
+
+const showNewFeatures = ref(false)
+
+const prepareNextFeature = () => {
+  localStorage.setItem('newFeatures', JSON.stringify(newFeatures.value))
+  showNewFeatures.value = false
+}
+// watch localStorage for changes
+const checkLocalStorage = () => {
+  if (localStorage.getItem('newFeatures') === null) {
+    return true
+  } else {
+    // check if content is the same
+    const newFeaturesFromStorage = JSON.parse(localStorage.getItem('newFeatures'))
+    if (JSON.stringify(newFeaturesFromStorage[0].timestamp) != JSON.stringify(newFeatures.value[0].timestamp)) {
+      return true
+    }
+    return false
+  }
+}
+
+showNewFeatures.value = checkLocalStorage()
 </script>
 
 <template>
@@ -29,6 +64,10 @@ watch(isOnline, (value) => {
       <component :is="Component"></component>
     </transition>
   </router-view>
+  <Teleport to='body'>
+    <NewestFeatures :show="showNewFeatures" @close="prepareNextFeature" :newFeatures="newFeatures.slice(1)">
+    </NewestFeatures>
+  </Teleport>
 </template>
 
 <style>

@@ -36,6 +36,7 @@ export const useAnimeData = defineStore("animeData", {
     toggleAbout: false,
     isStarred: false,
     bookMarkStore: useBookmarks(),
+    showNewFeatures: false,
   }),
   getters: {
     getAnimeTitleDescription: (state) => {
