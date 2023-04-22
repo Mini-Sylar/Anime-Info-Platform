@@ -35,7 +35,7 @@ const checkIfActive = () => {
                             </p>
                         </div>
                     </div>
-                    <a href="https://github.com/Mini-Sylar/Anime-Info-Platform" target="_blank">Full Release Notes 🔗</a>
+                    <a href="https://github.com/Mini-Sylar/Anime-Info-Platform/releases/latest" target="_blank">Full Release Notes 🔗</a>
                 </div>
 
                 <div class="modal-footer">
