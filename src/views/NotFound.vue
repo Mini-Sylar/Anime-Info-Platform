@@ -17,7 +17,7 @@ import { useAnimeData } from '@/stores/anime_data.js'
 export default {
     mounted() {
         const mainAnimeData = useAnimeData()
-        mainAnimeData.fetchAnimeData('Demon-Slayer-Kimetsu-no-Yaiba-Swordsmith-Village-Arc')
+        mainAnimeData.fetchAnimeData('Oshi-No-Ko')
     },
 }
 </script>

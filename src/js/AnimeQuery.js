@@ -19,7 +19,7 @@ export function prepareAnimeData(
     ? sharedValue
     : storedValue
     ? storedValue
-    : "Demon-Slayer-Kimetsu-no-Yaiba-Swordsmith-Village-Arc"
+    : "Oshi-No-Ko"
 ) {
   let gqlBody = {
     query: `query ($id: Int,$search: String) {
