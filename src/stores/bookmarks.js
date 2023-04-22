@@ -93,10 +93,11 @@ export const useBookmarks = defineStore("bookmarks", {
     },
     async fetchFromBookmarks(savedShows) {
       this.bookmarksloading = true;
+      if (this.bookmarked_details.length == savedShows.length) {
+        this.bookmarksloading = false;
+        return;
+      }
       let showIDs = [];
-
-      // ! TODO: Fix refteching everytime when no new shows are added
-
       savedShows.filter((show) => {
         const id = parseInt(show.id);
         if (!isNaN(id)) {

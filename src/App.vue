@@ -5,14 +5,11 @@ import { useAnimeData } from '@/stores/anime_data';
 import { computed, watch } from 'vue'
 import { useNetwork } from '@vueuse/core'
 import { useToast } from "vue-toastification";
-import Modal from './components/Modals/Modal.vue'
 
 const toast = useToast();
 const setColor = computed(() => {
   return useAnimeData().getAccentColor
 });
-
-
 
 const { isOnline } = useNetwork()
 
