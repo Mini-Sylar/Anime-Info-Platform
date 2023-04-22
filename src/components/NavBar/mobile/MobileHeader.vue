@@ -45,7 +45,16 @@ export default {
         document.body.style.overflow = 'scroll';
       }
 
-      this.$router.push("/");
+      this.$router.push("/").then(() => {
+        // scroll to cards
+        setTimeout(() => {
+          window.scrollTo({
+            left: 0,
+            top: document.body.scrollHeight,
+            behavior: "smooth"
+          });
+        }, 800);
+      });
       return useAnimeData().fetchCurrentSeason();
     }
   },

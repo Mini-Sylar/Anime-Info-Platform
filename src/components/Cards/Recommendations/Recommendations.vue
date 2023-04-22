@@ -1,5 +1,5 @@
 <template>
-  <div class="is-a-container swiper-container noselect">
+  <div class="is-a-container swiper-container noselect" id="recommendations">
     <transition appear mode="out-in">
       <swiper :slides-per-view="numberofCards" :space-between="0" :effect="'coverflow'" :centeredSlides="centerSlides"
         :coverflowEffect="{
