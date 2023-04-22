@@ -132,4 +132,8 @@ ul li::before {
     margin-top: 0;
     color: v-bind(setColor) !important;
 }
+
+:global(.modal-header *) {
+    color: v-bind(setColor) !important ;
+}
 </style>

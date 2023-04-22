@@ -35,6 +35,7 @@ const checkIfActive = () => {
                             </p>
                         </div>
                     </div>
+                    <a href="https://github.com/Mini-Sylar/Anime-Info-Platform" target="_blank">Release Notes 🔗</a>
                 </div>
 
                 <div class="modal-footer">
@@ -135,8 +136,13 @@ p::before {
     transform: scale(1.1);
 }
 
-.modal-header h3 {
+.modal-header h3,
+a {
     margin-top: 0;
     color: v-bind(setColor) !important;
+}
+
+a:hover {
+    text-decoration: underline;
 }
 </style>

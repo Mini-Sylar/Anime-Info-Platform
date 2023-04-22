@@ -53,6 +53,7 @@ import Modal from "@/components/Modals/Modal.vue"
 import ImportExport from "../../Modals/ImportExport.vue";
 import { useBookmarks } from "../../../stores/bookmarks";
 import { ref } from 'vue'
+
 const showInfo = ref(false)
 const showImportExport = ref(false)
 const clearAll = () => {

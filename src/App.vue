@@ -28,7 +28,7 @@ const newFeatures = ref([
   },
   {
     title: "Bookmarks 🌟",
-    description: "Keep track of your shows with the new bookmark feature. <br>Star your show to get started"
+    description: "Keep track of your shows with the new bookmark feature 🚀. <br>Star your show to get started",
   },
 ])
 
@@ -195,7 +195,7 @@ td,
   background: v-bind('setColor') !important;
 }
 
-.uses-dynamic {
+.uses-dynamic{
   color: v-bind('setColor') !important;
   fill: v-bind('setColor') !important;
 }
