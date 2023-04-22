@@ -34,7 +34,8 @@
                         <div class="bg-image"><img :src="bookmark.coverImage.medium" :alt="bookmark.title.english ? bookmark.title.english :
                                 bookmark.title.romaji
                             "></div>
-                        <div class="title">
+                        <div class="title animetitle" role="button" aria-label="search anime"
+                            @click="searchAnime(bookmark.title.romaji)">
                             <p>
                                 {{ bookmark.title.english ? bookmark.title.english :
                                     bookmark.title.romaji }}
@@ -110,11 +111,15 @@
 </template>
 <script setup>
 import { useBookmarks } from '../../../stores/bookmarks';
+import { useAnimeData } from '../../../stores/anime_data';
+import { useRouter } from 'vue-router';
 import { ref, computed, watch } from 'vue'
 import Bars from '../../Loaders/Bars.vue';
 import Pagination from '../Pagination/Pagination.vue';
 import Tips from '../Tips/Tips.vue';
 
+
+const router = useRouter()
 const bookmarks = useBookmarks();
 const search = ref('')
 const bookmarkloading = computed(() => bookmarks.bookmarksloading)
@@ -185,10 +190,12 @@ const toggleWatched = async (showId) => {
     } catch (error) {
         return
     }
-
-
 };
 
+const searchAnime = (showTitle) => {
+    router.push('/')
+    useAnimeData().fetchAnimeData(showTitle, false)
+}
 
 </script>
 <style scoped>
@@ -448,6 +455,15 @@ img {
     transform: rotate(45deg);
 }
 
+.animetitle p {
+    transition: all .3s ease;
+}
+
+.animetitle:hover p {
+    cursor: pointer;
+    color: #004b81;
+}
+
 
 
 @media screen and (max-width:768px) {
@@ -520,7 +536,7 @@ img {
         transform: translateX(-25%);
     }
 
-    .tbl-content{
+    .tbl-content {
         margin-block: 4rem;
     }
 }

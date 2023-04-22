@@ -129,7 +129,8 @@ td,
 
 .history-title:hover,
 .go-back-home,
-.bookmarked-show:hover {
+.bookmarked-show:hover,
+.title:hover p {
   color: v-bind("setColor") !important;
   transition: color .2s ease-in-out;
 }
