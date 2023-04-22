@@ -91,6 +91,7 @@ svg {
 
 .button-container {
     display: flex;
+    flex-wrap: wrap;
 }
 
 button {

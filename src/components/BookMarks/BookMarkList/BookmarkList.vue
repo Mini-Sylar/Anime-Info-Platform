@@ -558,7 +558,13 @@ img {
     }
 
     .tbl-content {
-        margin-block: 4rem;
+        margin-top: 2rem;
+    }
+
+    .pagination {
+        align-items: flex-start;
+        margin-top: 2rem;
+        min-height: 8rem;
     }
 }
 </style>
