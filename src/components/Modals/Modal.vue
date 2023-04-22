@@ -127,9 +127,7 @@ ul li::before {
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
 }
-</style>
 
-<style>
 .modal-header h3 {
     margin-top: 0;
     color: v-bind(setColor) !important;

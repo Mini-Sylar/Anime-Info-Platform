@@ -216,9 +216,7 @@ ul li::before {
 .is-not-active {
     color: v-bind('setColor + "40"') !important;
 }
-</style>
 
-<style>
 .modal-header h3 {
     margin-top: 0;
     color: v-bind(setColor) !important;
