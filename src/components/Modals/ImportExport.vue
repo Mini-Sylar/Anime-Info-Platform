@@ -8,6 +8,7 @@ import { useToast } from 'vue-toastification';
 const toast = useToast();
 
 const file = ref(null)
+const isButtonDisable = ref(false)
 const props = defineProps({
     show: Boolean
 })
@@ -29,11 +30,21 @@ const showImport = () => {
     showExport.value = false
 }
 
-const exportShow = () => {
-    useBookmarks().exportBookmarks()
+const exportShow = async () => {
+    isButtonDisable.value = true
+    try {
+        await useBookmarks().exportBookmarks()
+    }
+    catch (e) {
+        toast.error("No bookmarks to export")
+    }
+    finally {
+        isButtonDisable.value = false
+    }
 }
 
 const importShows = async () => {
+    isButtonDisable.value = true
     if (file.value.files.length == 0) {
         toast.error("No file selected")
         return
@@ -44,6 +55,9 @@ const importShows = async () => {
     }
     catch (e) {
         toast.error("Invalid file")
+    }
+    finally {
+        isButtonDisable.value = false
     }
 
 }
@@ -67,12 +81,55 @@ const importShows = async () => {
                 <div class="modal-body">
                     <div class="export-container" v-if="showExport">
                         <p>Export your anime list to a JSON file.</p>
-                        <button class="modal-default-button" @click="exportShow">Export</button>
+                        <button class="modal-default-button" @click="exportShow" :disabled="isButtonDisable">
+                            <transition name="fade">
+                                <span v-if="isButtonDisable"><svg class="is-contact-loader" version="1.1" id="L9"
+                                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                        x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 0 0"
+                                        xml:space="preserve">
+                                        <rect x="20" y="50" width="4" height="10" fill="#fff">
+                                            <animateTransform attributeType="xml" attributeName="transform" type="translate"
+                                                values="0 0; 0 20; 0 0" begin="0" dur="0.6s" repeatCount="indefinite" />
+                                        </rect>
+                                        <rect x="30" y="50" width="4" height="10" fill="#fff">
+                                            <animateTransform attributeType="xml" attributeName="transform" type="translate"
+                                                values="0 0; 0 20; 0 0" begin="0.2s" dur="0.6s" repeatCount="indefinite" />
+                                        </rect>
+                                        <rect x="40" y="50" width="4" height="10" fill="#fff">
+                                            <animateTransform attributeType="xml" attributeName="transform" type="translate"
+                                                values="0 0; 0 20; 0 0" begin="0.4s" dur="0.6s" repeatCount="indefinite" />
+                                        </rect>
+                                    </svg></span>
+
+                            </transition> Export
+                        </button>
+
                     </div>
                     <div class="export-container" v-else>
                         <p>Import your anime list from a JSON file.</p>
                         <input class="modal-default-button" type="file" accept=".json" ref="file" typeof="JSON">
-                        <button class="modal-default-button" @click="importShows" :disabled="false">Import</button>
+                        <button class="modal-default-button" @click="importShows" :disabled="isButtonDisable">
+                            <transition name="fade">
+                                <span v-if="isButtonDisable"><svg class="is-contact-loader" version="1.1" id="L9"
+                                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                        x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 0 0"
+                                        xml:space="preserve">
+                                        <rect x="20" y="50" width="4" height="10" fill="#fff">
+                                            <animateTransform attributeType="xml" attributeName="transform" type="translate"
+                                                values="0 0; 0 20; 0 0" begin="0" dur="0.6s" repeatCount="indefinite" />
+                                        </rect>
+                                        <rect x="30" y="50" width="4" height="10" fill="#fff">
+                                            <animateTransform attributeType="xml" attributeName="transform" type="translate"
+                                                values="0 0; 0 20; 0 0" begin="0.2s" dur="0.6s" repeatCount="indefinite" />
+                                        </rect>
+                                        <rect x="40" y="50" width="4" height="10" fill="#fff">
+                                            <animateTransform attributeType="xml" attributeName="transform" type="translate"
+                                                values="0 0; 0 20; 0 0" begin="0.4s" dur="0.6s" repeatCount="indefinite" />
+                                        </rect>
+                                    </svg></span>
+
+                            </transition> Import
+                        </button>
                     </div>
                 </div>
 
@@ -133,6 +190,9 @@ const importShows = async () => {
     font-size: 16px;
     cursor: pointer;
     font-weight: 900;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
 }
 
 ul {
@@ -221,5 +281,11 @@ ul li::before {
 .modal-header h3 {
     margin-top: 0;
     color: v-bind(setColor) !important;
+}
+
+button:disabled {
+    background-color: gray !important;
+    transition: all .2s ease;
+    cursor: not-allowed;
 }
 </style>
