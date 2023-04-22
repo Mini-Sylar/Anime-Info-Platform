@@ -29,13 +29,13 @@ const checkIfActive = () => {
 
                 <div class="modal-body">
                     <div class="content" v-for="(feature, index) in newFeatures" :key="index">
-                        <h4>{{ feature.title }}</h4>
+                        <h4 class="newest-title">{{ feature.title }}</h4>
                         <div class="new-features">
-                            <p v-html="feature.description">
+                            <p class="newest-description" v-html="feature.description">
                             </p>
                         </div>
                     </div>
-                    <a href="https://github.com/Mini-Sylar/Anime-Info-Platform" target="_blank">Release Notes 🔗</a>
+                    <a href="https://github.com/Mini-Sylar/Anime-Info-Platform" target="_blank">Full Release Notes 🔗</a>
                 </div>
 
                 <div class="modal-footer">
@@ -94,34 +94,6 @@ const checkIfActive = () => {
     font-weight: 900;
 }
 
-.new-features {
-    padding: 1rem;
-}
-
-p::before {
-    content: "\2022";
-    /* Add content: \2022 is the CSS Code/unicode for a bullet */
-    color: v-bind(setColor);
-    /* Change the color */
-    font-weight: bold;
-    /* If you want it to be bold */
-    display: inline-block;
-    /* Needed to add space between the bullet and the text */
-    width: 1em;
-    /* Also needed for space (tweak if needed) */
-    margin-left: -1em;
-    /* Also needed for space (tweak if needed) */
-}
-
-/*
- * The following styles are auto-applied to elements with
- * transition="modal" when their visibility is toggled
- * by Vue.js.
- *
- * You can easily play with the modal transition by editing
- * these styles.
- */
-
 .modal-enter-from {
     opacity: 0;
 }
@@ -145,4 +117,22 @@ a {
 a:hover {
     text-decoration: underline;
 }
+
+.newest-title {
+    font-style: italic;
+    margin-bottom: 0 !important;
+}
+
+.newest-description {
+    margin-top: 0 !important;
+    color: rgb(159, 159, 159);
+}
+
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+
 </style>
