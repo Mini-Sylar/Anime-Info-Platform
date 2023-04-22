@@ -1,7 +1,6 @@
 <template >
     <div>
         <div class="min-container">
-            <Tips></Tips>
             <BookmarkList></BookmarkList>
         </div>
         <Background v-memo="mainAnimeData.getBackground" :backgroundImage="mainAnimeData.getBackground"
@@ -9,7 +8,6 @@
     </div>
 </template>
 <script setup>
-import Tips from '../components/BookMarks/Tips/Tips.vue';
 import BookmarkList from '../components/BookMarks/BookMarkList/BookmarkList.vue';
 import Background from '../components/Body/Background/Background.vue';
 import { useAnimeData } from '../stores/anime_data';

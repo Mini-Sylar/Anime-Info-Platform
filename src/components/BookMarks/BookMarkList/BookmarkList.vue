@@ -1,7 +1,10 @@
 <template>
     <div>
         <div class="search-box">
-            <input type="text" class="search-bookmark" placeholder="Search" v-model="search">
+            <div class="tips">
+                <Tips></Tips>
+            </div>
+            <div class="search-item"><input type="text" class="search-bookmark" placeholder="Search" v-model="search"></div>
         </div>
         <div class="tbl-header bookmarked-container">
             <table cellpadding="0" cellspacing="0" border="0">
@@ -110,6 +113,7 @@ import { useBookmarks } from '../../../stores/bookmarks';
 import { ref, computed, watch } from 'vue'
 import Bars from '../../Loaders/Bars.vue';
 import Pagination from '../Pagination/Pagination.vue';
+import Tips from '../Tips/Tips.vue';
 
 const bookmarks = useBookmarks();
 const search = ref('')
@@ -178,16 +182,6 @@ watch(bookmark_details, () => {
 const toggleWatched = async (showId) => {
     try {
         await bookmarks.toggleWatched(showId.toString());
-        // toggle the watched status of bookmarkWithStatus.value
-
-        // const updatedBookmarks = bookmarkWithStatus.value.map((show) => {
-        //     if (show.id === showId.toString()) {
-        //         return { ...show, watched: !show.watched };
-        //     }
-        //     return show;
-        // });
-        // bookmarkWithStatus.value = updatedBookmarks;
-
     } catch (error) {
         return
     }
@@ -309,7 +303,8 @@ th {
 
 .search-box {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: .5rem;
 }
 
@@ -462,7 +457,8 @@ img {
     }
 
     .search-box {
-        justify-content: center;
+        flex-direction: column;
+        gap: 3rem;
     }
 
     .tbl-content {
@@ -519,16 +515,13 @@ img {
         left: 25%;
     }
 
-
-
-    .action button {
-        position: relative;
-        right: 30% !important;
-    }
-
     .bookmarks-loading svg {
 
         transform: translateX(-25%);
+    }
+
+    .tbl-content{
+        margin-block: 4rem;
     }
 }
 </style>
