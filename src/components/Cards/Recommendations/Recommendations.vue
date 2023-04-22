@@ -28,6 +28,15 @@
           </transition>
 
         </swiper-slide>
+        <swiper-slide class="swiper-slide-instance" v-if="populateCards.length > 19">
+          <p class="noselect card-hovered" role="link" aria-label="Show more recommended" @click="showMore">
+            Show More <br>&rarr;
+          </p>
+          <!-- <transition appear mode="out-in">
+            <img loading="lazy" src="" alt="" class="anime-images" />
+          </transition> -->
+
+        </swiper-slide>
       </swiper>
     </transition>
     <transition appear mode="out-in">
@@ -61,6 +70,11 @@ export default {
     SwiperSlide,
     Bars
   },
+  data() {
+    return {
+      slice: true
+    }
+  },
   async setup() {
     const mainAnimeData = ref([])
     const getAnimeData = async () => {
@@ -84,7 +98,10 @@ export default {
   },
   computed: {
     populateCards() {
-      return this.mainAnimeData.getRecommendations
+      if (this.slice == true) {
+        return this.mainAnimeData.getRecommendations.slice(0, 20)
+      }
+      return this.mainAnimeData.getRecommendations.slice(20, 50)
     },
     numberofCards() {
       if (screen.width < 768) return 2.7
@@ -102,6 +119,9 @@ export default {
       let getTitle = query.romaji ? query.romaji : query.english;
       this.useFetchFromRecommendations(getTitle);
     },
+    showMore() {
+      this.slice = !this.slice
+    }
   },
 };
 </script>
