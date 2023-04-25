@@ -117,13 +117,27 @@ export const useBookmarks = defineStore("bookmarks", {
           const bIndex = showIDs.indexOf(b.id);
           return aIndex - bIndex;
         }) || [];
+      this.bookmarked_details = this.bookmarked_details.map((show) => {
+        return {
+          ...show,
+          airingSchedule: {
+            ...show.airingSchedule,
+            nodes: {
+              ...show.airingSchedule.nodes,
+              0: {
+                ...show.airingSchedule.nodes[0],
+                episode: show.airingSchedule.nodes[0]?.episode - 1 || 0,
+              },
+            },
+          },
+        };
+      });
       let latestEpisodes = [];
 
       this.bookmarked_details.forEach((show) => {
         latestEpisodes.push({
           showId: show.id.toString(),
-          latestEpisode:
-            show.airingSchedule.nodes[0]?.episode - 1 || show.episodes,
+          latestEpisode: show.airingSchedule.nodes[0]?.episode || show.episodes,
           timestamp: savedShows.find((s) => s.id == show.id).timestamp,
         });
       });
