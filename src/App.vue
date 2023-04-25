@@ -16,9 +16,9 @@ const { isOnline } = useNetwork()
 
 watch(isOnline, (value) => {
   if (value) {
-    toast.success("Back Online!", { timeout: 1000 })
+    toast.success("Back Online!")
   } else {
-    toast.error("Offline!, You won't be able to search for anime or reach out to me.", { timeout: 1000 })
+    toast.error("Offline!, You won't be able to search for anime or reach out to me.",)
   }
 })
 
