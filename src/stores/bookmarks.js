@@ -111,7 +111,6 @@ export const useBookmarks = defineStore("bookmarks", {
       });
 
       let data = await response.json();
-
       this.bookmarked_details =
         data?.data.Page.media.sort((a, b) => {
           const aIndex = showIDs.indexOf(a.id);
@@ -123,7 +122,8 @@ export const useBookmarks = defineStore("bookmarks", {
       this.bookmarked_details.forEach((show) => {
         latestEpisodes.push({
           showId: show.id.toString(),
-          latestEpisode: show.airingSchedule.nodes[0]?.episode || show.episodes,
+          latestEpisode:
+            show.airingSchedule.nodes[0]?.episode - 1 || show.episodes,
           timestamp: savedShows.find((s) => s.id == show.id).timestamp,
         });
       });
