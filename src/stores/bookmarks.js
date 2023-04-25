@@ -62,9 +62,7 @@ export const useBookmarks = defineStore("bookmarks", {
         }
         return true;
       } catch (err) {
-        toast.error("Something went wrong!", {
-          timeout: 2000,
-        });
+        toast.error("Something went wrong!");
 
         return false;
       } finally {
@@ -158,9 +156,7 @@ export const useBookmarks = defineStore("bookmarks", {
             watched: !value[0].watched,
           };
           await localforage.setItem(showId, [updatedValue]);
-          toast.success("Episode watched status toggled!", {
-            duration: 500,
-          });
+          toast.success("Episode watched status toggled!");
           this.getSavedShows();
           return true;
         } else {
@@ -201,9 +197,7 @@ export const useBookmarks = defineStore("bookmarks", {
                   resolve(true);
                 })
                 .catch((err) => {
-                  toast.error("Something went wrong!", {
-                    duration: 500,
-                  });
+                  toast.error("Something went wrong!");
                   reject(err);
                 });
             } else {
