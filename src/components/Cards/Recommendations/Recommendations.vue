@@ -12,7 +12,8 @@
       delay: 2500,
       disableOnInteraction: false,
       pauseOnMouseEnter: true,
-    }" :key="populateCards" :preload-images="false" :lazy="true">
+    }" :preload-images="false" :lazy="true" ref="swiperContainer" :keyboard="true"
+        :key="mainAnimeData.getRecommendations" @swiper="onSwiper">
         <swiper-slide class="swiper-slide-instance" v-for="(item, index) in populateCards" :key="index">
           <p class="noselect card-hovered" role="link" aria-label="link to anime in card"
             @click="searchFromRecommended(item.mediaRecommendation.title)">
@@ -28,14 +29,10 @@
           </transition>
 
         </swiper-slide>
-        <swiper-slide class="swiper-slide-instance" v-if="populateCards.length > 19">
-          <p class="noselect card-hovered" role="link" aria-label="Show more recommended" @click="showMore">
+        <swiper-slide class="swiper-slide-instance" v-if="populateCards.length > 19" @click="showMore">
+          <p class="noselect card-hovered" role="link" aria-label="Show more recommended">
             Show More <br>&rarr;
           </p>
-          <!-- <transition appear mode="out-in">
-            <img loading="lazy" src="" alt="" class="anime-images" />
-          </transition> -->
-
         </swiper-slide>
       </swiper>
     </transition>
@@ -72,6 +69,7 @@ export default {
   },
   data() {
     return {
+      swiper: null,
       slice: true
     }
   },
@@ -80,6 +78,7 @@ export default {
     const getAnimeData = async () => {
       mainAnimeData.value = await useAnimeData()
     }
+    const swiperContainer = ref(null)
     await getAnimeData()
     let useFetchFromRecommendations = mainAnimeData.value.fetchFromRecommended
     // useAnimeStoreHere
@@ -93,7 +92,8 @@ export default {
         Autoplay,
       ],
       mainAnimeData,
-      useFetchFromRecommendations
+      useFetchFromRecommendations,
+      swiperContainer
     };
   },
   computed: {
@@ -105,13 +105,13 @@ export default {
     },
     numberofCards() {
       if (screen.width < 768) return 2.7
-      return this.mainAnimeData.getRecommendations.length < 2 ? 2 : 4
+      return this.mainAnimeData.getRecommendations.length <= 2 ? 2 : 4
     },
     isCardsLoading() {
       return this.mainAnimeData.cardsLoading
     },
     centerSlides() {
-      return this.mainAnimeData.getRecommendations.length < 2 ? false : true
+      return this.mainAnimeData.getRecommendations.length <= 2 ? false : true
     }
   },
   methods: {
@@ -121,7 +121,15 @@ export default {
     },
     showMore() {
       this.slice = !this.slice
-    }
+      this.mainAnimeData.cardsLoading = true
+      this.swiper.slideTo(0);
+      setTimeout(() => {
+        this.mainAnimeData.cardsLoading = false
+      }, 1000);
+    },
+    onSwiper(swiper) {
+      this.swiper = swiper;
+    },
   },
 };
 </script>
