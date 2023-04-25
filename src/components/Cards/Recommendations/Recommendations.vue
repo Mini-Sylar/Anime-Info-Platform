@@ -99,7 +99,7 @@ export default {
   computed: {
     populateCards() {
       if (this.slice == true) {
-        return this.mainAnimeData.getRecommendations.slice(0, 20)
+        return this.mainAnimeData.getRecommendations.slice(0, 20) // TODO: fix slicing issue
       }
       return this.mainAnimeData.getRecommendations.slice(20, 50)
     },
