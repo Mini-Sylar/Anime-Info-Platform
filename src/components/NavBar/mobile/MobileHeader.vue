@@ -1,18 +1,21 @@
 <template>
   <div>
-    <ui-sidebar>
-
-    </ui-sidebar>
+    <ui-sidebar> </ui-sidebar>
     <nav>
       <div class="logo">
-        <a @click="getCurrentSeasonShows()" title="get current anime data" role="button" class="is-url">Current Season</a>
+        <a
+          @click="getCurrentSeasonShows()"
+          title="get current anime data"
+          role="button"
+          class="is-url"
+          >Current Season</a
+        >
       </div>
       <div id="nav-icon1" class="hamburger" v-on:click="showHam">
         <span></span>
         <span></span>
         <span></span>
       </div>
-
     </nav>
   </div>
 </template>
@@ -23,7 +26,7 @@ export default {
   data() {
     return {
       showNav: "show-nav",
-    }
+    };
   },
   methods: {
     showHam() {
@@ -32,17 +35,19 @@ export default {
       document.querySelector(".hamburger").classList.toggle("open");
       document.querySelector(".first").classList.toggle(this.showNav);
       if (mobile_nav.classList.contains("show-nav")) {
-        document.body.style.overflow = 'hidden';
+        document.body.style.overflow = "hidden";
       } else {
-        document.body.style.overflow = 'scroll';
+        document.body.style.overflow = "scroll";
       }
     },
     getCurrentSeasonShows() {
-      if (document.querySelector(".nav-mobile").classList.contains("show-nav")) {
+      if (
+        document.querySelector(".nav-mobile").classList.contains("show-nav")
+      ) {
         document.querySelector(".nav-mobile").classList.remove(this.showNav);
         document.querySelector(".hamburger").classList.remove("open");
         document.querySelector(".first").classList.remove(this.showNav);
-        document.body.style.overflow = 'scroll';
+        document.body.style.overflow = "scroll";
       }
 
       this.$router.push("/").then(() => {
@@ -51,19 +56,17 @@ export default {
           window.scrollTo({
             left: 0,
             top: document.body.scrollHeight,
-            behavior: "smooth"
+            behavior: "smooth",
           });
         }, 800);
       });
       return useAnimeData().fetchCurrentSeason();
-    }
+    },
   },
   components: {
     "ui-sidebar": MobileSideBar,
   },
-  mounted() {
-
-  }
+  mounted() {},
 };
 </script>
 <style scoped>
@@ -89,7 +92,7 @@ export default {
 }
 
 .hamburger {
-  z-index: 99999
+  z-index: 99999;
 }
 
 /* Ham */
@@ -168,7 +171,7 @@ export default {
   cursor: pointer;
 }
 
-@media screen and (max-width:821px) {
+@media screen and (max-width: 821px) {
   #nav-icon1 {
     top: 5%;
   }

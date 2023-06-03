@@ -1,27 +1,28 @@
 <script setup>
 import NavbarVue from "./components/NavBar/Navbar.vue";
 import { RouterView } from "vue-router";
-import { useAnimeData } from '@/stores/anime_data';
-import { computed, watch, ref } from 'vue'
-import { useNetwork } from '@vueuse/core'
+import { useAnimeData } from "@/stores/anime_data";
+import { computed, watch, ref } from "vue";
+import { useNetwork } from "@vueuse/core";
 import { useToast } from "vue-toastification";
 import NewestFeatures from "./components/Modals/NewestFeatures.vue";
 
 const toast = useToast();
 const setColor = computed(() => {
-  return useAnimeData().getAccentColor
+  return useAnimeData().getAccentColor;
 });
 
-const { isOnline } = useNetwork()
+const { isOnline } = useNetwork();
 
 watch(isOnline, (value) => {
   if (value) {
-    toast.success("Back Online!")
+    toast.success("Back Online!");
   } else {
-    toast.error("Offline!, You won't be able to search for anime or reach out to me.",)
+    toast.error(
+      "Offline!, You won't be able to search for anime or reach out to me."
+    );
   }
-})
-
+});
 
 const newFeatures = ref([
   {
@@ -29,54 +30,56 @@ const newFeatures = ref([
   },
   {
     title: "Bookmarks 🌟",
-    description: "Keep track of your shows with the new bookmark feature 🚀. <br>Star your show to get started",
+    description:
+      "Keep track of your shows with the new bookmark feature 🚀. <br>Star your show to get started",
   },
   {
     title: "History 📖",
-    description: "Find out the 10 latest shows you've searched"
+    description: "Find out the 10 latest shows you've searched",
   },
   {
     title: "Genres",
-    description: "Choose the specific genre you want and surprise yourself"
-  }
-])
-
-
-
+    description: "Choose the specific genre you want and surprise yourself",
+  },
+]);
 
 // const showNewFeatures = ref(false)
 const showNewFeatures = computed(() => {
-  return useAnimeData().showNewFeatures
-})
+  return useAnimeData().showNewFeatures;
+});
 
 const prepareNextFeature = () => {
-  localStorage.setItem('newFeatures', JSON.stringify(newFeatures.value))
-  useAnimeData().showNewFeatures = false
-}
+  localStorage.setItem("newFeatures", JSON.stringify(newFeatures.value));
+  useAnimeData().showNewFeatures = false;
+};
 // watch localStorage for changes
 const checkLocalStorage = () => {
-  if (localStorage.getItem('newFeatures') === null) {
-    return useAnimeData().showNewFeatures = true
+  if (localStorage.getItem("newFeatures") === null) {
+    return (useAnimeData().showNewFeatures = true);
   } else {
     // check if content is the same
-    const newFeaturesFromStorage = JSON.parse(localStorage.getItem('newFeatures'))
-    if (JSON.stringify(newFeaturesFromStorage[0].timestamp) != JSON.stringify(newFeatures.value[0].timestamp)) {
-      return useAnimeData().showNewFeatures = true
+    const newFeaturesFromStorage = JSON.parse(
+      localStorage.getItem("newFeatures")
+    );
+    if (
+      JSON.stringify(newFeaturesFromStorage[0].timestamp) !=
+      JSON.stringify(newFeatures.value[0].timestamp)
+    ) {
+      return (useAnimeData().showNewFeatures = true);
     }
-    return useAnimeData().showNewFeatures = false
+    return (useAnimeData().showNewFeatures = false);
   }
-}
+};
 
-checkLocalStorage()
+checkLocalStorage();
 
 watch(showNewFeatures, (value) => {
   if (value) {
-    document.body.style.overflow = 'hidden'
+    document.body.style.overflow = "hidden";
   } else {
-    document.body.style.overflow = 'auto'
+    document.body.style.overflow = "auto";
   }
-}
-)
+});
 </script>
 
 <template>
@@ -86,8 +89,12 @@ watch(showNewFeatures, (value) => {
       <component :is="Component"></component>
     </transition>
   </router-view>
-  <Teleport to='body'>
-    <NewestFeatures :show="showNewFeatures" @close="prepareNextFeature" :newFeatures="newFeatures.slice(1)">
+  <Teleport to="body">
+    <NewestFeatures
+      :show="showNewFeatures"
+      @close="prepareNextFeature"
+      :newFeatures="newFeatures.slice(1)"
+    >
     </NewestFeatures>
   </Teleport>
 </template>
@@ -107,11 +114,10 @@ watch(showNewFeatures, (value) => {
   transform: translateX(-30%);
 }
 
-
 /* Fade Animation */
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity .3s;
+  transition: opacity 0.3s;
 }
 
 .fade-enter-from,
@@ -121,9 +127,8 @@ watch(showNewFeatures, (value) => {
 
 .tbl-content::-webkit-scrollbar-thumb {
   background-color: v-bind("setColor") !important;
-  transition: all .5s ease-in-out;
+  transition: all 0.5s ease-in-out;
 }
-
 
 /* Scale Animation */
 .scale-enter-active,
@@ -138,22 +143,21 @@ watch(showNewFeatures, (value) => {
 
 .is-url:hover {
   color: v-bind("setColor") !important;
-  transition: color .5s ease-in-out;
+  transition: color 0.5s ease-in-out;
 }
 
 .router-link-active {
   color: v-bind("setColor") !important;
-  transition: color .5s ease-in-out;
+  transition: color 0.5s ease-in-out;
 }
 
 ::selection {
   background-color: v-bind("setColor + '80'") !important;
 }
 
-
 .carrette_button {
   background-color: v-bind("setColor") !important;
-  transition: background-color .5s ease-in-out;
+  transition: background-color 0.5s ease-in-out;
 }
 
 .contains-genres,
@@ -164,11 +168,9 @@ watch(showNewFeatures, (value) => {
   background-color: v-bind("setColor + '20'") !important;
 }
 
-
 .check::before,
 .check::after {
   background: v-bind("setColor") !important;
-  ;
 }
 
 .tbl-content,
@@ -178,11 +180,9 @@ td,
   border-color: v-bind("setColor + '20'") !important;
 }
 
-
-
 * {
   accent-color: v-bind("setColor") !important;
-  transition: accent-color .5s ease-in-out;
+  transition: accent-color 0.5s ease-in-out;
 }
 
 .history-title:hover,
@@ -190,7 +190,7 @@ td,
 .bookmarked-show:hover,
 .title:hover p {
   color: v-bind("setColor") !important;
-  transition: color .2s ease-in-out;
+  transition: color 0.2s ease-in-out;
 }
 
 .v-enter-active,
@@ -204,36 +204,35 @@ td,
 }
 
 .is-loader * {
-  fill: v-bind('setColor') !important;
-  transition: fill .2s ease-in-out;
+  fill: v-bind("setColor") !important;
+  transition: fill 0.2s ease-in-out;
 }
 
 #nav-icon1 span {
-  background: v-bind('setColor') !important;
+  background: v-bind("setColor") !important;
 }
 
 .first,
 .send-message {
-  background: v-bind('setColor') !important;
+  background: v-bind("setColor") !important;
 }
 
 .uses-dynamic {
-  color: v-bind('setColor') !important;
-  fill: v-bind('setColor') !important;
+  color: v-bind("setColor") !important;
+  fill: v-bind("setColor") !important;
 }
 
 .dividers {
-  background-color: v-bind('setColor') !important;
+  background-color: v-bind("setColor") !important;
 }
 
 .arrow-icon-divider * {
-  border: 3px solid v-bind('setColor') !important;
+  border: 3px solid v-bind("setColor") !important;
 }
 
 .contact-form {
   background-color: v-bind('setColor + "20"') !important;
   box-shadow: 0 0 10px 0 v-bind('setColor + "20"') !important;
-  ;
 }
 
 .first-last,
@@ -248,6 +247,6 @@ td,
 }
 
 .form-input {
-  border-bottom: 1px solid v-bind('setColor') !important;
+  border-bottom: 1px solid v-bind("setColor") !important;
 }
 </style>

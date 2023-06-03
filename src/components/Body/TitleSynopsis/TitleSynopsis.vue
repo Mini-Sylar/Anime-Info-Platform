@@ -1,65 +1,63 @@
-<template  >
-    <div class="is-a-container">
-        <transition appear mode="out-in">
-            <h1 class="anime-title" :key="title">{{ title }}</h1>
-        </transition>
-        <!-- Add transtion to description -->
-        <transition appear mode="out-in">
-            <p class="anime-synposis" v-html="titleDescription.description" :key="title">
-            </p>
-        </transition>
-
-    </div>
+<template>
+  <div class="is-a-container">
+    <transition appear mode="out-in">
+      <h1 class="anime-title" :key="title">{{ title }}</h1>
+    </transition>
+    <!-- Add transtion to description -->
+    <transition appear mode="out-in">
+      <p
+        class="anime-synposis"
+        v-html="titleDescription.description"
+        :key="title"
+      ></p>
+    </transition>
+  </div>
 </template>
 <script>
 export default {
-    data() {
-        return {
-        };
+  data() {
+    return {};
+  },
+  props: {
+    titleDescription: {
+      type: Object,
     },
-    props: {
-        titleDescription: {
-            type: Object,
-        },
+  },
+  computed: {
+    title() {
+      return this.$props.titleDescription.animeTitle;
     },
-    computed: {
-        title() {
-            return this.$props.titleDescription.animeTitle
-        }
-
-    },
-}
+  },
+};
 </script>
 <style>
 .anime-synposis {
-    height: 20vh;
-    overflow-y: scroll;
-    margin-block: 1.5rem;
-    font-size: clamp(.8rem, .95vw, 2rem);
+  height: 20vh;
+  overflow-y: scroll;
+  margin-block: 1.5rem;
+  font-size: clamp(0.8rem, 0.95vw, 2rem);
 }
 
 .anime-title {
-    font-family: DexaPro-Bold;
-    font-size: clamp(1.5rem, 3vw, 3.5rem);
-    line-height: 3rem;
-    transition: all 1s ease-in;
-    content: "hello world";
+  font-family: DexaPro-Bold;
+  font-size: clamp(1.5rem, 3vw, 3.5rem);
+  line-height: 3rem;
+  transition: all 1s ease-in;
+  content: "hello world";
 }
 
-
 @media screen and (max-width: 768px) {
-    .anime-title {
-        font-size: clamp(1.5rem, 3vw, 3.5rem);
-        height: 40vh;
-        line-height: 1.5rem;
-        display: flex;
-        align-items: flex-end;
-        color: white;
-    }
+  .anime-title {
+    font-size: clamp(1.5rem, 3vw, 3.5rem);
+    height: 40vh;
+    line-height: 1.5rem;
+    display: flex;
+    align-items: flex-end;
+    color: white;
+  }
 
-    .anime-synposis {
-        color: #f1f1f1;
-    }
-
+  .anime-synposis {
+    color: #f1f1f1;
+  }
 }
 </style>

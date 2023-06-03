@@ -1,54 +1,57 @@
 <script>
-import BodyVue from '../components/Body/Body.vue';
-import SurpriseMe from '../components/Cards/SurpriseMe/SurpriseMe.vue';
-import Recommendations from '../components/Cards/Recommendations/Recommendations.vue';
-import BodyLoading from '../components/Body/Loading/BodyLoading.vue';
-import CardLoading from '../components/Cards/Loading/CardLoading.vue';
-import { useAnimeData } from '../stores/anime_data';
-import { defineAsyncComponent } from 'vue'
-import { useHead } from '@unhead/vue'
-const RecommendationsWrapper = defineAsyncComponent(() => import('../components/Cards/Recommendations/Recommendations.vue'));
+import BodyVue from "../components/Body/Body.vue";
+import SurpriseMe from "../components/Cards/SurpriseMe/SurpriseMe.vue";
+import Recommendations from "../components/Cards/Recommendations/Recommendations.vue";
+import BodyLoading from "../components/Body/Loading/BodyLoading.vue";
+import CardLoading from "../components/Cards/Loading/CardLoading.vue";
+import { useAnimeData } from "../stores/anime_data";
+import { defineAsyncComponent } from "vue";
+import { useHead } from "@unhead/vue";
+const RecommendationsWrapper = defineAsyncComponent(() =>
+  import("../components/Cards/Recommendations/Recommendations.vue")
+);
 
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
     BodyVue,
     RecommendationsWrapper,
     Recommendations,
     SurpriseMe,
     BodyLoading,
-    CardLoading
+    CardLoading,
   },
   computed: {
     setColor() {
-      const mainAnimeData = useAnimeData()
+      const mainAnimeData = useAnimeData();
       return mainAnimeData.getAccentColor;
-    }
+    },
   },
   errorCaptured() {
-    this.$router.push({ name: '404' })
-    this.$router.go(1)
+    this.$router.push({ name: "404" });
+    this.$router.go(1);
   },
   mounted() {
-    this.$mixpanel.track("Home Page")
+    this.$mixpanel.track("Home Page");
   },
   setup() {
     useHead({
-      title: 'Anime Info Platform | Home',
+      title: "Anime Info Platform | Home",
       meta: [
         {
-          name: 'description',
-          content: 'Search for your favorite anime and get information, recommendations, and more using the anime info platform.'
+          name: "description",
+          content:
+            "Search for your favorite anime and get information, recommendations, and more using the anime info platform.",
         },
         {
-          name: 'keywords',
-          content: 'anime, anime info, anime info platform, anime info website, anime information'
-        }
-      ]
-    })
-  }
-}
-
+          name: "keywords",
+          content:
+            "anime, anime info, anime info platform, anime info website, anime information",
+        },
+      ],
+    });
+  },
+};
 </script>
 
 <template>
@@ -83,12 +86,11 @@ export default {
   </div>
 </template>
 
-
 <style>
 button {
   background-color: v-bind("setColor") !important;
   color: white !important;
-  transition: all .5s ease-in-out;
+  transition: all 0.5s ease-in-out;
 }
 
 .action-button {
@@ -98,27 +100,27 @@ button {
 }
 
 iframe {
-  border: 2px solid v-bind('setColor');
-  transition: border .5s ease-in-out;
+  border: 2px solid v-bind("setColor");
+  transition: border 0.5s ease-in-out;
 }
 
 *::-webkit-scrollbar-thumb {
   background-color: v-bind("setColor") !important;
-  transition: all .5s ease-in-out;
+  transition: all 0.5s ease-in-out;
 }
 
 .card-hovered:hover {
   color: v-bind("setColor") !important;
   min-height: 100%;
   background-color: rgba(0, 0, 0, 0.622);
-  transition: all .2s ease;
+  transition: all 0.2s ease;
   filter: brightness(200%);
 }
 
 select {
   background-color: v-bind("setColor") !important;
   color: white !important;
-  transition: all .5s ease-in-out;
+  transition: all 0.5s ease-in-out;
 }
 
 /* we will explain what these classes do next! */
@@ -148,15 +150,12 @@ select {
   position: absolute;
   top: 0;
   z-index: -1;
-
 }
 
-@media screen and (max-width:821px) {
+@media screen and (max-width: 821px) {
   .main-div {
     flex-direction: column;
     gap: 4rem;
   }
-
 }
-
 </style>

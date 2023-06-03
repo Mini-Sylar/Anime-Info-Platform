@@ -1,37 +1,70 @@
 <template>
   <div class="is-a-container swiper-container noselect" id="recommendations">
     <transition appear mode="out-in">
-      <swiper :slides-per-view="numberofCards" :space-between="0" :effect="'coverflow'" :centeredSlides="centerSlides"
+      <swiper
+        :slides-per-view="numberofCards"
+        :space-between="0"
+        :effect="'coverflow'"
+        :centeredSlides="centerSlides"
         :coverflowEffect="{
-            rotate: 10,
-            stretch: 1,
-            depth: 100,
-            modifier: 3,
-            slideShadows: true,
-          }" :modules="modules" :grabCursor="true" :autoplay="{
-      delay: 2500,
-      disableOnInteraction: false,
-      pauseOnMouseEnter: true,
-    }" :preload-images="false" :lazy="true" ref="swiperContainer" :keyboard="true"
-        :key="mainAnimeData.getRecommendations" @swiper="onSwiper">
-        <swiper-slide class="swiper-slide-instance" v-for="(item, index) in populateCards" :key="index">
-          <p class="noselect card-hovered" role="link" aria-label="link to anime in card"
-            @click="searchFromRecommended(item.mediaRecommendation.title)">
+          rotate: 10,
+          stretch: 1,
+          depth: 100,
+          modifier: 3,
+          slideShadows: true,
+        }"
+        :modules="modules"
+        :grabCursor="true"
+        :autoplay="{
+          delay: 2500,
+          disableOnInteraction: false,
+          pauseOnMouseEnter: true,
+        }"
+        :preload-images="false"
+        :lazy="true"
+        ref="swiperContainer"
+        :keyboard="true"
+        :key="mainAnimeData.getRecommendations"
+        @swiper="onSwiper"
+      >
+        <swiper-slide
+          class="swiper-slide-instance"
+          v-for="(item, index) in populateCards"
+          :key="index"
+        >
+          <p
+            class="noselect card-hovered"
+            role="link"
+            aria-label="link to anime in card"
+            @click="searchFromRecommended(item.mediaRecommendation.title)"
+          >
             {{
               item.mediaRecommendation.title.english != null
-              ? item.mediaRecommendation.title.english
-              : item.mediaRecommendation.title.romaji
+                ? item.mediaRecommendation.title.english
+                : item.mediaRecommendation.title.romaji
             }}
           </p>
           <transition appear mode="out-in">
-            <img loading="lazy" :src="item.mediaRecommendation.coverImage.large" alt="" class="anime-images"
-              :key="item.mediaRecommendation.coverImage.large" />
+            <img
+              loading="lazy"
+              :src="item.mediaRecommendation.coverImage.large"
+              alt=""
+              class="anime-images"
+              :key="item.mediaRecommendation.coverImage.large"
+            />
           </transition>
-
         </swiper-slide>
-        <swiper-slide class="swiper-slide-instance" v-if="populateCards.length > 19" @click="showMore">
-          <p class="noselect card-hovered" role="link" aria-label="Show more recommended">
-            Show More <br>&rarr;
+        <swiper-slide
+          class="swiper-slide-instance"
+          v-if="populateCards.length > 19"
+          @click="showMore"
+        >
+          <p
+            class="noselect card-hovered"
+            role="link"
+            aria-label="Show more recommended"
+          >
+            Show More <br />&rarr;
           </p>
         </swiper-slide>
       </swiper>
@@ -45,7 +78,7 @@
 </template>
 <script>
 import { useAnimeData } from "@/stores/anime_data.js";
-import { ref } from 'vue';
+import { ref } from "vue";
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from "swiper/vue";
 import {
@@ -65,22 +98,22 @@ export default {
   components: {
     Swiper,
     SwiperSlide,
-    Bars
+    Bars,
   },
   data() {
     return {
       swiper: null,
-      slice: true
-    }
+      slice: true,
+    };
   },
   async setup() {
-    const mainAnimeData = ref([])
+    const mainAnimeData = ref([]);
     const getAnimeData = async () => {
-      mainAnimeData.value = await useAnimeData()
-    }
-    const swiperContainer = ref(null)
-    await getAnimeData()
-    let useFetchFromRecommendations = mainAnimeData.value.fetchFromRecommended
+      mainAnimeData.value = await useAnimeData();
+    };
+    const swiperContainer = ref(null);
+    await getAnimeData();
+    let useFetchFromRecommendations = mainAnimeData.value.fetchFromRecommended;
     // useAnimeStoreHere
     return {
       modules: [
@@ -93,26 +126,26 @@ export default {
       ],
       mainAnimeData,
       useFetchFromRecommendations,
-      swiperContainer
+      swiperContainer,
     };
   },
   computed: {
     populateCards() {
       if (this.slice == true) {
-        return this.mainAnimeData.getRecommendations.slice(0, 20) // TODO: fix slicing issue
+        return this.mainAnimeData.getRecommendations.slice(0, 20); // TODO: fix slicing issue
       }
-      return this.mainAnimeData.getRecommendations.slice(20, 50)
+      return this.mainAnimeData.getRecommendations.slice(20, 50);
     },
     numberofCards() {
-      if (screen.width < 768) return 2.7
-      return this.mainAnimeData.getRecommendations.length <= 2 ? 2 : 4
+      if (screen.width < 768) return 2.7;
+      return this.mainAnimeData.getRecommendations.length <= 2 ? 2 : 4;
     },
     isCardsLoading() {
-      return this.mainAnimeData.cardsLoading
+      return this.mainAnimeData.cardsLoading;
     },
     centerSlides() {
-      return this.mainAnimeData.getRecommendations.length <= 2 ? false : true
-    }
+      return this.mainAnimeData.getRecommendations.length <= 2 ? false : true;
+    },
   },
   methods: {
     searchFromRecommended(query) {
@@ -120,11 +153,11 @@ export default {
       this.useFetchFromRecommendations(getTitle);
     },
     showMore() {
-      this.slice = !this.slice
-      this.mainAnimeData.cardsLoading = true
+      this.slice = !this.slice;
+      this.mainAnimeData.cardsLoading = true;
       this.swiper.slideTo(0);
       setTimeout(() => {
-        this.mainAnimeData.cardsLoading = false
+        this.mainAnimeData.cardsLoading = false;
       }, 1000);
     },
     onSwiper(swiper) {
@@ -180,8 +213,6 @@ p {
   align-items: center;
   border-radius: 15px;
 }
-
-
 
 .swiper-loading {
   position: absolute;
