@@ -121,13 +121,8 @@
 
     <transition name="fade">
       <div class="pagination" v-if="allBookmarks.length > 0">
-        <Pagination
-          :total-pages="totalPages"
-          :total="total"
-          :per-page="10"
-          :current-page="currentPage"
-          @pagechanged="onPageChange"
-        />
+        <Pagination :total-pages="totalPages" :total="total" :per-page="10" :current-page="currentPage"
+          @pagechanged="onPageChange" />
       </div>
     </transition>
   </div>
