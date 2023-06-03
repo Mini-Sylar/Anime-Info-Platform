@@ -164,7 +164,6 @@ const allBookmarks = computed(() => {
 });
 //  pagination functions
 const total = computed(() => fetchBookmarks.getBookmarks.length);
-console.log(total.value);
 const totalPages = computed(() => Math.ceil(total.value / 10));
 const onPageChange = (page) => {
   currentPage.value = page;
