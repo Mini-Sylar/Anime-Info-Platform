@@ -1,8 +1,5 @@
-<!-- eslint-disable prettier/prettier -->
 <template>
   <div>
-    <hr />
-    {{ allBookmarks }}
     <div class="search-box">
       <div class="tips">
         <Tips></Tips>

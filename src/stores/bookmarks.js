@@ -36,7 +36,7 @@ export const useBookmarks = defineStore("bookmarks", {
         }
       }
       bookmarkedShows.sort((a, b) => b.timestamp - a.timestamp);
-      this.bookmarks = bookmarkedShows.map((show,index) => ({
+      this.bookmarks = bookmarkedShows.map((show, index) => ({
         ...show,
         showDetails: this.bookmarks[index]?.showDetails || {},
       }));
