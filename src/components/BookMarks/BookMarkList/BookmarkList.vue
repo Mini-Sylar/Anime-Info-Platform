@@ -139,15 +139,14 @@ const search = ref("");
 const bookmarkloading = computed(() => fetchBookmarks.bookmarksloading);
 // pagination
 const currentPage = ref(1);
-const total = computed(() => allBookmarks.value.length);
-const totalPages = computed(() => Math.ceil(total.value / 10));
+
 
 async function loadBookmarks() {
   const fetchedData = await fetchBookmarks.getSavedShows();
   await fetchBookmarks.fetchFromBookmarks(fetchedData);
 }
 
- loadBookmarks();
+loadBookmarks();
 
 const allBookmarks = computed(() => {
   return fetchBookmarks.getBookmarks
@@ -164,6 +163,9 @@ const allBookmarks = computed(() => {
     .slice((currentPage.value - 1) * 10, currentPage.value * 10);
 });
 //  pagination functions
+const total = computed(() => fetchBookmarks.getBookmarks.length);
+console.log(total.value);
+const totalPages = computed(() => Math.ceil(total.value / 10));
 const onPageChange = (page) => {
   currentPage.value = page;
 };
