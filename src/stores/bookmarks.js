@@ -37,6 +37,7 @@ export const useBookmarks = defineStore("bookmarks", {
       }
       bookmarkedShows.sort((a, b) => b.timestamp - a.timestamp);
       this.bookmarks = bookmarkedShows;
+      console.log(this.bookmarks);
       return bookmarkedShows;
     },
 
@@ -53,17 +54,18 @@ export const useBookmarks = defineStore("bookmarks", {
         if (isStarred) {
           await localforage.setItem(showId, [showData]);
           toast.info("Show starred successfully!", {});
+          return true
         } else {
           await localforage.removeItem(showId);
           toast.info("Show removed successfully!", {});
+          return false
         }
-        return true;
       } catch (err) {
         toast.error("Something went wrong!");
 
         return false;
       } finally {
-        this.getSavedShows();
+        await this.getSavedShows();
       }
     },
     isShowStarred(showId) {

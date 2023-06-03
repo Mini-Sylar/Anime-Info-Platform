@@ -86,17 +86,17 @@
 
           <div class="action">
             <button class="delete-button" @click="toggleWatched(bookmark.id)">
-              <div role="button" :title="bookmarkWithStatus[index]?.watched
+              <div role="button" :title="bookmark.watched
                 ? 'Mark as unwatched'
                 : 'Mark as watched'
                 " :class="[
-    bookmarkWithStatus[index]?.watched
+    bookmark.watched
       ? `check check-watched`
       : `check uses-dynamic`,
   ]"></div>
             </button>
             <button title="Share" class="delete-button" @click="
-              shareAnime(bookmark.title.english || bookmark.title.romaji)
+              shareAnime(bookmark.title)
               ">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="uses-dynamic delete-icon share-hover">
                 <path
@@ -119,8 +119,8 @@
       </TransitionGroup>
     </div>
 
-    <!-- <transition name="fade">
-      <div class="pagination" v-if="bookmark_details.length > 0">
+    <transition name="fade">
+      <div class="pagination" v-if="allBookmarks.length > 0">
         <Pagination
           :total-pages="totalPages"
           :total="total"
@@ -129,7 +129,7 @@
           @pagechanged="onPageChange"
         />
       </div>
-    </transition> -->
+    </transition>
   </div>
 </template>
 <script setup>
@@ -147,6 +147,8 @@ const search = ref("");
 const bookmarkloading = computed(() => fetchBookmarks.bookmarksloading);
 // pagination
 const currentPage = ref(1);
+const total = computed(() => allBookmarks.value.length);
+const totalPages = computed(() => Math.ceil(total.value / 10));
 
 async function loadBookmarks() {
   const fetchedData = await fetchBookmarks.getSavedShows();
@@ -173,42 +175,6 @@ const allBookmarks = computed(() => {
 const onPageChange = (page) => {
   currentPage.value = page;
 };
-const total = computed(() => allBookmarks.value.length);
-const totalPages = computed(() => Math.ceil(total.value / 10));
-
-// const bookRef = computed(() => fetchBookmarks.bookmarked_details);
-
-const bookmarkWithStatus = computed(() =>
-  //  set up search
-  fetchBookmarks.bookmarks
-    .filter((show) => {
-      return (
-        show.showDetails.title.english
-          ?.toLowerCase()
-          .includes(search.value.toLowerCase()) ||
-        show.showDetails.title.romaji
-          ?.toLowerCase()
-          .includes(search.value.toLowerCase())
-      );
-    })
-    .slice((currentPage.value - 1) * 10, currentPage.value * 10)
-);
-
-console.log(allBookmarks.value);
-
-// const bookmark_details = computed(() => {
-//   const filteredShows = bookRef.value.filter((show) => {
-//     return (
-//       show.title.english?.toLowerCase().includes(search.value.toLowerCase()) ||
-//       show.title.romaji?.toLowerCase().includes(search.value.toLowerCase())
-//     );
-//   });
-
-//   return filteredShows.slice(
-//     (currentPage.value - 1) * 10,
-//     currentPage.value * 10
-//   );
-// });
 
 const formatDate = (date) => {
   const options = {
@@ -232,21 +198,21 @@ const formatDate = (date) => {
 const removeStar = (show) => {
   const showID = show.id.toString();
   const showTitle = show.title.english ? show.title.english : show.title.romaji;
-  bookmarks.starAnime(showID, showTitle);
+  fetchBookmarks.starAnime(showID, showTitle);
   // use splice instead of filter to remove the item from the array
-  bookRef.value.splice(bookRef.value.indexOf(show), 1);
+  // allBookmarks.value.splice(allBookmarks.value.indexOf(show), 1);
 };
 
-// watch(bookmark_details, () => {
-//   if (bookmark_details.value.length === 0 && currentPage.value !== 1) {
-//     currentPage.value = 1;
-//   }
-// });
+watch(allBookmarks, () => {
+  if (allBookmarks.value.length === 0 && currentPage.value !== 1) {
+    currentPage.value = 1;
+  }
+});
 
 // toggle watched
 const toggleWatched = async (showId) => {
   try {
-    await bookmarks.toggleWatched(showId.toString());
+    await fetchBookmarks.toggleWatched(showId);
   } catch (error) {
     return;
   }

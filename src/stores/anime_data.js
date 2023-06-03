@@ -254,7 +254,6 @@ export const useAnimeData = defineStore("animeData", {
     },
     async initializeIsStarred(showId) {
       const starred = await this.bookMarkStore.isShowStarred(showId.value);
-      // const starred = await isShowStarred(showId.value);
       this.$state.isStarred = starred;
     },
     showReleaseNotes() {
