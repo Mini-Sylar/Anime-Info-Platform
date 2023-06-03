@@ -150,7 +150,7 @@ async function loadBookmarks() {
   await fetchBookmarks.fetchFromBookmarks(fetchedData);
 }
 
-await loadBookmarks();
+ loadBookmarks();
 
 const allBookmarks = computed(() => {
   return fetchBookmarks.getBookmarks

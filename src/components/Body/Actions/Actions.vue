@@ -59,7 +59,6 @@ const useShareAnime = () => {
   useAnimeData().shareAnimeMain();
 };
 const showID = computed(() => {
-  console.log("showID computed")
   return useAnimeData().getAnimeId.toString();
 });
 // check if anime was starred
