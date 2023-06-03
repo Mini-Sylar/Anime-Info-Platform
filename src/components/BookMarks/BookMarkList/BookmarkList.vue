@@ -1,16 +1,14 @@
+<!-- eslint-disable prettier/prettier -->
 <template>
   <div>
+    <hr />
+    {{ allBookmarks }}
     <div class="search-box">
       <div class="tips">
         <Tips></Tips>
       </div>
       <div class="search-item">
-        <input
-          type="text"
-          class="search-bookmark"
-          placeholder="Search"
-          v-model="search"
-        />
+        <input type="text" class="search-bookmark" placeholder="Search" v-model="search" />
       </div>
     </div>
     <div class="tbl-header bookmarked-container">
@@ -35,34 +33,21 @@
       </transition>
 
       <TransitionGroup name="pop" tag="ul" class="container">
-        <li
-          class="table-item"
-          v-for="(bookmark, index) in bookmark_details"
-          :key="index"
-          v-if="bookmark_details.length > 0"
-        >
+        <li class="table-item" v-for="(bookmark, index) in allBookmarks" :key="index" v-if="allBookmarks.length > 0">
           <div class="contains-title">
             <div class="bg-image">
-              <img
-                :src="bookmark.coverImage.medium"
-                :alt="
-                  bookmark.title.english
-                    ? bookmark.title.english
-                    : bookmark.title.romaji
-                "
-              />
+              <img :src="bookmark.showDetails.coverImage.medium" :alt="bookmark.showDetails.title.english
+                ? bookmark.showDetails.title.english
+                : bookmark.showDetails.title.romaji
+                " />
             </div>
-            <div
-              class="title animetitle"
-              role="button"
-              aria-label="search anime"
-              @click="searchAnime(bookmark.title.romaji)"
-            >
+            <div class="title animetitle" role="button" aria-label="search anime"
+              @click="searchAnime(bookmark.showDetails.title.romaji)">
               <p>
                 {{
-                  bookmark.title.english
-                    ? bookmark.title.english
-                    : bookmark.title.romaji
+                  bookmark.showDetails.title.english
+                  ? bookmark.showDetails.title.english
+                  : bookmark.showDetails.title.romaji
                 }}
               </p>
             </div>
@@ -70,12 +55,12 @@
           <div class="latest-episode">
             <p>
               {{
-                bookmark.airingSchedule.nodes[0]?.episode
-                  ? bookmark.airingSchedule.nodes[0]?.episode
-                  : bookmark?.episodes
+                bookmark.showDetails.airingSchedule.nodes[0].episode
+                ? bookmark.showDetails.airingSchedule.nodes[0].episode
+                : bookmark.showDetails?.episodes
               }}
               <transition name="pop">
-                <span class="watched" v-if="bookmarkWithStatus[index]?.watched">
+                <span class="watched" v-if="bookmark.watched">
                   Watched
                 </span>
                 <span class="unwatched" v-else> Unwatched </span>
@@ -84,70 +69,45 @@
           </div>
 
           <div class="schedule">
-            <p>{{ formatDate(bookmark.airingSchedule.nodes[0]?.airingAt) }}</p>
+            <p>{{ formatDate(bookmark.showDetails.airingSchedule.nodes[0].airingAt) }}</p>
           </div>
 
           <div class="season">
-            <p>{{ bookmark?.season }} {{ bookmark?.startDate.year }}</p>
+            <p>{{ bookmark.showDetails.season }} {{ bookmark.showDetails.startDate.year }}</p>
           </div>
 
           <div class="status">
-            <span
-              :class="[
-                bookmark.status == 'FINISHED' ? 'finished' : 'releasing',
-              ]"
-            >
-              {{ bookmark.status }}
+            <span :class="[
+              bookmark.showDetails.status == 'FINISHED' ? 'finished' : 'releasing',
+            ]">
+              {{ bookmark.showDetails.status }}
             </span>
           </div>
 
           <div class="action">
             <button class="delete-button" @click="toggleWatched(bookmark.id)">
-              <div
-                role="button"
-                :title="
-                  bookmarkWithStatus[index]?.watched
-                    ? 'Mark as unwatched'
-                    : 'Mark as watched'
-                "
-                :class="[
-                  bookmarkWithStatus[index]?.watched
-                    ? `check check-watched`
-                    : `check uses-dynamic`,
-                ]"
-              ></div>
+              <div role="button" :title="bookmarkWithStatus[index]?.watched
+                ? 'Mark as unwatched'
+                : 'Mark as watched'
+                " :class="[
+    bookmarkWithStatus[index]?.watched
+      ? `check check-watched`
+      : `check uses-dynamic`,
+  ]"></div>
             </button>
-            <button
-              title="Share"
-              class="delete-button"
-              @click="
-                shareAnime(bookmark.title.english || bookmark.title.romaji)
-              "
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 448 512"
-                class="uses-dynamic delete-icon share-hover"
-              >
+            <button title="Share" class="delete-button" @click="
+              shareAnime(bookmark.title.english || bookmark.title.romaji)
+              ">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="uses-dynamic delete-icon share-hover">
                 <path
-                  d="M352 224c53 0 96-43 96-96s-43-96-96-96s-96 43-96 96c0 4 .2 8 .7 11.9l-94.1 47C145.4 170.2 121.9 160 96 160c-53 0-96 43-96 96s43 96 96 96c25.9 0 49.4-10.2 66.6-26.9l94.1 47c-.5 3.9-.7 7.8-.7 11.9c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-25.9 0-49.4 10.2-66.6 26.9l-94.1-47c.5-3.9 .7-7.8 .7-11.9s-.2-8-.7-11.9l94.1-47C302.6 213.8 326.1 224 352 224z"
-                />
+                  d="M352 224c53 0 96-43 96-96s-43-96-96-96s-96 43-96 96c0 4 .2 8 .7 11.9l-94.1 47C145.4 170.2 121.9 160 96 160c-53 0-96 43-96 96s43 96 96 96c25.9 0 49.4-10.2 66.6-26.9l94.1 47c-.5 3.9-.7 7.8-.7 11.9c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-25.9 0-49.4 10.2-66.6 26.9l-94.1-47c.5-3.9 .7-7.8 .7-11.9s-.2-8-.7-11.9l94.1-47C302.6 213.8 326.1 224 352 224z" />
               </svg>
             </button>
-            <button
-              title="Remove show from your bookmarks"
-              type="button"
-              class="delete-button"
-              @click="removeStar(bookmark)"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="uses-dynamic delete-icon"
-                viewBox="0 0 448 512"
-              >
+            <button title="Remove show from your bookmarks" type="button" class="delete-button"
+              @click="removeStar(bookmark)">
+              <svg xmlns="http://www.w3.org/2000/svg" class="uses-dynamic delete-icon" viewBox="0 0 448 512">
                 <path
-                  d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"
-                />
+                  d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z" />
               </svg>
             </button>
           </div>
@@ -159,7 +119,7 @@
       </TransitionGroup>
     </div>
 
-    <transition name="fade">
+    <!-- <transition name="fade">
       <div class="pagination" v-if="bookmark_details.length > 0">
         <Pagination
           :total-pages="totalPages"
@@ -169,7 +129,7 @@
           @pagechanged="onPageChange"
         />
       </div>
-    </transition>
+    </transition> -->
   </div>
 </template>
 <script setup>
@@ -182,39 +142,73 @@ import Pagination from "../Pagination/Pagination.vue";
 import Tips from "../Tips/Tips.vue";
 
 const router = useRouter();
-const bookmarks = useBookmarks();
+const fetchBookmarks = useBookmarks();
 const search = ref("");
-const bookmarkloading = computed(() => bookmarks.bookmarksloading);
+const bookmarkloading = computed(() => fetchBookmarks.bookmarksloading);
+// pagination
+const currentPage = ref(1);
 
 async function loadBookmarks() {
-  const fetchedData = await bookmarks.getSavedShows();
-  await bookmarks.fetchFromBookmarks(fetchedData);
+  const fetchedData = await fetchBookmarks.getSavedShows();
+  await fetchBookmarks.fetchFromBookmarks(fetchedData);
 }
 
-loadBookmarks();
-// Set it to computed so it's always fetching the latest data
-// completed
-const bookRef = computed(() => bookmarks.bookmarked_details);
+await loadBookmarks();
+
+const allBookmarks = computed(() => {
+  return fetchBookmarks.getBookmarks
+    .filter((show) => {
+      return (
+        show.showDetails.title?.english
+          ?.toLowerCase()
+          .includes(search.value.toLowerCase()) ||
+        show.showDetails.title?.romaji
+          ?.toLowerCase()
+          .includes(search.value.toLowerCase())
+      );
+    })
+    .slice((currentPage.value - 1) * 10, currentPage.value * 10);
+});
+//  pagination functions
+const onPageChange = (page) => {
+  currentPage.value = page;
+};
+const total = computed(() => allBookmarks.value.length);
+const totalPages = computed(() => Math.ceil(total.value / 10));
+
+// const bookRef = computed(() => fetchBookmarks.bookmarked_details);
+
 const bookmarkWithStatus = computed(() =>
-  bookmarks.bookmarks.slice(
-    (currentPage.value - 1) * 10,
-    currentPage.value * 10
-  )
+  //  set up search
+  fetchBookmarks.bookmarks
+    .filter((show) => {
+      return (
+        show.showDetails.title.english
+          ?.toLowerCase()
+          .includes(search.value.toLowerCase()) ||
+        show.showDetails.title.romaji
+          ?.toLowerCase()
+          .includes(search.value.toLowerCase())
+      );
+    })
+    .slice((currentPage.value - 1) * 10, currentPage.value * 10)
 );
 
-const bookmark_details = computed(() => {
-  const filteredShows = bookRef.value.filter((show) => {
-    return (
-      show.title.english?.toLowerCase().includes(search.value.toLowerCase()) ||
-      show.title.romaji?.toLowerCase().includes(search.value.toLowerCase())
-    );
-  });
+console.log(allBookmarks.value);
 
-  return filteredShows.slice(
-    (currentPage.value - 1) * 10,
-    currentPage.value * 10
-  );
-});
+// const bookmark_details = computed(() => {
+//   const filteredShows = bookRef.value.filter((show) => {
+//     return (
+//       show.title.english?.toLowerCase().includes(search.value.toLowerCase()) ||
+//       show.title.romaji?.toLowerCase().includes(search.value.toLowerCase())
+//     );
+//   });
+
+//   return filteredShows.slice(
+//     (currentPage.value - 1) * 10,
+//     currentPage.value * 10
+//   );
+// });
 
 const formatDate = (date) => {
   const options = {
@@ -242,19 +236,12 @@ const removeStar = (show) => {
   // use splice instead of filter to remove the item from the array
   bookRef.value.splice(bookRef.value.indexOf(show), 1);
 };
-// pagination
-const currentPage = ref(1);
-const onPageChange = (page) => {
-  currentPage.value = page;
-};
-const total = computed(() => bookRef.value.length);
-const totalPages = computed(() => Math.ceil(total.value / 10));
 
-watch(bookmark_details, () => {
-  if (bookmark_details.value.length === 0 && currentPage.value !== 1) {
-    currentPage.value = 1;
-  }
-});
+// watch(bookmark_details, () => {
+//   if (bookmark_details.value.length === 0 && currentPage.value !== 1) {
+//     currentPage.value = 1;
+//   }
+// });
 
 // toggle watched
 const toggleWatched = async (showId) => {
@@ -627,5 +614,9 @@ img {
   .action {
     gap: 15%;
   }
+}
+
+* {
+  color: white;
 }
 </style>

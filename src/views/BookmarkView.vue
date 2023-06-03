@@ -1,8 +1,12 @@
 <template>
   <div>
-    <div class="min-container">
-      <BookmarkList></BookmarkList>
-    </div>
+    <Suspense>
+      <template #default>
+        <div class="min-container">
+          <BookmarkList></BookmarkList>
+        </div>
+      </template>
+    </Suspense>
     <Background
       v-memo="mainAnimeData.getBackground"
       :backgroundImage="mainAnimeData.getBackground"

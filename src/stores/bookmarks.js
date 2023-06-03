@@ -9,15 +9,11 @@ let toast = useToast();
 export const useBookmarks = defineStore("bookmarks", {
   state: () => ({
     bookmarks: [],
-    bookmarked_details: [],
     bookmarksloading: false,
   }),
   getters: {
     getBookmarks: (state) => {
       return state.bookmarks;
-    },
-    getBookmarkedDetials: (state) => {
-      return state.bookmarked_details;
     },
   },
   actions: {
@@ -34,6 +30,7 @@ export const useBookmarks = defineStore("bookmarks", {
             latestEpisode: data[0].latestEpisode,
             previousEpisode: data[0].previousEpisode,
             timestamp: data[0].timestamp,
+            showDetails: {},
           };
           bookmarkedShows.push(bookmarkedShow);
         }
@@ -91,10 +88,10 @@ export const useBookmarks = defineStore("bookmarks", {
     },
     async fetchFromBookmarks(savedShows) {
       this.bookmarksloading = true;
-      if (this.bookmarked_details.length == savedShows.length) {
-        this.bookmarksloading = false;
-        return;
-      }
+      // if (this.bookmarks.length == savedShows.length) {
+      //   this.bookmarksloading = false;
+      //   return;
+      // }
       let showIDs = [];
       savedShows.filter((show) => {
         const id = parseInt(show.id);
@@ -109,13 +106,13 @@ export const useBookmarks = defineStore("bookmarks", {
       });
 
       let data = await response.json();
-      this.bookmarked_details =
+      let showDetails =
         data?.data.Page.media.sort((a, b) => {
           const aIndex = showIDs.indexOf(a.id);
           const bIndex = showIDs.indexOf(b.id);
           return aIndex - bIndex;
         }) || [];
-      this.bookmarked_details = this.bookmarked_details.map((show) => {
+      showDetails = showDetails.map((show) => {
         return {
           ...show,
           airingSchedule: {
@@ -132,7 +129,11 @@ export const useBookmarks = defineStore("bookmarks", {
       });
       let latestEpisodes = [];
 
-      this.bookmarked_details.forEach((show) => {
+      this.bookmarks.forEach((show, index) => {
+        show.showDetails = showDetails[index];
+      });
+
+      showDetails.forEach((show) => {
         latestEpisodes.push({
           showId: show.id.toString(),
           latestEpisode: show.airingSchedule.nodes[0]?.episode || show.episodes,
@@ -268,7 +269,6 @@ export const useBookmarks = defineStore("bookmarks", {
     async clearAllBookmarks() {
       await localforage.clear();
       toast.info("All bookmarks cleared!", {});
-      this.bookmarked_details = [];
       this.bookmarks = [];
     },
   },
