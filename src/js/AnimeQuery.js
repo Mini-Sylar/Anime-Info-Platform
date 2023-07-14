@@ -19,7 +19,7 @@ export function prepareAnimeData(
     ? sharedValue
     : storedValue
     ? storedValue
-    : "Oshi-No-Ko"
+    : "Zom-100-Bucket-List-of-the-Dead"
 ) {
   let gqlBody = {
     query: `query ($id: Int,$search: String) {
