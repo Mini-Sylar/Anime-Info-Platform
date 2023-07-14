@@ -200,16 +200,18 @@ button {
 @media screen and (max-width: 500px) {
 
   .contains-genres {
-    right: 100%;
-    left: -65%;
-    width: 90vw;
-    height: 35rem;
+    right: 0;
+    left: -13vw;
+    margin: 0 auto;
+    width: 65vw;
+    height: 36rem;
   }
 
   .contains-genres ul {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    padding: 1rem;
   }
 }
 </style>

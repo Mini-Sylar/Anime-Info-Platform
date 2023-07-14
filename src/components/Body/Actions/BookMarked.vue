@@ -6,11 +6,7 @@
       <div class="has-bookmarks">
         <ul>
           <li v-for="(bookmark, index) in bookmarks" :key="index">
-            <button
-              type="button"
-              class="bookmarked-show"
-              @click="searchAnime(bookmark.title)"
-            >
+            <button type="button" class="bookmarked-show" @click="searchAnime(bookmark.title)">
               {{ bookmark.title }}
             </button>
           </li>
@@ -52,7 +48,9 @@ useBookmarks()
   bottom: 7rem;
   background-color: #0195ff2c;
   border-radius: 10px;
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
+  z-index: 10;
   height: 21em;
   overflow: hidden;
   width: 20rem;
