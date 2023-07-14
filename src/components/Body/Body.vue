@@ -2,20 +2,20 @@
   <div class="is-a-container">
     <div class="body-container">
       <transition appear mode="out-in">
+        <div class="image-mobile">
+          <img :src="mainAnimeData.getBackground" alt="Show Image">
+        </div>
+      </transition>
+      <transition appear mode="out-in">
         <div class="body-loading-blur" v-if="setBodyLoading">
           <Bars></Bars>
         </div>
       </transition>
-      <TitleSynopsis
-        :titleDescription="mainAnimeData.getAnimeTitleDescription"
-      ></TitleSynopsis>
+      <TitleSynopsis :titleDescription="mainAnimeData.getAnimeTitleDescription"></TitleSynopsis>
       <div class="info-trailer-container">
         <div class="info-container">
           <AnimeData :animeMetaData="mainAnimeData.getMetaDescription" />
-          <Rating
-            :rate="mainAnimeData.getRating"
-            :accentColor="mainAnimeData.getAccentColor"
-          />
+          <Rating :rate="mainAnimeData.getRating" :accentColor="mainAnimeData.getAccentColor" />
           <Actions />
           <MoreInfo :animeID="mainAnimeData.getAnimeId" />
         </div>
@@ -75,6 +75,11 @@ const setBodyLoading = computed(() => {
   transform: translate(-80%, -50%) !important;
 }
 
+
+.image-mobile {
+  display: none;
+}
+
 @media screen and (max-width: 768px) {
   .body-loading-blur {
     height: 100%;
@@ -82,6 +87,23 @@ const setBodyLoading = computed(() => {
 
   .body-loading-blur svg {
     transform: translate(-40%, -60%) !important;
+  }
+
+  .image-mobile {
+    display: block;
+    width: 100%;
+    height: 15rem;
+    display: flex;
+    margin: 0 auto;
+    margin-top: 10rem;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+
+  .image-mobile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 }
 </style>

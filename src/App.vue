@@ -90,11 +90,7 @@ watch(showNewFeatures, (value) => {
     </transition>
   </router-view>
   <Teleport to="body">
-    <NewestFeatures
-      :show="showNewFeatures"
-      @close="prepareNextFeature"
-      :newFeatures="newFeatures.slice(1)"
-    >
+    <NewestFeatures :show="showNewFeatures" @close="prepareNextFeature" :newFeatures="newFeatures.slice(1)">
     </NewestFeatures>
   </Teleport>
 </template>
@@ -248,5 +244,10 @@ td,
 
 .form-input {
   border-bottom: 1px solid v-bind("setColor") !important;
+}
+
+.image-mobile {
+  border: .5px solid v-bind("setColor") !important;
+  filter: drop-shadow(0 0 0.75rem v-bind("setColor")) !important;
 }
 </style>

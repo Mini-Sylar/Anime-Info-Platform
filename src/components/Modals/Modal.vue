@@ -64,6 +64,7 @@ const checkIfActive = () => {
   border: 1px solid v-bind(setColor + "20");
   transition: all 0.3s ease;
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .modal-body {
