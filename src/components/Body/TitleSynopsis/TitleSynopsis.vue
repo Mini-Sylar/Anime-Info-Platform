@@ -50,7 +50,7 @@ export default {
   .anime-title {
     font-size: clamp(1.5rem, 3vw, 3.5rem);
     height: 100%;
-    margin-top: 2rem;
+    margin-top: 3rem;
     line-height: 1.5rem;
     display: flex;
     align-items: flex-end;
