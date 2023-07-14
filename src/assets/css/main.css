@@ -4,7 +4,6 @@ main {
   display: flex;
 }
 
-
 .left-side-main {
   width: 100%;
   display: flex;
@@ -38,6 +37,7 @@ main {
   animation: shimmer 2.5s infinite;
   background-color: #ffffffd2;
   opacity: 0.5;
+  -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
 }
 
@@ -275,6 +275,3 @@ main {
     transform: rotateZ(0);
   }
 }
-
-
-

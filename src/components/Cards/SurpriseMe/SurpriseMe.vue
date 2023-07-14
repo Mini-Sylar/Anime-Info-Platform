@@ -5,22 +5,13 @@
         <button type="submit">Surprise Me</button>
         <OnClickOutside @trigger="hideWhenClickedOutside">
           <span class="dropdown-button">
-            <span
-              role="button"
-              aria-label="Button to show genres"
-              @click.prevent="toggleShowGenre"
-              class="carrette_button"
-            >
-              <svg
-                :class="[
-                  showGenre == true ? 'carret-toggle rotate' : 'carret-toggle',
-                ]"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 320 512"
-              >
+            <span role="button" aria-label="Button to show genres" @click.prevent="toggleShowGenre"
+              class="carrette_button">
+              <svg :class="[
+                showGenre == true ? 'carret-toggle rotate' : 'carret-toggle',
+              ]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
                 <path
-                  d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"
-                />
+                  d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z" />
               </svg>
             </span>
 
@@ -28,13 +19,7 @@
               <div class="contains-genres" v-if="showGenre">
                 <ul>
                   <li v-for="(item, index) in genres" :key="index">
-                    <input
-                      type="radio"
-                      :id="item"
-                      :value="item"
-                      name="animeGenre"
-                      v-model="genreQuery"
-                    />
+                    <input type="radio" :id="item" :value="item" name="animeGenre" v-model="genreQuery" />
                     <label :for="item">{{ item }}</label>
                   </li>
                 </ul>
@@ -161,7 +146,7 @@ button {
   right: 0;
   left: -8%;
   width: 120%;
-  background-color: #0195ff2c;
+  background-color: #0195ff6c;
   border-radius: 10px;
   z-index: 1;
   padding: 0.3rem;
@@ -169,7 +154,9 @@ button {
   padding-bottom: 0;
   overflow: hidden;
   height: 21rem;
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
+  z-index: 9;
   color: white;
   transition: all 0.2s ease-in-out;
 }
@@ -211,8 +198,18 @@ button {
 }
 
 @media screen and (max-width: 500px) {
+
+  .contains-genres {
+    right: 100%;
+    left: -65%;
+    width: 90vw;
+    height: 35rem;
+  }
+
   .contains-genres ul {
-    gap: 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
   }
 }
 </style>

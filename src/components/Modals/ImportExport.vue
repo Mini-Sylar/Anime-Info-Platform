@@ -66,141 +66,59 @@ const importShows = async () => {
           <h3>Export/Import Bookmark List</h3>
         </div>
         <div class="swap-views">
-          <button
-            @click="showExportView"
-            :class="[showExport == true ? 'is-active' : 'is-not-active']"
-          >
+          <button @click="showExportView" :class="[showExport == true ? 'is-active' : 'is-not-active']">
             Export
           </button>
-          <button
-            @click="showImport"
-            :class="[showExport == true ? 'is-not-active' : 'is-active']"
-          >
+          <button @click="showImport" :class="[showExport == true ? 'is-not-active' : 'is-active']">
             Import
           </button>
         </div>
         <div class="modal-body">
           <div class="export-container" v-if="showExport">
             <p>Export your anime list to a JSON file.</p>
-            <button
-              class="modal-default-button"
-              @click="exportShow"
-              :disabled="isButtonDisable"
-            >
+            <button class="modal-default-button" @click="exportShow" :disabled="isButtonDisable">
               <transition name="fade">
-                <span v-if="isButtonDisable"
-                  ><svg
-                    class="is-contact-loader"
-                    version="1.1"
-                    id="L9"
-                    xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                    x="0px"
-                    y="0px"
-                    viewBox="0 0 100 100"
-                    enable-background="new 0 0 0 0"
-                    xml:space="preserve"
-                  >
+                <span v-if="isButtonDisable"><svg class="is-contact-loader" version="1.1" id="L9"
+                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                    viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
                     <rect x="20" y="50" width="4" height="10" fill="#fff">
-                      <animateTransform
-                        attributeType="xml"
-                        attributeName="transform"
-                        type="translate"
-                        values="0 0; 0 20; 0 0"
-                        begin="0"
-                        dur="0.6s"
-                        repeatCount="indefinite"
-                      />
+                      <animateTransform attributeType="xml" attributeName="transform" type="translate"
+                        values="0 0; 0 20; 0 0" begin="0" dur="0.6s" repeatCount="indefinite" />
                     </rect>
                     <rect x="30" y="50" width="4" height="10" fill="#fff">
-                      <animateTransform
-                        attributeType="xml"
-                        attributeName="transform"
-                        type="translate"
-                        values="0 0; 0 20; 0 0"
-                        begin="0.2s"
-                        dur="0.6s"
-                        repeatCount="indefinite"
-                      />
+                      <animateTransform attributeType="xml" attributeName="transform" type="translate"
+                        values="0 0; 0 20; 0 0" begin="0.2s" dur="0.6s" repeatCount="indefinite" />
                     </rect>
                     <rect x="40" y="50" width="4" height="10" fill="#fff">
-                      <animateTransform
-                        attributeType="xml"
-                        attributeName="transform"
-                        type="translate"
-                        values="0 0; 0 20; 0 0"
-                        begin="0.4s"
-                        dur="0.6s"
-                        repeatCount="indefinite"
-                      />
-                    </rect></svg
-                ></span>
+                      <animateTransform attributeType="xml" attributeName="transform" type="translate"
+                        values="0 0; 0 20; 0 0" begin="0.4s" dur="0.6s" repeatCount="indefinite" />
+                    </rect>
+                  </svg></span>
               </transition>
               Export
             </button>
           </div>
           <div class="export-container" v-else>
             <p>Import your anime list from a JSON file.</p>
-            <input
-              class="modal-default-button"
-              type="file"
-              accept=".json"
-              ref="file"
-              typeof="JSON"
-            />
-            <button
-              class="modal-default-button"
-              @click="importShows"
-              :disabled="isButtonDisable"
-            >
+            <input class="modal-default-button" type="file" accept=".json" ref="file" typeof="JSON" />
+            <button class="modal-default-button" @click="importShows" :disabled="isButtonDisable">
               <transition name="fade">
-                <span v-if="isButtonDisable"
-                  ><svg
-                    class="is-contact-loader"
-                    version="1.1"
-                    id="L9"
-                    xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                    x="0px"
-                    y="0px"
-                    viewBox="0 0 100 100"
-                    enable-background="new 0 0 0 0"
-                    xml:space="preserve"
-                  >
+                <span v-if="isButtonDisable"><svg class="is-contact-loader" version="1.1" id="L9"
+                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                    viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
                     <rect x="20" y="50" width="4" height="10" fill="#fff">
-                      <animateTransform
-                        attributeType="xml"
-                        attributeName="transform"
-                        type="translate"
-                        values="0 0; 0 20; 0 0"
-                        begin="0"
-                        dur="0.6s"
-                        repeatCount="indefinite"
-                      />
+                      <animateTransform attributeType="xml" attributeName="transform" type="translate"
+                        values="0 0; 0 20; 0 0" begin="0" dur="0.6s" repeatCount="indefinite" />
                     </rect>
                     <rect x="30" y="50" width="4" height="10" fill="#fff">
-                      <animateTransform
-                        attributeType="xml"
-                        attributeName="transform"
-                        type="translate"
-                        values="0 0; 0 20; 0 0"
-                        begin="0.2s"
-                        dur="0.6s"
-                        repeatCount="indefinite"
-                      />
+                      <animateTransform attributeType="xml" attributeName="transform" type="translate"
+                        values="0 0; 0 20; 0 0" begin="0.2s" dur="0.6s" repeatCount="indefinite" />
                     </rect>
                     <rect x="40" y="50" width="4" height="10" fill="#fff">
-                      <animateTransform
-                        attributeType="xml"
-                        attributeName="transform"
-                        type="translate"
-                        values="0 0; 0 20; 0 0"
-                        begin="0.4s"
-                        dur="0.6s"
-                        repeatCount="indefinite"
-                      />
-                    </rect></svg
-                ></span>
+                      <animateTransform attributeType="xml" attributeName="transform" type="translate"
+                        values="0 0; 0 20; 0 0" begin="0.4s" dur="0.6s" repeatCount="indefinite" />
+                    </rect>
+                  </svg></span>
               </transition>
               Import
             </button>
@@ -230,7 +148,9 @@ const importShows = async () => {
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   transition: opacity 0.3s ease;
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
+  z-index: 10;
 }
 
 .modal-container {

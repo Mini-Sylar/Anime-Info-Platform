@@ -12,11 +12,7 @@
       <ul>
         <li v-for="(history, index) in getHistory" :key="index">
           <div class="history-content">
-            <button
-              type="button"
-              class="history-title"
-              @click.prevent="searchHistory(history)"
-            >
+            <button type="button" class="history-title" @click.prevent="searchHistory(history)">
               {{ history }}
             </button>
           </div>
@@ -56,7 +52,9 @@ const clearHistory = () => {
   bottom: 7rem;
   background-color: #0195ff2c;
   border-radius: 10px;
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
+  z-index: 9;
   height: 20em;
   overflow: hidden;
   width: 20rem;
@@ -131,6 +129,7 @@ h4 {
   height: 18rem;
   background-color: #0195ff2c;
   border-radius: 10px;
+  -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
   z-index: 28 !important;
 }

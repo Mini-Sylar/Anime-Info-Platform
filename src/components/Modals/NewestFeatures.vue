@@ -26,21 +26,14 @@ const checkIfActive = () => {
         </div>
 
         <div class="modal-body">
-          <div
-            class="content"
-            v-for="(feature, index) in newFeatures"
-            :key="index"
-          >
+          <div class="content" v-for="(feature, index) in newFeatures" :key="index">
             <h4 class="newest-title">{{ feature.title }}</h4>
             <div class="new-features">
               <p class="newest-description" v-html="feature.description"></p>
             </div>
           </div>
-          <a
-            href="https://github.com/Mini-Sylar/Anime-Info-Platform/releases/latest"
-            target="_blank"
-            >Full Release Notes 🔗</a
-          >
+          <a href="https://github.com/Mini-Sylar/Anime-Info-Platform/releases/latest" target="_blank">Full Release Notes
+            🔗</a>
         </div>
 
         <div class="modal-footer">
@@ -66,7 +59,9 @@ const checkIfActive = () => {
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   transition: opacity 0.3s ease;
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
+  z-index: 10;
 }
 
 .modal-container {
@@ -77,7 +72,9 @@ const checkIfActive = () => {
   border-radius: 2px;
   border: 1px solid v-bind(setColor + "20");
   transition: all 0.3s ease;
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
+  z-index: 10;
 }
 
 .modal-body {
