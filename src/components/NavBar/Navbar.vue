@@ -23,13 +23,8 @@ const redirectToHomeAndFetch = () => {
   <header>
     <nav class="navigation-bar">
       <div class="main-links" v-if="!isMobile">
-        <a
-          role="button"
-          title="get current season list"
-          class="is-url is-link current-season"
-          @click="redirectToHomeAndFetch"
-          >Current Season</a
-        >
+        <a role="button" title="get current season list" class="is-url is-link current-season"
+          @click="redirectToHomeAndFetch">Current Season</a>
         <RouterLink to="/" class="is-url">Home</RouterLink>
         <RouterLink to="/bookmarks" class="is-url">Bookmarks</RouterLink>
         <RouterLink to="/about" class="is-url">About</RouterLink>
@@ -38,10 +33,7 @@ const redirectToHomeAndFetch = () => {
       <div v-else>
         <MobileHeader> </MobileHeader>
       </div>
-      <div
-        class="search-bar"
-        v-if="$route.path === '/' || $route.params.search"
-      >
+      <div class="search-bar" v-if="$route.path === '/' || $route.params.search">
         <SearchboxVue />
       </div>
     </nav>
@@ -65,6 +57,7 @@ const redirectToHomeAndFetch = () => {
 }
 
 header {
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   transition: all 0.5s ease;
 }

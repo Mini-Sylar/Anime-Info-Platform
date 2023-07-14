@@ -233,7 +233,9 @@ table {
 
 .tbl-header {
   background-color: #0195ff2c;
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
+  z-index: 10;
 }
 
 .tbl-content {
@@ -243,7 +245,9 @@ table {
   overflow-x: auto;
   margin-top: 0px;
   border: 1px solid #0195ff2c;
+  -webkit-backdrop-filter: blur(30px);
   backdrop-filter: blur(30px);
+  z-index: 10;
   overflow-x: hidden;
 }
 
@@ -323,7 +327,9 @@ th {
   width: 100%;
   height: 100%;
   z-index: 20;
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
+  z-index: 10;
 }
 
 .empty {
@@ -349,7 +355,9 @@ th {
   border: none;
   outline: none;
   background-color: #0195ff2c;
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
+  z-index: 10;
   color: #fff;
   font-size: 1rem;
   font-weight: 500;
