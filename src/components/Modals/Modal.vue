@@ -52,6 +52,7 @@ const checkIfActive = () => {
   display: flex;
   transition: opacity 0.3s ease;
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .modal-container {
@@ -133,6 +134,6 @@ ul li::before {
 }
 
 :global(.modal-header *) {
-  color: v-bind(setColor) !important ;
+  color: v-bind(setColor) !important;
 }
 </style>
