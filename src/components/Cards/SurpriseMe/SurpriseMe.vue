@@ -213,5 +213,9 @@ button {
     gap: 1rem;
     padding: 1rem;
   }
+
+  .surprise-me-container{
+    margin-block: 4rem;
+  }
 }
 </style>
