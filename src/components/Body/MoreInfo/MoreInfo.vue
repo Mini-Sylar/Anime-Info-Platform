@@ -1,66 +1,58 @@
 <template>
-  <div class="more-info-container" v-once>
-    <button
-      class="btn btn-reverse btn-arrow"
-      type="button"
-      @click="openNewLink"
-      title="Read more on AniList"
-    >
-      <span
-        >More Info<svg
-          version="1.1"
-          id="Layer_1"
-          xmlns="http://www.w3.org/2000/svg"
-          xmlns:xlink="http://www.w3.org/1999/xlink"
-          x="0px"
-          y="0px"
-          viewBox="0 0 36.1 25.8"
-          enable-background="new 0 0 36.1 25.8"
-          xml:space="preserve"
-        >
+  <div class="more-info-container"
+       v-once>
+    <button class="btn btn-reverse btn-arrow"
+            type="button"
+            @click="openNewLink"
+            title="Read more on AniList">
+      <span>More Info<svg version="1.1"
+             id="Layer_1"
+             xmlns="http://www.w3.org/2000/svg"
+             xmlns:xlink="http://www.w3.org/1999/xlink"
+             x="0px"
+             y="0px"
+             viewBox="0 0 36.1 25.8"
+             enable-background="new 0 0 36.1 25.8"
+             xml:space="preserve">
           <g>
-            <line
-              fill="none"
-              stroke="#FFFFFF"
-              stroke-width="3"
-              stroke-miterlimit="10"
-              x1="0"
-              y1="12.9"
-              x2="34"
-              y2="12.9"
-            ></line>
-            <polyline
-              fill="none"
-              stroke="#FFFFFF"
-              stroke-width="3"
-              stroke-miterlimit="10"
-              points="22.2,1.1 34,12.9 22.2,24.7   "
-            ></polyline>
-          </g></svg
-      ></span>
+            <line fill="none"
+                  stroke="#FFFFFF"
+                  stroke-width="3"
+                  stroke-miterlimit="10"
+                  x1="0"
+                  y1="12.9"
+                  x2="34"
+                  y2="12.9"></line>
+            <polyline fill="none"
+                      stroke="#FFFFFF"
+                      stroke-width="3"
+                      stroke-miterlimit="10"
+                      points="22.2,1.1 34,12.9 22.2,24.7   "></polyline>
+          </g>
+        </svg></span>
     </button>
   </div>
 </template>
-<script>
-export default {
-  props: {
-    animeID: {
-      type: Number,
-    },
-  },
-  methods: {
-    openNewLink() {
-      this.$mixpanel.track("More Info Button Clicked", {
-        animeID: this.$props.animeID,
-      });
-      return window.open(
-        `https://anilist.co/anime/${this.$props.animeID}`,
-        "_blank" // <- This is what makes it open in a new window.
-      );
-    },
-  },
-};
+
+<script setup>
+
+const props = defineProps({
+  animeID: {
+    type: Number
+  }
+})
+
+function openNewLink() {
+  return window.open(
+    `https://anilist.co/anime/${props.animeID.value}`,
+    '_blank' // <- This is what makes it open in a new window.
+  )
+}
+
+
+
 </script>
+
 <style scoped>
 button {
   /* background-color: v-bind("setColor"); */
@@ -82,7 +74,8 @@ button {
 button {
   border: none;
   letter-spacing: 1.5px;
-  transition: color 0.1s cubic-bezier(0.16, 0.08, 0.355, 1),
+  transition:
+    color 0.1s cubic-bezier(0.16, 0.08, 0.355, 1),
     background 0.1s cubic-bezier(0.16, 0.08, 0.355, 1);
   display: inline-block;
   cursor: pointer;

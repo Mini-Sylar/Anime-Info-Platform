@@ -2,24 +2,17 @@
   <div>
     <div class="image-container">
       <transition appear mode="out-in">
-        <img
-          loading="lazy"
-          :src="backgroundImage"
-          alt="Main body image"
-          :key="backgroundImage"
-        />
+        <img loading="lazy" :src="backgroundImage" alt="Main body image" :key="backgroundImage" />
       </transition>
     </div>
   </div>
 </template>
-<script>
-export default {
-  props: {
-    backgroundImage: {
-      required: false,
-    },
-  },
-};
+<script setup>
+defineProps({
+  backgroundImage: {
+    required: false
+  }
+})
 </script>
 <style scoped>
 * {

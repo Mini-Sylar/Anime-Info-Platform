@@ -1,33 +1,33 @@
 // Shade Color
 export function shadeColor(color, percent) {
-  var R = parseInt(color.substring(1, 3), 16);
-  var G = parseInt(color.substring(3, 5), 16);
-  var B = parseInt(color.substring(5, 7), 16);
+  var R = parseInt(color.substring(1, 3), 16)
+  var G = parseInt(color.substring(3, 5), 16)
+  var B = parseInt(color.substring(5, 7), 16)
 
-  R = parseInt((R * (100 + percent)) / 100);
-  G = parseInt((G * (100 + percent)) / 100);
-  B = parseInt((B * (100 + percent)) / 100);
+  R = parseInt((R * (100 + percent)) / 100)
+  G = parseInt((G * (100 + percent)) / 100)
+  B = parseInt((B * (100 + percent)) / 100)
 
-  R = R < 255 ? R : 255;
-  G = G < 255 ? G : 255;
-  B = B < 255 ? B : 255;
+  R = R < 255 ? R : 255
+  G = G < 255 ? G : 255
+  B = B < 255 ? B : 255
 
-  var RR = R.toString(16).length == 1 ? "0" + R.toString(16) : R.toString(16);
-  var GG = G.toString(16).length == 1 ? "0" + G.toString(16) : G.toString(16);
-  var BB = B.toString(16).length == 1 ? "0" + B.toString(16) : B.toString(16);
+  var RR = R.toString(16).length == 1 ? '0' + R.toString(16) : R.toString(16)
+  var GG = G.toString(16).length == 1 ? '0' + G.toString(16) : G.toString(16)
+  var BB = B.toString(16).length == 1 ? '0' + B.toString(16) : B.toString(16)
 
-  return "#" + RR + GG + BB;
+  return '#' + RR + GG + BB
 }
 
 // Set Opacity
 export const setOpacity = (hex, alpha) =>
   `${hex}${Math.floor(alpha * 255)
     .toString(16)
-    .padStart(2, 0)}`;
+    .padStart(2, 0)}`
 
 export function randomIntFromInterval(min, max) {
   // min and max included
-  return Math.floor(Math.random() * (max - min + 1) + min);
+  return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
 // Share Anime
@@ -37,16 +37,16 @@ export function shareAnime(title, url, formattedTitle) {
       .share({
         title: title,
         url: url + formattedTitle,
-        text: `Check out ${title} on Anime Info Platform`,
+        text: `Check out ${title} on Anime Info Platform`
       })
       .then()
-      .catch(() => {});
+      .catch(() => {})
   }
 }
 
 export function detectMobile() {
-  var check = false;
-  (function (a) {
+  var check = false
+  ;(function (a) {
     if (
       /(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(
         a
@@ -55,24 +55,24 @@ export function detectMobile() {
         a.substr(0, 4)
       )
     )
-      check = true;
-  })(navigator.userAgent || navigator.vendor || window.opera);
-  return check;
+      check = true
+  })(navigator.userAgent || navigator.vendor || window.opera)
+  return check
 }
 
 export function generateNewNodes(received_response) {
   let newNodes = [
     ...received_response.data.Page.media.map((item) => {
-      return { mediaRecommendation: item };
-    }),
-  ];
+      return { mediaRecommendation: item }
+    })
+  ]
 
-  return newNodes;
+  return newNodes
 }
 
 export const omitNull = (obj) => {
   Object.keys(obj)
     .filter((k) => obj[k] === null)
-    .forEach((k) => delete obj[k]);
-  return obj;
-};
+    .forEach((k) => delete obj[k])
+  return obj
+}

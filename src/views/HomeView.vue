@@ -1,57 +1,50 @@
-<script>
-import BodyVue from "../components/Body/Body.vue";
-import SurpriseMe from "../components/Cards/SurpriseMe/SurpriseMe.vue";
-import Recommendations from "../components/Cards/Recommendations/Recommendations.vue";
-import BodyLoading from "../components/Body/Loading/BodyLoading.vue";
-import CardLoading from "../components/Cards/Loading/CardLoading.vue";
-import { useAnimeData } from "../stores/anime_data";
-import { defineAsyncComponent } from "vue";
-import { useHead } from "@unhead/vue";
-const RecommendationsWrapper = defineAsyncComponent(() =>
-  import("../components/Cards/Recommendations/Recommendations.vue")
-);
+<script setup>
+import BodyVue from '../components/Body/Body.vue'
+import SurpriseMe from '../components/Cards/SurpriseMe/SurpriseMe.vue'
+import Recommendations from '../components/Cards/Recommendations/Recommendations.vue'
+import BodyLoading from '../components/Body/Loading/BodyLoading.vue'
+import CardLoading from '../components/Cards/Loading/CardLoading.vue'
+import { useAnimeData } from '../stores/anime_data'
+import { onMounted,onErrorCaptured,computed} from 'vue'
+import { useHead } from '@unhead/vue'
+import { useRouter } from 'vue-router'
 
-export default {
-  name: "Home",
-  components: {
-    BodyVue,
-    RecommendationsWrapper,
-    Recommendations,
-    SurpriseMe,
-    BodyLoading,
-    CardLoading,
-  },
-  computed: {
-    setColor() {
-      const mainAnimeData = useAnimeData();
-      return mainAnimeData.getAccentColor;
-    },
-  },
-  errorCaptured() {
-    this.$router.push({ name: "404" });
-    this.$router.go(1);
-  },
-  mounted() {
-    this.$mixpanel.track("Home Page");
-  },
-  setup() {
-    useHead({
-      title: "Anime Info Platform | Home",
+
+const mainAnimeData = useAnimeData()
+const router = useRouter()
+
+
+const setColor = computed(() => {
+  return mainAnimeData.getAccentColor
+})
+
+ useHead({
+      title: 'Anime Info Platform | Home',
       meta: [
         {
-          name: "description",
+          name: 'description',
           content:
-            "Search for your favorite anime and get information, recommendations, and more using the anime info platform.",
+            'Search for your favorite anime and get information, recommendations, and more using the anime info platform.'
         },
         {
-          name: "keywords",
-          content:
-            "anime, anime info, anime info platform, anime info website, anime information",
-        },
-      ],
-    });
-  },
-};
+          name: 'keywords',
+          content: 'anime, anime info, anime info platform, anime info website, anime information'
+        }
+      ]
+    })
+
+
+
+onMounted(() => {
+     this.$mixpanel.track('Home Page')
+});
+
+onErrorCaptured(() => {
+  router.push({ name: '404' })
+  router.go(1)
+})
+
+
 </script>
 
 <template>
@@ -88,29 +81,29 @@ export default {
 
 <style>
 button {
-  background-color: v-bind("setColor") !important;
+  background-color: v-bind('setColor') !important;
   color: white !important;
   transition: all 0.5s ease-in-out;
 }
 
 .action-button {
   background-color: transparent !important;
-  color: v-bind("setColor") !important;
-  fill: v-bind("setColor") !important;
+  color: v-bind('setColor') !important;
+  fill: v-bind('setColor') !important;
 }
 
 iframe {
-  border: 2px solid v-bind("setColor");
+  border: 2px solid v-bind('setColor');
   transition: border 0.5s ease-in-out;
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: v-bind("setColor") !important;
+  background-color: v-bind('setColor') !important;
   transition: all 0.5s ease-in-out;
 }
 
 .card-hovered:hover {
-  color: v-bind("setColor") !important;
+  color: v-bind('setColor') !important;
   min-height: 100%;
   background-color: rgba(0, 0, 0, 0.622);
   transition: all 0.2s ease;
@@ -118,7 +111,7 @@ iframe {
 }
 
 select {
-  background-color: v-bind("setColor") !important;
+  background-color: v-bind('setColor') !important;
   color: white !important;
   transition: all 0.5s ease-in-out;
 }

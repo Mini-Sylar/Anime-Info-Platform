@@ -18,33 +18,29 @@
           </div>
         </li>
       </ul>
-      <button type="button" class="clear-history" @click="clearHistory">
-        Clear History
-      </button>
+      <button type="button" class="clear-history" @click="clearHistory">Clear History</button>
     </div>
   </div>
 </template>
 <script setup>
-import { useAnimeData } from "../../../stores/anime_data";
-import { computed } from "vue";
-import Bars from "../../Loaders/Bars.vue";
+import { useAnimeData } from '../../../stores/anime_data'
+import { computed } from 'vue'
+import Bars from '../../Loaders/Bars.vue'
 
-const mainAnimeData = useAnimeData();
-const getHistory = computed(() => mainAnimeData.searchHistory);
+const mainAnimeData = useAnimeData()
+const getHistory = computed(() => mainAnimeData.searchHistory)
 const searchHistory = (history) => {
-  mainAnimeData.fetchAnimeData(history, false);
-};
+  mainAnimeData.fetchAnimeData(history, false)
+}
 
-const hasTrailer = computed(() =>
-  mainAnimeData.getTrailer == null ? "7rem" : "17rem"
-);
+const hasTrailer = computed(() => (mainAnimeData.getTrailer == null ? '7rem' : '17rem'))
 
 const checkClearHistory = computed(() => {
-  return mainAnimeData.clearHistoryLoading;
-});
+  return mainAnimeData.clearHistoryLoading
+})
 const clearHistory = () => {
-  mainAnimeData.clearHistory();
-};
+  mainAnimeData.clearHistory()
+}
 </script>
 <style scoped>
 .history-container {
@@ -59,7 +55,9 @@ const clearHistory = () => {
   overflow: hidden;
   width: 20rem;
   left: 5rem;
-  transition: height 0.2s ease-in-out, visibility 0.2s ease-in-out,
+  transition:
+    height 0.2s ease-in-out,
+    visibility 0.2s ease-in-out,
     opacity 0.2s ease-in-out;
 }
 

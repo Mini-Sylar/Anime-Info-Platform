@@ -13,9 +13,7 @@
         </ul>
       </div>
       <div class="button-container">
-        <button class="btn" @click="$router.push('/bookmarks')">
-          View All Bookmarks
-        </button>
+        <button class="btn" @click="$router.push('/bookmarks')">View All Bookmarks</button>
       </div>
     </div>
     <div v-else class="no-bookmarks">
@@ -24,23 +22,21 @@
   </div>
 </template>
 <script setup>
-import { useBookmarks } from "../../../stores/bookmarks";
-import { useAnimeData } from "../../../stores/anime_data";
-import { ref, computed } from "vue";
-const bookmarks = ref([]);
+import { useBookmarks } from '../../../stores/bookmarks'
+import { useAnimeData } from '../../../stores/anime_data'
+import { ref, computed } from 'vue'
+const bookmarks = ref([])
 const searchAnime = (bookmark) => {
-  useAnimeData().fetchAnimeData(bookmark, false);
-};
+  useAnimeData().fetchAnimeData(bookmark, false)
+}
 
-const hasTrailer = computed(() =>
-  useAnimeData().getTrailer == null ? "7rem" : "17rem"
-);
+const hasTrailer = computed(() => (useAnimeData().getTrailer == null ? '7rem' : '17rem'))
 
 useBookmarks()
   .getSavedShows()
   .then((data) => {
-    bookmarks.value = data.slice(0, 10) || [];
-  });
+    bookmarks.value = data.slice(0, 10) || []
+  })
 </script>
 <style scoped>
 .bookmarked-container {
@@ -55,7 +51,9 @@ useBookmarks()
   overflow: hidden;
   width: 20rem;
   left: 5rem;
-  transition: height 0.2s ease-in-out, visibility 0.2s ease-in-out,
+  transition:
+    height 0.2s ease-in-out,
+    visibility 0.2s ease-in-out,
     opacity 0.2s ease-in-out;
 }
 

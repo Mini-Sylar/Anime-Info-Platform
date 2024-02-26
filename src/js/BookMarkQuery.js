@@ -28,8 +28,8 @@ export function fetchDataFromBookmarks(ids = []) {
   }
 }
 `,
-    variables: { ids: ids },
-  };
+    variables: { ids: ids }
+  }
 
-  return JSON.stringify(gqlBody);
+  return JSON.stringify(gqlBody)
 }

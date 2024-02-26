@@ -7,9 +7,7 @@
     <div class="actions-section shimmer"></div>
   </div>
 </template>
-<script>
-export default {};
-</script>
+
 <style scoped>
 div {
   overflow: hidden;

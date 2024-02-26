@@ -1,20 +1,20 @@
 <script setup>
-import { useAnimeData } from "@/stores/anime_data";
-import { computed, ref, watch } from "vue";
-import { vOnClickOutside } from "@vueuse/components";
+import { useAnimeData } from '@/stores/anime_data'
+import { computed, ref, watch } from 'vue'
+import { vOnClickOutside } from '@vueuse/components'
 const props = defineProps({
   show: Boolean,
-  newFeatures: Object,
-});
+  newFeatures: Object
+})
 
 const setColor = computed(() => {
-  return useAnimeData().getAccentColor;
-});
+  return useAnimeData().getAccentColor
+})
 
-const emit = defineEmits(["close"]);
+const emit = defineEmits(['close'])
 const checkIfActive = () => {
-  emit("close");
-};
+  emit('close')
+}
 </script>
 
 <template>
@@ -32,15 +32,16 @@ const checkIfActive = () => {
               <p class="newest-description" v-html="feature.description"></p>
             </div>
           </div>
-          <a href="https://github.com/Mini-Sylar/Anime-Info-Platform/releases/latest" target="_blank">Full Release Notes
-            🔗</a>
+          <a
+            href="https://github.com/Mini-Sylar/Anime-Info-Platform/releases/latest"
+            target="_blank"
+            >Full Release Notes 🔗</a
+          >
         </div>
 
         <div class="modal-footer">
           <slot name="footer">
-            <button class="modal-default-button" @click="$emit('close')">
-              OK
-            </button>
+            <button class="modal-default-button" @click="$emit('close')">OK</button>
           </slot>
         </div>
       </div>
@@ -68,9 +69,9 @@ const checkIfActive = () => {
   width: min(40em, 100%);
   margin: auto;
   padding: 20px 30px;
-  background-color: v-bind(setColor + "20");
+  background-color: v-bind(setColor + '20');
   border-radius: 2px;
-  border: 1px solid v-bind(setColor + "20");
+  border: 1px solid v-bind(setColor + '20');
   transition: all 0.3s ease;
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);

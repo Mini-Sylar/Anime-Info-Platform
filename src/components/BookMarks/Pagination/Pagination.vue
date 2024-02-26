@@ -9,7 +9,7 @@
           :disabled="isInFirstPage"
           aria-label="Go to first page"
         >
-          {{ screenWidth ? "<<" : "Fast Page" }}
+          {{ screenWidth ? '<<' : 'Fast Page' }}
         </button>
       </li>
 
@@ -25,7 +25,7 @@
         </button>
       </li>
 
-      <li v-for="page in pages" class="pagination-item">
+      <li v-for="(page, index) in pages" :key="index" class="pagination-item">
         <button
           type="button"
           @click="onClickPage(page.name)"
@@ -57,106 +57,110 @@
           :disabled="isInLastPage"
           aria-label="Go to last page"
         >
-          {{ screenWidth ? ">>" : "Last Page" }}
+          {{ screenWidth ? '>>' : 'Last Page' }}
         </button>
       </li>
     </ul>
   </div>
 </template>
-<script>
-export default {
-  props: {
-    maxVisibleButtons: {
-      type: Number,
-      required: false,
-      default: 3,
-    },
-    totalPages: {
-      type: Number,
-      required: true,
-    },
-    total: {
-      type: Number,
-      required: true,
-    },
-    perPage: {
-      type: Number,
-      required: true,
-    },
-    currentPage: {
-      type: Number,
-      required: true,
-    },
+<script setup>
+import { computed } from 'vue';
+
+const emit = defineEmits(['pagechanged'])
+
+const props = defineProps({
+  maxVisibleButtons: {
+    type: Number,
+    required: false,
+    default: 3
   },
-  computed: {
-    startPage() {
-      if (this.currentPage <= Math.floor(this.maxVisibleButtons / 2) + 1) {
-        return 1;
-      }
-
-      if (
-        this.currentPage >=
-        this.totalPages - Math.floor(this.maxVisibleButtons / 2)
-      ) {
-        return this.totalPages - this.maxVisibleButtons + 1;
-      }
-
-      return this.currentPage - Math.floor(this.maxVisibleButtons / 2);
-    },
-    endPage() {
-      if (this.startPage + this.maxVisibleButtons - 1 <= this.totalPages) {
-        return Math.min(
-          this.startPage + this.maxVisibleButtons - 1,
-          this.totalPages
-        );
-      }
-      return this.totalPages;
-    },
-    pages() {
-      const range = [];
-      for (let i = this.startPage; i <= this.endPage; i += 1) {
-        range.push({
-          name: i,
-          isDisabled: i === this.currentPage,
-        });
-      }
-
-      return range;
-    },
-    isInFirstPage() {
-      return this.currentPage === 1;
-    },
-    isInLastPage() {
-      return this.currentPage === this.totalPages;
-    },
-    screenWidth() {
-      if (screen.width < 424) {
-        return true;
-      }
-    },
+  totalPages: {
+    type: Number,
+    required: true
   },
-
-  methods: {
-    onClickFirstPage() {
-      this.$emit("pagechanged", 1);
-    },
-    onClickPreviousPage() {
-      this.$emit("pagechanged", this.currentPage - 1);
-    },
-    onClickPage(page) {
-      this.$emit("pagechanged", page);
-    },
-    onClickNextPage() {
-      this.$emit("pagechanged", this.currentPage + 1);
-    },
-    onClickLastPage() {
-      this.$emit("pagechanged", this.totalPages);
-    },
-    isPageActive(page) {
-      return this.currentPage === page;
-    },
+  total: {
+    type: Number,
+    required: true
   },
-};
+  perPage: {
+    type: Number,
+    required: true
+  },
+  currentPage: {
+    type: Number,
+    required: true
+  }
+})
+
+const startPage = computed(() => {
+  if (props.currentPage <= Math.floor(props.maxVisibleButtons / 2) + 1) {
+    return 1
+  }
+
+  if (props.currentPage >= props.totalPages - Math.floor(props.maxVisibleButtons / 2)) {
+    return props.totalPages - props.maxVisibleButtons + 1
+  }
+
+  return props.currentPage - Math.floor(props.maxVisibleButtons / 2)
+})
+
+const endPage = computed(() => {
+  if (startPage.value + props.maxVisibleButtons - 1 <= props.totalPages) {
+    return Math.min(startPage.value + props.maxVisibleButtons - 1, props.totalPages)
+  }
+  return props.totalPages
+})
+
+const pages = computed(() => {
+  const range = []
+  for (let i = startPage.value; i <= endPage.value; i += 1) {
+    range.push({
+      name: i,
+      isDisabled: i === props.currentPage
+    })
+  }
+
+  return range
+})
+
+const isInFirstPage = computed(() => {
+  return props.currentPage === 1
+})
+
+const isInLastPage = computed(() => {
+  return props.currentPage === props.totalPages
+})
+
+const screenWidth = computed(() => {
+  return screen.width < 424
+     
+})
+
+
+function onClickFirstPage() {
+  emit('pagechanged', 1)
+}
+
+function onClickPreviousPage() {
+  emit('pagechanged', props.currentPage - 1)
+}
+
+function onClickPage(page) {
+  emit('pagechanged', page)
+}
+
+function onClickNextPage() {
+  emit('pagechanged', props.currentPage + 1)
+}
+
+function onClickLastPage() {
+  emit('pagechanged', props.totalPages)
+}
+
+function isPageActive(page) {
+  return props.currentPage === page
+}
+
 </script>
 <style scoped>
 .pagination {

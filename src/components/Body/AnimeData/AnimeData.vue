@@ -5,24 +5,21 @@
     <p>{{ animeMetaData.episodes }} episodes</p>
   </div>
 </template>
-<script>
-export default {
-  data() {
-    return {};
-  },
-  props: {
-    animeMetaData: {
-      type: Object,
-      required: true,
-    },
-  },
-  computed: {
-    formatGenre: function () {
-      // Join elements in array seperated by a backslash
-      return this.animeMetaData.genre.join(" / ");
-    },
-  },
-};
+<script setup>
+import {computed} from 'vue'
+
+
+const props = defineProps({
+  animeMetaData: {
+    type: Object,
+    required: true
+  }
+})
+
+const formatGenre = computed(() => {
+  return props.animeMetaData.genre.join(' / ')
+})
+
 </script>
 <style scoped>
 div p {

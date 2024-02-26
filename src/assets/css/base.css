@@ -5,12 +5,12 @@
 /* import font file from assets fonts */
 @font-face {
   font-family: DexaPro-Regular;
-  src: url("../fonts/DexaPro-Regular.ttf");
+  src: url('../fonts/DexaPro-Regular.ttf');
   font-display: swap;
 }
 @font-face {
   font-family: DexaPro-Bold;
-  src: url("../fonts/DexaPro-Bold.ttf");
+  src: url('../fonts/DexaPro-Bold.ttf');
   font-display: swap;
 }
 
@@ -20,7 +20,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: "DexaPro-Regular";
+  font-family: 'DexaPro-Regular';
 }
 
 p,

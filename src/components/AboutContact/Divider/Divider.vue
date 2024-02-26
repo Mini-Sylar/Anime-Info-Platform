@@ -6,7 +6,7 @@
         :class="[
           $route.path == '/contact'
             ? 'rotate-right uses-dynamic arrow-right'
-            : 'rotate-left uses-dynamic arrow-right',
+            : 'rotate-left uses-dynamic arrow-right'
         ]"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 448 512"
@@ -20,15 +20,15 @@
   </div>
 </template>
 <script setup>
-import { useRouter } from "vue-router";
-const router = useRouter();
+import { useRouter } from 'vue-router'
+const router = useRouter()
 const changeWidth = () => {
-  if (router.currentRoute.value.path == "/contact") {
-    router.push("/about");
-    return;
+  if (router.currentRoute.value.path == '/contact') {
+    router.push('/about')
+    return
   }
-  router.push("/contact");
-};
+  router.push('/contact')
+}
 </script>
 <style scoped>
 * {

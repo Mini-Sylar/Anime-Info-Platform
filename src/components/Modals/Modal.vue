@@ -1,19 +1,19 @@
 <script setup>
-import { useAnimeData } from "@/stores/anime_data";
-import { computed } from "vue";
-import { vOnClickOutside } from "@vueuse/components";
+import { useAnimeData } from '@/stores/anime_data'
+import { computed } from 'vue'
+import { vOnClickOutside } from '@vueuse/components'
 const props = defineProps({
-  show: Boolean,
-});
+  show: Boolean
+})
 
 const setColor = computed(() => {
-  return useAnimeData().getAccentColor;
-});
+  return useAnimeData().getAccentColor
+})
 
-const emit = defineEmits(["close"]);
+const emit = defineEmits(['close'])
 const checkIfActive = () => {
-  emit("close");
-};
+  emit('close')
+}
 </script>
 
 <template>
@@ -30,9 +30,7 @@ const checkIfActive = () => {
 
         <div class="modal-footer">
           <slot name="footer">
-            <button class="modal-default-button" @click="$emit('close')">
-              OK
-            </button>
+            <button class="modal-default-button" @click="$emit('close')">OK</button>
           </slot>
         </div>
       </div>
@@ -60,9 +58,9 @@ const checkIfActive = () => {
   width: min(40em, 100%);
   margin: auto;
   padding: 20px 30px;
-  background-color: v-bind(setColor + "20");
+  background-color: v-bind(setColor + '20');
   border-radius: 2px;
-  border: 1px solid v-bind(setColor + "20");
+  border: 1px solid v-bind(setColor + '20');
   transition: all 0.3s ease;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -93,7 +91,7 @@ ul {
 }
 
 ul li::before {
-  content: "\2022";
+  content: '\2022';
   /* Add content: \2022 is the CSS Code/unicode for a bullet */
   color: v-bind(setColor);
   /* Change the color */

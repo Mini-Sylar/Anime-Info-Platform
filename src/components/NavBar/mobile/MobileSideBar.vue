@@ -2,15 +2,9 @@
   <div>
     <aside class="nav-mobile">
       <RouterLink to="/" class="is-url" @click="hideMenu">Home</RouterLink>
-      <RouterLink to="/bookmarks" class="is-url" @click="hideMenu"
-        >Bookmarks</RouterLink
-      >
-      <RouterLink to="/about" class="is-url" @click="hideMenu"
-        >About</RouterLink
-      >
-      <RouterLink to="/contact" class="is-url" @click="hideMenu"
-        >Contact</RouterLink
-      >
+      <RouterLink to="/bookmarks" class="is-url" @click="hideMenu">Bookmarks</RouterLink>
+      <RouterLink to="/about" class="is-url" @click="hideMenu">About</RouterLink>
+      <RouterLink to="/contact" class="is-url" @click="hideMenu">Contact</RouterLink>
     </aside>
     <aside class="first"></aside>
   </div>
@@ -18,22 +12,22 @@
 <script>
 export default {
   data() {
-    return {};
+    return {}
   },
   methods: {
     hideMenu() {
-      document.querySelector(".nav-mobile").classList.remove("show-nav");
-      document.querySelector(".first").classList.remove("show-nav");
-      document.querySelector(".hamburger").classList.remove("open");
-      document.body.style.overflow = "scroll";
-    },
+      document.querySelector('.nav-mobile').classList.remove('show-nav')
+      document.querySelector('.first').classList.remove('show-nav')
+      document.querySelector('.hamburger').classList.remove('open')
+      document.body.style.overflow = 'scroll'
+    }
   },
   watch: {
     $route() {
-      this.hideMenu();
-    },
-  },
-};
+      this.hideMenu()
+    }
+  }
+}
 </script>
 <style scoped>
 .nav-mobile {
@@ -56,7 +50,7 @@ export default {
 
 .first {
   display: block;
-  content: "";
+  content: '';
   position: absolute;
   width: 10%;
   height: 100vh;

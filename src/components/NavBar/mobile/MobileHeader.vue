@@ -20,54 +20,52 @@
   </div>
 </template>
 <script>
-import MobileSideBar from "./MobileSideBar.vue";
-import { useAnimeData } from "../../../stores/anime_data";
+import MobileSideBar from './MobileSideBar.vue'
+import { useAnimeData } from '../../../stores/anime_data'
 export default {
   data() {
     return {
-      showNav: "show-nav",
-    };
+      showNav: 'show-nav'
+    }
   },
   methods: {
     showHam() {
-      document.querySelector(".nav-mobile").classList.toggle(this.showNav);
-      const mobile_nav = document.querySelector(".nav-mobile");
-      document.querySelector(".hamburger").classList.toggle("open");
-      document.querySelector(".first").classList.toggle(this.showNav);
-      if (mobile_nav.classList.contains("show-nav")) {
-        document.body.style.overflow = "hidden";
+      document.querySelector('.nav-mobile').classList.toggle(this.showNav)
+      const mobile_nav = document.querySelector('.nav-mobile')
+      document.querySelector('.hamburger').classList.toggle('open')
+      document.querySelector('.first').classList.toggle(this.showNav)
+      if (mobile_nav.classList.contains('show-nav')) {
+        document.body.style.overflow = 'hidden'
       } else {
-        document.body.style.overflow = "scroll";
+        document.body.style.overflow = 'scroll'
       }
     },
     getCurrentSeasonShows() {
-      if (
-        document.querySelector(".nav-mobile").classList.contains("show-nav")
-      ) {
-        document.querySelector(".nav-mobile").classList.remove(this.showNav);
-        document.querySelector(".hamburger").classList.remove("open");
-        document.querySelector(".first").classList.remove(this.showNav);
-        document.body.style.overflow = "scroll";
+      if (document.querySelector('.nav-mobile').classList.contains('show-nav')) {
+        document.querySelector('.nav-mobile').classList.remove(this.showNav)
+        document.querySelector('.hamburger').classList.remove('open')
+        document.querySelector('.first').classList.remove(this.showNav)
+        document.body.style.overflow = 'scroll'
       }
 
-      this.$router.push("/").then(() => {
+      this.$router.push('/').then(() => {
         // scroll to cards
         setTimeout(() => {
           window.scrollTo({
             left: 0,
             top: document.body.scrollHeight,
-            behavior: "smooth",
-          });
-        }, 800);
-      });
-      return useAnimeData().fetchCurrentSeason();
-    },
+            behavior: 'smooth'
+          })
+        }, 800)
+      })
+      return useAnimeData().fetchCurrentSeason()
+    }
   },
   components: {
-    "ui-sidebar": MobileSideBar,
+    'ui-sidebar': MobileSideBar
   },
-  mounted() {},
-};
+  mounted() {}
+}
 </script>
 <style scoped>
 .no-scroll {

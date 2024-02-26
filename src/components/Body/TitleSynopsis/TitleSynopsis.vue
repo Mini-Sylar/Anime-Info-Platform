@@ -5,30 +5,23 @@
     </transition>
     <!-- Add transtion to description -->
     <transition appear mode="out-in">
-      <p
-        class="anime-synposis"
-        v-html="titleDescription.description"
-        :key="title"
-      ></p>
+      <p class="anime-synposis" v-html="titleDescription.description" :key="title"></p>
     </transition>
   </div>
 </template>
-<script>
-export default {
-  data() {
-    return {};
-  },
-  props: {
-    titleDescription: {
-      type: Object,
-    },
-  },
-  computed: {
-    title() {
-      return this.$props.titleDescription.animeTitle;
-    },
-  },
-};
+<script setup>
+import { computed } from 'vue';
+
+const props = defineProps({
+  titleDescription: {
+    type: Object
+  }
+})
+
+const title = computed(() => {
+  return props.titleDescription.animeTitle
+})
+
 </script>
 <style>
 .anime-synposis {
@@ -43,7 +36,7 @@ export default {
   font-size: clamp(1.5rem, 3vw, 3.5rem);
   line-height: 3rem;
   transition: all 1s ease-in;
-  content: "hello world";
+  content: 'hello world';
 }
 
 @media screen and (max-width: 768px) {

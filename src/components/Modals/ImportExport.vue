@@ -1,61 +1,61 @@
 <script setup>
-import { useAnimeData } from "@/stores/anime_data";
-import { useBookmarks } from "../../stores/bookmarks";
-import { computed, ref } from "vue";
-import { vOnClickOutside } from "@vueuse/components";
-import { useToast } from "vue-toastification";
+import { useAnimeData } from '@/stores/anime_data'
+import { useBookmarks } from '../../stores/bookmarks'
+import { computed, ref } from 'vue'
+import { vOnClickOutside } from '@vueuse/components'
+import { useToast } from 'vue-toastification'
 
-const toast = useToast();
+const toast = useToast()
 
-const file = ref(null);
-const isButtonDisable = ref(false);
+const file = ref(null)
+const isButtonDisable = ref(false)
 const props = defineProps({
-  show: Boolean,
-});
+  show: Boolean
+})
 
 const setColor = computed(() => {
-  return useAnimeData().getAccentColor;
-});
+  return useAnimeData().getAccentColor
+})
 
-const emit = defineEmits(["close"]);
+const emit = defineEmits(['close'])
 const checkIfActive = () => {
-  emit("close");
-};
+  emit('close')
+}
 
-const showExport = ref(true);
+const showExport = ref(true)
 const showExportView = () => {
-  showExport.value = true;
-};
+  showExport.value = true
+}
 const showImport = () => {
-  showExport.value = false;
-};
+  showExport.value = false
+}
 
 const exportShow = async () => {
-  isButtonDisable.value = true;
+  isButtonDisable.value = true
   try {
-    await useBookmarks().exportBookmarks();
+    await useBookmarks().exportBookmarks()
   } catch (e) {
-    toast.error("No bookmarks to export");
+    toast.error('No bookmarks to export')
   } finally {
-    isButtonDisable.value = false;
+    isButtonDisable.value = false
   }
-};
+}
 
 const importShows = async () => {
-  isButtonDisable.value = true;
+  isButtonDisable.value = true
   if (file.value.files.length == 0) {
-    toast.error("No file selected");
-    return;
+    toast.error('No file selected')
+    return
   }
   try {
-    await useBookmarks().importBookmarks(file.value.files[0]);
-    checkIfActive();
+    await useBookmarks().importBookmarks(file.value.files[0])
+    checkIfActive()
   } catch (e) {
-    toast.error("Invalid file");
+    toast.error('Invalid file')
   } finally {
-    isButtonDisable.value = false;
+    isButtonDisable.value = false
   }
-};
+}
 </script>
 
 <template>
@@ -66,7 +66,10 @@ const importShows = async () => {
           <h3>Export/Import Bookmark List</h3>
         </div>
         <div class="swap-views">
-          <button @click="showExportView" :class="[showExport == true ? 'is-active' : 'is-not-active']">
+          <button
+            @click="showExportView"
+            :class="[showExport == true ? 'is-active' : 'is-not-active']"
+          >
             Export
           </button>
           <button @click="showImport" :class="[showExport == true ? 'is-not-active' : 'is-active']">
@@ -78,47 +81,115 @@ const importShows = async () => {
             <p>Export your anime list to a JSON file.</p>
             <button class="modal-default-button" @click="exportShow" :disabled="isButtonDisable">
               <transition name="fade">
-                <span v-if="isButtonDisable"><svg class="is-contact-loader" version="1.1" id="L9"
-                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                    viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
+                <span v-if="isButtonDisable"
+                  ><svg
+                    class="is-contact-loader"
+                    version="1.1"
+                    id="L9"
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    x="0px"
+                    y="0px"
+                    viewBox="0 0 100 100"
+                    enable-background="new 0 0 0 0"
+                    xml:space="preserve"
+                  >
                     <rect x="20" y="50" width="4" height="10" fill="#fff">
-                      <animateTransform attributeType="xml" attributeName="transform" type="translate"
-                        values="0 0; 0 20; 0 0" begin="0" dur="0.6s" repeatCount="indefinite" />
+                      <animateTransform
+                        attributeType="xml"
+                        attributeName="transform"
+                        type="translate"
+                        values="0 0; 0 20; 0 0"
+                        begin="0"
+                        dur="0.6s"
+                        repeatCount="indefinite"
+                      />
                     </rect>
                     <rect x="30" y="50" width="4" height="10" fill="#fff">
-                      <animateTransform attributeType="xml" attributeName="transform" type="translate"
-                        values="0 0; 0 20; 0 0" begin="0.2s" dur="0.6s" repeatCount="indefinite" />
+                      <animateTransform
+                        attributeType="xml"
+                        attributeName="transform"
+                        type="translate"
+                        values="0 0; 0 20; 0 0"
+                        begin="0.2s"
+                        dur="0.6s"
+                        repeatCount="indefinite"
+                      />
                     </rect>
                     <rect x="40" y="50" width="4" height="10" fill="#fff">
-                      <animateTransform attributeType="xml" attributeName="transform" type="translate"
-                        values="0 0; 0 20; 0 0" begin="0.4s" dur="0.6s" repeatCount="indefinite" />
-                    </rect>
-                  </svg></span>
+                      <animateTransform
+                        attributeType="xml"
+                        attributeName="transform"
+                        type="translate"
+                        values="0 0; 0 20; 0 0"
+                        begin="0.4s"
+                        dur="0.6s"
+                        repeatCount="indefinite"
+                      />
+                    </rect></svg
+                ></span>
               </transition>
               Export
             </button>
           </div>
           <div class="export-container" v-else>
             <p>Import your anime list from a JSON file.</p>
-            <input class="modal-default-button" type="file" accept=".json" ref="file" typeof="JSON" />
+            <input
+              class="modal-default-button"
+              type="file"
+              accept=".json"
+              ref="file"
+              typeof="JSON"
+            />
             <button class="modal-default-button" @click="importShows" :disabled="isButtonDisable">
               <transition name="fade">
-                <span v-if="isButtonDisable"><svg class="is-contact-loader" version="1.1" id="L9"
-                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                    viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
+                <span v-if="isButtonDisable"
+                  ><svg
+                    class="is-contact-loader"
+                    version="1.1"
+                    id="L9"
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    x="0px"
+                    y="0px"
+                    viewBox="0 0 100 100"
+                    enable-background="new 0 0 0 0"
+                    xml:space="preserve"
+                  >
                     <rect x="20" y="50" width="4" height="10" fill="#fff">
-                      <animateTransform attributeType="xml" attributeName="transform" type="translate"
-                        values="0 0; 0 20; 0 0" begin="0" dur="0.6s" repeatCount="indefinite" />
+                      <animateTransform
+                        attributeType="xml"
+                        attributeName="transform"
+                        type="translate"
+                        values="0 0; 0 20; 0 0"
+                        begin="0"
+                        dur="0.6s"
+                        repeatCount="indefinite"
+                      />
                     </rect>
                     <rect x="30" y="50" width="4" height="10" fill="#fff">
-                      <animateTransform attributeType="xml" attributeName="transform" type="translate"
-                        values="0 0; 0 20; 0 0" begin="0.2s" dur="0.6s" repeatCount="indefinite" />
+                      <animateTransform
+                        attributeType="xml"
+                        attributeName="transform"
+                        type="translate"
+                        values="0 0; 0 20; 0 0"
+                        begin="0.2s"
+                        dur="0.6s"
+                        repeatCount="indefinite"
+                      />
                     </rect>
                     <rect x="40" y="50" width="4" height="10" fill="#fff">
-                      <animateTransform attributeType="xml" attributeName="transform" type="translate"
-                        values="0 0; 0 20; 0 0" begin="0.4s" dur="0.6s" repeatCount="indefinite" />
-                    </rect>
-                  </svg></span>
+                      <animateTransform
+                        attributeType="xml"
+                        attributeName="transform"
+                        type="translate"
+                        values="0 0; 0 20; 0 0"
+                        begin="0.4s"
+                        dur="0.6s"
+                        repeatCount="indefinite"
+                      />
+                    </rect></svg
+                ></span>
               </transition>
               Import
             </button>
@@ -127,9 +198,7 @@ const importShows = async () => {
 
         <div class="modal-footer">
           <slot name="footer">
-            <button class="modal-default-button" @click="$emit('close')">
-              Cancel
-            </button>
+            <button class="modal-default-button" @click="$emit('close')">Cancel</button>
           </slot>
         </div>
       </div>
@@ -157,9 +226,9 @@ const importShows = async () => {
   width: min(40em, 100%);
   margin: auto;
   padding: 20px 30px;
-  background-color: v-bind(setColor + "20");
+  background-color: v-bind(setColor + '20');
   border-radius: 2px;
-  border: 1px solid v-bind(setColor + "20");
+  border: 1px solid v-bind(setColor + '20');
   transition: all 0.3s ease;
   backdrop-filter: blur(10px);
 }
@@ -193,7 +262,7 @@ ul {
 }
 
 ul li::before {
-  content: "\2022";
+  content: '\2022';
   /* Add content: \2022 is the CSS Code/unicode for a bullet */
   color: v-bind(setColor);
   /* Change the color */
@@ -243,7 +312,7 @@ ul li::before {
 
 .swap-views {
   padding-block: 1rem;
-  border-bottom: 1px solid v-bind(setColor + "10");
+  border-bottom: 1px solid v-bind(setColor + '10');
   display: flex;
   gap: 1rem;
 }

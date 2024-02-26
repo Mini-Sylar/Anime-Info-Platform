@@ -6,23 +6,20 @@
       <p>Don't worry, We'll get you right back on track</p>
       <router-link to="/" class="go-back-home">Go Back Home</router-link>
       <div class="girl-crying">
-        <img
-          src="@/assets/images/anime-cry.gif"
-          loading="lazy"
-          alt="Lost user"
-        />
+        <img src="@/assets/images/anime-cry.gif" loading="lazy" alt="Lost user" />
       </div>
     </div>
   </div>
 </template>
-<script>
-import { useAnimeData } from "@/stores/anime_data.js";
-export default {
-  mounted() {
-    const mainAnimeData = useAnimeData();
-    mainAnimeData.fetchAnimeData("Oshi-No-Ko");
-  },
-};
+<script setup>
+import { useAnimeData } from '@/stores/anime_data.js'
+import { onMounted } from 'vue';
+
+onMounted(() => {
+     const mainAnimeData = useAnimeData()
+    mainAnimeData.fetchAnimeData('Oshi-No-Ko')
+});
+
 </script>
 <style scoped>
 h1 {

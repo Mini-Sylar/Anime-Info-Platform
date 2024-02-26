@@ -3,7 +3,7 @@
     <div class="body-container">
       <transition appear mode="out-in">
         <div class="image-mobile">
-          <img :src="mainAnimeData.getBackground" alt="Show Image">
+          <img :src="mainAnimeData.getBackground" alt="Show Image" />
         </div>
       </transition>
       <transition appear mode="out-in">
@@ -29,26 +29,26 @@
   </div>
 </template>
 <script setup>
-import TitleSynopsis from "./TitleSynopsis/TitleSynopsis.vue";
-import AnimeData from "./AnimeData/AnimeData.vue";
-import Rating from "./Rating/Rating.vue";
-import Actions from "./Actions/Actions.vue";
-import MoreInfo from "./MoreInfo/MoreInfo.vue";
-import Trailer from "./Trailer/Trailer.vue";
-import Background from "./Background/Background.vue";
-import Bars from "../Loaders/Bars.vue";
+import TitleSynopsis from './TitleSynopsis/TitleSynopsis.vue'
+import AnimeData from './AnimeData/AnimeData.vue'
+import Rating from './Rating/Rating.vue'
+import Actions from './Actions/Actions.vue'
+import MoreInfo from './MoreInfo/MoreInfo.vue'
+import Trailer from './Trailer/Trailer.vue'
+import Background from './Background/Background.vue'
+import Bars from '../Loaders/Bars.vue'
 // useAnimeStoreHere
-import { useAnimeData } from "@/stores/anime_data.js";
-import { ref, computed } from "vue";
-const mainAnimeData = ref(null);
+import { useAnimeData } from '@/stores/anime_data.js'
+import { ref, computed } from 'vue'
+const mainAnimeData = ref(null)
 const getAnimeData = async () => {
-  mainAnimeData.value = await useAnimeData();
-  return mainAnimeData.value;
-};
-await getAnimeData();
+  mainAnimeData.value = await useAnimeData()
+  return mainAnimeData.value
+}
+await getAnimeData()
 const setBodyLoading = computed(() => {
-  return mainAnimeData.value.bodyLoading;
-});
+  return mainAnimeData.value.bodyLoading
+})
 </script>
 
 <style scoped>
@@ -75,7 +75,6 @@ const setBodyLoading = computed(() => {
 .body-loading-blur svg {
   transform: translate(-80%, -50%) !important;
 }
-
 
 .image-mobile {
   display: none;

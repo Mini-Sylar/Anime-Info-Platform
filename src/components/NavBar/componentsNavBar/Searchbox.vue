@@ -2,11 +2,7 @@
   <transition appear mode="out-in">
     <div>
       <div class="search-box">
-        <form
-          @submit.prevent="handlesubmit"
-          id="search-form"
-          name="anime-search"
-        >
+        <form @submit.prevent="handlesubmit" id="search-form" name="anime-search">
           <button class="btn-search" type="submit" aria-label="Search Button">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
               <path
@@ -28,30 +24,30 @@
 </template>
 <script>
 // useAnimeStore Here
-import { useAnimeData } from "@/stores/anime_data.js";
-import { ref } from "vue";
+import { useAnimeData } from '@/stores/anime_data.js'
+import { ref } from 'vue'
 
 export default {
   setup() {
-    const mainAnimeData = useAnimeData();
-    const searchQuery = ref("");
+    const mainAnimeData = useAnimeData()
+    const searchQuery = ref('')
     const handlesubmit = () => {
-      if (searchQuery.value === "") return;
-      mainAnimeData.fetchAnimeData(searchQuery.value);
-      searchQuery.value = "";
-    };
+      if (searchQuery.value === '') return
+      mainAnimeData.fetchAnimeData(searchQuery.value)
+      searchQuery.value = ''
+    }
     return {
       searchQuery,
-      handlesubmit,
-    };
+      handlesubmit
+    }
   },
   computed: {
     setColor() {
-      const mainAnimeData = useAnimeData();
-      return mainAnimeData.getAccentColor;
-    },
-  },
-};
+      const mainAnimeData = useAnimeData()
+      return mainAnimeData.getAccentColor
+    }
+  }
+}
 </script>
 <style scoped>
 /* Search Bar From Hall Management */
@@ -62,7 +58,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  filter: drop-shadow(0 0 0.75rem v-bind("setColor"));
+  filter: drop-shadow(0 0 0.75rem v-bind('setColor'));
 }
 
 .input-search {
@@ -74,8 +70,8 @@ export default {
   outline: none;
   border-radius: 25px;
   transition: all 0.5s ease-in-out;
-  background-color: v-bind("setColor");
-  caret-color: v-bind("setColor");
+  background-color: v-bind('setColor');
+  caret-color: v-bind('setColor');
   padding-right: 40px;
   color: #fff;
 }

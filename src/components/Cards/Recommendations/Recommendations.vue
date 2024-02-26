@@ -11,14 +11,14 @@
           stretch: 1,
           depth: 100,
           modifier: 3,
-          slideShadows: true,
+          slideShadows: true
         }"
         :modules="modules"
         :grabCursor="true"
         :autoplay="{
           delay: 2500,
           disableOnInteraction: false,
-          pauseOnMouseEnter: true,
+          pauseOnMouseEnter: true
         }"
         :preload-images="false"
         :lazy="true"
@@ -59,11 +59,7 @@
           v-if="populateCards.length > 19"
           @click="showMore"
         >
-          <p
-            class="noselect card-hovered"
-            role="link"
-            aria-label="Show more recommended"
-          >
+          <p class="noselect card-hovered" role="link" aria-label="Show more recommended">
             Show More <br />&rarr;
           </p>
         </swiper-slide>
@@ -77,94 +73,80 @@
   </div>
 </template>
 <script>
-import { useAnimeData } from "@/stores/anime_data.js";
-import { ref } from "vue";
+import { useAnimeData } from '@/stores/anime_data.js'
+import { ref } from 'vue'
 // Import Swiper Vue.js components
-import { Swiper, SwiperSlide } from "swiper/vue";
-import {
-  Navigation,
-  Pagination,
-  Scrollbar,
-  A11y,
-  EffectCoverflow,
-  Autoplay,
-} from "swiper";
+import { Swiper, SwiperSlide } from 'swiper/vue'
+import { Navigation, Pagination, Scrollbar, A11y, EffectCoverflow, Autoplay } from 'swiper'
 
 // Import Swiper styles
-import "swiper/css";
-import "swiper/css/effect-coverflow";
-import Bars from "../../Loaders/Bars.vue";
+import 'swiper/css'
+import 'swiper/css/effect-coverflow'
+import Bars from '../../Loaders/Bars.vue'
 export default {
   components: {
     Swiper,
     SwiperSlide,
-    Bars,
+    Bars
   },
   data() {
     return {
       swiper: null,
-      slice: true,
-    };
+      slice: true
+    }
   },
   async setup() {
-    const mainAnimeData = ref([]);
+    const mainAnimeData = ref([])
     const getAnimeData = async () => {
-      mainAnimeData.value = await useAnimeData();
-    };
-    const swiperContainer = ref(null);
-    await getAnimeData();
-    let useFetchFromRecommendations = mainAnimeData.value.fetchFromRecommended;
+      mainAnimeData.value = await useAnimeData()
+    }
+    const swiperContainer = ref(null)
+    await getAnimeData()
+    let useFetchFromRecommendations = mainAnimeData.value.fetchFromRecommended
     // useAnimeStoreHere
     return {
-      modules: [
-        Navigation,
-        Pagination,
-        Scrollbar,
-        A11y,
-        EffectCoverflow,
-        Autoplay,
-      ],
+      modules: [Navigation, Pagination, Scrollbar, A11y, EffectCoverflow, Autoplay],
       mainAnimeData,
       useFetchFromRecommendations,
-      swiperContainer,
-    };
+      swiperContainer
+    }
   },
   computed: {
     populateCards() {
       if (this.slice == true) {
-        return this.mainAnimeData.getRecommendations.slice(0, 20); // TODO: fix slicing issue
+        return this.mainAnimeData.getRecommendations.slice(0, 20) // TODO: fix slicing issue
       }
-      return this.mainAnimeData.getRecommendations.slice(20, 50);
+      return this.mainAnimeData.getRecommendations.slice(20, 50)
     },
     numberofCards() {
-      if (screen.width < 768) return 2.7;
-      return this.mainAnimeData.getRecommendations.length <= 2 ? 2 : 4;
+      if (screen.width < 768) return 2.7
+      return this.mainAnimeData.getRecommendations.length <= 2 ? 2 : 4
     },
     isCardsLoading() {
-      return this.mainAnimeData.cardsLoading;
+      return this.mainAnimeData.cardsLoading
     },
     centerSlides() {
-      return this.mainAnimeData.getRecommendations.length <= 2 ? false : true;
-    },
+      return this.mainAnimeData.getRecommendations.length <= 2 ? false : true
+    }
   },
   methods: {
     searchFromRecommended(query) {
-      let getTitle = query.romaji ? query.romaji : query.english;
-      this.useFetchFromRecommendations(getTitle);
+      let getTitle = query.romaji ? query.romaji : query.english
+      this.useFetchFromRecommendations(getTitle)
     },
     showMore() {
-      this.slice = !this.slice;
-      this.mainAnimeData.cardsLoading = true;
-      this.swiper.slideTo(0);
+      this.slice = !this.slice
+      this.mainAnimeData.cardsLoading = true
+      this.swiper.slideTo(0)
       setTimeout(() => {
-        this.mainAnimeData.cardsLoading = false;
-      }, 1000);
+        this.mainAnimeData.cardsLoading = false
+      }, 1000)
     },
     onSwiper(swiper) {
-      this.swiper = swiper;
-    },
-  },
-};
+      this.swiper = swiper
+    }
+  }
+}
 </script>
 <style scoped>
 .swiper-container {

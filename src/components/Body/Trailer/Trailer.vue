@@ -13,23 +13,20 @@
     </div>
   </transition>
 </template>
-<script>
-export default {
-  data() {
-    return {};
-  },
-  props: {
-    trailer: {
-      type: String,
-      default: "",
-    },
-  },
-  computed: {
-    trailerUrl() {
-      return `https://www.youtube.com/embed/${this.$props.trailer}`;
-    },
-  },
-};
+<script setup>
+import { computed } from 'vue';
+
+const props = defineProps({
+  trailer: {
+    type: String,
+    default: ''
+  }
+})
+
+const trailerUrl = computed(() => {
+  return `https://www.youtube.com/embed/${props.trailer}`
+})
+
 </script>
 <style scoped>
 iframe {

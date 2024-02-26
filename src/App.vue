@@ -1,85 +1,81 @@
 <script setup>
-import NavbarVue from "./components/NavBar/Navbar.vue";
-import { RouterView } from "vue-router";
-import { useAnimeData } from "@/stores/anime_data";
-import { computed, watch, ref } from "vue";
-import { useNetwork } from "@vueuse/core";
-import { useToast } from "vue-toastification";
-import NewestFeatures from "./components/Modals/NewestFeatures.vue";
+import NavbarVue from './components/NavBar/Navbar.vue'
+import { RouterView } from 'vue-router'
+import { useAnimeData } from '@/stores/anime_data'
+import { computed, watch, ref } from 'vue'
+import { useNetwork } from '@vueuse/core'
+import { useToast } from 'vue-toastification'
+import NewestFeatures from './components/Modals/NewestFeatures.vue'
 
-const toast = useToast();
+const toast = useToast()
 const setColor = computed(() => {
-  return useAnimeData().getAccentColor;
-});
+  return useAnimeData().getAccentColor
+})
 
-const { isOnline } = useNetwork();
+const { isOnline } = useNetwork()
 
 watch(isOnline, (value) => {
   if (value) {
-    toast.success("Back Online!");
+    toast.success('Back Online!')
   } else {
-    toast.error(
-      "Offline!, You won't be able to search for anime or reach out to me."
-    );
+    toast.error("Offline!, You won't be able to search for anime or reach out to me.")
   }
-});
+})
 
 const newFeatures = ref([
   {
-    timestamp: "22-04-2023",
+    timestamp: '22-04-2023'
   },
   {
-    title: "Bookmarks 🌟",
+    title: 'Bookmarks 🌟',
     description:
-      "Keep track of your shows with the new bookmark feature 🚀. <br>Star your show to get started",
+      'Keep track of your shows with the new bookmark feature 🚀. <br>Star your show to get started'
   },
   {
-    title: "History 📖",
-    description: "Find out the 10 latest shows you've searched",
+    title: 'History 📖',
+    description: "Find out the 10 latest shows you've searched"
   },
   {
-    title: "Genres",
-    description: "Choose the specific genre you want and surprise yourself",
-  },
-]);
+    title: 'Genres',
+    description: 'Choose the specific genre you want and surprise yourself'
+  }
+])
 
 // const showNewFeatures = ref(false)
 const showNewFeatures = computed(() => {
-  return useAnimeData().showNewFeatures;
-});
+  return useAnimeData().showNewFeatures
+})
 
 const prepareNextFeature = () => {
-  localStorage.setItem("newFeatures", JSON.stringify(newFeatures.value));
-  useAnimeData().showNewFeatures = false;
-};
+  localStorage.setItem('newFeatures', JSON.stringify(newFeatures.value))
+  useAnimeData().showNewFeatures = false
+}
 // watch localStorage for changes
 const checkLocalStorage = () => {
-  if (localStorage.getItem("newFeatures") === null) {
-    return (useAnimeData().showNewFeatures = true);
+  if (localStorage.getItem('newFeatures') === null) {
+    return (useAnimeData().showNewFeatures = true)
   } else {
     // check if content is the same
-    const newFeaturesFromStorage = JSON.parse(
-      localStorage.getItem("newFeatures")
-    );
+    const newFeaturesFromStorage = JSON.parse(localStorage.getItem('newFeatures'))
     if (
       JSON.stringify(newFeaturesFromStorage[0].timestamp) !=
       JSON.stringify(newFeatures.value[0].timestamp)
     ) {
-      return (useAnimeData().showNewFeatures = true);
+      return (useAnimeData().showNewFeatures = true)
     }
-    return (useAnimeData().showNewFeatures = false);
+    return (useAnimeData().showNewFeatures = false)
   }
-};
+}
 
-checkLocalStorage();
+checkLocalStorage()
 
 watch(showNewFeatures, (value) => {
   if (value) {
-    document.body.style.overflow = "hidden";
+    document.body.style.overflow = 'hidden'
   } else {
-    document.body.style.overflow = "auto";
+    document.body.style.overflow = 'auto'
   }
-});
+})
 </script>
 
 <template>
@@ -90,7 +86,11 @@ watch(showNewFeatures, (value) => {
     </transition>
   </router-view>
   <Teleport to="body">
-    <NewestFeatures :show="showNewFeatures" @close="prepareNextFeature" :newFeatures="newFeatures.slice(1)">
+    <NewestFeatures
+      :show="showNewFeatures"
+      @close="prepareNextFeature"
+      :newFeatures="newFeatures.slice(1)"
+    >
     </NewestFeatures>
   </Teleport>
 </template>
@@ -100,7 +100,9 @@ watch(showNewFeatures, (value) => {
 .slide-enter-active,
 .slide-leave-active {
   position: absolute;
-  transition: opacity 1s, transform 1s;
+  transition:
+    opacity 1s,
+    transform 1s;
 }
 
 .slide-enter-from,
@@ -122,7 +124,7 @@ watch(showNewFeatures, (value) => {
 }
 
 .tbl-content::-webkit-scrollbar-thumb {
-  background-color: v-bind("setColor") !important;
+  background-color: v-bind('setColor') !important;
   transition: all 0.5s ease-in-out;
 }
 
@@ -138,12 +140,12 @@ watch(showNewFeatures, (value) => {
 }
 
 .is-url:hover {
-  color: v-bind("setColor") !important;
+  color: v-bind('setColor') !important;
   transition: color 0.5s ease-in-out;
 }
 
 .router-link-active {
-  color: v-bind("setColor") !important;
+  color: v-bind('setColor') !important;
   transition: color 0.5s ease-in-out;
 }
 
@@ -152,7 +154,7 @@ watch(showNewFeatures, (value) => {
 }
 
 .carrette_button {
-  background-color: v-bind("setColor") !important;
+  background-color: v-bind('setColor') !important;
   transition: background-color 0.5s ease-in-out;
 }
 
@@ -166,7 +168,7 @@ watch(showNewFeatures, (value) => {
 
 .check::before,
 .check::after {
-  background: v-bind("setColor") !important;
+  background: v-bind('setColor') !important;
 }
 
 .tbl-content,
@@ -177,7 +179,7 @@ td,
 }
 
 * {
-  accent-color: v-bind("setColor") !important;
+  accent-color: v-bind('setColor') !important;
   transition: accent-color 0.5s ease-in-out;
 }
 
@@ -185,7 +187,7 @@ td,
 .go-back-home,
 .bookmarked-show:hover,
 .title:hover p {
-  color: v-bind("setColor") !important;
+  color: v-bind('setColor') !important;
   transition: color 0.2s ease-in-out;
 }
 
@@ -200,30 +202,30 @@ td,
 }
 
 .is-loader * {
-  fill: v-bind("setColor") !important;
+  fill: v-bind('setColor') !important;
   transition: fill 0.2s ease-in-out;
 }
 
 #nav-icon1 span {
-  background: v-bind("setColor") !important;
+  background: v-bind('setColor') !important;
 }
 
 .first,
 .send-message {
-  background: v-bind("setColor") !important;
+  background: v-bind('setColor') !important;
 }
 
 .uses-dynamic {
-  color: v-bind("setColor") !important;
-  fill: v-bind("setColor") !important;
+  color: v-bind('setColor') !important;
+  fill: v-bind('setColor') !important;
 }
 
 .dividers {
-  background-color: v-bind("setColor") !important;
+  background-color: v-bind('setColor') !important;
 }
 
 .arrow-icon-divider * {
-  border: 3px solid v-bind("setColor") !important;
+  border: 3px solid v-bind('setColor') !important;
 }
 
 .contact-form {
@@ -243,11 +245,11 @@ td,
 }
 
 .form-input {
-  border-bottom: 1px solid v-bind("setColor") !important;
+  border-bottom: 1px solid v-bind('setColor') !important;
 }
 
 .image-mobile {
-  border: .5px solid v-bind("setColor") !important;
-  filter: drop-shadow(0 0 0.75rem v-bind("setColor")) !important;
+  border: 0.5px solid v-bind('setColor') !important;
+  filter: drop-shadow(0 0 0.75rem v-bind('setColor')) !important;
 }
 </style>

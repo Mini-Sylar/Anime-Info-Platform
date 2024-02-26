@@ -1,25 +1,25 @@
 // local storage set query
-import { randomIntFromInterval } from "./helpers";
+import { randomIntFromInterval } from './helpers'
 
 export let headersList = {
-  Accept: "*/*",
-  "User-Agent": "Thunder Client (https://www.thunderclient.com)",
-  "Content-Type": "application/json",
-};
+  Accept: '*/*',
+  'User-Agent': 'Thunder Client (https://www.thunderclient.com)',
+  'Content-Type': 'application/json'
+}
 // Global Variables
-let sharedValue = window.location.href.split("/")[3];
+let sharedValue = window.location.href.split('/')[3]
 // prevent shared value from using 'about,contact,bookmarks'
-let doNotUse = ["about", "contact", "bookmarks"];
-sharedValue = doNotUse.includes(sharedValue) ? "" : sharedValue;
-let storedValue = localStorage.getItem("searchQuery");
-let currentYear = new Date().getFullYear();
+let doNotUse = ['about', 'contact', 'bookmarks']
+sharedValue = doNotUse.includes(sharedValue) ? '' : sharedValue
+let storedValue = localStorage.getItem('searchQuery')
+let currentYear = new Date().getFullYear()
 
 export function prepareAnimeData(
   searchQuery = sharedValue
     ? sharedValue
     : storedValue
-    ? storedValue
-    : "Zom-100-Bucket-List-of-the-Dead"
+      ? storedValue
+      : 'Zom-100-Bucket-List-of-the-Dead'
 ) {
   let gqlBody = {
     query: `query ($id: Int,$search: String) {
@@ -61,22 +61,22 @@ export function prepareAnimeData(
   }
 }
 `,
-    variables: { search: searchQuery },
-  };
-  return JSON.stringify(gqlBody);
+    variables: { search: searchQuery }
+  }
+  return JSON.stringify(gqlBody)
 }
 // Store Anime data
-let response = await fetch("https://graphql.anilist.co/?id", {
-  method: "POST",
+let response = await fetch('https://graphql.anilist.co/?id', {
+  method: 'POST',
   body: prepareAnimeData(),
-  headers: headersList,
-});
-export let main_data = await response.json();
+  headers: headersList
+})
+export let main_data = await response.json()
 if (main_data.data.Media === null) {
-  window.location.href = "/not-found";
+  window.location.href = '/not-found'
 }
 // Surprise Me Cards
-export function surpriseMe(genre = "action") {
+export function surpriseMe(genre = 'action') {
   let gqlBody_Cards = {
     query: `query ( $page: Int, $perPage: Int, $search: String) {
   Page (page: $page, perPage: $perPage) {
@@ -101,21 +101,21 @@ export function surpriseMe(genre = "action") {
     variables: {
       search: genre,
       page:
-        genre !== "Ecchi" &&
-        genre !== "Horror" && // remove horror
-        genre !== "Mahou Shoujo" && // remove horror
-        genre !== "Mecha" &&
-        genre !== "Music" && //Remove Music
-        genre !== "Mystery" &&
-        genre !== "Psychological"
+        genre !== 'Ecchi' &&
+        genre !== 'Horror' && // remove horror
+        genre !== 'Mahou Shoujo' && // remove horror
+        genre !== 'Mecha' &&
+        genre !== 'Music' && //Remove Music
+        genre !== 'Mystery' &&
+        genre !== 'Psychological'
           ? randomIntFromInterval(1, 200) // for none of the values above
-          : genre !== "Horror" && genre !== "Mahou Shoujo" && genre !== "Music"
-          ? randomIntFromInterval(1, 90)
-          : randomIntFromInterval(1, 50),
-      perPage: 10,
-    },
-  };
-  return JSON.stringify(gqlBody_Cards);
+          : genre !== 'Horror' && genre !== 'Mahou Shoujo' && genre !== 'Music'
+            ? randomIntFromInterval(1, 90)
+            : randomIntFromInterval(1, 50),
+      perPage: 10
+    }
+  }
+  return JSON.stringify(gqlBody_Cards)
 }
 
 export function currentSeason() {
@@ -136,8 +136,8 @@ export function currentSeason() {
   }
 }
 `,
-    variables: { seasonYear: currentYear },
-  };
+    variables: { seasonYear: currentYear }
+  }
 
-  return JSON.stringify(gqlBody);
+  return JSON.stringify(gqlBody)
 }

@@ -3,19 +3,17 @@
     <h1 class="about-title">About</h1>
     <p>
       Hey there! <br />
-      Welcome to <span class="uses-dynamic">Anime Info Platform v.2.0.0</span>.
-      A complete rewrite using Vue including all its performance benefits. All
-      your favorite features are here including a new history section that shows
-      your recently searched anime! The new redesigned site also comes with a
-      redesigned mobile view making it easier to use on the go. I hope you enjoy
-      the new site and be sure to follow me on social media to stay up-to-date
-      with my latest updates and projects!. <br />
+      Welcome to <span class="uses-dynamic">Anime Info Platform v.2.0.0</span>. A complete rewrite
+      using Vue including all its performance benefits. All your favorite features are here
+      including a new history section that shows your recently searched anime! The new redesigned
+      site also comes with a redesigned mobile view making it easier to use on the go. I hope you
+      enjoy the new site and be sure to follow me on social media to stay up-to-date with my latest
+      updates and projects!. <br />
       This site is made possible with the help of
-      <span class="uses-dynamic">AniList's </span>GraphQl API. Be sure to check
-      it out! <br />
+      <span class="uses-dynamic">AniList's </span>GraphQl API. Be sure to check it out! <br />
       <br />
-      Thanks for stopping by, and be sure to follow me on social media to stay
-      up-to-date with my latest updates and projects! <br /><br />
+      Thanks for stopping by, and be sure to follow me on social media to stay up-to-date with my
+      latest updates and projects! <br /><br />
     </p>
     <a href="https://github.com/Mini-Sylar" target="_blank"
       ><span class="uses-dynamic">~ Terence</span></a
@@ -29,13 +27,13 @@
   </div>
 </template>
 <script setup>
-import { useAnimeData } from "../../../stores/anime_data";
-import { computed } from "vue";
-const animeData = useAnimeData();
+import { useAnimeData } from '../../../stores/anime_data'
+import { computed } from 'vue'
+const animeData = useAnimeData()
 
 const aboutWidth = computed(() => {
-  return animeData.aboutWidth;
-});
+  return animeData.aboutWidth
+})
 </script>
 <style scoped>
 .left-about {
