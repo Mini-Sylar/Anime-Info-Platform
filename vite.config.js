@@ -19,17 +19,21 @@ export default defineConfig({
         name: 'Anime Info Platform 2.0', 
         short_name: 'Animark 2.0',
         icons: [
-          {
-            src: '/android-chrome-192x192.png',
-            sizes: '192x192',
-            type: 'image/png',
-             purpose: 'maskable'
-          },
-          {
-            src: '/android-chrome-512x512.png',
-            sizes: '512x512',
-            type: 'image/png'
-          },
+           {
+            "src": "/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        },{
+          src: "/apple-touch-icon.png",
+          sizes: "180x180",
+          type: "image/png",
+          purpose: "maskable any"
+        }
 
         ],
         theme_color: '#f6f6f6',
