@@ -5,11 +5,12 @@ import Recommendations from '../components/Cards/Recommendations/Recommendations
 import BodyLoading from '../components/Body/Loading/BodyLoading.vue'
 import CardLoading from '../components/Cards/Loading/CardLoading.vue'
 import { useAnimeData } from '../stores/anime_data'
-import { onMounted,onErrorCaptured,computed} from 'vue'
+import { onMounted,onErrorCaptured,computed,inject} from 'vue'
 import { useHead } from '@unhead/vue'
 import { useRouter } from 'vue-router'
 
 
+const mixpanel = inject('mixpanel')
 const mainAnimeData = useAnimeData()
 const router = useRouter()
 
@@ -36,12 +37,12 @@ const setColor = computed(() => {
 
 
 onMounted(() => {
-     this.$mixpanel.track('Home Page')
+     mixpanel.track('Home Page')
 });
 
-onErrorCaptured(() => {
-  router.push({ name: '404' })
-  router.go(1)
+onErrorCaptured((error) => {
+  console.error('Error captured in HomeView.vue: ', error.message)
+  // router.push({ name: '404' })
 })
 
 

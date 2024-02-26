@@ -1,7 +1,7 @@
 <template>
   <div class="is-a-container swiper-container noselect" id="recommendations">
     <transition appear mode="out-in">
-      <swiper
+      <Swiper
         :slides-per-view="numberofCards"
         :space-between="0"
         :effect="'coverflow'"
@@ -13,7 +13,6 @@
           modifier: 3,
           slideShadows: true
         }"
-        :modules="modules"
         :grabCursor="true"
         :autoplay="{
           delay: 2500,
@@ -63,7 +62,7 @@
             Show More <br />&rarr;
           </p>
         </swiper-slide>
-      </swiper>
+      </Swiper>
     </transition>
     <transition appear mode="out-in">
       <div class="swiper-loading" v-if="isCardsLoading">
@@ -72,31 +71,23 @@
     </transition>
   </div>
 </template>
-<script>
+
+<script setup lang="js">
 import { useAnimeData } from '@/stores/anime_data.js'
-import { ref } from 'vue'
-// Import Swiper Vue.js components
+import { ref,computed } from 'vue'
+
 import { Swiper, SwiperSlide } from 'swiper/vue'
-import { Navigation, Pagination, Scrollbar, A11y, EffectCoverflow, Autoplay } from 'swiper'
 
 // Import Swiper styles
 import 'swiper/css'
 import 'swiper/css/effect-coverflow'
+import 'swiper/element/css/autoplay'
 import Bars from '../../Loaders/Bars.vue'
-export default {
-  components: {
-    Swiper,
-    SwiperSlide,
-    Bars
-  },
-  data() {
-    return {
-      swiper: null,
-      slice: true
-    }
-  },
-  async setup() {
-    const mainAnimeData = ref([])
+
+const swiper = ref(null)
+const slice = ref(true)
+
+   const mainAnimeData = ref([])
     const getAnimeData = async () => {
       mainAnimeData.value = await useAnimeData()
     }
@@ -104,49 +95,47 @@ export default {
     await getAnimeData()
     let useFetchFromRecommendations = mainAnimeData.value.fetchFromRecommended
     // useAnimeStoreHere
-    return {
-      modules: [Navigation, Pagination, Scrollbar, A11y, EffectCoverflow, Autoplay],
-      mainAnimeData,
-      useFetchFromRecommendations,
-      swiperContainer
-    }
-  },
-  computed: {
-    populateCards() {
-      if (this.slice == true) {
-        return this.mainAnimeData.getRecommendations.slice(0, 20) // TODO: fix slicing issue
+
+    const populateCards = computed(() => {
+      if (slice.value == true) {
+        return mainAnimeData.value.getRecommendations.slice(0, 20) // TODO: fix slicing issue
       }
-      return this.mainAnimeData.getRecommendations.slice(20, 50)
-    },
-    numberofCards() {
+      return mainAnimeData.value.getRecommendations.slice(20, 50)
+    })
+
+    const numberofCards = computed(() => {
       if (screen.width < 768) return 2.7
-      return this.mainAnimeData.getRecommendations.length <= 2 ? 2 : 4
-    },
-    isCardsLoading() {
-      return this.mainAnimeData.cardsLoading
-    },
-    centerSlides() {
-      return this.mainAnimeData.getRecommendations.length <= 2 ? false : true
-    }
-  },
-  methods: {
-    searchFromRecommended(query) {
+      return mainAnimeData.value.getRecommendations.length <= 2 ? 2 : 4
+    })
+
+    const isCardsLoading = computed(() => {
+      return mainAnimeData.value.cardsLoading
+    })
+
+    const centerSlides = computed(() => {
+      return mainAnimeData.value.getRecommendations.length <= 2 ? false : true
+    })
+
+
+    const searchFromRecommended = (query) => {
       let getTitle = query.romaji ? query.romaji : query.english
-      this.useFetchFromRecommendations(getTitle)
-    },
-    showMore() {
-      this.slice = !this.slice
-      this.mainAnimeData.cardsLoading = true
-      this.swiper.slideTo(0)
-      setTimeout(() => {
-        this.mainAnimeData.cardsLoading = false
-      }, 1000)
-    },
-    onSwiper(swiper) {
-      this.swiper = swiper
+      useFetchFromRecommendations(getTitle)
     }
-  }
-}
+
+    const showMore = () => {
+      slice.value = !slice.value
+      mainAnimeData.value.cardsLoading = true
+      swiper.value.slideTo(0)
+      setTimeout(() => {
+        mainAnimeData.value.cardsLoading = false
+      }, 1000)
+    }
+
+    const onSwiper = (swiper) => {
+      swiper.value = swiper
+    }
+   
+
 </script>
 <style scoped>
 .swiper-container {

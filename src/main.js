@@ -29,7 +29,7 @@ localforage.config({
 const app = createApp(App)
 const mixpanelPlugin = {
   install: (app) => {
-    app.config.globalProperties.$mixpanel = mixpanel
+    app.provide('mixpanel', mixpanel)
   }
 }
 app.use(router)

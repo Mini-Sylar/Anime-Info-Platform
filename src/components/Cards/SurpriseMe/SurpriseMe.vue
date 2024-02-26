@@ -1,38 +1,34 @@
 <template>
-  <div class="surprise-me-container" v-once>
+  <div class="surprise-me-container"
+       v-once>
     <form @submit.prevent="handlesubmit">
       <div class="splitbutton">
         <button type="submit">Surprise Me</button>
         <OnClickOutside @trigger="hideWhenClickedOutside">
           <span class="dropdown-button">
-            <span
-              role="button"
-              aria-label="Button to show genres"
-              @click.prevent="toggleShowGenre"
-              class="carrette_button"
-            >
-              <svg
-                :class="[showGenre == true ? 'carret-toggle rotate' : 'carret-toggle']"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 320 512"
-              >
+            <span role="button"
+                  aria-label="Button to show genres"
+                  @click.prevent="toggleShowGenre"
+                  class="carrette_button">
+              <svg :class="[showGenre == true ? 'carret-toggle rotate' : 'carret-toggle']"
+                   xmlns="http://www.w3.org/2000/svg"
+                   viewBox="0 0 320 512">
                 <path
-                  d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"
-                />
+                      d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z" />
               </svg>
             </span>
 
             <transition name="show-genre">
-              <div class="contains-genres" v-if="showGenre">
+              <div class="contains-genres"
+                   v-if="showGenre">
                 <ul>
-                  <li v-for="(item, index) in genres" :key="index">
-                    <input
-                      type="radio"
-                      :id="item"
-                      :value="item"
-                      name="animeGenre"
-                      v-model="genreQuery"
-                    />
+                  <li v-for="(item, index) in genres"
+                      :key="index">
+                    <input type="radio"
+                           :id="item"
+                           :value="item"
+                           name="animeGenre"
+                           v-model="genreQuery" />
                     <label :for="item">{{ item }}</label>
                   </li>
                 </ul>
@@ -44,66 +40,58 @@
     </form>
   </div>
 </template>
-<script>
+<script setup>
 import { useAnimeData } from '@/stores/anime_data.js'
 import { OnClickOutside } from '@vueuse/components'
 import { ref } from 'vue'
 import mixpanel from 'mixpanel-browser'
-export default {
-  components: {
-    OnClickOutside
-  },
-  data() {
-    return {
-      genres: [
-        'Action',
-        'Adventure',
-        'Comedy',
-        'Drama',
-        'Ecchi',
-        'Fantasy',
-        'Horror',
-        'Mahou Shoujo',
-        'Mecha',
-        'Music',
-        'Mystery',
-        'Psychological',
-        'Romance',
-        'Current Season'
-      ],
-      showGenre: false
-    }
-  },
-  setup() {
-    const mainAnimeData = useAnimeData()
-    const genreQuery = ref('Action')
-    const handlesubmit = () => {
-      if (genreQuery.value == 'Current Season') {
-        mainAnimeData.fetchCurrentSeason()
-        mixpanel.track('Surprise Me', { genre: genreQuery.value })
-        return
-      }
 
-      mainAnimeData.fetchSurprise(genreQuery.value)
-      mixpanel.track('Surprise Me', { genre: genreQuery.value })
-    }
+const genres = [
+  'Action',
+  'Adventure',
+  'Comedy',
+  'Drama',
+  'Ecchi',
+  'Fantasy',
+  'Horror',
+  'Mahou Shoujo',
+  'Mecha',
+  'Music',
+  'Mystery',
+  'Psychological',
+  'Romance',
+  'Current Season'
+]
 
-    return {
-      genreQuery,
-      handlesubmit
-    }
-  },
-  methods: {
-    toggleShowGenre() {
-      this.showGenre = !this.showGenre
-    },
-    hideWhenClickedOutside() {
-      if (this.showGenre == true) {
-        this.showGenre = false
-      }
-    }
+const showGenre = ref(false)
+
+
+
+const mainAnimeData = useAnimeData()
+const genreQuery = ref('Action')
+const handlesubmit = () => {
+  if (genreQuery.value == 'Current Season') {
+    mainAnimeData.fetchCurrentSeason()
+    mixpanel.track('Surprise Me', { genre: genreQuery.value })
+    return
+  }
+
+  mainAnimeData.fetchSurprise(genreQuery.value)
+  mixpanel.track('Surprise Me', { genre: genreQuery.value })
+}
+
+
+function hideWhenClickedOutside() {
+  if (showGenre.value == true) {
+    showGenre.value = false
   }
 }
+
+function toggleShowGenre() {
+  showGenre.value = !showGenre.value
+}
+
+
 </script>
 <style scoped>
 .surprise-me-container {

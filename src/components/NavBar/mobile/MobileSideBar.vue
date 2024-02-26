@@ -9,25 +9,25 @@
     <aside class="first"></aside>
   </div>
 </template>
-<script>
-export default {
-  data() {
-    return {}
-  },
-  methods: {
-    hideMenu() {
-      document.querySelector('.nav-mobile').classList.remove('show-nav')
-      document.querySelector('.first').classList.remove('show-nav')
-      document.querySelector('.hamburger').classList.remove('open')
-      document.body.style.overflow = 'scroll'
-    }
-  },
-  watch: {
-    $route() {
-      this.hideMenu()
-    }
-  }
+<script setup>
+import {watch } from 'vue'
+import { useRoute } from 'vue-router';
+
+const route = useRoute()
+
+
+function hideMenu() {
+  document.querySelector('.nav-mobile').classList.remove('show-nav')
+  document.querySelector('.first').classList.remove('show-nav')
+  document.querySelector('.hamburger').classList.remove('open')
+  document.body.style.overflow = 'scroll'
 }
+
+watch(route, () => {
+ hideMenu()
+})
+
+
 </script>
 <style scoped>
 .nav-mobile {

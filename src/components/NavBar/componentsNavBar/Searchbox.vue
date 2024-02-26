@@ -22,13 +22,12 @@
     </div>
   </transition>
 </template>
-<script>
+<script setup>
 // useAnimeStore Here
 import { useAnimeData } from '@/stores/anime_data.js'
-import { ref } from 'vue'
+import { ref,computed } from 'vue'
 
-export default {
-  setup() {
+
     const mainAnimeData = useAnimeData()
     const searchQuery = ref('')
     const handlesubmit = () => {
@@ -36,18 +35,13 @@ export default {
       mainAnimeData.fetchAnimeData(searchQuery.value)
       searchQuery.value = ''
     }
-    return {
-      searchQuery,
-      handlesubmit
-    }
-  },
-  computed: {
-    setColor() {
-      const mainAnimeData = useAnimeData()
+
+    const setColor = computed(() => {
       return mainAnimeData.getAccentColor
-    }
-  }
-}
+    })
+   
+
+
 </script>
 <style scoped>
 /* Search Bar From Hall Management */

@@ -15,7 +15,7 @@
       <div class="info-trailer-container">
         <div class="info-container">
           <AnimeData :animeMetaData="mainAnimeData.getMetaDescription" />
-          <Rating :rate="mainAnimeData.getRating" :accentColor="mainAnimeData.getAccentColor" />
+          <Rating :rate="rating" :accentColor="mainAnimeData.getAccentColor" />
           <Actions />
           <MoreInfo :animeID="mainAnimeData.getAnimeId" />
         </div>
@@ -37,18 +37,19 @@ import MoreInfo from './MoreInfo/MoreInfo.vue'
 import Trailer from './Trailer/Trailer.vue'
 import Background from './Background/Background.vue'
 import Bars from '../Loaders/Bars.vue'
-// useAnimeStoreHere
 import { useAnimeData } from '@/stores/anime_data.js'
-import { ref, computed } from 'vue'
-const mainAnimeData = ref(null)
-const getAnimeData = async () => {
-  mainAnimeData.value = await useAnimeData()
-  return mainAnimeData.value
-}
-await getAnimeData()
+import {  computed } from 'vue'
+const mainAnimeData = useAnimeData()
+
+
 const setBodyLoading = computed(() => {
-  return mainAnimeData.value.bodyLoading
+  return mainAnimeData.bodyLoading
 })
+
+const rating = computed(() => {
+  return mainAnimeData.getRating 
+})
+
 </script>
 
 <style scoped>

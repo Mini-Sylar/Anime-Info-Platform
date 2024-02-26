@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ui-sidebar> </ui-sidebar>
+    <MobileSideBar/>
     <nav>
       <div class="logo">
         <a
@@ -19,53 +19,52 @@
     </nav>
   </div>
 </template>
-<script>
+<script setup>
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+const showNav = ref('show-nav');
+
+function showHam() {
+  document.querySelector('.nav-mobile').classList.toggle(showNav.value);
+  const mobile_nav = document.querySelector('.nav-mobile');
+  document.querySelector('.hamburger').classList.toggle('open');
+  document.querySelector('.first').classList.toggle(showNav.value);
+  if (mobile_nav.classList.contains(showNav.value)) {
+    document.body.style.overflow = 'hidden';
+  } else {
+    document.body.style.overflow = 'scroll';
+  }
+}
+
+function getCurrentSeasonShows() {
+  if (document.querySelector('.nav-mobile').classList.contains(showNav.value)) {
+    document.querySelector('.nav-mobile').classList.remove(showNav.value);
+    document.querySelector('.hamburger').classList.remove('open');
+    document.querySelector('.first').classList.remove(showNav.value);
+    document.body.style.overflow = 'scroll';
+  }
+
+  router.push('/').then(() => {
+    // scroll to cards
+    setTimeout(() => {
+      window.scrollTo({
+        left: 0,
+        top: document.body.scrollHeight,
+        behavior: 'smooth'
+      });
+    }, 800);
+  });
+  return useAnimeData().fetchCurrentSeason();
+}
+
+
+
+
 import MobileSideBar from './MobileSideBar.vue'
 import { useAnimeData } from '../../../stores/anime_data'
-export default {
-  data() {
-    return {
-      showNav: 'show-nav'
-    }
-  },
-  methods: {
-    showHam() {
-      document.querySelector('.nav-mobile').classList.toggle(this.showNav)
-      const mobile_nav = document.querySelector('.nav-mobile')
-      document.querySelector('.hamburger').classList.toggle('open')
-      document.querySelector('.first').classList.toggle(this.showNav)
-      if (mobile_nav.classList.contains('show-nav')) {
-        document.body.style.overflow = 'hidden'
-      } else {
-        document.body.style.overflow = 'scroll'
-      }
-    },
-    getCurrentSeasonShows() {
-      if (document.querySelector('.nav-mobile').classList.contains('show-nav')) {
-        document.querySelector('.nav-mobile').classList.remove(this.showNav)
-        document.querySelector('.hamburger').classList.remove('open')
-        document.querySelector('.first').classList.remove(this.showNav)
-        document.body.style.overflow = 'scroll'
-      }
 
-      this.$router.push('/').then(() => {
-        // scroll to cards
-        setTimeout(() => {
-          window.scrollTo({
-            left: 0,
-            top: document.body.scrollHeight,
-            behavior: 'smooth'
-          })
-        }, 800)
-      })
-      return useAnimeData().fetchCurrentSeason()
-    }
-  },
-  components: {
-    'ui-sidebar': MobileSideBar
-  },
-  mounted() {}
-}
 </script>
 <style scoped>
 .no-scroll {
