@@ -17,24 +17,20 @@ export default defineConfig({
       manifest: {
         start_url: '/',
         name: 'Anime Info Platform 2.0', 
-        short_name: 'Anime Info',
+        short_name: 'Animark 2.0',
         icons: [
           {
             src: '/android-chrome-192x192.png',
             sizes: '192x192',
-            type: 'image/png'
+            type: 'image/png',
+             purpose: 'maskable'
           },
           {
             src: '/android-chrome-512x512.png',
             sizes: '512x512',
             type: 'image/png'
           },
-          {
-            src:'/mstile-150x150.png',
-            sizes: '150x150',
-            type: 'image/png',
-            purpose: 'maskable'
-          }
+
         ],
         theme_color: '#f6f6f6',
         background_color: '#f6f6f6',
