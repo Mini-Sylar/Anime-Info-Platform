@@ -15,7 +15,7 @@ export default defineConfig({
       devOptions: { enabled: true },
       includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'mask-icon.svg'],
       manifest: {
-        start_url: '/auth/login',
+        start_url: '/',
         name: 'Anime Info Platform 2.0', 
         short_name: 'Anime Info',
         icons: [

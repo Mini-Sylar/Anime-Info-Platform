@@ -42,7 +42,6 @@ onMounted(() => {
 
 onErrorCaptured((error) => {
   console.error('Error captured in HomeView.vue: ', error.message)
-  // router.push({ name: '404' })
 })
 
 
