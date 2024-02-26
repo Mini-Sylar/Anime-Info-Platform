@@ -28,6 +28,12 @@ export default defineConfig({
             src: '/android-chrome-512x512.png',
             sizes: '512x512',
             type: 'image/png'
+          },
+          {
+            src:'/mstile-150x150.png',
+            sizes: '150x150',
+            type: 'image/png',
+            purpose: 'maskable'
           }
         ],
         theme_color: '#f6f6f6',

@@ -42,6 +42,7 @@ onMounted(() => {
 
 onErrorCaptured((error) => {
   console.error('Error captured in HomeView.vue: ', error.message)
+  router.push('/not-found')
 })
 
 
