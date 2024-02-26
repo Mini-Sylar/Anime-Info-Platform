@@ -1,8 +1,10 @@
 <script setup>
 import { useAnimeData } from '@/stores/anime_data'
-import { computed, ref, watch } from 'vue'
+import { computed } from 'vue'
 import { vOnClickOutside } from '@vueuse/components'
-const props = defineProps({
+
+
+defineProps({
   show: Boolean,
   newFeatures: Object
 })
@@ -22,7 +24,7 @@ const checkIfActive = () => {
     <div v-if="show" class="modal-mask">
       <div class="modal-container" v-on-click-outside="checkIfActive">
         <div class="modal-header">
-          <h3>New Features 🎉</h3>
+          <h3>New Features v.2.2.0 🎉</h3>
         </div>
 
         <div class="modal-body">

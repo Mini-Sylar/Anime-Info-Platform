@@ -24,7 +24,11 @@ watch(isOnline, (value) => {
 
 const newFeatures = ref([
   {
-    timestamp: '22-04-2023'
+    timestamp: '26-02-2024'
+  },
+  {
+    title:'PWA Mode (26-02-2024)📱',
+    description: 'You can now install the app on your device and use it offline. Hit the icon on your nav bar to install. 🚀',
   },
   {
     title: 'Bookmarks 🌟',
