@@ -4,7 +4,6 @@
       <BookmarkList></BookmarkList>
     </div>
     <Background
-      v-memo="mainAnimeData.getBackground"
       :backgroundImage="mainAnimeData.getBackground"
       class="image-background"
     ></Background>

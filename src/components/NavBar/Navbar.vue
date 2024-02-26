@@ -65,6 +65,8 @@ header {
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   transition: all 0.5s ease;
+  position: relative;
+  z-index: 10;
 }
 
 .is-link {
