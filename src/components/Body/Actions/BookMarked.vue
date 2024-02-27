@@ -24,13 +24,12 @@
 <script setup>
 import { useBookmarks } from '../../../stores/bookmarks'
 import { useAnimeData } from '../../../stores/anime_data'
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 const bookmarks = ref([])
 const searchAnime = (bookmark) => {
   useAnimeData().fetchAnimeData(bookmark, false)
 }
 
-const hasTrailer = computed(() => (useAnimeData().getTrailer == null ? '7rem' : '17rem'))
 
 useBookmarks()
   .getSavedShows()
@@ -110,7 +109,6 @@ ul {
   .bookmarked-container {
     left: min(3rem, 1rem);
     width: 90%;
-    bottom: v-bind(hasTrailer);
   }
 
   .has-bookmarks {

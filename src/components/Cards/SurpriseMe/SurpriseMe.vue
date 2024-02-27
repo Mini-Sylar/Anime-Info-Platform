@@ -3,7 +3,8 @@
     <form @submit.prevent="handlesubmit">
       <div class="splitbutton">
         <button type="submit" class="surprise-parent">Surprise Me</button>
-        <button type="button" class="drop-container" @click="toggleShowGenre">
+        <OnClickOutside @trigger="hideWhenClickedOutside">
+        <button type="button" class="drop-container" @click.self="toggleShowGenre">
           <span class="dropdown-button">
             <span role="button" aria-label="Button to show genres" class="carrette_button">
               <svg
@@ -16,7 +17,6 @@
                 />
               </svg>
             </span>
-            <OnClickOutside @trigger="hideWhenClickedOutside">
               <transition name="show-genre">
                 <div class="contains-genres" v-if="showGenre">
                   <ul>
@@ -33,9 +33,9 @@
                   </ul>
                 </div>
               </transition>
-            </OnClickOutside>
-          </span>
-        </button>
+            </span>
+          </button>
+        </OnClickOutside>
       </div>
     </form>
   </div>

@@ -33,7 +33,6 @@ const searchHistory = (history) => {
   mainAnimeData.fetchAnimeData(history, false)
 }
 
-const hasTrailer = computed(() => (mainAnimeData.getTrailer == null ? '7rem' : '17rem'))
 
 const checkClearHistory = computed(() => {
   return mainAnimeData.clearHistoryLoading

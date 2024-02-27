@@ -87,7 +87,7 @@
 </template>
 <script setup>
 import { useAnimeData } from '@/stores/anime_data'
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import History from './History.vue'
 import BookMarked from './BookMarked.vue'
 import { vOnClickOutside } from '@vueuse/components'
@@ -139,6 +139,23 @@ const showMiniBookmarkMenu = () => {
 const showReleaseNotes = () => {
   useAnimeData().showReleaseNotes()
 }
+
+// prevent scroll when modal is open
+watch(showModal, (value) => {
+  if (value) {
+    document.body.style.overflow = 'hidden'
+  } else {
+    document.body.style.overflow = 'auto'
+  }
+})
+
+watch(showBookmark, (value) => {
+  if (value) {
+    document.body.style.overflow = 'hidden'
+  } else {
+    document.body.style.overflow = 'auto'
+  }
+})
 </script>
 <style scoped>
 button {
