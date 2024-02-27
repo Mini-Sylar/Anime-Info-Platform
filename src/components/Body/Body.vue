@@ -80,7 +80,16 @@ const rating = computed(() => {
   display: none;
 }
 
+@media screen and (max-width: 1025px) {
+  .body-container {
+    text-align: center;
+  }
+}
+
 @media screen and (max-width: 768px) {
+  .body-container {
+    text-align: left;
+  }
   .body-loading-blur {
     height: 100%;
   }

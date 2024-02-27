@@ -88,8 +88,8 @@ const swiper = ref(null)
 const slice = ref(true)
 
    const mainAnimeData = ref([])
-    const getAnimeData = async () => {
-      mainAnimeData.value = await useAnimeData()
+    const getAnimeData =  () => {
+      mainAnimeData.value =  useAnimeData()
     }
     const swiperContainer = ref(null)
     await getAnimeData()
@@ -104,7 +104,7 @@ const slice = ref(true)
     })
 
     const numberofCards = computed(() => {
-      if (screen.width < 768) return 2.7
+      if (screen.width <1025) return 2.7
       return mainAnimeData.value.getRecommendations.length <= 2 ? 2 : 4
     })
 
@@ -209,7 +209,7 @@ p {
   transform: translate(-70%, -70%);
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1025px) {
   .swiper-container {
     min-width: 100%;
     height: 100%;

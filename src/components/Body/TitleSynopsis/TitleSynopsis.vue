@@ -10,7 +10,7 @@
   </div>
 </template>
 <script setup>
-import { computed } from 'vue';
+import { computed } from 'vue'
 
 const props = defineProps({
   titleDescription: {
@@ -21,7 +21,6 @@ const props = defineProps({
 const title = computed(() => {
   return props.titleDescription.animeTitle
 })
-
 </script>
 <style>
 .anime-synposis {
@@ -37,6 +36,13 @@ const title = computed(() => {
   line-height: 3rem;
   transition: all 1s ease-in;
   content: 'hello world';
+}
+
+@media screen and (max-width: 1025px) {
+  .anime-title {
+    text-align: center;
+    justify-content: center;
+  }
 }
 
 @media screen and (max-width: 768px) {

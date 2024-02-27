@@ -109,7 +109,7 @@ main {
   filter: blur(20px) brightness(0.7);
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1025px) {
   .about-container {
     margin: 0 auto;
   }

@@ -4,13 +4,8 @@
       <div class="splitbutton">
         <button type="submit">Surprise Me</button>
         <OnClickOutside @trigger="hideWhenClickedOutside">
-          <span class="dropdown-button">
-            <span
-              role="button"
-              aria-label="Button to show genres"
-              @click.prevent="toggleShowGenre"
-              class="carrette_button"
-            >
+          <span class="dropdown-button" @click.prevent="toggleShowGenre">
+            <span role="button" aria-label="Button to show genres" class="carrette_button">
               <svg
                 :class="[showGenre == true ? 'carret-toggle rotate' : 'carret-toggle']"
                 xmlns="http://www.w3.org/2000/svg"
@@ -214,10 +209,6 @@ button {
 
   .surprise-me-container {
     margin-block: 4rem;
-  }
-
-  .dropdown-button {
-    padding: 0.6rem 1rem;
   }
 }
 </style>

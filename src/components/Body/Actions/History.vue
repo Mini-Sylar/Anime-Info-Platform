@@ -140,7 +140,6 @@ h4 {
   .history-container {
     left: min(3rem, 1rem);
     width: 90%;
-    bottom: v-bind(hasTrailer);
   }
 
   .search-history {

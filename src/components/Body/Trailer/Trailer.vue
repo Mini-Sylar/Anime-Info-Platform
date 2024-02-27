@@ -14,7 +14,7 @@
   </transition>
 </template>
 <script setup>
-import { computed } from 'vue';
+import { computed } from 'vue'
 
 const props = defineProps({
   trailer: {
@@ -26,7 +26,6 @@ const props = defineProps({
 const trailerUrl = computed(() => {
   return `https://www.youtube.com/embed/${props.trailer}`
 })
-
 </script>
 <style scoped>
 iframe {
@@ -45,14 +44,6 @@ iframe {
     width: 80%;
     height: min(15rem, 30rem);
     margin: 0 auto;
-  }
-}
-
-@media screen and (max-width: 500px) {
-  iframe {
-    width: 100%;
-    height: 100%;
-    min-height: 15rem;
   }
 }
 </style>

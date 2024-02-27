@@ -237,7 +237,7 @@ button:disabled {
   margin-top: 2rem;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1025px) {
   .right-contact {
     width: 100%;
     height: 70vh;

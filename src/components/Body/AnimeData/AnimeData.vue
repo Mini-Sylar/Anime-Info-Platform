@@ -26,7 +26,7 @@ div p {
   font-size: clamp(0.7rem, 0.9vw, 2rem);
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 2025px) {
   p {
     color: #f1f1f1;
   }

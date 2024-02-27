@@ -519,7 +519,7 @@ img {
   color: #004b81;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1025px) {
   .table-item {
     flex-direction: column;
     gap: 1rem;

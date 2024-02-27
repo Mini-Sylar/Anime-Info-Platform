@@ -73,12 +73,7 @@ header {
   cursor: pointer;
 }
 
-@media screen and (max-width: 768px) {
-  .navigation-bar {
-    flex-direction: column;
-    gap: 1rem;
-  }
-
+@media screen and (max-width: 1025px) {
   .search-bar {
     display: flex;
     justify-content: center;
@@ -97,6 +92,14 @@ header {
 
   .main-links {
     gap: min(4rem, 10rem);
+    justify-content: center;
+  }
+
+  .navigation-bar {
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    margin: 0 auto;
   }
 }
 </style>

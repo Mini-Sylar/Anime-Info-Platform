@@ -77,7 +77,7 @@ main {
   }
 }
 
-@media screen and (max-width: 821px) {
+@media screen and (max-width: 1025px) {
   .left-side-main {
     width: 100%;
     min-height: 50rem;

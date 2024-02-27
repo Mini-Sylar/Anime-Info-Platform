@@ -77,7 +77,7 @@ p {
 
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1025px) {
   p {
     color: #f1f1f1;
   }
