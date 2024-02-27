@@ -1,6 +1,6 @@
 <template>
   <transition appear mode="out-in">
-    <div>
+    <button>
       <div class="search-box">
         <form @submit.prevent="handlesubmit" id="search-form" name="anime-search">
           <button class="btn-search" type="submit" aria-label="Search Button">
@@ -19,32 +19,35 @@
           />
         </form>
       </div>
-    </div>
+    </button>
   </transition>
 </template>
 <script setup>
 // useAnimeStore Here
 import { useAnimeData } from '@/stores/anime_data.js'
-import { ref,computed } from 'vue'
+import { ref, computed } from 'vue'
 
+const mainAnimeData = useAnimeData()
+const searchQuery = ref('')
+const handlesubmit = () => {
+  if (searchQuery.value === '') return
+  mainAnimeData.fetchAnimeData(searchQuery.value)
+  searchQuery.value = ''
+}
 
-    const mainAnimeData = useAnimeData()
-    const searchQuery = ref('')
-    const handlesubmit = () => {
-      if (searchQuery.value === '') return
-      mainAnimeData.fetchAnimeData(searchQuery.value)
-      searchQuery.value = ''
-    }
-
-    const setColor = computed(() => {
-      return mainAnimeData.getAccentColor
-    })
-   
-
-
+const setColor = computed(() => {
+  return mainAnimeData.getAccentColor
+})
 </script>
 <style scoped>
 /* Search Bar From Hall Management */
+
+button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
 .search-box {
   width: fit-content;
   height: fit-content;
@@ -56,10 +59,10 @@ import { ref,computed } from 'vue'
 }
 
 .input-search {
-  height: 10px;
+  height: 20px;
   width: 0px;
   border-style: none;
-  padding: 10px 10px;
+  padding: 13px 10px;
   font-size: 16px;
   outline: none;
   border-radius: 25px;
