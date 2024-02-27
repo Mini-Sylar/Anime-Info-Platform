@@ -118,7 +118,7 @@ button {
 .drop-container {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
-  border-left: 1px solid #ffffff1a;
+  margin-left: 1px;
 }
 
 .dropdown-button {
