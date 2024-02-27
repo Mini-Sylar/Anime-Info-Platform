@@ -27,8 +27,9 @@ const newFeatures = ref([
     timestamp: '26-02-2024'
   },
   {
-    title:'PWA Mode (26-02-2024)📱',
-    description: 'You can now install the app on your device and use it offline. Hit the icon on your nav bar to install. 🚀',
+    title: 'PWA Mode (26-02-2024)📱',
+    description:
+      'You can now install the app on your device and use it offline. Hit the icon on your nav bar to install. 🚀'
   },
   {
     title: 'Bookmarks 🌟',
@@ -253,7 +254,7 @@ td,
 }
 
 .image-mobile {
-  border: 0.5px solid v-bind('setColor') !important;
   filter: drop-shadow(0 0 0.75rem v-bind('setColor')) !important;
+  border: 0.5px solid v-bind('setColor') !important;
 }
 </style>

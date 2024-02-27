@@ -3,7 +3,8 @@
     <div class="body-container">
       <transition appear mode="out-in">
         <div class="image-mobile">
-          <img :src="mainAnimeData.getBackground" alt="Show Image" />
+          <Trailer :trailer="mainAnimeData.getTrailer" v-if="mainAnimeData.getTrailer" />
+          <img :src="mainAnimeData.getBackground" alt="Show Image" v-else />
         </div>
       </transition>
       <transition appear mode="out-in">
@@ -38,18 +39,16 @@ import Trailer from './Trailer/Trailer.vue'
 import Background from './Background/Background.vue'
 import Bars from '../Loaders/Bars.vue'
 import { useAnimeData } from '@/stores/anime_data.js'
-import {  computed } from 'vue'
+import { computed } from 'vue'
 const mainAnimeData = useAnimeData()
-
 
 const setBodyLoading = computed(() => {
   return mainAnimeData.bodyLoading
 })
 
 const rating = computed(() => {
-  return mainAnimeData.getRating 
+  return mainAnimeData.getRating
 })
-
 </script>
 
 <style scoped>
@@ -94,17 +93,29 @@ const rating = computed(() => {
     display: block;
     width: 100%;
     height: 15rem;
+    width: 20rem;
     display: flex;
     margin: 0 auto;
     margin-top: 10rem;
     border-radius: 20px;
     overflow: hidden;
+    display: flex;
+    justify-content: center;
   }
 
   .image-mobile img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+
+  .image-mobile :deep(iframe) {
+    width: 20rem;
+    border: none;
+  }
+
+  .trailer-container {
+    display: none;
   }
 }
 </style>

@@ -151,14 +151,14 @@ const slice = ref(true)
 .swiper-slide-instance {
   background-color: transparent;
   width: 100%;
-  height: 15rem;
+  height: 17rem;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 15px;
   position: relative;
-  min-width: 10rem;
+  min-width: 12rem;
 }
 
 img {
@@ -216,8 +216,8 @@ p {
   }
 
   .swiper-slide-instance {
-    height: 12rem;
-    min-width: 7rem;
+    height: 15rem;
+    min-width: 10rem;
     max-width: 10rem;
   }
 

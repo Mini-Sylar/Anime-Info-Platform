@@ -98,8 +98,7 @@ function toggleShowGenre() {
   width: 100%;
   display: flex;
   justify-content: center;
-  padding: 1rem;
-  margin-top: 0.1rem;
+  padding: .85rem;
   gap: 1rem;
   position: relative;
 }
@@ -175,7 +174,7 @@ button {
 }
 
 .carrette_button {
-  padding: 8px 12px;
+  padding: 7.5px 12px;
   border-top-right-radius: 25px;
   border-bottom-right-radius: 25px;
   background-color: #0195ff;
