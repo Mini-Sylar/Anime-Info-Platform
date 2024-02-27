@@ -3,20 +3,20 @@
     <form @submit.prevent="handlesubmit">
       <div class="splitbutton">
         <button type="submit" class="surprise-parent">Surprise Me</button>
-        <OnClickOutside @trigger="hideWhenClickedOutside">
-          <button class="drop-container" @click.prevent="toggleShowGenre">
-            <span class="dropdown-button">
-              <span role="button" aria-label="Button to show genres" class="carrette_button">
-                <svg
-                  :class="[showGenre == true ? 'carret-toggle rotate' : 'carret-toggle']"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 320 512"
-                >
-                  <path
-                    d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"
-                  />
-                </svg>
-              </span>
+        <button type="button" class="drop-container" @click="toggleShowGenre">
+          <span class="dropdown-button">
+            <span role="button" aria-label="Button to show genres" class="carrette_button">
+              <svg
+                :class="[showGenre == true ? 'carret-toggle rotate' : 'carret-toggle']"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 320 512"
+              >
+                <path
+                  d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"
+                />
+              </svg>
+            </span>
+            <OnClickOutside @trigger="hideWhenClickedOutside">
               <transition name="show-genre">
                 <div class="contains-genres" v-if="showGenre">
                   <ul>
@@ -33,9 +33,9 @@
                   </ul>
                 </div>
               </transition>
-            </span>
-          </button>
-        </OnClickOutside>
+            </OnClickOutside>
+          </span>
+        </button>
       </div>
     </form>
   </div>
@@ -43,7 +43,7 @@
 <script setup>
 import { useAnimeData } from '@/stores/anime_data.js'
 import { OnClickOutside } from '@vueuse/components'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import mixpanel from 'mixpanel-browser'
 
 const genres = [
@@ -87,6 +87,14 @@ function hideWhenClickedOutside() {
 function toggleShowGenre() {
   showGenre.value = !showGenre.value
 }
+
+watch(showGenre, () => {
+  if (showGenre.value) {
+    document.body.style.overflow = 'hidden'
+  } else {
+    document.body.style.overflow = 'auto'
+  }
+})
 </script>
 <style scoped>
 .surprise-me-container {
@@ -161,7 +169,7 @@ button {
   padding-top: 0;
   padding-bottom: 0;
   overflow: hidden;
-  height: 21rem;
+  height: 22rem;
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   z-index: 9;
@@ -179,6 +187,7 @@ button {
   display: flex;
   align-items: center;
   gap: 1rem;
+  font-size: large;
 }
 
 .show-genre-active,
@@ -203,7 +212,8 @@ button {
     left: -45vw;
     margin: 0 auto;
     width: 65vw;
-    height: 36rem;
+    height: 35rem;
+    overflow-y: auto;
   }
 
   .contains-genres ul {
