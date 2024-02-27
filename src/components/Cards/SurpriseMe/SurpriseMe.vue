@@ -174,7 +174,7 @@ button {
 }
 
 .carrette_button {
-  padding: 7.5px 12px;
+  padding: 0.469rem 12px;
   border-top-right-radius: 25px;
   border-bottom-right-radius: 25px;
   background-color: #0195ff;
