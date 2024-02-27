@@ -117,13 +117,14 @@ button {
 }
 
 .dropdown-button {
-  border-left: 1px solid #0195ff;
+  border-left: 1px solid transparent;
   cursor: pointer;
   background-color: #0195ff;
   padding: 0.55rem 1rem;
   border-top-right-radius: 25px;
   border-bottom-right-radius: 25px;
   position: relative;
+  margin-left: 0.8px;
 }
 
 .carret-toggle {
@@ -213,6 +214,10 @@ button {
 
   .surprise-me-container {
     margin-block: 4rem;
+  }
+
+  .dropdown-button {
+    padding: 0.6rem 1rem;
   }
 }
 </style>

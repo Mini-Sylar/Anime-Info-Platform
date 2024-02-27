@@ -161,7 +161,6 @@ watch(showNewFeatures, (value) => {
 .dropdown-button {
   background-color: v-bind('setColor') !important;
   transition: background-color 0.5s ease-in-out;
-  border-color: v-bind('setColor') !important;
 }
 
 .contains-genres,
