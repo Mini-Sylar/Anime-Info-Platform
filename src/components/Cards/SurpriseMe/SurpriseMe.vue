@@ -2,38 +2,39 @@
   <div class="surprise-me-container" v-once>
     <form @submit.prevent="handlesubmit">
       <div class="splitbutton">
-        <button type="submit">Surprise Me</button>
+        <button type="submit" class="surprise-parent">Surprise Me</button>
         <OnClickOutside @trigger="hideWhenClickedOutside">
-          <span class="dropdown-button" @click.prevent="toggleShowGenre">
-            <span role="button" aria-label="Button to show genres" class="carrette_button">
-              <svg
-                :class="[showGenre == true ? 'carret-toggle rotate' : 'carret-toggle']"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 320 512"
-              >
-                <path
-                  d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"
-                />
-              </svg>
+          <button class="drop-container" @click.prevent="toggleShowGenre">
+            <span class="dropdown-button">
+              <span role="button" aria-label="Button to show genres" class="carrette_button">
+                <svg
+                  :class="[showGenre == true ? 'carret-toggle rotate' : 'carret-toggle']"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 320 512"
+                >
+                  <path
+                    d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"
+                  />
+                </svg>
+              </span>
+              <transition name="show-genre">
+                <div class="contains-genres" v-if="showGenre">
+                  <ul>
+                    <li v-for="(item, index) in genres" :key="index">
+                      <input
+                        type="radio"
+                        :id="item"
+                        :value="item"
+                        name="animeGenre"
+                        v-model="genreQuery"
+                      />
+                      <label :for="item">{{ item }}</label>
+                    </li>
+                  </ul>
+                </div>
+              </transition>
             </span>
-
-            <transition name="show-genre">
-              <div class="contains-genres" v-if="showGenre">
-                <ul>
-                  <li v-for="(item, index) in genres" :key="index">
-                    <input
-                      type="radio"
-                      :id="item"
-                      :value="item"
-                      name="animeGenre"
-                      v-model="genreQuery"
-                    />
-                    <label :for="item">{{ item }}</label>
-                  </li>
-                </ul>
-              </div>
-            </transition>
-          </span>
+          </button>
         </OnClickOutside>
       </div>
     </form>
@@ -103,23 +104,27 @@ button {
   border-radius: 25px;
   cursor: pointer;
   border: none;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
   z-index: 22;
   color: white;
   font-weight: 900;
   position: relative;
 }
 
+.surprise-parent {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.drop-container {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-left: 1px solid #ffffff1a;
+}
+
 .dropdown-button {
   border-left: 1px solid transparent;
   cursor: pointer;
-  background-color: #0195ff;
-  padding: 0.55rem 1rem;
-  border-top-right-radius: 25px;
-  border-bottom-right-radius: 25px;
   position: relative;
-  margin-left: 0.8px;
 }
 
 .carret-toggle {
@@ -129,8 +134,9 @@ button {
   width: 10px;
   position: absolute;
   right: 0;
-  top: 30%;
-  left: 25%;
+  top: 0.1rem;
+  left: -0.5rem;
+  right: 0;
 }
 
 .splitbutton {

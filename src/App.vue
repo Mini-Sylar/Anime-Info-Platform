@@ -158,10 +158,6 @@ watch(showNewFeatures, (value) => {
   background-color: v-bind("setColor + '80'") !important;
 }
 
-.dropdown-button {
-  background-color: v-bind('setColor') !important;
-  transition: background-color 0.5s ease-in-out;
-}
 
 .contains-genres,
 .history-container,
