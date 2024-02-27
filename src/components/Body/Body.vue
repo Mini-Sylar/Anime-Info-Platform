@@ -18,6 +18,7 @@
           <AnimeData :animeMetaData="mainAnimeData.getMetaDescription" />
           <Rating :rate="rating" :accentColor="mainAnimeData.getAccentColor" />
           <Actions />
+          <h3>{{ mainAnimeData.getAnimeId }}</h3>
           <MoreInfo :animeID="mainAnimeData.getAnimeId" />
         </div>
         <div class="trailer-container">

@@ -44,7 +44,7 @@ const props = defineProps({
 
 function openNewLink() {
   return window.open(
-    `https://anilist.co/anime/${props.animeID.value}`,
+    `https://anilist.co/anime/${props.animeID}`,
     '_blank' // <- This is what makes it open in a new window.
   )
 }
