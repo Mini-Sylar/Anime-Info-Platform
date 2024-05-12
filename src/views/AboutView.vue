@@ -25,7 +25,7 @@
       </a>
       <a
         class="social-link uses-dynamic linkedin"
-        href="https://www.linkedin.com/in/terence-ugo-quashie-4452b2223/"
+        href="https://www.linkedin.com/in/terence-nacciarone-quashie/"
         target="_blank"
         title="reach out to me on linkedin"
         @click="$mixpanel.track('Visited LinkedIn')"
