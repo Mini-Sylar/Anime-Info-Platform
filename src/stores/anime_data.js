@@ -123,11 +123,9 @@ export const useAnimeData = defineStore('animeData', {
         })
         let surpriseCards_gotten = await response_cards.json()
         // Create a new object to store the data
-        let newNodes = [
-          ...surpriseCards_gotten.data.Page.media.map((item) => {
+        let newNodes = surpriseCards_gotten.data.Page.media.map((item) => {
             return { mediaRecommendation: item }
           })
-        ]
         this.animeData.data.Media.recommendations.nodes = newNodes
       } catch (error) {
         toast.error('There was an issue fetching the this show')

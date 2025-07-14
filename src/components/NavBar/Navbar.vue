@@ -1,24 +1,3 @@
-<script setup>
-import { RouterLink } from 'vue-router'
-import SearchboxVue from './componentsNavBar/Searchbox.vue'
-import MobileHeader from './mobile/MobileHeader.vue'
-import { computed } from 'vue'
-import { useAnimeData } from '../../stores/anime_data'
-import { detectMobile } from '../../js/helpers'
-import { useRouter } from 'vue-router'
-const animeData = useAnimeData()
-const isMobile = computed(() => {
-  return detectMobile()
-})
-
-const router = useRouter()
-
-const redirectToHomeAndFetch = () => {
-  router.push('/')
-  animeData.fetchCurrentSeason()
-}
-</script>
-
 <template>
   <header>
     <nav class="navigation-bar">
@@ -44,6 +23,27 @@ const redirectToHomeAndFetch = () => {
     </nav>
   </header>
 </template>
+
+<script setup>
+import { RouterLink } from 'vue-router'
+import SearchboxVue from './componentsNavBar/Searchbox.vue'
+import MobileHeader from './mobile/MobileHeader.vue'
+import { computed } from 'vue'
+import { useAnimeData } from '../../stores/anime_data'
+import { detectMobile } from '../../js/helpers'
+import { useRouter } from 'vue-router'
+const animeData = useAnimeData()
+const isMobile = computed(() => {
+  return detectMobile()
+})
+
+const router = useRouter()
+
+const redirectToHomeAndFetch = () => {
+  router.push('/')
+  animeData.fetchCurrentSeason()
+}
+</script>
 
 <style scoped>
 .navigation-bar {

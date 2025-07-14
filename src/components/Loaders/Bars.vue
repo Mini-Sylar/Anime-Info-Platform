@@ -47,7 +47,6 @@
   </svg>
 </template>
 
-
 <style scoped>
 svg {
   width: 100px;

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <MobileSideBar/>
+    <MobileSideBar />
     <nav>
       <div class="logo">
         <a
@@ -20,30 +20,30 @@
   </div>
 </template>
 <script setup>
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
-const router = useRouter();
-const showNav = ref('show-nav');
+const router = useRouter()
+const showNav = ref('show-nav')
 
 function showHam() {
-  document.querySelector('.nav-mobile').classList.toggle(showNav.value);
-  const mobile_nav = document.querySelector('.nav-mobile');
-  document.querySelector('.hamburger').classList.toggle('open');
-  document.querySelector('.first').classList.toggle(showNav.value);
+  document.querySelector('.nav-mobile').classList.toggle(showNav.value)
+  const mobile_nav = document.querySelector('.nav-mobile')
+  document.querySelector('.hamburger').classList.toggle('open')
+  document.querySelector('.first').classList.toggle(showNav.value)
   if (mobile_nav.classList.contains(showNav.value)) {
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden'
   } else {
-    document.body.style.overflow = 'scroll';
+    document.body.style.overflow = 'scroll'
   }
 }
 
 function getCurrentSeasonShows() {
   if (document.querySelector('.nav-mobile').classList.contains(showNav.value)) {
-    document.querySelector('.nav-mobile').classList.remove(showNav.value);
-    document.querySelector('.hamburger').classList.remove('open');
-    document.querySelector('.first').classList.remove(showNav.value);
-    document.body.style.overflow = 'scroll';
+    document.querySelector('.nav-mobile').classList.remove(showNav.value)
+    document.querySelector('.hamburger').classList.remove('open')
+    document.querySelector('.first').classList.remove(showNav.value)
+    document.body.style.overflow = 'scroll'
   }
 
   router.push('/').then(() => {
@@ -53,18 +53,14 @@ function getCurrentSeasonShows() {
         left: 0,
         top: document.body.scrollHeight,
         behavior: 'smooth'
-      });
-    }, 800);
-  });
-  return useAnimeData().fetchCurrentSeason();
+      })
+    }, 800)
+  })
+  return useAnimeData().fetchCurrentSeason()
 }
-
-
-
 
 import MobileSideBar from './MobileSideBar.vue'
 import { useAnimeData } from '../../../stores/anime_data'
-
 </script>
 <style scoped>
 .no-scroll {

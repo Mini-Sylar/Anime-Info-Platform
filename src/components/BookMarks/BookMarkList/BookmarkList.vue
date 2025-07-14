@@ -30,103 +30,96 @@
       </transition>
 
       <TransitionGroup name="pop" tag="ul" class="container">
-        <li
-          class="table-item"
-          v-for="(bookmark, index) in allBookmarks"
-          :key="index"
-          v-if="allBookmarks.length > 0"
-        >
-          <div class="contains-title">
-            <div class="bg-image">
-              <img
-                :src="bookmark.showDetails.coverImage.medium"
-                :alt="
-                  bookmark.showDetails.title.english
-                    ? bookmark.showDetails.title.english
-                    : bookmark.showDetails.title.romaji
-                "
-              />
+        <div v-if="allBookmarks.length > 0">
+          <li class="table-item" v-for="(bookmark, index) in allBookmarks" :key="index">
+            <div class="contains-title">
+              <div class="bg-image">
+                <img
+                  :src="bookmark.showDetails.coverImage.medium"
+                  :alt="
+                    bookmark.showDetails.title.english
+                      ? bookmark.showDetails.title.english
+                      : bookmark.showDetails.title.romaji
+                  "
+                />
+              </div>
+              <div
+                class="title animetitle"
+                role="button"
+                aria-label="search anime"
+                @click="searchAnime(bookmark.showDetails.title.romaji)"
+              >
+                <p>
+                  {{
+                    bookmark.showDetails.title.english
+                      ? bookmark.showDetails.title.english
+                      : bookmark.showDetails.title.romaji
+                  }}
+                </p>
+              </div>
             </div>
-            <div
-              class="title animetitle"
-              role="button"
-              aria-label="search anime"
-              @click="searchAnime(bookmark.showDetails.title.romaji)"
-            >
+            <div class="latest-episode">
               <p>
                 {{
-                  bookmark.showDetails.title.english
-                    ? bookmark.showDetails.title.english
-                    : bookmark.showDetails.title.romaji
+                  bookmark.showDetails.airingSchedule.nodes[0].episode
+                    ? bookmark.showDetails.airingSchedule.nodes[0].episode
+                    : bookmark.showDetails?.episodes
                 }}
+                <transition name="pop">
+                  <span class="watched" v-if="bookmark.watched"> Watched </span>
+                  <span class="unwatched" v-else> Unwatched </span>
+                </transition>
               </p>
             </div>
-          </div>
-          <div class="latest-episode">
-            <p>
-              {{
-                bookmark.showDetails.airingSchedule.nodes[0].episode
-                  ? bookmark.showDetails.airingSchedule.nodes[0].episode
-                  : bookmark.showDetails?.episodes
-              }}
-              <transition name="pop">
-                <span class="watched" v-if="bookmark.watched"> Watched </span>
-                <span class="unwatched" v-else> Unwatched </span>
-              </transition>
-            </p>
-          </div>
-
-          <div class="schedule">
-            <p>{{ formatDate(bookmark.showDetails.airingSchedule.nodes[0].airingAt) }}</p>
-          </div>
-
-          <div class="season">
-            <p>{{ bookmark.showDetails.season }} {{ bookmark.showDetails.startDate.year }}</p>
-          </div>
-
-          <div class="status">
-            <span :class="[bookmark.showDetails.status == 'FINISHED' ? 'finished' : 'releasing']">
-              {{ bookmark.showDetails.status }}
-            </span>
-          </div>
-
-          <div class="action">
-            <button class="delete-button" @click="toggleWatched(bookmark.id)">
-              <div
-                role="button"
-                :title="bookmark.watched ? 'Mark as unwatched' : 'Mark as watched'"
-                :class="[bookmark.watched ? `check check-watched` : `check uses-dynamic`]"
-              ></div>
-            </button>
-            <button title="Share" class="delete-button" @click="shareAnime(bookmark.title)">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 448 512"
-                class="uses-dynamic delete-icon share-hover"
+            <div class="schedule">
+              <p>{{ formatDate(bookmark.showDetails.airingSchedule.nodes[0].airingAt) }}</p>
+            </div>
+            <div class="season">
+              <p>{{ bookmark.showDetails.season }} {{ bookmark.showDetails.startDate.year }}</p>
+            </div>
+            <div class="status">
+              <span :class="[bookmark.showDetails.status == 'FINISHED' ? 'finished' : 'releasing']">
+                {{ bookmark.showDetails.status }}
+              </span>
+            </div>
+            <div class="action">
+              <button class="delete-button" @click="toggleWatched(bookmark.id)">
+                <div
+                  role="button"
+                  :title="bookmark.watched ? 'Mark as unwatched' : 'Mark as watched'"
+                  :class="[bookmark.watched ? `check check-watched` : `check uses-dynamic`]"
+                ></div>
+              </button>
+              <button title="Share" class="delete-button" @click="shareAnime(bookmark.title)">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 448 512"
+                  class="uses-dynamic delete-icon share-hover"
+                >
+                  <path
+                    d="M352 224c53 0 96-43 96-96s-43-96-96-96s-96 43-96 96c0 4 .2 8 .7 11.9l-94.1 47C145.4 170.2 121.9 160 96 160c-53 0-96 43-96 96s43 96 96 96c25.9 0 49.4-10.2 66.6-26.9l94.1 47c-.5 3.9-.7 7.8-.7 11.9c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-25.9 0-49.4 10.2-66.6 26.9l-94.1-47c.5-3.9 .7-7.8 .7-11.9s-.2-8-.7-11.9l94.1-47C302.6 213.8 326.1 224 352 224z"
+                  />
+                </svg>
+              </button>
+              <button
+                title="Remove show from your bookmarks"
+                type="button"
+                class="delete-button"
+                @click="removeStar(bookmark)"
               >
-                <path
-                  d="M352 224c53 0 96-43 96-96s-43-96-96-96s-96 43-96 96c0 4 .2 8 .7 11.9l-94.1 47C145.4 170.2 121.9 160 96 160c-53 0-96 43-96 96s43 96 96 96c25.9 0 49.4-10.2 66.6-26.9l94.1 47c-.5 3.9-.7 7.8-.7 11.9c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-25.9 0-49.4 10.2-66.6 26.9l-94.1-47c.5-3.9 .7-7.8 .7-11.9s-.2-8-.7-11.9l94.1-47C302.6 213.8 326.1 224 352 224z"
-                />
-              </svg>
-            </button>
-            <button
-              title="Remove show from your bookmarks"
-              type="button"
-              class="delete-button"
-              @click="removeStar(bookmark)"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="uses-dynamic delete-icon"
-                viewBox="0 0 448 512"
-              >
-                <path
-                  d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"
-                />
-              </svg>
-            </button>
-          </div>
-        </li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="uses-dynamic delete-icon"
+                  viewBox="0 0 448 512"
+                >
+                  <path
+                    d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"
+                  />
+                </svg>
+              </button>
+            </div>
+          </li>
+        </div>
         <div class="empty" v-else-if="bookmarkloading == true"></div>
         <div class="empty" v-else>
           <h2>NO SHOWS BOOKMARKED...😢</h2>
@@ -223,7 +216,7 @@ watch(allBookmarks, () => {
 const toggleWatched = async (showId) => {
   try {
     await fetchBookmarks.toggleWatched(showId)
-  } catch (error) {
+  } catch  {
     return
   }
 }

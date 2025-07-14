@@ -1,53 +1,3 @@
-<script setup>
-import BodyVue from '../components/Body/Body.vue'
-import SurpriseMe from '../components/Cards/SurpriseMe/SurpriseMe.vue'
-import Recommendations from '../components/Cards/Recommendations/Recommendations.vue'
-import BodyLoading from '../components/Body/Loading/BodyLoading.vue'
-import CardLoading from '../components/Cards/Loading/CardLoading.vue'
-import { useAnimeData } from '../stores/anime_data'
-import { onMounted,onErrorCaptured,computed,inject} from 'vue'
-import { useHead } from '@unhead/vue'
-import { useRouter } from 'vue-router'
-
-
-const mixpanel = inject('mixpanel')
-const mainAnimeData = useAnimeData()
-const router = useRouter()
-
-
-const setColor = computed(() => {
-  return mainAnimeData.getAccentColor
-})
-
- useHead({
-      title: 'Anime Info Platform | Home',
-      meta: [
-        {
-          name: 'description',
-          content:
-            'Search for your favorite anime and get information, recommendations, and more using the anime info platform.'
-        },
-        {
-          name: 'keywords',
-          content: 'anime, anime info, anime info platform, anime info website, anime information'
-        }
-      ]
-    })
-
-
-
-onMounted(() => {
-     mixpanel.track('Home Page')
-});
-
-onErrorCaptured((error) => {
-  console.error('Error captured in HomeView.vue: ', error.message)
-  router.push('/not-found')
-})
-
-
-</script>
-
 <template>
   <div class="main-div">
     <div class="left-side-main">
@@ -79,6 +29,50 @@ onErrorCaptured((error) => {
     </div>
   </div>
 </template>
+
+<script setup>
+import BodyVue from '../components/Body/Body.vue'
+import SurpriseMe from '../components/Cards/SurpriseMe/SurpriseMe.vue'
+import Recommendations from '../components/Cards/Recommendations/Recommendations.vue'
+import BodyLoading from '../components/Body/Loading/BodyLoading.vue'
+import CardLoading from '../components/Cards/Loading/CardLoading.vue'
+import { useAnimeData } from '../stores/anime_data'
+import { onMounted, onErrorCaptured, computed, inject } from 'vue'
+import { useHead } from '@unhead/vue'
+import { useRouter } from 'vue-router'
+
+const mixpanel = inject('mixpanel')
+const mainAnimeData = useAnimeData()
+const router = useRouter()
+
+const setColor = computed(() => {
+  return mainAnimeData.getAccentColor
+})
+
+useHead({
+  title: 'Anime Info Platform | Home',
+  meta: [
+    {
+      name: 'description',
+      content:
+        'Search for your favorite anime and get information, recommendations, and more using the anime info platform.'
+    },
+    {
+      name: 'keywords',
+      content: 'anime, anime info, anime info platform, anime info website, anime information'
+    }
+  ]
+})
+
+onMounted(() => {
+  mixpanel.track('Home Page')
+})
+
+onErrorCaptured((error) => {
+  console.error('Error captured in HomeView.vue: ', error.message)
+  router.push('/not-found')
+})
+</script>
 
 <style>
 button {

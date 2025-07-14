@@ -74,7 +74,7 @@
 
 <script setup lang="js">
 import { useAnimeData } from '@/stores/anime_data.js'
-import { ref,computed } from 'vue'
+import { ref, computed } from 'vue'
 
 import { Swiper, SwiperSlide } from 'swiper/vue'
 
@@ -87,55 +87,52 @@ import Bars from '../../Loaders/Bars.vue'
 const swiper = ref(null)
 const slice = ref(true)
 
-   const mainAnimeData = ref([])
-    const getAnimeData =  () => {
-      mainAnimeData.value =  useAnimeData()
-    }
-    const swiperContainer = ref(null)
-    await getAnimeData()
-    let useFetchFromRecommendations = mainAnimeData.value.fetchFromRecommended
-    // useAnimeStoreHere
+const mainAnimeData = ref([])
+const getAnimeData = () => {
+  mainAnimeData.value = useAnimeData()
+}
+const swiperContainer = ref(null)
+await getAnimeData()
+let useFetchFromRecommendations = mainAnimeData.value.fetchFromRecommended
+// useAnimeStoreHere
 
-    const populateCards = computed(() => {
-      if (slice.value == true) {
-        return mainAnimeData.value.getRecommendations.slice(0, 20) // TODO: fix slicing issue
-      }
-      return mainAnimeData.value.getRecommendations.slice(20, 50)
-    })
+const populateCards = computed(() => {
+  if (slice.value == true) {
+    return mainAnimeData.value.getRecommendations.slice(0, 20) // TODO: fix slicing issue
+  }
+  return mainAnimeData.value.getRecommendations.slice(20, 50)
+})
 
-    const numberofCards = computed(() => {
-      if (screen.width <1025) return 2.7
-      return mainAnimeData.value.getRecommendations.length <= 2 ? 2 : 4
-    })
+const numberofCards = computed(() => {
+  if (screen.width < 1025) return 2.7
+  return mainAnimeData.value.getRecommendations.length <= 2 ? 2 : 4
+})
 
-    const isCardsLoading = computed(() => {
-      return mainAnimeData.value.cardsLoading
-    })
+const isCardsLoading = computed(() => {
+  return mainAnimeData.value.cardsLoading
+})
 
-    const centerSlides = computed(() => {
-      return mainAnimeData.value.getRecommendations.length <= 2 ? false : true
-    })
+const centerSlides = computed(() => {
+  return mainAnimeData.value.getRecommendations.length <= 2 ? false : true
+})
 
+const searchFromRecommended = (query) => {
+  let getTitle = query.romaji ? query.romaji : query.english
+  useFetchFromRecommendations(getTitle)
+}
 
-    const searchFromRecommended = (query) => {
-      let getTitle = query.romaji ? query.romaji : query.english
-      useFetchFromRecommendations(getTitle)
-    }
+const showMore = () => {
+  slice.value = !slice.value
+  mainAnimeData.value.cardsLoading = true
+  swiper.value.slideTo(0)
+  setTimeout(() => {
+    mainAnimeData.value.cardsLoading = false
+  }, 1000)
+}
 
-    const showMore = () => {
-      slice.value = !slice.value
-      mainAnimeData.value.cardsLoading = true
-      swiper.value.slideTo(0)
-      setTimeout(() => {
-        mainAnimeData.value.cardsLoading = false
-      }, 1000)
-    }
-
-    const onSwiper = (swiper) => {
-      swiper.value = swiper
-    }
-   
-
+const onSwiper = (swiper) => {
+  swiper.value = swiper
+}
 </script>
 <style scoped>
 .swiper-container {

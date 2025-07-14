@@ -10,11 +10,10 @@
   </div>
 </template>
 <script setup>
-import {watch } from 'vue'
-import { useRoute } from 'vue-router';
+import { watch } from 'vue'
+import { useRoute } from 'vue-router'
 
 const route = useRoute()
-
 
 function hideMenu() {
   document.querySelector('.nav-mobile').classList.remove('show-nav')
@@ -24,10 +23,8 @@ function hideMenu() {
 }
 
 watch(route, () => {
- hideMenu()
+  hideMenu()
 })
-
-
 </script>
 <style scoped>
 .nav-mobile {

@@ -6,8 +6,7 @@
   </div>
 </template>
 <script setup>
-import {computed} from 'vue'
-
+import { computed } from 'vue'
 
 const props = defineProps({
   animeMetaData: {
@@ -19,7 +18,6 @@ const props = defineProps({
 const formatGenre = computed(() => {
   return props.animeMetaData.genre.join(' / ')
 })
-
 </script>
 <style scoped>
 div p {

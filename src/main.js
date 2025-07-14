@@ -8,7 +8,7 @@ import Toast from 'vue-toastification'
 import 'vue-toastification/dist/index.css'
 import mixpanel from 'mixpanel-browser'
 import localforage from 'localforage'
-import { createHead } from '@unhead/vue'
+import { createHead } from '@unhead/vue/client'
 import { register } from 'swiper/element/bundle'
 
 mixpanel.init(import.meta.env.VITE_MIXPANEL_TOKEN)

@@ -1,21 +1,3 @@
-<script setup>
-import { useAnimeData } from '@/stores/anime_data'
-import { computed } from 'vue'
-import { vOnClickOutside } from '@vueuse/components'
-const props = defineProps({
-  show: Boolean
-})
-
-const setColor = computed(() => {
-  return useAnimeData().getAccentColor
-})
-
-const emit = defineEmits(['close'])
-const checkIfActive = () => {
-  emit('close')
-}
-</script>
-
 <template>
   <Transition name="modal">
     <div v-if="show" class="modal-mask">
@@ -37,6 +19,24 @@ const checkIfActive = () => {
     </div>
   </Transition>
 </template>
+
+<script setup>
+import { useAnimeData } from '@/stores/anime_data'
+import { computed } from 'vue'
+import { vOnClickOutside } from '@vueuse/components'
+defineProps({
+  show: Boolean
+})
+
+const setColor = computed(() => {
+  return useAnimeData().getAccentColor
+})
+
+const emit = defineEmits(['close'])
+const checkIfActive = () => {
+  emit('close')
+}
+</script>
 
 <style scoped>
 .modal-mask {

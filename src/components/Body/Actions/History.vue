@@ -33,7 +33,6 @@ const searchHistory = (history) => {
   mainAnimeData.fetchAnimeData(history, false)
 }
 
-
 const checkClearHistory = computed(() => {
   return mainAnimeData.clearHistoryLoading
 })

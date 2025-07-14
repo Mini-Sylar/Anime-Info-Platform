@@ -13,13 +13,12 @@
 </template>
 <script setup>
 import { useAnimeData } from '@/stores/anime_data.js'
-import { onMounted } from 'vue';
+import { onMounted } from 'vue'
 
 onMounted(() => {
-     const mainAnimeData = useAnimeData()
-    mainAnimeData.fetchAnimeData('Oshi-No-Ko')
-});
-
+  const mainAnimeData = useAnimeData()
+  mainAnimeData.fetchAnimeData('Oshi-No-Ko')
+})
 </script>
 <style scoped>
 h1 {

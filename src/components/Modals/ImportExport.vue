@@ -1,63 +1,3 @@
-<script setup>
-import { useAnimeData } from '@/stores/anime_data'
-import { useBookmarks } from '../../stores/bookmarks'
-import { computed, ref } from 'vue'
-import { vOnClickOutside } from '@vueuse/components'
-import { useToast } from 'vue-toastification'
-
-const toast = useToast()
-
-const file = ref(null)
-const isButtonDisable = ref(false)
-const props = defineProps({
-  show: Boolean
-})
-
-const setColor = computed(() => {
-  return useAnimeData().getAccentColor
-})
-
-const emit = defineEmits(['close'])
-const checkIfActive = () => {
-  emit('close')
-}
-
-const showExport = ref(true)
-const showExportView = () => {
-  showExport.value = true
-}
-const showImport = () => {
-  showExport.value = false
-}
-
-const exportShow = async () => {
-  isButtonDisable.value = true
-  try {
-    await useBookmarks().exportBookmarks()
-  } catch (e) {
-    toast.error('No bookmarks to export')
-  } finally {
-    isButtonDisable.value = false
-  }
-}
-
-const importShows = async () => {
-  isButtonDisable.value = true
-  if (file.value.files.length == 0) {
-    toast.error('No file selected')
-    return
-  }
-  try {
-    await useBookmarks().importBookmarks(file.value.files[0])
-    checkIfActive()
-  } catch (e) {
-    toast.error('Invalid file')
-  } finally {
-    isButtonDisable.value = false
-  }
-}
-</script>
-
 <template>
   <Transition name="modal">
     <div v-if="show" class="modal-mask">
@@ -205,6 +145,66 @@ const importShows = async () => {
     </div>
   </Transition>
 </template>
+
+<script setup>
+import { useAnimeData } from '@/stores/anime_data'
+import { useBookmarks } from '../../stores/bookmarks'
+import { computed, ref } from 'vue'
+import { vOnClickOutside } from '@vueuse/components'
+import { useToast } from 'vue-toastification'
+
+const toast = useToast()
+
+const file = ref(null)
+const isButtonDisable = ref(false)
+defineProps({
+  show: Boolean
+})
+
+const setColor = computed(() => {
+  return useAnimeData().getAccentColor
+})
+
+const emit = defineEmits(['close'])
+const checkIfActive = () => {
+  emit('close')
+}
+
+const showExport = ref(true)
+const showExportView = () => {
+  showExport.value = true
+}
+const showImport = () => {
+  showExport.value = false
+}
+
+const exportShow = async () => {
+  isButtonDisable.value = true
+  try {
+    await useBookmarks().exportBookmarks()
+  } catch {
+    toast.error('No bookmarks to export')
+  } finally {
+    isButtonDisable.value = false
+  }
+}
+
+const importShows = async () => {
+  isButtonDisable.value = true
+  if (file.value.files.length == 0) {
+    toast.error('No file selected')
+    return
+  }
+  try {
+    await useBookmarks().importBookmarks(file.value.files[0])
+    checkIfActive()
+  } catch {
+    toast.error('Invalid file')
+  } finally {
+    isButtonDisable.value = false
+  }
+}
+</script>
 
 <style scoped>
 .modal-mask {

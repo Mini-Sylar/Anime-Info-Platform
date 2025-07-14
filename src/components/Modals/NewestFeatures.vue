@@ -1,30 +1,9 @@
-<script setup>
-import { useAnimeData } from '@/stores/anime_data'
-import { computed } from 'vue'
-import { vOnClickOutside } from '@vueuse/components'
-
-
-defineProps({
-  show: Boolean,
-  newFeatures: Object
-})
-
-const setColor = computed(() => {
-  return useAnimeData().getAccentColor
-})
-
-const emit = defineEmits(['close'])
-const checkIfActive = () => {
-  emit('close')
-}
-</script>
-
 <template>
   <Transition name="modal">
     <div v-if="show" class="modal-mask">
       <div class="modal-container" v-on-click-outside="checkIfActive">
         <div class="modal-header">
-          <h3>New Features v.2.2.0 🎉</h3>
+          <h3>New Features v.2.3.0 🎉</h3>
         </div>
 
         <div class="modal-body">
@@ -50,6 +29,26 @@ const checkIfActive = () => {
     </div>
   </Transition>
 </template>
+
+<script setup>
+import { useAnimeData } from '@/stores/anime_data'
+import { computed } from 'vue'
+import { vOnClickOutside } from '@vueuse/components'
+
+defineProps({
+  show: Boolean,
+  newFeatures: Object
+})
+
+const setColor = computed(() => {
+  return useAnimeData().getAccentColor
+})
+
+const emit = defineEmits(['close'])
+const checkIfActive = () => {
+  emit('close')
+}
+</script>
 
 <style scoped>
 .modal-mask {

@@ -1,3 +1,20 @@
+<template>
+  <NavbarVue />
+  <router-view v-slot="{ Component }">
+    <transition name="fade" mode="out-in">
+      <component :is="Component"></component>
+    </transition>
+  </router-view>
+  <Teleport to="body">
+    <NewestFeatures
+      :show="showNewFeatures"
+      @close="prepareNextFeature"
+      :newFeatures="newFeatures.slice(1)"
+    >
+    </NewestFeatures>
+  </Teleport>
+</template>
+
 <script setup>
 import NavbarVue from './components/NavBar/Navbar.vue'
 import { RouterView } from 'vue-router'
@@ -83,23 +100,6 @@ watch(showNewFeatures, (value) => {
 })
 </script>
 
-<template>
-  <NavbarVue />
-  <router-view v-slot="{ Component }">
-    <transition name="fade" mode="out-in">
-      <component :is="Component"></component>
-    </transition>
-  </router-view>
-  <Teleport to="body">
-    <NewestFeatures
-      :show="showNewFeatures"
-      @close="prepareNextFeature"
-      :newFeatures="newFeatures.slice(1)"
-    >
-    </NewestFeatures>
-  </Teleport>
-</template>
-
 <style>
 /* Slide Animation */
 .slide-enter-active,
@@ -157,7 +157,6 @@ watch(showNewFeatures, (value) => {
 ::selection {
   background-color: v-bind("setColor + '80'") !important;
 }
-
 
 .contains-genres,
 .history-container,

@@ -30,7 +30,6 @@ const searchAnime = (bookmark) => {
   useAnimeData().fetchAnimeData(bookmark, false)
 }
 
-
 useBookmarks()
   .getSavedShows()
   .then((data) => {

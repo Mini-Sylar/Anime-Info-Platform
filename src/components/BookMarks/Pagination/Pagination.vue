@@ -64,7 +64,7 @@
   </div>
 </template>
 <script setup>
-import { computed } from 'vue';
+import { computed } from 'vue'
 
 const emit = defineEmits(['pagechanged'])
 
@@ -133,9 +133,7 @@ const isInLastPage = computed(() => {
 
 const screenWidth = computed(() => {
   return screen.width < 424
-     
 })
-
 
 function onClickFirstPage() {
   emit('pagechanged', 1)
@@ -160,7 +158,6 @@ function onClickLastPage() {
 function isPageActive(page) {
   return props.currentPage === page
 }
-
 </script>
 <style scoped>
 .pagination {
