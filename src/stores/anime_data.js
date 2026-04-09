@@ -3,14 +3,14 @@ import {
   prepareAnimeData,
   headersList,
   main_data,
-  surpriseMe,
+  surpriseMePageCount,
+  surpriseMeAtPage,
   currentSeason
 } from '../js/AnimeQuery'
 import router from '../router'
 import mixpanel from 'mixpanel-browser'
-import { shadeColor, shareAnime, generateNewNodes, omitNull } from '../js/helpers'
+import { shadeColor, shareAnime, generateNewNodes, omitNull, randomIntFromInterval } from '../js/helpers'
 import { useToast } from 'vue-toastification'
-
 import { useBookmarks } from './bookmarks'
 
 main_data.data.Media.recommendations.nodes = main_data.data.Media.recommendations.nodes.filter(
@@ -34,7 +34,6 @@ export const useAnimeData = defineStore('animeData', {
   }),
   getters: {
     getAnimeTitleDescription: (state) => {
-      // set Anime Title and Description
       const animeTitle = state.animeData.data.Media.title.english
         ? state.animeData.data.Media.title.english
         : state.animeData.data.Media.title.romaji
@@ -46,7 +45,7 @@ export const useAnimeData = defineStore('animeData', {
       const genre = state.animeData.data.Media.genres
       const episodes = state.animeData.data.Media.episodes
         ? state.animeData.data.Media.episodes
-        : 'Unknown'
+        : null
       return { year, genre, episodes }
     },
     getRating: (state) => {
@@ -60,8 +59,7 @@ export const useAnimeData = defineStore('animeData', {
       return trailer
     },
     getRecommendations: (state) => {
-      const recommendations = state.animeData.data.Media.recommendations.nodes
-      return recommendations
+      return state.animeData.data.Media.recommendations.nodes
     },
     getAccentColor: (state) => {
       const color = state.animeData.data.Media.coverImage.color
@@ -72,72 +70,84 @@ export const useAnimeData = defineStore('animeData', {
       return background !== null ? background : '/images/404-no-wallpaper.jpg'
     },
     getAnimeId: (state) => {
-      const animeID = state.animeData.data.Media.id
-      return animeID
+      return state.animeData.data.Media.id
     }
   },
   actions: {
     async fetchAnimeData(searchQuery, logHistory = true) {
       this.cardsLoading = true
       this.bodyLoading = true
-      let response = await fetch('https://graphql.anilist.co/?id', {
-        method: 'POST',
-        body: prepareAnimeData(searchQuery),
-        headers: headersList
-      })
       try {
-        // Main Data Here
+        let response = await fetch('https://graphql.anilist.co/', {
+          method: 'POST',
+          body: prepareAnimeData(searchQuery),
+          headers: headersList
+        })
         let main_data = await response.json()
-        // loop through array  main_data.data.Media.recommendations.nodes and drop object with null values using filter
+        // Filter out null recommendations
         main_data.data.Media.recommendations.nodes =
           main_data.data.Media.recommendations.nodes.filter(
             (item) => item.mediaRecommendation !== null
           )
         this.animeData = main_data
-        //   Set to local storage to save search query after refresh
         localStorage.setItem('searchQuery', searchQuery)
-        //  Add to search history
         if (logHistory) {
           this.addToHistory()
         }
-        //check if starred
         this.bookMarkStore.isShowStarred(main_data.data.Media.id).then((value) => {
           this.isStarred = value
         })
       } catch (error) {
-        toast.error('Error Fetching Data')
+        toast.error('Error fetching anime data')
       }
       setTimeout(() => {
         this.cardsLoading = false
         this.bodyLoading = false
       }, 1000)
     },
+
     async fetchSurprise(genre) {
-      // Add loading parameters here
+      this.cardsLoading = true
       try {
-        this.cardsLoading = true
-        let response_cards = await fetch('https://graphql.anilist.co/?id', {
+        // Step 1: Get the real last page count for this genre
+        const countRes = await fetch('https://graphql.anilist.co/', {
           method: 'POST',
-          body: surpriseMe(genre),
+          body: surpriseMePageCount(genre),
           headers: headersList
         })
-        let surpriseCards_gotten = await response_cards.json()
-        // Create a new object to store the data
-        let newNodes = surpriseCards_gotten.data.Page.media.map((item) => {
-            return { mediaRecommendation: item }
-          })
-        this.animeData.data.Media.recommendations.nodes = newNodes
+        const countData = await countRes.json()
+        const lastPage = countData?.data?.Page?.pageInfo?.lastPage ?? 50
+        // Cap at 150 to avoid empty pages deep in the results
+        const randomPage = randomIntFromInterval(1, Math.min(lastPage, 150))
+
+        // Step 2: Fetch anime from that random page
+        const animeRes = await fetch('https://graphql.anilist.co/', {
+          method: 'POST',
+          body: surpriseMeAtPage(genre, randomPage),
+          headers: headersList
+        })
+        const animeData = await animeRes.json()
+        const newNodes = animeData.data.Page.media.map((item) => ({
+          mediaRecommendation: item
+        }))
+
+        if (newNodes.length === 0) {
+          toast.warning('No results for that genre/page, try again!')
+        } else {
+          this.animeData.data.Media.recommendations.nodes = newNodes
+        }
       } catch (error) {
-        toast.error('There was an issue fetching the this show')
+        toast.error('There was an issue fetching surprise shows')
       }
       setTimeout(() => {
         this.cardsLoading = false
       }, 1000)
     },
+
     async fetchFromRecommended(title) {
       this.bodyLoading = true
       try {
-        let response = await fetch('https://graphql.anilist.co/?id', {
+        let response = await fetch('https://graphql.anilist.co/', {
           method: 'POST',
           body: prepareAnimeData(title),
           headers: headersList
@@ -145,7 +155,6 @@ export const useAnimeData = defineStore('animeData', {
         this.animeData.data.Media.trailer = null
         let main_data = await response.json()
         main_data.data.Media.recommendations = null
-        // Set background to no image if not found
         if (main_data.data.Media.bannerImage === null) {
           main_data.data.Media.bannerImage = '/images/404-no-wallpaper.jpg'
         }
@@ -153,37 +162,35 @@ export const useAnimeData = defineStore('animeData', {
           ...omitNull(this.animeData.data.Media),
           ...omitNull(main_data.data.Media)
         }
-        //check if starred
         this.bookMarkStore.isShowStarred(main_data.data.Media.id).then((value) => {
           this.isStarred = value
         })
       } catch (error) {
-        toast.error('Error Fetching Data')
+        toast.error('Error fetching anime data')
       }
       setTimeout(() => {
         this.bodyLoading = false
       }, 1000)
       localStorage.setItem('searchQuery', title)
     },
+
     async shareAnimeMain() {
       const animeTitle = this.animeData.data.Media.title.english
         ? this.animeData.data.Media.title.english
         : this.animeData.data.Media.title.romaji
       const formattedTitle = animeTitle
-        .replace(/[^\w\s]/g, '') // Replace special characters with empty string
-        .replace(/\s+/g, '-') //
+        .replace(/[^\w\s]/g, '')
+        .replace(/\s+/g, '-')
       const animeUrl = router.currentRoute.value.fullPath
       shareAnime(animeTitle, animeUrl, formattedTitle)
-      mixpanel.track('Shared Anime', {
-        title: animeTitle
-      })
+      mixpanel.track('Shared Anime', { title: animeTitle })
     },
+
     async shareAnimeCard(animeTitle, animeUrl, formattedTitle) {
       shareAnime(animeTitle, animeUrl, formattedTitle)
-      mixpanel.track('Shared Anime Bookmark', {
-        title: animeTitle
-      })
+      mixpanel.track('Shared Anime Bookmark', { title: animeTitle })
     },
+
     async addToHistory() {
       const animeTitle = this.animeData.data.Media.title.english
         ? this.animeData.data.Media.title.english
@@ -194,6 +201,7 @@ export const useAnimeData = defineStore('animeData', {
       }
       localStorage.setItem('searchHistory', JSON.stringify(this.searchHistory))
     },
+
     async clearHistory() {
       this.clearHistoryLoading = true
       this.searchHistory = []
@@ -202,14 +210,12 @@ export const useAnimeData = defineStore('animeData', {
         this.clearHistoryLoading = false
       }, 1000)
     },
+
     async reduceWidth(reduce) {
       this.toggleAbout = reduce
-      if (this.toggleAbout == true) {
-        this.aboutWidth = '170%'
-      } else {
-        this.aboutWidth = '20%'
-      }
+      this.aboutWidth = this.toggleAbout ? '170%' : '20%'
     },
+
     async fetchCurrentSeason() {
       this.cardsLoading = true
       try {
@@ -225,18 +231,21 @@ export const useAnimeData = defineStore('animeData', {
       }
       this.cardsLoading = false
     },
+
     async toggleStarredStatus(showId, showName, isStarred) {
       try {
         const result = await this.bookMarkStore.starAnime(showId, showName, isStarred)
         this.$state.isStarred = result
       } catch (error) {
-        toast.error('There was an issue checking the starred status of this show')
+        toast.error('There was an issue updating the bookmark')
       }
     },
+
     async initializeIsStarred(showId) {
       const starred = await this.bookMarkStore.isShowStarred(showId.value)
       this.$state.isStarred = starred
     },
+
     showReleaseNotes() {
       this.showNewFeatures = true
     }

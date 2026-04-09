@@ -81,6 +81,15 @@ button {
   transition: all 0.5s ease-in-out;
 }
 
+/* Transparent utility buttons — keep their own colors, not the accent fill */
+button.read-more-btn,
+button.genre-tag,
+button.genre-chip,
+button.genre-toggle-btn {
+  background-color: transparent !important;
+  color: inherit !important;
+}
+
 .action-button {
   background-color: transparent !important;
   color: v-bind('setColor') !important;

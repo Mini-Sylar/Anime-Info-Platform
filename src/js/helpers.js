@@ -74,3 +74,20 @@ export const omitNull = (obj) => {
     .forEach((k) => delete obj[k])
   return obj
 }
+
+// Sanitize HTML from AniList: keep safe formatting tags, strip dangerous ones
+export function sanitizeHtml(html) {
+  if (!html) return ''
+  return html
+    // Remove dangerous block-level and executable tags and their content
+    .replace(/<(script|style|iframe|object|embed|form|input|link|meta)[\s\S]*?<\/\1>/gi, '')
+    .replace(/<(script|style|iframe|object|embed|form|input|link|meta)[^>]*\/?>/gi, '')
+    // Strip event handlers
+    .replace(/\s+on\w+="[^"]*"/gi, '')
+    .replace(/\s+on\w+='[^']*'/gi, '')
+    // Strip javascript: hrefs
+    .replace(/href="javascript:[^"]*"/gi, '')
+    .replace(/href='javascript:[^']*'/gi, '')
+    // Strip <source> tags (common in AniList descriptions)
+    .replace(/<source[^>]*>/gi, '')
+}

@@ -2,7 +2,7 @@
   <div class="is-a-container swiper-container noselect" id="recommendations">
     <transition appear mode="out-in">
       <Swiper
-        :slides-per-view="numberofCards"
+        :slides-per-view="numberOfCards"
         :space-between="0"
         :effect="'coverflow'"
         :centeredSlides="centerSlides"
@@ -21,7 +21,6 @@
         }"
         :preload-images="false"
         :lazy="true"
-        ref="swiperContainer"
         :keyboard="true"
         :key="mainAnimeData.getRecommendations"
         @swiper="onSwiper"
@@ -32,7 +31,7 @@
           :key="index"
         >
           <p
-            class="noselect card-hovered"
+            class="noselect card-hovered card-title"
             role="link"
             aria-label="link to anime in card"
             @click="searchFromRecommended(item.mediaRecommendation.title)"
@@ -53,20 +52,26 @@
             />
           </transition>
         </swiper-slide>
+
         <swiper-slide
-          class="swiper-slide-instance"
-          v-if="populateCards.length > 19"
+          class="swiper-slide-instance show-more-slide"
+          v-if="hasMoreCards"
           @click="showMore"
         >
-          <p class="noselect card-hovered" role="link" aria-label="Show more recommended">
-            Show More <br />&rarr;
+          <p
+            class="noselect card-hovered show-more-label"
+            role="button"
+            aria-label="Show more recommendations"
+          >
+            <span>{{ isShowingMore ? '← Less' : 'More →' }}</span>
           </p>
         </swiper-slide>
       </Swiper>
     </transition>
+
     <transition appear mode="out-in">
       <div class="swiper-loading" v-if="isCardsLoading">
-        <Bars></Bars>
+        <Bars />
       </div>
     </transition>
   </div>
@@ -75,65 +80,65 @@
 <script setup lang="js">
 import { useAnimeData } from '@/stores/anime_data.js'
 import { ref, computed } from 'vue'
-
 import { Swiper, SwiperSlide } from 'swiper/vue'
-
-// Import Swiper styles
 import 'swiper/css'
 import 'swiper/css/effect-coverflow'
 import 'swiper/element/css/autoplay'
 import Bars from '../../Loaders/Bars.vue'
 
-const swiper = ref(null)
-const slice = ref(true)
+// Fix: use a clearly named ref to avoid shadowing in the onSwiper callback
+const swiperInstance = ref(null)
+const showingMore = ref(false)
 
-const mainAnimeData = ref([])
-const getAnimeData = () => {
-  mainAnimeData.value = useAnimeData()
-}
-const swiperContainer = ref(null)
-await getAnimeData()
-let useFetchFromRecommendations = mainAnimeData.value.fetchFromRecommended
-// useAnimeStoreHere
+const mainAnimeData = useAnimeData()
+await Promise.resolve() // keeps Suspense working without async store call
+
+const totalRecommendations = computed(() => mainAnimeData.getRecommendations.length)
 
 const populateCards = computed(() => {
-  if (slice.value == true) {
-    return mainAnimeData.value.getRecommendations.slice(0, 20) // TODO: fix slicing issue
+  const all = mainAnimeData.getRecommendations
+  if (!showingMore.value) {
+    return all.slice(0, 20)
   }
-  return mainAnimeData.value.getRecommendations.slice(20, 50)
+  return all.slice(20)
 })
 
-const numberofCards = computed(() => {
-  if (screen.width < 1025) return 2.7
-  return mainAnimeData.value.getRecommendations.length <= 2 ? 2 : 4
+// Show the toggle slide only when there are more than 20 recommendations
+const hasMoreCards = computed(() => totalRecommendations.value > 20)
+const isShowingMore = computed(() => showingMore.value)
+
+const numberOfCards = computed(() => {
+  if (window.screen.width < 1025) return 2.7
+  return totalRecommendations.value <= 2 ? 2 : 4
 })
 
-const isCardsLoading = computed(() => {
-  return mainAnimeData.value.cardsLoading
-})
+const isCardsLoading = computed(() => mainAnimeData.cardsLoading)
 
-const centerSlides = computed(() => {
-  return mainAnimeData.value.getRecommendations.length <= 2 ? false : true
-})
+const centerSlides = computed(() => totalRecommendations.value > 2)
 
-const searchFromRecommended = (query) => {
-  let getTitle = query.romaji ? query.romaji : query.english
-  useFetchFromRecommendations(getTitle)
+// Fix: prefer English title, fallback to romaji
+const searchFromRecommended = (titleObj) => {
+  const title = titleObj.english ? titleObj.english : titleObj.romaji
+  mainAnimeData.fetchFromRecommended(title)
 }
 
 const showMore = () => {
-  slice.value = !slice.value
-  mainAnimeData.value.cardsLoading = true
-  swiper.value.slideTo(0)
+  showingMore.value = !showingMore.value
+  mainAnimeData.cardsLoading = true
+  if (swiperInstance.value) {
+    swiperInstance.value.slideTo(0)
+  }
   setTimeout(() => {
-    mainAnimeData.value.cardsLoading = false
-  }, 1000)
+    mainAnimeData.cardsLoading = false
+  }, 800)
 }
 
+// Fix: renamed parameter to avoid shadowing the swiperInstance ref
 const onSwiper = (swiper) => {
-  swiper.value = swiper
+  swiperInstance.value = swiper
 }
 </script>
+
 <style scoped>
 .swiper-container {
   display: flex;
@@ -142,7 +147,6 @@ const onSwiper = (swiper) => {
   min-width: 40rem;
   height: 90%;
   position: relative;
-  /* background-color: red; */
 }
 
 .swiper-slide-instance {
@@ -158,6 +162,10 @@ const onSwiper = (swiper) => {
   min-width: 12rem;
 }
 
+.show-more-slide {
+  cursor: pointer;
+}
+
 img {
   width: 100%;
   height: 100%;
@@ -167,19 +175,53 @@ img {
   filter: brightness(0.4);
 }
 
-p {
+.card-title {
   z-index: 100;
   color: hsl(0, 0%, 90%);
   font-weight: 600;
   cursor: pointer;
   padding: 10px;
   height: 10vh;
-  /* background-color: red; */
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 15px;
+}
+
+.show-more-label {
+  z-index: 100;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+  color: rgba(245, 245, 245, 0.95);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04));
+  border: 1px dashed rgba(255, 255, 255, 0.34);
+  box-shadow:
+    0 10px 26px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(255, 255, 255, 0.04) inset;
+  transition: all 0.2s ease;
+}
+
+.show-more-label span {
+  transition: transform 0.2s ease;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+}
+
+.show-more-label:hover span {
+  transform: scale(1.1);
+}
+
+.show-more-label:hover {
+  border-color: rgba(255, 255, 255, 0.55);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.07));
 }
 
 .swiper-loading {
@@ -189,10 +231,10 @@ p {
   width: 100%;
   height: 25rem;
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border-radius: 20px;
   z-index: 200;
   overflow: hidden;
-  border-radius: 20px;
   padding: 20px;
 }
 
@@ -222,7 +264,7 @@ p {
     height: 20rem;
   }
 
-  p {
+  .card-title {
     font-size: 12px;
   }
 
