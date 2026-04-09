@@ -13,6 +13,17 @@
         <RouterLink to="/bookmarks" class="is-url">Bookmarks</RouterLink>
         <RouterLink to="/about" class="is-url">About</RouterLink>
         <RouterLink to="/contact" class="is-url">Contact</RouterLink>
+        <a
+          role="button"
+          title="Open notification settings"
+          class="is-url is-link settings-link"
+          @click="openNotificationSettings"
+        >
+          <span class="settings-link-inner">
+            <span aria-hidden="true" class="bell-icon">🔔</span>
+            <span>Settings</span>
+          </span>
+        </a>
       </div>
       <div v-else>
         <MobileHeader> </MobileHeader>
@@ -43,6 +54,10 @@ const redirectToHomeAndFetch = () => {
   router.push('/')
   animeData.fetchCurrentSeason()
 }
+
+const openNotificationSettings = () => {
+  animeData.openNotificationSettings()
+}
 </script>
 
 <style scoped>
@@ -71,6 +86,42 @@ header {
 
 .is-link {
   cursor: pointer;
+}
+
+.settings-link-inner {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.bell-icon {
+  font-size: 0.95em;
+  transform: translateY(-1px);
+}
+
+.settings-link:hover .bell-icon {
+  animation: ring 0.9s ease;
+}
+
+@keyframes ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  20% {
+    transform: rotate(12deg);
+  }
+  40% {
+    transform: rotate(-10deg);
+  }
+  60% {
+    transform: rotate(8deg);
+  }
+  80% {
+    transform: rotate(-6deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }
 
 @media screen and (max-width: 1025px) {

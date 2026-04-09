@@ -5,6 +5,13 @@
       <RouterLink to="/bookmarks" class="is-url" @click="hideMenu">Bookmarks</RouterLink>
       <RouterLink to="/about" class="is-url" @click="hideMenu">About</RouterLink>
       <RouterLink to="/contact" class="is-url" @click="hideMenu">Contact</RouterLink>
+      <a
+        role="button"
+        class="is-url settings-mobile-link"
+        title="Open notification settings"
+        @click="openSettings"
+        >🔔 Settings</a
+      >
     </aside>
     <aside class="first"></aside>
   </div>
@@ -12,8 +19,10 @@
 <script setup>
 import { watch } from 'vue'
 import { useRoute } from 'vue-router'
+import { useAnimeData } from '../../../stores/anime_data'
 
 const route = useRoute()
+const animeData = useAnimeData()
 
 function hideMenu() {
   document.querySelector('.nav-mobile').classList.remove('show-nav')
@@ -25,6 +34,11 @@ function hideMenu() {
 watch(route, () => {
   hideMenu()
 })
+
+function openSettings() {
+  animeData.openNotificationSettings()
+  hideMenu()
+}
 </script>
 <style scoped>
 .nav-mobile {
@@ -65,6 +79,10 @@ watch(route, () => {
   font-weight: 900;
   transition: all 1s ease-in;
   opacity: 1;
+}
+
+.settings-mobile-link {
+  letter-spacing: 0.02em;
 }
 
 .show-nav {

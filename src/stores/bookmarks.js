@@ -3,6 +3,7 @@ import localforage from 'localforage'
 import { useToast } from 'vue-toastification'
 import { fetchDataFromBookmarks } from '../js/BookMarkQuery'
 import { headersList } from '../js/AnimeQuery'
+import { dispatchReleaseNotifications, getNotificationSettings } from '../js/notificationEngine'
 
 let toast = useToast()
 
@@ -90,7 +91,8 @@ export const useBookmarks = defineStore('bookmarks', {
         })
       })
     },
-    async fetchFromBookmarks(savedShows) {
+    async fetchFromBookmarks(savedShows, options = {}) {
+      const { shouldNotify = true } = options
       this.bookmarksloading = true
       // if (this.bookmarks.length == savedShows.length) {
       //   this.bookmarksloading = false;
@@ -138,18 +140,60 @@ export const useBookmarks = defineStore('bookmarks', {
       })
 
       showDetails.forEach((show) => {
+        const existing = savedShows.find((s) => s.id == show.id)
         latestEpisodes.push({
           showId: show.id.toString(),
           latestEpisode: show.airingSchedule.nodes[0]?.episode || show.episodes,
-          timestamp: savedShows.find((s) => s.id == show.id).timestamp
+          previousEpisode: existing?.latestEpisode || 0,
+          title: show.title.english || show.title.romaji,
+          watched: existing?.watched || false,
+          timestamp: existing?.timestamp
         })
       })
+
+      if (shouldNotify) {
+        const notificationSettings = getNotificationSettings()
+        if (notificationSettings.enabled) {
+          const releaseEvents = latestEpisodes
+            .filter((episodeInfo) => {
+              const next = Number(episodeInfo.latestEpisode || 0)
+              const prev = Number(episodeInfo.previousEpisode || 0)
+              return !episodeInfo.watched && next > prev
+            })
+            .map((episodeInfo) => {
+              const nextEpisode = Number(episodeInfo.latestEpisode || 0)
+              const previous = Number(episodeInfo.previousEpisode || 0)
+
+              return {
+                kind: previous <= 0 && nextEpisode === 1 ? 'season-start' : 'episode',
+                showId: episodeInfo.showId,
+                title: episodeInfo.title,
+                episode: nextEpisode,
+                releasedAt: Date.now()
+              }
+            })
+
+          if (releaseEvents.length) {
+            await dispatchReleaseNotifications(releaseEvents)
+          }
+        }
+      }
 
       // Update all latest episodes
       this.updateAllLatestEpisodes(latestEpisodes)
       setTimeout(() => {
         this.bookmarksloading = false
       }, 1000)
+    },
+
+    async checkForReleaseNotifications() {
+      const settings = getNotificationSettings()
+      if (!settings.enabled) return
+
+      const savedShows = await this.getSavedShows()
+      if (!savedShows.length) return
+
+      await this.fetchFromBookmarks(savedShows, { shouldNotify: true })
     },
 
     async toggleWatched(showId) {

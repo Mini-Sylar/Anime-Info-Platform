@@ -13,16 +13,30 @@
     >
     </NewestFeatures>
   </Teleport>
+
+  <Teleport to="body">
+    <Modal :show="showNotificationSettings" @close="closeNotificationSettings">
+      <template #header>
+        <h3>Notification Settings 🔔</h3>
+      </template>
+      <template #body>
+        <Settings />
+      </template>
+    </Modal>
+  </Teleport>
 </template>
 
 <script setup>
 import NavbarVue from './components/NavBar/Navbar.vue'
 import { RouterView } from 'vue-router'
 import { useAnimeData } from '@/stores/anime_data'
-import { computed, watch, ref } from 'vue'
+import { computed, watch, ref, onMounted, onUnmounted } from 'vue'
 import { useNetwork } from '@vueuse/core'
 import { useToast } from 'vue-toastification'
 import NewestFeatures from './components/Modals/NewestFeatures.vue'
+import Modal from './components/Modals/Modal.vue'
+import Settings from './components/Body/Settings/Settings.vue'
+import { useBookmarks } from './stores/bookmarks'
 
 const toast = useToast()
 const setColor = computed(() => {
@@ -41,7 +55,22 @@ watch(isOnline, (value) => {
 
 const newFeatures = ref([
   {
-    timestamp: '26-02-2024'
+    timestamp: '09-04-2026'
+  },
+  {
+    title: 'Smart Notifications (09-04-2026) 🔔',
+    description:
+      'You can now get low-noise release notifications for your bookmarked shows. Alerts are deduped, throttled, and grouped by digest to avoid spam.'
+  },
+  {
+    title: 'Notification Settings Panel ⚙️',
+    description:
+      'Added a dedicated settings panel with quiet hours, cooldown control, and max alerts per digest. You can tune how chatty notifications should be.'
+  },
+  {
+    title: 'Settings Shortcut in Navbar 🧭',
+    description:
+      'Settings is now accessible from both desktop and mobile navigation, with a bell indicator so it is easy to find.'
   },
   {
     title: 'PWA Mode (26-02-2024)📱',
@@ -68,6 +97,25 @@ const showNewFeatures = computed(() => {
   return useAnimeData().showNewFeatures
 })
 
+const showNotificationSettings = computed(() => {
+  return useAnimeData().showNotificationSettings
+})
+
+const closeNotificationSettings = () => {
+  useAnimeData().closeNotificationSettings()
+}
+
+const bookmarksStore = useBookmarks()
+let notificationInterval = null
+
+const runNotificationCheck = async () => {
+  try {
+    await bookmarksStore.checkForReleaseNotifications()
+  } catch {
+    // Silent by design: this loop should never annoy users with runtime noise.
+  }
+}
+
 const prepareNextFeature = () => {
   localStorage.setItem('newFeatures', JSON.stringify(newFeatures.value))
   useAnimeData().showNewFeatures = false
@@ -91,8 +139,20 @@ const checkLocalStorage = () => {
 
 checkLocalStorage()
 
-watch(showNewFeatures, (value) => {
-  if (value) {
+onMounted(() => {
+  runNotificationCheck()
+  notificationInterval = setInterval(runNotificationCheck, 45 * 60 * 1000)
+})
+
+onUnmounted(() => {
+  if (notificationInterval) {
+    clearInterval(notificationInterval)
+    notificationInterval = null
+  }
+})
+
+watch([showNewFeatures, showNotificationSettings], ([featuresOpen, notificationOpen]) => {
+  if (featuresOpen || notificationOpen) {
     document.body.style.overflow = 'hidden'
   } else {
     document.body.style.overflow = 'auto'

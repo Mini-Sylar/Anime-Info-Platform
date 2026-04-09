@@ -10,6 +10,7 @@ import mixpanel from 'mixpanel-browser'
 import localforage from 'localforage'
 import { createHead } from '@unhead/vue/client'
 import { register } from 'swiper/element/bundle'
+import { registerSW } from 'virtual:pwa-register'
 
 mixpanel.init(import.meta.env.VITE_MIXPANEL_TOKEN)
 
@@ -43,4 +44,9 @@ app.use(mixpanelPlugin)
 const head = createHead()
 app.use(head)
 register()
+
+registerSW({
+  immediate: true
+})
+
 app.mount('#app')

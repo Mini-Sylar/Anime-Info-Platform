@@ -36,7 +36,8 @@ export const useAnimeData = defineStore('animeData', {
     toggleAbout: false,
     isStarred: false,
     bookMarkStore: useBookmarks(),
-    showNewFeatures: false
+    showNewFeatures: false,
+    showNotificationSettings: false
   }),
   getters: {
     getAnimeTitleDescription: (state) => {
@@ -282,6 +283,14 @@ export const useAnimeData = defineStore('animeData', {
 
     showReleaseNotes() {
       this.showNewFeatures = true
+    },
+
+    openNotificationSettings() {
+      this.showNotificationSettings = true
+    },
+
+    closeNotificationSettings() {
+      this.showNotificationSettings = false
     }
   }
 })

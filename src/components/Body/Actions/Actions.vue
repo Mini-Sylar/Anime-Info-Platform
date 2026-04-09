@@ -69,6 +69,18 @@
         <button
           type="button"
           class="action-button bookmarks"
+          title="Notification Settings"
+          @click="openNotificationSettings"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="uses-dynamic">
+            <path
+              d="M224 512a64 64 0 0 0 64-64H160a64 64 0 0 0 64 64zm215.4-149.3C404.3 327.2 384 270.9 384 208c0-77.7-54.5-143.1-128-157.8V32a32 32 0 1 0-64 0v18.2C118.5 64.9 64 130.3 64 208c0 62.9-20.3 119.2-55.4 154.7c-6 6.1-8.6 14.8-6.8 23.1S10.2 400 18.7 400h410.6c8.5 0 15.8-5.8 17.6-14.2s-.8-17-6.9-23.1z"
+            />
+          </svg>
+        </button>
+        <button
+          type="button"
+          class="action-button bookmarks"
           title="Show Release Notes"
           @click="showReleaseNotes"
         >
@@ -138,6 +150,10 @@ const showMiniBookmarkMenu = () => {
 
 const showReleaseNotes = () => {
   useAnimeData().showReleaseNotes()
+}
+
+const openNotificationSettings = () => {
+  useAnimeData().openNotificationSettings()
 }
 
 // prevent scroll when modal is open

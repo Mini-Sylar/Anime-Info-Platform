@@ -3,7 +3,7 @@
     <div v-if="show" class="modal-mask">
       <div class="modal-container" v-on-click-outside="checkIfActive">
         <div class="modal-header">
-          <h3>New Features v.2.3.0 🎉</h3>
+          <h3>New Features v.2.4.0 🎉</h3>
         </div>
 
         <div class="modal-body">
