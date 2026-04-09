@@ -71,24 +71,6 @@ const newFeatures = ref([
     title: 'Settings Shortcut in Navbar 🧭',
     description:
       'Settings is now accessible from both desktop and mobile navigation, with a bell indicator so it is easy to find.'
-  },
-  {
-    title: 'PWA Mode (26-02-2024)📱',
-    description:
-      'You can now install the app on your device and use it offline. Hit the icon on your nav bar to install. 🚀'
-  },
-  {
-    title: 'Bookmarks 🌟',
-    description:
-      'Keep track of your shows with the new bookmark feature 🚀. <br>Star your show to get started'
-  },
-  {
-    title: 'History 📖',
-    description: "Find out the 10 latest shows you've searched"
-  },
-  {
-    title: 'Genres',
-    description: 'Choose the specific genre you want and surprise yourself'
   }
 ])
 
