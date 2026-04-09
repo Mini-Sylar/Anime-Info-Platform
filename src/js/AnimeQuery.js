@@ -15,13 +15,35 @@ sharedValue = doNotUse.includes(sharedValue) ? '' : sharedValue
 let storedValue = localStorage.getItem('searchQuery')
 let currentYear = new Date().getFullYear()
 
-export function prepareAnimeData(
-  searchQuery = sharedValue
-    ? sharedValue
-    : storedValue
-      ? storedValue
-      : 'Zom-100-Bucket-List-of-the-Dead'
-) {
+async function getInitialSearchQuery() {
+  if (sharedValue) return sharedValue
+  if (storedValue) return storedValue
+
+  try {
+    const seasonResponse = await fetch('https://graphql.anilist.co/', {
+      method: 'POST',
+      body: currentSeason(),
+      headers: headersList
+    })
+
+    if (!seasonResponse.ok) {
+      throw new Error('Unable to fetch current season list.')
+    }
+
+    const seasonData = await seasonResponse.json()
+    const media = seasonData?.data?.Page?.media || []
+    if (!media.length) {
+      throw new Error('No current season anime found.')
+    }
+
+    const chosen = media[randomIntFromInterval(0, media.length - 1)]
+    return chosen?.title?.english || chosen?.title?.romaji || 'Zom-100-Bucket-List-of-the-Dead'
+  } catch (error) {
+    return 'Zom-100-Bucket-List-of-the-Dead'
+  }
+}
+
+export function prepareAnimeData(searchQuery) {
   let gqlBody = {
     query: `query ($id: Int, $search: String) {
   Media(id: $id, search: $search, type: ANIME) {
@@ -82,10 +104,11 @@ export function searchSuggestions(query) {
   })
 }
 
+const defaultSearchQuery = await getInitialSearchQuery()
 // Store Anime data on initial load
 let response = await fetch('https://graphql.anilist.co/', {
   method: 'POST',
-  body: prepareAnimeData(),
+  body: prepareAnimeData(defaultSearchQuery),
   headers: headersList
 })
 export let main_data = await response.json()
