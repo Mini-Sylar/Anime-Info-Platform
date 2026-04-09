@@ -64,6 +64,24 @@ export function prepareAnimeData(
   return JSON.stringify(gqlBody)
 }
 
+// Autocomplete suggestions — lightweight query (title + cover + year only)
+// Designed for debounced calls from the search box; perPage kept low to stay fast
+export function searchSuggestions(query) {
+  return JSON.stringify({
+    query: `query ($search: String) {
+  Page(page: 1, perPage: 7) {
+    media(search: $search, type: ANIME, sort: SEARCH_MATCH) {
+      id
+      title { english romaji }
+      coverImage { medium }
+      seasonYear
+    }
+  }
+}`,
+    variables: { search: query }
+  })
+}
+
 // Store Anime data on initial load
 let response = await fetch('https://graphql.anilist.co/', {
   method: 'POST',

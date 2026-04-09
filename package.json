@@ -12,7 +12,6 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
-    "@emailjs/browser": "^4.4.1",
     "@unhead/vue": "^2.1.13",
     "@vueuse/components": "^14.2.1",
     "@vueuse/core": "^14.2.1",

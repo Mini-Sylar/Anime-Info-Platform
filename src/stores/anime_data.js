@@ -9,7 +9,13 @@ import {
 } from '../js/AnimeQuery'
 import router from '../router'
 import mixpanel from 'mixpanel-browser'
-import { shadeColor, shareAnime, generateNewNodes, omitNull, randomIntFromInterval } from '../js/helpers'
+import {
+  shadeColor,
+  shareAnime,
+  generateNewNodes,
+  omitNull,
+  randomIntFromInterval
+} from '../js/helpers'
 import { useToast } from 'vue-toastification'
 import { useBookmarks } from './bookmarks'
 
@@ -109,39 +115,69 @@ export const useAnimeData = defineStore('animeData', {
     async fetchSurprise(genre) {
       this.cardsLoading = true
       try {
-        // Step 1: Get the real last page count for this genre
         const countRes = await fetch('https://graphql.anilist.co/', {
           method: 'POST',
           body: surpriseMePageCount(genre),
           headers: headersList
         })
-        const countData = await countRes.json()
-        const lastPage = countData?.data?.Page?.pageInfo?.lastPage ?? 50
-        // Cap at 150 to avoid empty pages deep in the results
-        const randomPage = randomIntFromInterval(1, Math.min(lastPage, 150))
 
-        // Step 2: Fetch anime from that random page
-        const animeRes = await fetch('https://graphql.anilist.co/', {
-          method: 'POST',
-          body: surpriseMeAtPage(genre, randomPage),
-          headers: headersList
-        })
-        const animeData = await animeRes.json()
-        const newNodes = animeData.data.Page.media.map((item) => ({
-          mediaRecommendation: item
-        }))
+        if (!countRes.ok) {
+          throw new Error('Unable to fetch genre data from AniList.')
+        }
+
+        const countData = await countRes.json()
+        if (countData.errors?.length) {
+          throw new Error(countData.errors[0].message)
+        }
+
+        const lastPage = countData?.data?.Page?.pageInfo?.lastPage ?? 0
+        if (!lastPage || lastPage < 1) {
+          toast.warning(`No anime found for genre "${genre}". Try another genre.`)
+          return
+        }
+
+        const maxPage = Math.min(lastPage, 150)
+        let newNodes = []
+        let attempt = 0
+        const maxAttempts = 4
+
+        while (attempt < maxAttempts && newNodes.length === 0) {
+          const randomPage = randomIntFromInterval(1, maxPage)
+          const animeRes = await fetch('https://graphql.anilist.co/', {
+            method: 'POST',
+            body: surpriseMeAtPage(genre, randomPage),
+            headers: headersList
+          })
+
+          if (!animeRes.ok) {
+            throw new Error('Unable to fetch surprise anime from AniList.')
+          }
+
+          const animeData = await animeRes.json()
+          if (animeData.errors?.length) {
+            throw new Error(animeData.errors[0].message)
+          }
+
+          const media = animeData?.data?.Page?.media ?? []
+          newNodes = media.length ? generateNewNodes(animeData) : []
+          attempt += 1
+        }
 
         if (newNodes.length === 0) {
-          toast.warning('No results for that genre/page, try again!')
-        } else {
-          this.animeData.data.Media.recommendations.nodes = newNodes
+          toast.warning(
+            `Could not find results for "${genre}" after ${maxAttempts} tries. Please try another genre.`
+          )
+          return
         }
+
+        this.animeData.data.Media.recommendations.nodes = newNodes
       } catch (error) {
-        toast.error('There was an issue fetching surprise shows')
+        toast.error(error.message || 'There was an issue fetching surprise shows')
+      } finally {
+        setTimeout(() => {
+          this.cardsLoading = false
+        }, 1000)
       }
-      setTimeout(() => {
-        this.cardsLoading = false
-      }, 1000)
     },
 
     async fetchFromRecommended(title) {
@@ -178,9 +214,7 @@ export const useAnimeData = defineStore('animeData', {
       const animeTitle = this.animeData.data.Media.title.english
         ? this.animeData.data.Media.title.english
         : this.animeData.data.Media.title.romaji
-      const formattedTitle = animeTitle
-        .replace(/[^\w\s]/g, '')
-        .replace(/\s+/g, '-')
+      const formattedTitle = animeTitle.replace(/[^\w\s]/g, '').replace(/\s+/g, '-')
       const animeUrl = router.currentRoute.value.fullPath
       shareAnime(animeTitle, animeUrl, formattedTitle)
       mixpanel.track('Shared Anime', { title: animeTitle })

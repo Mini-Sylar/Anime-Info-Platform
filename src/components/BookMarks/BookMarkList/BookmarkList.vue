@@ -216,7 +216,7 @@ watch(allBookmarks, () => {
 const toggleWatched = async (showId) => {
   try {
     await fetchBookmarks.toggleWatched(showId)
-  } catch  {
+  } catch {
     return
   }
 }

@@ -21,7 +21,8 @@
           <MoreInfo :animeID="mainAnimeData.getAnimeId" />
         </div>
         <div class="trailer-container">
-          <Trailer :trailer="mainAnimeData.getTrailer" />
+          <Trailer :trailer="mainAnimeData.getTrailer" v-if="mainAnimeData.getTrailer" />
+          <img v-else :src="mainAnimeData.getBackground" alt="Show Image" />
         </div>
       </div>
     </div>
@@ -126,5 +127,11 @@ const rating = computed(() => {
   .trailer-container {
     display: none;
   }
+}
+
+.trailer-container img {
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
 }
 </style>

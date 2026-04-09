@@ -100,15 +100,13 @@
     </form>
   </div>
 </template>
+
 <script setup>
 import { useToast } from 'vue-toastification'
 import { ref, computed } from 'vue'
-import emailjs from '@emailjs/browser'
 import mixpanel from 'mixpanel-browser'
 
-const serviceID = import.meta.env.VITE_SERVICE_ID
-const templateID = import.meta.env.VITE_TEMPLATE_ID
-const publicKey = import.meta.env.VITE_PUBLIC_API_KEY
+const staticFormsKey = import.meta.env.VITE_STATIC_FORMS_API_KEY
 const buttonDisabled = ref(false)
 const isButtonDisable = computed(() => {
   return buttonDisabled.value
@@ -116,22 +114,52 @@ const isButtonDisable = computed(() => {
 const getForm = ref(null)
 const toast = useToast()
 
-const submitForm = () => {
+const submitForm = async () => {
   buttonDisabled.value = true
-  emailjs.sendForm(serviceID, templateID, getForm.value, publicKey).then(
-    () => {
-      toast.success('Message sent successfully!')
-      buttonDisabled.value = false
-      mixpanel.track('Used Contact Form', {
-        email: getForm.value.querySelector('input[name=reply_to]').value
-      })
-      getForm.value.reset()
-    },
-    () => {
-      toast.error('There was a problem sending your message, try again')
-      buttonDisabled.value = false
+
+  if (!staticFormsKey) {
+    toast.error('Missing form API key. Please set VITE_STATIC_FORMS_API_KEY.')
+    buttonDisabled.value = false
+    return
+  }
+
+  const form = getForm.value
+  const email = form.querySelector('input[name=reply_to]').value
+  const subject = form.querySelector('input[name=subject]').value
+  const message = form.querySelector('textarea[name=message]').value
+
+  const payload = {
+    accessKey: staticFormsKey,
+    email,
+    subject,
+    message,
+    name: email,
+    replyTo: email
+  }
+
+  try {
+    const response = await fetch('https://api.staticforms.xyz/submit', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    })
+
+    if (!response.ok) {
+      throw new Error('Network response was not ok')
     }
-  )
+
+    toast.success('Message sent successfully!')
+    mixpanel.track('Used Contact Form', {
+      email
+    })
+    form.reset()
+  } catch {
+    toast.error('There was a problem sending your message, try again')
+  } finally {
+    buttonDisabled.value = false
+  }
 }
 </script>
 

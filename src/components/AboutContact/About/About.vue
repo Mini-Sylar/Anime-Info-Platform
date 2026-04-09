@@ -16,7 +16,7 @@
       latest updates and projects! <br /><br />
     </p>
     <a href="https://github.com/Mini-Sylar" target="_blank"
-      ><span class="uses-dynamic">~ Terence</span></a
+      ><span class="uses-dynamic">~ Mini-Sylar</span></a
     >
     <img
       loading="lazy"
