@@ -20,9 +20,8 @@
           <Actions />
           <MoreInfo :animeID="mainAnimeData.getAnimeId" />
         </div>
-        <div class="trailer-container">
-          <Trailer :trailer="mainAnimeData.getTrailer" v-if="mainAnimeData.getTrailer" />
-          <img v-else :src="mainAnimeData.getBackground" alt="Show Image" />
+        <div class="trailer-container" v-if="mainAnimeData.getTrailer">
+          <Trailer :trailer="mainAnimeData.getTrailer" />
         </div>
       </div>
     </div>
